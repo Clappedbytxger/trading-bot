@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# Secrets — NEVER commit
+.env
+.env.local
+*.pem
+*.key
+
+# Research caches (regenerated)
+memory/.perplexity_cache/*.json
+memory/.gemini_cache/*.json
+memory/.tavily_cache/*.json
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
