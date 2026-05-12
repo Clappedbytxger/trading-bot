@@ -3,7 +3,6 @@ version: 1
 approved: true
 created: 2026-05-11
 last_modified: 2026-05-11
-note: "Placeholder. No trades may be placed until version >= 1 AND approved: true."
 ---
 
 ## Variant C — Bull-Custom: "AI-Capex Barbell" (My synthesis)
