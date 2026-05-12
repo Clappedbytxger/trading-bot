@@ -16,9 +16,9 @@ and updated by weekly review.
 ---
 
 ## VOO
-- **Thesis:** Low-cost S&P 500 core; strategy-mandated 50% sleeve, **capped at 35% by guardrail #1 pending Robin resolution.**
+- **Thesis:** Low-cost S&P 500 core; strategy-mandated 50% sleeve. Designated Core ETF under the guardrail #1 ETF-core exception (max 60%).
 - **Entry trigger:** Any pre-market on a non-major-event day; DCA over 3 days.
-- **Max allocation if bought:** 35% (effective cap)
+- **Max allocation if bought:** 50% (band 45–55%)
 - **Added:** 2026-05-12
 
 ## MSFT

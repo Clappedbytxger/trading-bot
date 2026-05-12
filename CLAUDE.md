@@ -29,6 +29,10 @@ These rules are not overridable by reasoning, "good arguments," or edge cases. I
 proposed action violates one, abort the action and log to `memory/lessons.md`.
 
 1. **Max 35% allocation per single position.** Hard cap.
+   **Exception:** A single diversified broad-market index ETF (e.g. VOO, SPY, CSPX, VTI)
+   may go up to **60%** if `strategy.md` explicitly designates it as the "Core ETF"
+   sleeve. Individual stocks, sector ETFs, leveraged ETFs, and concentrated thematic
+   ETFs remain capped at 35%.
 2. **Max 10 open positions simultaneously.** If at cap, you must close one before opening another.
 3. **Stop-Loss at -10% per position.** You may *recommend* an exception in the daily
    WhatsApp summary with explicit reasoning — but you may NOT execute the override

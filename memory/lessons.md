@@ -29,4 +29,4 @@ trading decision. Keep entries tight — pattern, lesson, encoded?
 ## 2026-05-12 — Strategy mandates 50% VOO but guardrail #1 caps single position at 35%
 - **Pattern:** First real pre-market draft: `strategy.md` (Variant C) specifies 50% VOO core, while `CLAUDE.md` Hard Guardrail #1 caps any single position at 35%. Conflict detected before any orders placed.
 - **Lesson:** When `strategy.md` conflicts with a Hard Guardrail in `CLAUDE.md`, the Hard Guardrail wins (non-negotiable). The routine must cap to the guardrail, park the residual cash, flag to Robin, and request explicit resolution (revise guardrail vs. revise strategy vs. split core across multiple ETFs). Never silently exceed a guardrail; never silently skip the strategy.
-- **Encoded as rule?** No — informal; needs Robin to decide the resolution path, then encode in either `strategy.md` (split core) or `CLAUDE.md` (guardrail exception for ETF-core).
+- **Encoded as rule?** Yes — Robin chose to extend Guardrail #1 with an ETF-Core exception (broad-market index ETFs designated as Core may go up to 60%; individual stocks still 35%). Encoded in `CLAUDE.md` 2026-05-12.
