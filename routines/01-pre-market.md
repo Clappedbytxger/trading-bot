@@ -9,6 +9,10 @@ Bull. It's pre-market. Goal: refresh research, identify catalysts, draft (not ex
 ## Required env vars
 `GEMINI_API_KEY`, `ALPACA_API_KEY_ID`, `ALPACA_API_SECRET_KEY`
 
+## Step 0 — Sync with main
+See `CLAUDE.md` → Memory Protocol → Step 0. `git fetch && git merge origin/main` into the
+working branch BEFORE reading. End-of-routine: merge working branch back into `main`.
+
 ## Step 1 — Read
 - `CLAUDE.md`
 - `memory/strategy.md` — if `approved: false` or missing, abort. Log to lessons, no other action.
@@ -72,11 +76,18 @@ Build a **trade-idea draft** (not orders):
 - Append new findings to `memory/research_log.md` (keep it concise — bullet points + citations).
 - Do NOT modify `strategy.md` or `portfolio.md` here.
 
-## Step 6 — Commit
+## Step 6 — Commit + sync to main
 ```
 git add memory/
 git commit -m "routine: 01-pre-market @ <timestamp>"
+git push -u origin <working-branch>
+
+# End-of-routine sync (see CLAUDE.md Step 0):
+git checkout main
+git pull origin main --ff-only
+git merge <working-branch> --no-ff -m "routine: merge 01-pre-market @ <timestamp>"
 git push origin main
+git checkout <working-branch>
 ```
 
 ## Step 7 — Notify

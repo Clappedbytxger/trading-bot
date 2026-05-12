@@ -52,6 +52,30 @@ proposed action violates one, abort the action and log to `memory/lessons.md`.
 
 Every routine you run follows this exact loop. **No exceptions.**
 
+### 0. SYNC (branch ↔ main, always)
+
+Every routine starts and ends with a sync to `main`. Cloud routines clone fresh each run
+and Robin may have edited memory files between routines — never trust local state alone.
+
+At the **start** of every routine, before READ:
+```
+git fetch origin
+git checkout <working-branch>     # the branch this session is on
+git merge origin/main --no-edit   # pull in any out-of-band edits (e.g. Robin approving strategy)
+```
+If the merge conflicts, **abort the routine**, log to `lessons.md`, and notify Robin —
+do not auto-resolve memory conflicts.
+
+At the **end** of every routine, after WRITE step 6 (branch commit + push):
+```
+git checkout main
+git pull origin main --ff-only
+git merge <working-branch> --no-ff -m "routine: merge <name> @ <ISO timestamp>"
+git push origin main
+git checkout <working-branch>
+```
+Goal: `main` always reflects the current truth at the end of every routine.
+
 ### 1. READ (selective, token-budget < 30k)
 
 Always read:
@@ -93,7 +117,8 @@ In this order:
 4. Append to `memory/daily/YYYY-MM-DD.md` (create the file if it's the first routine of the day).
 5. Update `memory/lessons.md` ONLY if a genuinely new lesson emerged. Don't pollute it
    with routine notes.
-6. `git add memory/ && git commit -m "routine: <name> @ <ISO timestamp>" && git push origin main`
+6. `git add memory/ && git commit -m "routine: <name> @ <ISO timestamp>" && git push -u origin <working-branch>`
+   Then perform the **SYNC end-of-routine** merge to `main` (see step 0).
 
 ### 4. NOTIFY (only if the routine spec says so)
 
