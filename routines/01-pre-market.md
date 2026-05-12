@@ -9,6 +9,10 @@ Bull. It's pre-market. Goal: refresh research, identify catalysts, draft (not ex
 ## Required env vars
 `GEMINI_API_KEY`, `ALPACA_API_KEY_ID`, `ALPACA_API_SECRET_KEY`
 
+## Step 0 — Sync with main
+See `CLAUDE.md` → Memory Protocol → Step 0. `git fetch && git merge origin/main` into the
+working branch BEFORE reading. End-of-routine: merge working branch back into `main`.
+
 ## Step 1 — Read
 - `CLAUDE.md`
 - `memory/strategy.md` — if `approved: false` or missing, abort. Log to lessons, no other action.
@@ -72,12 +76,19 @@ Build a **trade-idea draft** (not orders):
 - Append new findings to `memory/research_log.md` (keep it concise — bullet points + citations).
 - Do NOT modify `strategy.md` or `portfolio.md` here.
 
-## Step 6 — Commit
+## Step 6 — Commit + open/refresh PR with auto-merge
+`main` is branch-protected. Do NOT push to it directly. Use the GitHub MCP PR flow:
 ```
 git add memory/
 git commit -m "routine: 01-pre-market @ <timestamp>"
-git push origin main
+git push -u origin <working-branch>
 ```
+Then in MCP:
+1. `mcp__github__list_pull_requests` with `head=clappedbytxger:<working-branch>`, `state=open`
+2. If none exists: `mcp__github__create_pull_request` (base=`main`, head=`<working-branch>`,
+   title=`routine: 01-pre-market @ <timestamp>`, body links to today's daily file).
+3. `mcp__github__enable_pr_auto_merge` (mergeMethod: `MERGE`).
+4. End the routine. Do not poll for merge completion.
 
 ## Step 7 — Notify
 **No WhatsApp** unless an urgent risk emerged (e.g. a current position has critical news). If urgent, send a short German alert.
