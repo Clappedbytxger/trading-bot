@@ -71,14 +71,28 @@ If the merge conflicts, **abort the routine**, log to `lessons.md`, and notify R
 do not auto-resolve memory conflicts.
 
 At the **end** of every routine, after WRITE step 6 (branch commit + push):
-```
-git checkout main
-git pull origin main --ff-only
-git merge <working-branch> --no-ff -m "routine: merge <name> @ <ISO timestamp>"
-git push origin main
-git checkout <working-branch>
-```
-Goal: `main` always reflects the current truth at the end of every routine.
+
+`main` is protected — **never push directly to `main`**. Instead, open or update a
+pull request and let GitHub auto-merge handle the merge once any required checks pass.
+
+1. Ensure the working branch is pushed:
+   `git push -u origin <working-branch>`
+2. Open (or update) a PR via GitHub MCP — see `mcp__github__list_pull_requests` to find
+   an existing open PR for the same `head` branch first; only call
+   `mcp__github__create_pull_request` if none exists:
+   - `owner`: `clappedbytxger`
+   - `repo`: `trading-bot`
+   - `head`: `<working-branch>`
+   - `base`: `main`
+   - `title`: `routine: <name> @ <ISO timestamp>`
+   - `body`: one-paragraph summary linking to today's `memory/daily/YYYY-MM-DD.md`.
+3. Enable auto-merge: `mcp__github__enable_pr_auto_merge` with `mergeMethod: MERGE`.
+   GitHub will merge as soon as required checks pass (or immediately if there are none).
+4. Do **not** wait/poll for the merge. End the routine. The next routine's Step 0 will
+   pick up the merged state from `origin/main`.
+
+Goal: `main` always converges to the current truth via PR auto-merge, without giving
+the bot direct write access to a protected branch.
 
 ### 1. READ (selective, token-budget < 30k)
 
@@ -122,7 +136,7 @@ In this order:
 5. Update `memory/lessons.md` ONLY if a genuinely new lesson emerged. Don't pollute it
    with routine notes.
 6. `git add memory/ && git commit -m "routine: <name> @ <ISO timestamp>" && git push -u origin <working-branch>`
-   Then perform the **SYNC end-of-routine** merge to `main` (see step 0).
+   Then perform the **SYNC end-of-routine** PR + auto-merge flow (see step 0).
 
 ### 4. NOTIFY (only if the routine spec says so)
 
