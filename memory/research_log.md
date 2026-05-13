@@ -34,3 +34,39 @@ entries (> 30 days) can be pruned by the weekly-review routine.
 **Quant snapshots (yfinance):** See `memory/daily/2026-05-12.md` for full table.
 
 **Cited sources:** Gemini Search-Grounding citations attached to each query (Yahoo Finance, Reuters, Bloomberg, Investor.com aggregations). Numbers cross-verified against yfinance for fwd P/E.
+
+---
+
+## 2026-05-13 — Pre-market: macro + NVDA preview + GOOGL sanity check
+
+**Macro (Gemini):**
+- **April PPI prints today 13:30Z / 08:30 ET.** Consensus: headline +0.5%, core +0.4%. Hot print would compound yesterday's hot CPI (+3.8% YoY) and amplify "no-2026-cuts" repricing.
+- **Kevin Warsh full-chamber Senate confirmation vote today.** Powell's term ends 2026-05-15; Warsh expected sworn in same day. First remarks Mon 5/18 will set the rate-cut tape.
+- Yesterday SPX -0.1%, Nasdaq -0.7%. Energy still the inflation driver (gasoline +28.4% YoY).
+- Pre-market mixed: penny-stock movers dominate; mega-caps quiet.
+
+**NVDA (Gemini):** Earnings Q1 FY27 confirmed 2026-05-20 (Wed) post-close.
+- Citi forecast $80B revenue vs market consensus $78.6B; B300 line strength cited.
+- Jensen Huang on Trump's China delegation this week — H200 export decision potentially imminent (bull if approved, bear if export tightening).
+- New Illinois biometric privacy lawsuit (typical legal-flow noise, not a thesis hit).
+- Board adds Suzanne Nora Johnson (5/8); strategic partnerships with IREN (5/7) and Corning (5/6) on AI infra/US manufacturing.
+- StockInvest.us moved Strong-Buy → Buy (5/12) on technical weakness only — irrelevant to long-term thesis.
+- Insider net selling $38.5M / 90d (zero exec sells); pattern matches post-vest cadence, not a signal.
+- At **98.7% of 52w-Hi today** (vs 97.5% yesterday). Strategy caveat reinforced — **WAIT.**
+
+**GOOGL (Gemini):** Yesterday's -0.40% close was pure noise; thesis strengthened, not weakened.
+- Q1 2026 print blew the doors off: EPS **$5.11 vs $2.64 est**, revenue $109.9B vs $107.0B est.
+- Cloud +63% YoY; Cloud RPO doubled sequentially to **$467.6B**; backlog nearly doubled.
+- Quarterly dividend lifted $0.21 → $0.22.
+- Google-backed Isomorphic Labs raised $2.1B (AI drug discovery).
+- Alphabet preparing first-ever JPY bond issuance to fund AI infra.
+- One Seeking Alpha "take some profit" piece (5/12) on stretched valuation — minority view, not a thesis-break.
+- Quant: fwd P/E 26.78, op margin 36.1%, revG 21.8%, ROE ~39% — unchanged from yesterday.
+
+**Quant deltas (yfinance) vs 5/12 pre-market:**
+- NVDA $218.13 → $220.78 (+1.2%); Δhi -2.5% → -1.3% (deeper into 52w-high zone).
+- AVGO $422.07 → $419.30 (-0.7%); GOOGL $385.94 → $387.35 (+0.4%); META $602.18 → $603.00 (+0.1%).
+- MSFT $408.71 → $407.77 (-0.2%); V $324.95 → $326.42 (+0.5%); BRK-B $483.17 → $484.96 (+0.4%); LLY $983.70 → $989.87 (+0.6%); VOO $675.20 → $678.67 (+0.5%).
+- No fundamentals shift (fwd P/E, op margin, revG, beta all within 1 decimal of 5/12). Thesis remains intact across the board.
+
+**Cited sources:** Gemini Search-Grounding citations (Yahoo Finance, Reuters, Bloomberg, MarketWatch, Seeking Alpha, StockInvest.us). yfinance for quant.
