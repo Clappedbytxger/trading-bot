@@ -70,3 +70,33 @@ entries (> 30 days) can be pruned by the weekly-review routine.
 - No fundamentals shift (fwd P/E, op margin, revG, beta all within 1 decimal of 5/12). Thesis remains intact across the board.
 
 **Cited sources:** Gemini Search-Grounding citations (Yahoo Finance, Reuters, Bloomberg, MarketWatch, Seeking Alpha, StockInvest.us). yfinance for quant.
+
+---
+
+## 2026-05-14 — Pre-market: hot PPI, Fed transition, NVDA-Culper short report
+
+**Macro (Gemini):**
+- **April PPI HOT**: headline +6.0% YoY, core +5.2% YoY — largest gain in 3+ years, beat expectations. Energy + transportation/warehousing (+12% YoY) the drivers. 10Y yield ~4.5%, 2Y to 4.0%. Boston Fed (Collins) hawkish; "no rush to cut."
+- **Fed transition**: Powell's term ends **2026-05-15**; **Warsh sworn in 2026-05-16**. Warsh: hawkish but pro-"AI-fueled disinflation." Barclays since-1930 study: S&P avg drawdowns −5% / −12% / −16% at 1m / 3m / 6m post-new-chair. Market already paring rate-cut bets.
+- **Today's 08:30 ET data**: Retail Sales (+0.5% nominal / +0.7% core est) + Weekly Jobless Claims (208k est). Import/Export Prices, Business Inventories (+0.3% est) at 10:00 ET.
+- **Geopolitics**: Trump-Xi summit in Beijing today (Taiwan + trade); Brent ~$106/bbl on Strait-of-Hormuz disruption.
+
+**NVDA (Gemini, earnings 5/20 post-close):**
+- Consensus: rev $78.5–78.98B, EPS $1.75–1.78; data center ~$73.1B; GM ~75%. Prediction markets ~90% beat probability. Analysts: "perfection priced in."
+- **Jensen Huang in China with Trump** today — potential H200 export decision catalyst (bull if eased / bear if tightened).
+- **Analyst PT upgrades**: BofA $300 → $320 (2030 AI DC TAM raised to $1.7T); Susquehanna $250 → $275 (GB300 demand); RBC Outperform $250 reiterated.
+- **Culper Research SHORT report** (NEW): alleges >20% of FY26 compute revenue still routed to China via illicit GPU diversion through SEA intermediaries, contra Nvidia's "effectively zero post-April-2025-restrictions" statements. Substance unverifiable pre-earnings; expected to add print-day volatility but unlikely thesis-breaking if specifics thin.
+- Green Century ESG push for scope-3 emissions disclosure ahead of 2026 vote.
+- At **99.1% of 52w-Hi** today (vs 98.7% on 5/13 / 97.5% on 5/12). Strategy caveat strongly binding; earnings window opens 5/15. **STILL WAIT.**
+
+**Quant deltas (yfinance) vs 5/13 pre-market:**
+- GOOGL $387.35 → **$402.62 (+3.9%)**; Δhi -3.6% → **-0.3%** (now at 99.7% of 52w-Hi). Q1-beat re-rating into day 3.
+- META $603.00 → $616.63 (+2.3%); Δhi -24.3% → -22.6%.
+- LLY $989.87 → $1015.75 (+2.6%); Δhi -12.7% → -10.4%.
+- NVDA $220.78 → $225.83 (+2.3%); Δhi -1.3% → **-0.9%** (deeper into 52w-high zone).
+- VOO $678.67 → $682.41 (+0.6%); SPY 737.10 → 742.31 (+0.7%).
+- AVGO $419.30 → $416.79 (-0.6%); MSFT $407.77 → $405.21 (-0.6%); BRK-B $484.96 → $485.52 (+0.1%).
+- V $326.42 → **$320.31 (-1.9%)**; the lone red name, on rising-rates rotation.
+- No fundamentals shift (fwd P/E, op margin, revG, beta all within 1 decimal of 5/13). Thesis intact across the board.
+
+**Cited sources:** Gemini Search-Grounding citations (Yahoo Finance, Reuters, Bloomberg, MarketWatch, Seeking Alpha, BLS PPI release, Culper Research disclosure). yfinance for quant.
