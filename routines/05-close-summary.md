@@ -68,12 +68,18 @@ Don't add noise. If nothing rises to that bar, skip.
 📅 Morgen Fokus: <1 Satz aus 04-pre-close-Plan>
 ```
 
-## Step 6 — Commit
+## Step 6 — Commit + open PR + **actively merge** (highest priority)
+`main` is branch-protected. Follow `CLAUDE.md` Memory Protocol Step 0 (end-of-routine):
 ```
 git add memory/
 git commit -m "routine: 05-close-summary @ <timestamp>"
-git push origin main
+git push -u origin <working-branch>
 ```
+Then via GitHub MCP: list/create PR → `enable_pr_auto_merge` → if that returns
+"already clean" (no required checks) or any error, **fall through to
+`merge_pull_request` directly** (mergeMethod `MERGE`) → verify `merged: true` via
+`pull_request_read`. If the merge fails, log to `lessons.md`, add a "MERGE FAILED"
+line to today's daily file, and flag Robin via WhatsApp.
 
 ## Token budget
 < 40k input tokens. Output (WhatsApp) < 1k tokens.

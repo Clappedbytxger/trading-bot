@@ -44,12 +44,18 @@ Same guardrail pre-flight as 02-market-open. Log all trades to `memory/trade_log
 - Refresh `memory/portfolio.md` if any trades executed.
 - Append to `memory/daily/<today>.md` under section `## 03-midday` with: snapshot, actions taken, actions considered+skipped (with reason).
 
-## Step 6 — Commit
+## Step 6 — Commit + open PR + **actively merge** (highest priority)
+`main` is branch-protected. Follow `CLAUDE.md` Memory Protocol Step 0 (end-of-routine):
 ```
 git add memory/
 git commit -m "routine: 03-midday @ <timestamp>"
-git push origin main
+git push -u origin <working-branch>
 ```
+Then via GitHub MCP: list/create PR → `enable_pr_auto_merge` → if that returns
+"already clean" (no required checks) or any error, **fall through to
+`merge_pull_request` directly** (mergeMethod `MERGE`) → verify `merged: true` via
+`pull_request_read`. If the merge fails, log to `lessons.md`, add a "MERGE FAILED"
+line to today's daily file, and flag Robin via WhatsApp.
 
 ## Step 7 — Notify
 No WhatsApp by default. Only if you executed >1 significant trade or detected a
