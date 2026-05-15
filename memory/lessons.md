@@ -46,6 +46,27 @@ trading decision. Keep entries tight — pattern, lesson, encoded?
 - **Lesson:** A late-firing 01-pre-market never retroactively authorizes trades — by the time it runs, 02-market-open has already made its no-trade decision per spec. The correct response is to: (a) log the anomaly prominently in the daily file, (b) still complete the routine for audit/continuity (account sanity, quant pulse, macro pulse), (c) record a retroactive trade-idea draft so the next routines have context, (d) NEVER place orders from a late-firing pre-market. Tranche-3-style execution remains tied to *pre-market existing at open*, not *pre-market existing at all*.
 - **Encoded as rule?** Partially — `CLAUDE.md` already says "clock.is_open=True at pre-market time → log and continue cautiously". This entry hardens the rule: continue **cautiously** explicitly means **no orders, draft is audit-only**. Should be reinforced in `routines/01-pre-market.md` Step 2 next time that file is touched. Open question for Robin: 3 consecutive misses suggests a runner-side schedule issue; needs investigation outside of Bull's scope.
 
+## 2026-05-15 — Routine re-fires: snapshot-refresh, no duplicate side-effects
+- **Pattern:** `02-market-open` invoked twice in the same session (13:30Z at the
+  cash-equity open, and 13:55Z ≈25 min later, before the scheduled 14:30Z cron).
+  First fire completed cleanly: portfolio updated, daily section written, WhatsApp
+  drafted+sent, commit merged via PR #15. Second fire arrived with the routine
+  already at its terminal state and Robin's pending question unchanged.
+- **Lesson:** When a WhatsApp-yes routine fires a second time in the same
+  session, the second fire is a **snapshot-refresh + sanity-check only**, not a
+  full re-execution. Specifically: (a) re-pull live broker state (positions,
+  stops, account) and verify nothing material has changed since the first fire,
+  (b) refresh `portfolio.md` to current intraday values, (c) append a short
+  "re-fire" section to today's daily file documenting the delta, (d) do NOT place
+  new orders, (e) do NOT re-send the WhatsApp summary unless a material delta
+  has occurred (stop breach, thesis-break event, Robin reply, position
+  count/cash change). Material delta is the trigger; "same content, 25 min later"
+  is not a delta and re-sending erodes Robin's signal-to-noise.
+- **Encoded as rule?** Informally — recorded here. Should be reinforced in
+  `routines/02-market-open.md` and the equivalent for other WhatsApp-yes routines
+  (`05-close-summary`, `06-weekly-review`). Until then, this entry is
+  authoritative.
+
 ## 2026-05-14 — `enable_pr_auto_merge` is not enough; routines must ACTIVELY merge
 - **Pattern:** End-of-routine flow opened PR #10 and called `mcp__github__enable_pr_auto_merge`. The MCP returned "already in clean status (all checks passed). Auto-merge only applies when checks are pending — you can merge directly." → PR sat open, `main` never updated. Downstream routines would have cloned a stale `main` and read no trade plan, no portfolio update, nothing.
 - **Lesson:** `enable_pr_auto_merge` only schedules a merge **when there are pending required checks** to wait on. On this repo `main` has no required checks today, so auto-merge silently no-ops. **The merge is the highest-priority step of the routine** — if it doesn't happen, every downstream routine reads stale state and no trades fire. End-of-routine flow must be: try `enable_pr_auto_merge` (handles the pending-checks case), and on "already clean" or any other error **fall through to `merge_pull_request` directly** (`mergeMethod: MERGE`). Always verify with `pull_request_read` that `merged: true` before ending. Conflicts/policy-blocks → log + flag Robin in German; never end a routine with an unmerged PR.
