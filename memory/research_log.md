@@ -100,3 +100,28 @@ entries (> 30 days) can be pruned by the weekly-review routine.
 - No fundamentals shift (fwd P/E, op margin, revG, beta all within 1 decimal of 5/13). Thesis intact across the board.
 
 **Cited sources:** Gemini Search-Grounding citations (Yahoo Finance, Reuters, Bloomberg, MarketWatch, Seeking Alpha, BLS PPI release, Culper Research disclosure). yfinance for quant.
+
+---
+
+## 2026-05-15 — Pre-market (LATE / post-open backfill at 13:48Z): Powell→Warsh, U-Mich record low
+
+**Macro (Gemini, 1 grounded query):**
+- **Powell's last day as Fed Chair.** Warsh sworn in Sat 2026-05-16; first FOMC chaired Jun 16-17. Powell stays on as governor (precedent-breaking).
+- **U-Michigan May preliminary sentiment 48.2 — record low** (below ~52 prior). Yr-ahead inflation exp 4.5% (cool from 4.7%, still elevated). Hard-data prints today are net mixed:
+  - Retail Sales +0.5% MoM (in line, consumer resilient).
+  - Initial jobless claims **211k** (vs 208k est) — slight loosening at the margin.
+- **10Y yield 4.57%** (+8 bp from yesterday's 4.49%); DXY 99.20 (5-week high); Brent $100-104/bbl, Iran-war premium unchanged.
+- **Pre-market futures** Dow -0.67% / SPX -1.09% / NDX -1.58% → realized SPY -1.20% on the open. Tech/semis the worst sleeve.
+
+**Quant deltas (yfinance) vs 5/14 pre-market:**
+- VOO $682.41 → $679.72 (-0.39%); MSFT $405.21 → $414.45 (+2.28%); GOOGL $402.62 → $397.10 (-1.37%); META $616.63 → $611.29 (-0.87%); AVGO $416.79 → $427.13 (+2.48% on the day but -3.19% intraday off post-open peak); V $320.31 → $327.07 (+2.11%); BRK-B $485.52 → $485.16 (-0.07%); LLY $1015.75 → $1010.90 (-0.48%); NVDA $225.83 → $226.74 (+0.40%, dHi -0.9% → -4.14% because 52w-Hi printed at $236.54 in the meantime).
+- **Fundamentals unchanged within 1 decimal across all 9** vs 5/14: fwd P/E, op margin, revG, beta all in line.
+- **No earnings window on any held position** until AVGO 2026-06-03; tranche 3 clean of guardrail #8 whenever it unblocks.
+- **NVDA in earnings window** (5/15 → 5/20); WAIT confirmed.
+
+**Strategic read:**
+- Soft data (U-Mich record-low sentiment) is the cleanest new input — bearish for cyclicals, neutral-to-positive for defensive quality. Validates Bull's defensive-ballast outperformance today (MSFT/V/LLY/BRK.B all green vs SPY -1.20%).
+- Tape narrative: "Powell-last-day uncertainty + sticky inflation + softening consumer mood = higher-for-longer yields = AI sleeve pressure". Bull's 37.5% cash + 0.62-beta defensive sleeve continues to compress relative drawdown — alpha tightened +83 bp today.
+- No thesis-break events on any of the 8 holdings; no entry triggers fired for new names.
+
+**Cited sources:** Gemini Search-Grounding (U-Mich, BLS Retail Sales / Jobless Claims, Treasury yields, DXY). yfinance for quant. See `memory/daily/2026-05-15.md` for portfolio detail.
