@@ -46,6 +46,31 @@ trading decision. Keep entries tight — pattern, lesson, encoded?
 - **Lesson:** A late-firing 01-pre-market never retroactively authorizes trades — by the time it runs, 02-market-open has already made its no-trade decision per spec. The correct response is to: (a) log the anomaly prominently in the daily file, (b) still complete the routine for audit/continuity (account sanity, quant pulse, macro pulse), (c) record a retroactive trade-idea draft so the next routines have context, (d) NEVER place orders from a late-firing pre-market. Tranche-3-style execution remains tied to *pre-market existing at open*, not *pre-market existing at all*.
 - **Encoded as rule?** Partially — `CLAUDE.md` already says "clock.is_open=True at pre-market time → log and continue cautiously". This entry hardens the rule: continue **cautiously** explicitly means **no orders, draft is audit-only**. Should be reinforced in `routines/01-pre-market.md` Step 2 next time that file is touched. Open question for Robin: 3 consecutive misses suggests a runner-side schedule issue; needs investigation outside of Bull's scope.
 
+## 2026-05-15 — WhatsApp must spell out open questions, not reference them by shorthand
+- **Pattern:** Bull referenced "Robin's A/B/C reply still pending" in 3 consecutive
+  daily files (5/13 04-pre-close, 5/14 05-close-summary, 5/15 02-market-open WhatsApp
+  draft) and in the 13:30Z 02-market-open WhatsApp send — but never re-stated *what*
+  the A/B/C options actually were after the original 5/13 framing. Robin reasonably
+  replied: "Was meinst du mit meiner A/B/C reply? Wenn das wichtig ist, musst du mir
+  erklären in der Whatsapp Nachricht was ich zu tun habe." The shorthand assumed
+  Robin had perfect recall of a 3-day-old question buried in a daily file he doesn't
+  read. He doesn't — the WhatsApp is his interface, not the memory tree.
+- **Lesson:** Every WhatsApp that flags a pending Robin-decision MUST re-state the
+  question in full each time, not by shorthand reference. Specifically: (a) name
+  the decision in one phrase, (b) list each option with its concrete consequence
+  (dollars / allocation / risk), (c) state Bull's tendency and *why*, (d) give one
+  unambiguous instruction for how to reply (chat text vs. memory edit). If options
+  collapse over time (e.g. (C) becoming equivalent to (B)), explicitly retire the
+  dead option in the WhatsApp — don't carry forward stale shorthand. The 5/13
+  question was actually A/B from inception; (C) was Bull's later rewording of (B)
+  for emphasis and should never have appeared as a distinct option.
+- **Encoded as rule?** Informally — recorded here. The next 04-pre-close /
+  05-close-summary / 06-weekly-review WhatsApp drafts must spell out the
+  tranche-3 question in full per this rule, not "the A/B/C question". Should be
+  reinforced in `routines/02-market-open.md` Step 6, `routines/05-close-summary.md`
+  Step 6, `routines/06-weekly-review.md` Step 6, and the WhatsApp helper if/when
+  a "draft_whatsapp(open_questions=[...])" abstraction is introduced.
+
 ## 2026-05-15 — Routine re-fires: snapshot-refresh, no duplicate side-effects
 - **Pattern:** `02-market-open` invoked twice in the same session (13:30Z at the
   cash-equity open, and 13:55Z ≈25 min later, before the scheduled 14:30Z cron).
