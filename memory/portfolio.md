@@ -1,66 +1,66 @@
 ---
-last_updated: 2026-05-15T13:35:00Z
+last_updated: 2026-05-15T13:55:00Z
 broker: alpaca
 account_type: paper
-total_value_usd: 100707.52
+total_value_usd: 100804.03
 cash_usd: 38000.00
-day_pnl_pct: -0.4831
-ytd_pnl_pct: 0.7075
-benchmark_spx_ytd: 8.501
+day_pnl_pct: -0.3878
+ytd_pnl_pct: 0.8040
+benchmark_spx_ytd: 8.597
 spy_ytd_reference_date: 2026-01-02
 spy_ytd_reference_close: 681.31
-spy_today_price: 739.225
+spy_today_price: 739.88
 alpha_vs_spx: -7.793
 position_count: 8
 ---
 
-# Portfolio — 02-market-open 2026-05-15 (intraday)
+# Portfolio — 02-market-open 2026-05-15 (intraday, 13:55Z re-fire snapshot)
 
-**No trades today.** DCA tranche 3 of 3 remains **blocked** — `01-pre-market` did
-not run for the **2nd consecutive business day** and Robin's A/B/C tranche-3 decision
-from yesterday is still pending. Per routine spec Step 1, no new orders without
-today's pre-market draft. See `memory/daily/2026-05-15.md` for full detail.
+**No trades today.** Same status as the 13:30Z run — DCA tranche 3 of 3 remains
+**blocked** by missing on-time pre-market draft (2nd consecutive business day) and
+pending Robin A/B/C reply. This snapshot is a light refresh after `02-market-open`
+already ran cleanly at 13:30Z. Daily file has the full prior analysis under
+`## 02-market-open`; the re-fire note is appended under `## 02-market-open (13:55Z re-fire)`.
 
-Equity intraday at **$100,707.52** vs yesterday close $101,196.48 → **Day P&L
--$488.96 / -0.483%**. SPY -1.20% on the open (Powell→Warsh transition jitters, 10Y
-yield to 4.55%). Bull beat SPY by ~72 bp on the day on the back of (a) 37.5% cash
-drag *helping* in a red tape, and (b) defensive ballast actively positive: **MSFT
-+2.34% day, V +1.37%, BRK.B +0.30%, LLY +0.23%**. AI sleeve caught the down-draft
-but stayed well above stops: AVGO **-3.19% day** (worst), VOO -1.13% (tracks SPY),
-GOOGL -1.57%, META -0.97%. All 8 positions remain **green on UPL** (worst BRK.B
-+0.40%, best MSFT +3.08%).
+Equity intraday at **$100,804.03** vs yesterday close $101,196.48 → **Day P&L
+-$392.45 / -0.388%** (+10 bp recovery vs 13:30Z snapshot at -0.483%). SPY now
+$739.88 → SPY day -1.11% (recovered ~9 bp from -1.20% at the open). **Bull beat SPY
+by +72 bp on the day** (unchanged); alpha-vs-SPX unchanged at **-7.79%**. All 8
+positions still green on UPL: worst BRK.B **+0.30%** (slightly off the 13:30Z
++0.40%), best GOOGL **+2.92%** (rotated up from META/MSFT as GOOGL bounced +1.10%
+vs 13:30Z). Day-best mover into the 13:55Z mark: GOOGL **+1.10%** intraday;
+day-worst: MSFT **-0.36%** intraday off its 13:30Z high. AVGO stabilised
+(+0.05% intraday) after the -3.19% opening drop.
 
-SPY now **$739.225** → SPY YTD **+8.50%** (vs 2026-01-02 ref $681.31). Bull YTD
-**+0.71%** → **Alpha vs SPX -7.79%** — **+83 bp tightening on the day** (vs -8.62%
-at yesterday's close). The largest one-day alpha narrowing since DCA start; the
-strategy was *designed* to outperform on weak-tape days via defensive ballast + cash
-buffer, and today it did.
+SPY now **$739.88** → SPY YTD **+8.597%** (vs 2026-01-02 ref $681.31). Bull YTD
+**+0.804%** → **Alpha vs SPX -7.793%** (mechanically unchanged — both legs
+ticked up ~10 bp together).
 
-All 8 trailing stops verified GTC and active 8/8 status=new (no fills, no
-modifications). HWMs ratcheted on 3 of 8: MSFT 411.84 → 417.35, V 325.42 → 327.11,
-AVGO 441.35 → 442.36. No position within 9 percentage points of its -10% stop (closest
-is V at -8.20% from stop). No stop-tightening trigger fired (threshold +15% UPL; best
-MSFT +3.08%).
+All 8 trailing stops verified GTC, status=new, no fills, no modifications. HWMs
+ratcheted on 2 of 8 since 13:30Z snapshot: MSFT 417.35 → **418.26**, V 327.11 →
+**328.37**. (BRK.B 487.14 → 487.1399 — within rounding, treated unchanged.) No
+position within 7 percentage points of its -10% stop (closest is AVGO at 7.0% above
+stop). No stop-tightening trigger fired (threshold +15% UPL; best GOOGL +2.92%).
 
 ## Open Positions
 
 | Symbol | Qty | Avg Entry | Now | Market Value | Unrealized P&L | Day Δ | Alloc % | Target % | Trail-Stop |
 |--------|----:|----------:|----:|-------------:|---------------:|------:|--------:|---------:|------------|
-| VOO    | 49.332341 | $675.703 | $679.632 | $33,527.84 | +$193.84 (+0.58%) | -1.13% | 33.29% | 50% (Core ETF) | 10% trail on 49 sh GTC, HWM $689.10, stop $620.19 — 0.332 sh unprotected |
-| MSFT   | 11.521758 | $404.973 | $417.454 |  $4,809.81 | +$143.81 (+3.08%) | **+2.34%** (best) |  4.78% |  7%            | 10% trail on 11 sh GTC, HWM **$417.35** (↑), stop $375.61 — 0.522 sh unprotected |
-| AVGO   | 11.264102 | $414.236 | $426.215 |  $4,800.93 | +$134.93 (+2.89%) | **-3.19%** (worst) |  4.77% |  7%            | 10% trail on 11 sh GTC, HWM $442.36 (↑), stop $398.12 — 0.264 sh unprotected |
-| GOOGL  | 12.047273 | $387.308 | $394.320 |  $4,750.48 |  +$84.48 (+1.81%) | -1.57% |  4.72% |  7%            | 10% trail on 12 sh GTC, HWM $403.70, stop $363.33 — 0.047 sh unprotected |
-| META   |  7.767476 | $600.710 | $611.085 |  $4,746.59 |  +$80.59 (+1.73%) | -0.97% |  4.71% |  7%            | 10% trail on 7 sh GTC, HWM $623.73, stop $561.36 — 0.767 sh unprotected |
-| LLY    |  3.341161 | $997.857 |$1009.000 |  $3,371.23 |  +$37.23 (+1.12%) | +0.23% |  3.35% |  5%            | 10% trail on 3 sh GTC, HWM $1022.82, stop $920.54 — 0.341 sh unprotected |
-| V      | 10.256781 | $325.053 | $326.930 |  $3,353.25 |  +$19.25 (+0.58%) | +1.37% |  3.33% |  5%            | 10% trail on 10 sh GTC, HWM **$327.11** (↑), stop $294.40 — 0.257 sh unprotected |
-| BRK.B  |  6.883950 | $484.315 | $486.260 |  $3,347.39 |  +$13.39 (+0.40%) | +0.30% |  3.32% |  5%            | 10% trail on 6 sh GTC, HWM $487.14, stop $438.43 — 0.884 sh unprotected |
+| VOO    | 49.332341 | $675.703 | $680.570 | $33,574.11 | +$240.11 (+0.72%) | -1.05% | 33.31% | 50% (Core ETF) | 10% trail on 49 sh GTC, HWM $689.10, stop $620.19 — 0.332 sh unprotected |
+| MSFT   | 11.521758 | $404.973 | $415.950 |  $4,792.47 | +$126.47 (+2.71%) | +1.97% |  4.75% |  7%            | 10% trail on 11 sh GTC, HWM **$418.26** (↑) , stop $376.43 — 0.522 sh unprotected |
+| AVGO   | 11.264102 | $414.236 | $426.005 |  $4,798.56 | +$132.56 (+2.84%) | -3.24% |  4.76% |  7%            | 10% trail on 11 sh GTC, HWM $442.36, stop $398.12 — 0.264 sh unprotected |
+| GOOGL  | 12.047273 | $387.308 | $398.630 |  $4,802.40 | +$136.40 (+2.92%) | -0.49% |  4.76% |  7%            | 10% trail on 12 sh GTC, HWM $403.70, stop $363.33 — 0.047 sh unprotected |
+| META   |  7.767476 | $600.710 | $612.280 |  $4,755.87 |  +$89.87 (+1.93%) | -0.78% |  4.72% |  7%            | 10% trail on 7 sh GTC, HWM $623.73, stop $561.36 — 0.767 sh unprotected |
+| LLY    |  3.341161 | $997.857 |$1008.720 |  $3,370.30 |  +$36.30 (+1.09%) | +0.20% |  3.34% |  5%            | 10% trail on 3 sh GTC, HWM $1022.82, stop $920.54 — 0.341 sh unprotected |
+| V      | 10.256781 | $325.053 | $328.215 |  $3,366.43 |  +$32.43 (+0.97%) | +1.77% |  3.34% |  5%            | 10% trail on 10 sh GTC, HWM **$328.37** (↑) , stop $295.53 — 0.257 sh unprotected |
+| BRK.B  |  6.883950 | $484.315 | $485.750 |  $3,343.88 |   +$9.88 (+0.30%) | +0.19% |  3.32% |  5%            | 10% trail on 6 sh GTC, HWM $487.14, stop $438.43 — 0.884 sh unprotected |
 
-Total committed: $62,707.52 (62.27% of equity)
-Cash retained: $38,000.00 (37.73%)
+Total committed: $62,804.03 (62.30% of equity)
+Cash retained: $38,000.00 (37.70%)
 Open positions: 8 / 10 (NVDA deferred; 9th slot held in reserve)
 Leverage: 0.62x (cap 2x)
-Day P&L: -$488.96 (-0.483%) — Bull beat SPY day -1.20% by **+72 bp** on cash drag
-+ defensive-sleeve resilience.
+Day P&L: -$392.45 (-0.388%) — Bull beat SPY day -1.11% by **+72 bp** on cash drag
++ defensive-sleeve resilience (alpha unchanged vs 13:30Z snapshot).
 Fractional uncovered: ~3.40 sh aggregate ≈ ~$1,890 notional (~1.88% of equity).
 Mitigation still deferred until after tranche 3 consolidates remainders to ≥1 whole share.
 
