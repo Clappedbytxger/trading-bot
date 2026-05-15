@@ -40,12 +40,18 @@ In `memory/daily/<today>.md` under `## 04-pre-close`, write:
   - Macro events (Fed speak, CPI, etc.) — query via `research()` if not already cached
 - Open questions for Robin (if any)
 
-## Step 5 — Commit
+## Step 5 — Commit + open PR + **actively merge** (highest priority)
+`main` is branch-protected. Follow `CLAUDE.md` Memory Protocol Step 0 (end-of-routine):
 ```
 git add memory/
 git commit -m "routine: 04-pre-close @ <timestamp>"
-git push origin main
+git push -u origin <working-branch>
 ```
+Then via GitHub MCP: list/create PR → `enable_pr_auto_merge` → if that returns
+"already clean" (no required checks) or any error, **fall through to
+`merge_pull_request` directly** (mergeMethod `MERGE`) → verify `merged: true` via
+`pull_request_read`. If the merge fails, log to `lessons.md`, add a "MERGE FAILED"
+line to today's daily file, and flag Robin via WhatsApp.
 
 ## Step 6 — Notify
 No WhatsApp by default. Save the daily report for 05-close-summary.

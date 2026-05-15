@@ -76,19 +76,30 @@ Build a **trade-idea draft** (not orders):
 - Append new findings to `memory/research_log.md` (keep it concise — bullet points + citations).
 - Do NOT modify `strategy.md` or `portfolio.md` here.
 
-## Step 6 — Commit + open/refresh PR with auto-merge
-`main` is branch-protected. Do NOT push to it directly. Use the GitHub MCP PR flow:
+## Step 6 — Commit + open PR + **actively merge** (highest priority)
+`main` is branch-protected. Do NOT push to it directly. Use the GitHub MCP PR flow.
+**The merge MUST happen before the routine ends** — without it, every subsequent
+routine clones stale state from `main` and no trades fire. Follow `CLAUDE.md` Memory
+Protocol Step 0 (end-of-routine) verbatim:
+
 ```
 git add memory/
 git commit -m "routine: 01-pre-market @ <timestamp>"
 git push -u origin <working-branch>
 ```
 Then in MCP:
-1. `mcp__github__list_pull_requests` with `head=clappedbytxger:<working-branch>`, `state=open`
+1. `mcp__github__list_pull_requests` with `head=clappedbytxger:<working-branch>`, `state=open`.
 2. If none exists: `mcp__github__create_pull_request` (base=`main`, head=`<working-branch>`,
    title=`routine: 01-pre-market @ <timestamp>`, body links to today's daily file).
-3. `mcp__github__enable_pr_auto_merge` (mergeMethod: `MERGE`).
-4. End the routine. Do not poll for merge completion.
+3. Try `mcp__github__enable_pr_auto_merge` (mergeMethod: `MERGE`) — handles the case
+   where required checks are pending.
+4. If auto-merge returns "already in clean status" (no pending checks) or any other
+   error, **fall through and call `mcp__github__merge_pull_request` directly**
+   (mergeMethod: `MERGE`). This is the normal path when no required checks are
+   configured on `main`.
+5. Verify with `mcp__github__pull_request_read` that `merged: true`. If the merge
+   failed (conflicts, behind-base, policy block), log to `lessons.md`, add a
+   "MERGE FAILED" line to today's daily file, and flag Robin via WhatsApp.
 
 ## Step 7 — Notify
 **No WhatsApp** unless an urgent risk emerged (e.g. a current position has critical news). If urgent, send a short German alert.

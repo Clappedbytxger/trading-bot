@@ -86,12 +86,19 @@ Format (< 1000 chars):
 If you propose a guardrail override (e.g. higher stop-loss for a specific position),
 clearly state it and ask Robin for explicit confirmation in his next reply.
 
-## Step 7 — Commit
+## Step 7 — Commit + open PR + **actively merge** (highest priority)
+`main` is branch-protected. Follow `CLAUDE.md` Memory Protocol Step 0 (end-of-routine):
 ```
 git add memory/
 git commit -m "routine: 02-market-open @ <timestamp>"
-git push origin main
+git push -u origin <working-branch>
 ```
+Then via GitHub MCP: list/create PR → `enable_pr_auto_merge` → if that returns
+"already clean" (no required checks) or any error, **fall through to
+`merge_pull_request` directly** (mergeMethod `MERGE`) → verify `merged: true` via
+`pull_request_read`. If the merge fails, log to `lessons.md`, add a "MERGE FAILED"
+line to today's daily file, and flag Robin via WhatsApp. The merge must complete
+before the routine ends — downstream routines depend on a fresh `main`.
 
 ## Token budget
 < 45k input tokens. Most of the budget goes to recent research + reasoning. Keep WhatsApp output < 1k.

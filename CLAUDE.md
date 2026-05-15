@@ -73,7 +73,9 @@ do not auto-resolve memory conflicts.
 At the **end** of every routine, after WRITE step 6 (branch commit + push):
 
 `main` is protected — **never push directly to `main`**. Instead, open or update a
-pull request and let GitHub auto-merge handle the merge once any required checks pass.
+pull request and **actively merge it** so subsequent routines have a fresh `main` to
+clone from. **The merge is the highest-priority step of the routine** — if it doesn't
+happen, every downstream routine reads stale state and no trades can fire.
 
 1. Ensure the working branch is pushed:
    `git push -u origin <working-branch>`
@@ -86,13 +88,24 @@ pull request and let GitHub auto-merge handle the merge once any required checks
    - `base`: `main`
    - `title`: `routine: <name> @ <ISO timestamp>`
    - `body`: one-paragraph summary linking to today's `memory/daily/YYYY-MM-DD.md`.
-3. Enable auto-merge: `mcp__github__enable_pr_auto_merge` with `mergeMethod: MERGE`.
-   GitHub will merge as soon as required checks pass (or immediately if there are none).
-4. Do **not** wait/poll for the merge. End the routine. The next routine's Step 0 will
-   pick up the merged state from `origin/main`.
+3. **Merge the PR before ending the routine.** Try in this order:
+   a. `mcp__github__enable_pr_auto_merge` with `mergeMethod: MERGE` — handles the case
+      where required checks are still pending; GitHub merges automatically once green.
+   b. If auto-merge returns "already in clean status" (no pending checks) **or** any
+      other error, fall through and call `mcp__github__merge_pull_request` directly
+      with `mergeMethod: MERGE`. This is the normal path when no required checks are
+      configured on `main`.
+   c. If the direct merge fails with a mergeable-state error (conflicts, behind base,
+      review-required), **do not give up silently**: log the failure to `lessons.md`,
+      include a "MERGE FAILED — manual intervention needed" line in the daily file,
+      and (if the routine is one that sends WhatsApp) flag it to Robin in German.
+      Only conflicts/policy issues should ever land in Robin's lap — never a "I forgot
+      to merge" outcome.
+4. Verify the merge: `mcp__github__pull_request_read` on the PR and confirm
+   `merged: true` (or `state: closed` + `merged_at` set). Only then end the routine.
 
-Goal: `main` always converges to the current truth via PR auto-merge, without giving
-the bot direct write access to a protected branch.
+Goal: `main` always converges to the current truth at the end of every routine, so the
+next cloud routine clones the most recent memory and can trade on it.
 
 ### 1. READ (selective, token-budget < 30k)
 
