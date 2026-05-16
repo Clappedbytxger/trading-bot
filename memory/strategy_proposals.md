@@ -15,7 +15,7 @@ Format:
 
 ---
 
-## 2026-05-16 — DCA tranche sizing must respect guardrail #5 mechanically
+## 2026-05-16 — DCA tranche sizing must respect guardrail #5 mechanically — **APPROVED 2026-05-16 (chat reply), encoded in `strategy.md` v2**
 
 **Current rule** (`strategy.md` Variant C, Entry criteria, line 25):
 > DCA every position over 3 trading days (split each entry into 3 tranches).

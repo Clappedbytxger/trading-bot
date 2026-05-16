@@ -97,6 +97,39 @@ trading decision. Keep entries tight — pattern, lesson, encoded?
 - **Lesson:** `enable_pr_auto_merge` only schedules a merge **when there are pending required checks** to wait on. On this repo `main` has no required checks today, so auto-merge silently no-ops. **The merge is the highest-priority step of the routine** — if it doesn't happen, every downstream routine reads stale state and no trades fire. End-of-routine flow must be: try `enable_pr_auto_merge` (handles the pending-checks case), and on "already clean" or any other error **fall through to `merge_pull_request` directly** (`mergeMethod: MERGE`). Always verify with `pull_request_read` that `merged: true` before ending. Conflicts/policy-blocks → log + flag Robin in German; never end a routine with an unmerged PR.
 - **Encoded as rule?** Yes — `CLAUDE.md` Memory Protocol Step 0 (end-of-routine) rewritten today; all seven routine files (`00`–`06`) updated to point at the same flow. Old `git push origin main` snippet (which never worked under branch protection anyway) removed everywhere.
 
+## 2026-05-16 — WhatsApp is outbound-only; inbox.md is now the canonical reply channel
+- **Pattern:** Robin sent a WhatsApp "B" reply to Bull's tranche-3 question
+  (origin 5/13, fully re-explained 5/15 14:05Z) — but the reply never reached
+  any routine. CallMeBot is a one-way HTTP service: Bull POSTs to send,
+  Robin's WhatsApp replies go to a phone but no inbound listener exists in
+  `src/notify/whatsapp.py`. Three days of "Robin's A/B reply still pending"
+  daily-file notes + a Default-B fallback were drafted on the assumption
+  that WhatsApp was bidirectional. It isn't. Robin reasonably asked in chat:
+  "Ist das bei dir angekommen?" — no, it wasn't, because the channel doesn't
+  exist on the inbound side.
+- **Lesson:** Every "Robin must reply" prompt across `CLAUDE.md`,
+  `routines/*.md`, and daily WhatsApp messages MUST name a concrete inbound
+  channel that scheduled routines can actually read. The chat session works
+  for ad-hoc interactions but is invisible to scheduled cron routines.
+  Until a real bidirectional channel exists (Telegram bot / Twilio WhatsApp
+  Business webhook / GitHub-issues-poller), the canonical reply mechanism
+  is **`memory/inbox.md`**: Robin edits the file on GitHub web UI between
+  routines, commits to `main`, and Bull's next routine reads it at Step 1
+  (READ) after the start-of-routine sync. Every WhatsApp question Bull
+  sends must explicitly say "Bitte per memory/inbox.md auf GitHub
+  zurückschreiben — WhatsApp-Antworten erreichen Bull NICHT."
+- **Encoded as rule?** Yes — `memory/inbox.md` created 2026-05-16 with full
+  usage instructions. Two follow-ups still owed:
+  1. Update `CLAUDE.md` Communication Style section to name inbox.md as
+     the reply channel and remove any implicit "WhatsApp reply" assumption.
+  2. Update all WhatsApp draft templates (in routines 02/03/04/05/06) to
+     say "Bitte per memory/inbox.md zurückschreiben — WhatsApp ist nur
+     outbound" wherever a Robin-reply is requested. These belong in the
+     respective routine-spec edits, not in this lesson body.
+  Both follow-ups are deferred to a Robin-confirmed CLAUDE.md edit pass
+  (since `CLAUDE.md` is a top-level config that benefits from explicit
+  Robin acknowledgment, the same way strategy.md does).
+
 ## 2026-05-16 — Week ending 2026-05-15 (KW 20)
 - **Pattern:** Week-1 of live paper trading. Strategy executed cleanly on its first
   weak-tape stress test: SPY -1.20% Friday, Bull -0.49% → +71 bp day-alpha, the

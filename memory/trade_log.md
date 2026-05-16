@@ -106,3 +106,36 @@ HWM reset is acceptable when re-anchored to the now-larger combined position.
 - **NVDA** — target 7%, still deferred. Reason unchanged from 5/12 + 98.7% of 52w-Hi
   today (even closer than yesterday). Earnings 2026-05-20 → guardrail #8 window opens
   2026-05-15. Will re-evaluate after the print.
+
+---
+
+## 2026-05-16T20:50Z — DCA tranche 3 formally DEFERRED per Robin Option B (no order placed)
+
+Routine: `06-weekly-review` follow-up (Robin chat reply). Broker: Alpaca paper. Clock: closed (weekend).
+Strategy: Variant C "AI-Capex Barbell" (`strategy.md` v2 — DCA rule updated same day).
+
+Decision: **Robin chose Option B** via Claude Code chat session 2026-05-16T20:45Z.
+Robin sent a WhatsApp "B" reply earlier (5/15 or 5/16) which never reached Bull —
+CallMeBot is outbound-only. See `memory/inbox.md` Processed entry + lesson
+2026-05-16 on WhatsApp asymmetry.
+
+**Action**: T3 deferred ~1 week into post-NVDA + post-Warsh window.
+- Earliest re-evaluation: Thu 2026-05-21 in 01-pre-market (post NVDA-print 5/20).
+- Likely actual execution: Mon 5/25 or Tue 5/26, conditional on:
+  - NVDA block strategy caveat (≥1 -3% red day on AI sleeve before completing T2+T3 on the AI names);
+  - No fresh thesis-break events on any of the 8 held names;
+  - Macro tape settling post-Warsh first remarks (Mon 5/18).
+- T3 sizing on execution day per `strategy.md` v2: VOO capped at
+  `min($16,667, 0.30 × cash_at_open)`, residual rolls forward to T4 (and T5 if needed).
+
+No orders placed. No stops modified. No positions touched.
+
+### Why this matters as a trade-log entry
+
+A deferred-but-decided execution is a real trading decision (not a non-event).
+Logging here:
+- Anchors the decision to a timestamp + a rationale traceable to Robin's reply.
+- Closes the rolling "Robin A/B pending" open-question that's been carried in
+  every daily file since 2026-05-13.
+- Lets the next 01-pre-market read this entry and skip re-asking the question.
+

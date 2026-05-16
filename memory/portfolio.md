@@ -95,12 +95,19 @@ Mitigation still deferred until after tranche 3 consolidates remainders to ≥1 
 - **NVDA** — target 7%. Earnings 2026-05-20 (Wed) post-close. Guardrail-#8 earnings
   window **open since 2026-05-15**. Entry blocked. Re-evaluate post-print Thu 5/21
   per strategy caveat (still needs ≥1 -3% red day before completing tranches 2+3).
-- **DCA tranche 3 of 3** — **STILL BLOCKED, now 3rd business day in a row** (5/14,
-  5/15 missed; 5/18 Monday morning depends on Robin's reply). Robin's A/B reply
-  (post-14:05Z WhatsApp full re-explanation) still pending as of 21:15Z. No memory
-  edit on `main` since 14:48Z PR #17 merge. Path of least intervention remains
-  **(B) defer ~1 week into post-NVDA + post-Warsh window** — the de-facto default
-  if Robin's reply is not received by Mon 13:00Z 01-pre-market.
+- **DCA tranche 3 of 3** — **DEFERRED PER ROBIN DECISION 2026-05-16: Option B**.
+  Robin confirmed Option B via Claude Code chat session on 2026-05-16 (see
+  `memory/inbox.md` Processed). T3 deferred ~1 week into post-NVDA + post-Warsh
+  window. Earliest re-evaluation window: Thu 2026-05-21 in 01-pre-market (post
+  NVDA-print + 3 trading days of Warsh-era tape). Even then, T3 execution remains
+  conditional on (a) the strategy caveat for NVDA-block (≥1 -3% red day on the
+  AI sleeve, not just NVDA itself) and (b) no fresh thesis-break events. Most
+  likely actual execution: Mon 2026-05-25 or Tue 2026-05-26 if tape settles
+  cleanly. T3 sizing per `strategy.md` v2 DCA rule: VOO capped at
+  `min($16,667, 0.30 × cash_at_open)`, residual rolls forward to T4/T5.
+- **Robin's WhatsApp "B" reply (sent 2026-05-15/16) never arrived** — CallMeBot
+  is outbound-only. See lesson 2026-05-16 + new `memory/inbox.md` channel.
+  Future Robin replies must go via inbox.md, not WhatsApp text.
 
 ## DCA progression
 

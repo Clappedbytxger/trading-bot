@@ -1,8 +1,8 @@
 ---
-version: 1
+version: 2
 approved: true
 created: 2026-05-11
-last_modified: 2026-05-11
+last_modified: 2026-05-16
 ---
 
 ## Variant C — Bull-Custom: "AI-Capex Barbell" (My synthesis)
@@ -22,7 +22,7 @@ last_modified: 2026-05-11
   2. **BRK-B** (beta 0.62, FCF $61B) — broad-economy hedge, ~28% cash on the balance sheet at this writing.
   3. **LLY** (beta 0.48, rev growth 56%) — non-correlated healthcare growth (GLP-1 still in expansion).
 - **Entry criteria:**
-  - DCA every position over 3 trading days (split each entry into 3 tranches).
+  - DCA every position over 3 trading days (split each entry into 3 tranches). **Each tranche must satisfy guardrail #5: the single largest order in any tranche may not exceed 30% of available cash at the time of execution.** For positions whose target nominal exceeds ~20% of starting equity (e.g. VOO at 50%), the executable tranche size is therefore `min(target_nominal_per_tranche, 0.30 × current_cash_at_open)`, and any residual rolls into an additional tranche on the next trading day. Pre-flight every tranche on `cash_at_open`, not just at strategy-design time. (Added v2 2026-05-16 per strategy_proposals.md.)
   - No entry within 3 trading days before earnings (guardrail #8).
   - For NVDA specifically: do not initiate full 7% on a 52-week-high day. Wait for at least one -3% red day before completing tranches 2+3.
 - **Exit criteria:**
