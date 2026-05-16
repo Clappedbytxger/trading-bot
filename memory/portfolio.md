@@ -1,18 +1,45 @@
 ---
-last_updated: 2026-05-15T21:15:00Z
+last_updated: 2026-05-16T20:35:00Z
 broker: alpaca
 account_type: paper
 total_value_usd: 100739.35
 cash_usd: 38000.00
 day_pnl_pct: -0.4924
+week_pnl_pct: 0.7394
+week_spy_pct: 0.1355
+week_alpha_vs_spy_bp: 60.4
 ytd_pnl_pct: 0.7394
 benchmark_spx_ytd: 8.493
 spy_ytd_reference_date: 2026-01-02
 spy_ytd_reference_close: 681.31
 spy_today_price: 739.17
 alpha_vs_spx: -7.754
+ytd_alpha_tightening_this_week_pp: 0.502
 position_count: 8
 ---
+
+# Portfolio — 06-weekly-review 2026-05-16 (end-of-week KW 20 snapshot)
+
+## Weekly delta and alpha (week of 2026-05-11 → 2026-05-15)
+
+| Metric                          | Mon AM open (5/12) | Fri close (5/15) | Δ week        |
+|---------------------------------|-------------------:|-----------------:|--------------:|
+| Equity                          |        $100,000.00 |      $100,739.35 |    +$739.35   |
+| Bull cumulative return          |              0.00% |          +0.74%  |    +74 bp     |
+| SPY (entry 5/12 close $738.17)  |                  — |        $739.17   |    +0.135%    |
+| **Week alpha vs SPY**           |                  — |              —   |   **+60 bp**  |
+| SPX YTD                         |              +8.35% |        +8.49%   |    +14 bp     |
+| YTD alpha vs SPX                |             -8.26% |         -7.75%  |   **+51 bp**  |
+| Cash %                          |             100.0% |          37.7%  |    -62.3 pp   |
+| Open positions                  |                  0 |               8 |       +8      |
+| Tranches filled                 |                  0 |              16 |     +16 (T1+T2) |
+
+Daily alpha tightening trajectory (cumulative YTD alpha vs SPX):
+- 5/12 close (T1 fill day): **-8.26%**
+- 5/13 close (T2 fill day): -8.13%  (+13 bp tightening)
+- 5/14 close (no-trade):    -8.62%  (-49 bp widening on SPY +0.52% day)
+- 5/15 close (no-trade):    **-7.75%** (+87 bp tightening on SPY -1.20% day)
+- Net week: **+51 bp YTD-alpha tightening**
 
 # Portfolio — 05-close-summary 2026-05-15 (final post-close snapshot)
 

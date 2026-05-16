@@ -96,3 +96,32 @@ trading decision. Keep entries tight — pattern, lesson, encoded?
 - **Pattern:** End-of-routine flow opened PR #10 and called `mcp__github__enable_pr_auto_merge`. The MCP returned "already in clean status (all checks passed). Auto-merge only applies when checks are pending — you can merge directly." → PR sat open, `main` never updated. Downstream routines would have cloned a stale `main` and read no trade plan, no portfolio update, nothing.
 - **Lesson:** `enable_pr_auto_merge` only schedules a merge **when there are pending required checks** to wait on. On this repo `main` has no required checks today, so auto-merge silently no-ops. **The merge is the highest-priority step of the routine** — if it doesn't happen, every downstream routine reads stale state and no trades fire. End-of-routine flow must be: try `enable_pr_auto_merge` (handles the pending-checks case), and on "already clean" or any other error **fall through to `merge_pull_request` directly** (`mergeMethod: MERGE`). Always verify with `pull_request_read` that `merged: true` before ending. Conflicts/policy-blocks → log + flag Robin in German; never end a routine with an unmerged PR.
 - **Encoded as rule?** Yes — `CLAUDE.md` Memory Protocol Step 0 (end-of-routine) rewritten today; all seven routine files (`00`–`06`) updated to point at the same flow. Old `git push origin main` snippet (which never worked under branch protection anyway) removed everywhere.
+
+## 2026-05-16 — Week ending 2026-05-15 (KW 20)
+- **Pattern:** Week-1 of live paper trading. Strategy executed cleanly on its first
+  weak-tape stress test: SPY -1.20% Friday, Bull -0.49% → +71 bp day-alpha, the
+  cleanest single-day outperformance of the week. Weekly: Bull +0.74% vs SPY +0.135%
+  = **+60 bp week-alpha** with the book still only 62% deployed (tranche 3 deferred).
+  YTD-alpha gap tightened from -8.26% (Tue close) to -7.75% (Fri close) = +51 bp
+  this week. **Zero stop-outs, zero thesis-breaks, zero guardrail violations across
+  16 executed fills.** Every operational issue this week (3 consecutive 01-pre-market
+  cron misses, Alpaca fractional-stop rejections, IEX feed lag at post-close pull,
+  WhatsApp question-shorthand confusion, tranche-3 mechanical guardrail-#5 conflict)
+  was caught and either fixed or surfaced to Robin — no silent failures.
+- **Lesson:** In early-phase paper trading, **operational lessons outnumber strategy
+  lessons by ~4:1, and that's healthy.** The strategy itself ("AI-Capex Barbell"
+  with defensive ballast + cash sleeve) hasn't been stress-tested by a real
+  drawdown yet, but its single design promise — that cash + low-beta defensives
+  buffer the AI-sleeve volatility on weak-tape days — is empirically confirmed on
+  the only meaningful down-day in the dataset (5/15). Lesson for week 2 onward:
+  **resist the urge to "do something" while the strategy is working.** Every week
+  Bull *doesn't* tighten stops, trim winners, chase NVDA at 52w-high, or rebalance
+  intraday is a week of compounding the strategy spec. Action discipline > action
+  count.
+- **Encoded as rule?** No (still informal). Strategy.md needs no edit; this is a
+  behavioral reminder for routines 02/03/04. Proposed encoding for next week:
+  add a single line to routines 03-midday / 04-pre-close "Bias = inaction unless
+  a spec-trigger fires. Hit-rate of no-action days is a quality metric, not a
+  laziness metric." One concrete strategy-mechanics gap *was* surfaced this week
+  (DCA tranche sizing vs guardrail #5) — proposed to Robin in
+  `memory/strategy_proposals.md` 2026-05-16, awaiting his review.
