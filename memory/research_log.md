@@ -125,3 +125,32 @@ entries (> 30 days) can be pruned by the weekly-review routine.
 - No thesis-break events on any of the 8 holdings; no entry triggers fired for new names.
 
 **Cited sources:** Gemini Search-Grounding (U-Mich, BLS Retail Sales / Jobless Claims, Treasury yields, DXY). yfinance for quant. See `memory/daily/2026-05-15.md` for portfolio detail.
+
+---
+
+## 2026-05-18 — Pre-market (KW 21 start, Warsh-era Day 1)
+
+**Macro (Gemini):**
+- **Warsh Day 1 as Fed Chair.** Sworn in Sat 5/16 (Powell's term ended Fri 5/15). No public schedule for 5/18 announced; first FOMC he chairs is **June 16-17**. Senate confirmation 54-45 (most divisive in Fed history). Telegraphed stance: tighter inflation discipline, streamlined Fed communication, narrower mandate focus. Strategists model near-term policy continuity with Powell.
+- **Powell-stays-as-governor dynamic** is a new wild card — two governors with different inflation tolerances could create FOMC-dot-plot dispersion through June.
+- Gemini grounding did **not** return spot pre-market futures / 10Y / DXY / oil for 5/18 (flagged as too recent). Broker-side check punted to 02-market-open.
+
+**NVDA pre-earnings preview (Gemini, earnings Wed 5/20 post-close):**
+- Consensus: revenue ~$78B (Citi $80B, UBS models $81B), EPS ~$1.77 (range $1.69-1.99), data-center ~$73B, non-GAAP GM 74.5% (guidance 75% ±50 bp).
+- **PT moves since 5/14**: BofA $320 (from $300), UBS $275 (from $245), Susquehanna $275 (from $250), RBC Outperform $250 reiterated, KeyBanc $300 (from $275). Net hawkish flow.
+- **SK Hynix Q1 HBM sales to NVDA: +62.6% YoY** (KRW 7.78T) — bullish demand signal.
+- **Jensen Huang on China**: called full export ban "completely ridiculous"; warned of accelerating China's independent tech ecosystem. Trump-Xi summit (ended 5/15) did **not** address semis; China reportedly rejecting H200 imports to favor domestic chip development. Consensus and management guidance exclude China DC revenue — any inclusion = material surprise.
+- Hyperscaler aggregate capex raised to **$725B**; cloud-wide $830B in 2026 (~75% AI-specific). Direct read-through for AVGO + NVDA; capital-intensity question still for MSFT/META/GOOGL but mitigated by Q1 prints.
+- NVDA market cap surpassed $5.7T on 5/16.
+- **Bull stance**: WAIT. Earnings window blocking entry; strategy caveat (≥1 -3% red day on AI sleeve before completing tranches) remains in force post-print. Re-evaluate Thu 5/21 01-pre-market.
+
+**Quant pulse (yfinance, prior-session close):**
+- All 9 strategy names: fundamentals within 1 decimal of 5/15 read. **No thesis-break flags.**
+- NVDA at 95.26% of 52w-Hi (vs 99.1% on 5/14 — pulled back from the high but still elevated).
+- GOOGL at 98.29% of 52w-Hi; MSFT 75.96% (deep DD still); META 77.14% (capex-fear DD still).
+- All in-window earnings flags: **only NVDA**. AVGO 2026-06-03 (12 td out, clean).
+- SPY 98.62% of 52w-Hi at $739.17.
+
+**No thesis-break events on any of the 8 holdings; no entry triggers fired for new names. NVDA wait + T3 defer both still binding.**
+
+**Cited sources:** Gemini Search-Grounding (Warsh confirmation + bio, NVDA consensus, analyst PTs, Jensen comments, SK Hynix sales, hyperscaler capex). yfinance for quant. See `memory/daily/2026-05-18.md` for portfolio detail.
