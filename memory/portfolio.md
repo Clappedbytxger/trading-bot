@@ -1,120 +1,81 @@
 ---
-last_updated: 2026-05-16T20:35:00Z
+last_updated: 2026-05-18T13:37:00Z
 broker: alpaca
 account_type: paper
-total_value_usd: 100739.35
+total_value_usd: 100562.42
 cash_usd: 38000.00
-day_pnl_pct: -0.4924
-week_pnl_pct: 0.7394
-week_spy_pct: 0.1355
-week_alpha_vs_spy_bp: 60.4
-ytd_pnl_pct: 0.7394
-benchmark_spx_ytd: 8.493
+day_pnl_pct_vs_fri_yf_close: -0.1756
+day_pnl_pct_vs_fri_broker_close: -0.0298
+week_pnl_pct: 0.5624
+week_spy_pct: -0.0636
+ytd_pnl_pct: 0.5624
+benchmark_spx_ytd: 8.4235
 spy_ytd_reference_date: 2026-01-02
 spy_ytd_reference_close: 681.31
-spy_today_price: 739.17
-alpha_vs_spx: -7.754
-ytd_alpha_tightening_this_week_pp: 0.502
+spy_today_price: 738.70
+alpha_vs_spx: -7.8611
+ytd_alpha_widening_today_open_bp: -10.7
 position_count: 8
+leverage_x: 0.62
 ---
 
-# Portfolio — 06-weekly-review 2026-05-16 (end-of-week KW 20 snapshot)
+# Portfolio — 02-market-open 2026-05-18 (post-open snapshot, 13:37Z)
 
-## Weekly delta and alpha (week of 2026-05-11 → 2026-05-15)
+## Today's open delta
 
-| Metric                          | Mon AM open (5/12) | Fri close (5/15) | Δ week        |
-|---------------------------------|-------------------:|-----------------:|--------------:|
-| Equity                          |        $100,000.00 |      $100,739.35 |    +$739.35   |
-| Bull cumulative return          |              0.00% |          +0.74%  |    +74 bp     |
-| SPY (entry 5/12 close $738.17)  |                  — |        $739.17   |    +0.135%    |
-| **Week alpha vs SPY**           |                  — |              —   |   **+60 bp**  |
-| SPX YTD                         |              +8.35% |        +8.49%   |    +14 bp     |
-| YTD alpha vs SPX                |             -8.26% |         -7.75%  |   **+51 bp**  |
-| Cash %                          |             100.0% |          37.7%  |    -62.3 pp   |
-| Open positions                  |                  0 |               8 |       +8      |
-| Tranches filled                 |                  0 |              16 |     +16 (T1+T2) |
+| Metric                          | Fri close (yf-basis) | Mon pre-open (13:00Z) | Mon post-open (13:37Z) | Δ vs Fri close |
+|---------------------------------|---------------------:|----------------------:|-----------------------:|---------------:|
+| Equity                          |        $100,739.35  |        $100,522.33   |        $100,562.42    |    -$176.93 (-0.176%)   |
+| SPY                             |             $739.17 |               $738.70 (intraday) |               $738.70 |    -$0.47 (-0.064%) |
+| Cash %                          |             37.72%  |              37.80%  |              37.79%   |    +0.07 pp       |
+| Position count                  |                  8  |                   8  |                   8   |     0             |
+| Tranches filled                 |                 16  |                  16  |                  16   |     0             |
 
-Daily alpha tightening trajectory (cumulative YTD alpha vs SPX):
-- 5/12 close (T1 fill day): **-8.26%**
-- 5/13 close (T2 fill day): -8.13%  (+13 bp tightening)
-- 5/14 close (no-trade):    -8.62%  (-49 bp widening on SPY +0.52% day)
-- 5/15 close (no-trade):    **-7.75%** (+87 bp tightening on SPY -1.20% day)
-- Net week: **+51 bp YTD-alpha tightening**
+- Day P&L (yf-basis): **-0.176%** vs SPY day **-0.064%** → Bull lags SPY by **~11 bp** on the AM open as AI-sleeve gives back part of Fri's late-session rally. Defensives flat (V +0.03%, BRK.B -0.29%), Core ETF VOO tracking SPY within feed noise.
+- Alpha YTD: **-7.861%** vs SPX **+8.424%** (Bull YTD +0.562%) → **-10.7 bp widening** from Fri close -7.754%. Routine noise, not a regime change.
+- Broker vs yfinance feed reconciliation: broker shows -$30 vs Fri broker close $100,592.43 (essentially flat). The ~$147 IEX-lag gap from Fri close has narrowed to ~$30 — converging as expected per Fri lesson; no action.
 
-# Portfolio — 05-close-summary 2026-05-15 (final post-close snapshot)
+## Open positions (broker live mark @ 13:37Z)
 
-**No trades today** (4th routine of the day with zero broker activity).
-Daily file under `## 05-close-summary` has the full day attribution.
+| Symbol | Qty | Avg Entry | Mark | Market Value | Unrealized P&L | Day Δ | Alloc % | Target % | Trail-Stop |
+|--------|----:|----------:|-----:|-------------:|---------------:|------:|--------:|---------:|------------|
+| VOO    | 49.332341 | $675.703 | $679.135 | $33,503.32 | +$169.32 (+0.51%) | -0.045% | 33.32% | 50% (Core ETF) | 10% trail on 49 sh GTC, HWM $689.10, stop $620.19 — 0.332 sh unprotected |
+| MSFT   | 11.521758 | $404.973 | $417.870 |  $4,814.60 | +$148.60 (+3.19%) | -0.961% |  4.79% |  7%            | 10% trail on 11 sh GTC, HWM $428.17, stop $385.35 — 0.522 sh unprotected |
+| AVGO   | 11.264102 | $414.236 | $420.075 |  $4,731.77 |  +$65.77 (+1.41%) | -1.209% |  4.71% |  7%            | 10% trail on 11 sh GTC, HWM $442.36, stop $398.12 — 0.264 sh unprotected |
+| GOOGL  | 12.047273 | $387.308 | $401.590 |  $4,838.06 | +$172.06 (+3.69%) | **+1.208%** (best) |  4.81% |  7%            | 10% trail on 12 sh GTC, HWM $403.70, stop $363.33 — 0.047 sh unprotected |
+| META   |  7.767476 | $600.710 | $606.255 |  $4,709.07 |  +$43.07 (+0.92%) | -1.304% |  4.68% |  7%            | 10% trail on 7 sh GTC, HWM $623.73, stop $561.36 — 0.767 sh unprotected |
+| LLY    |  3.341161 | $997.857 |  $990.76 |  $3,310.29 |  -$23.71 (-0.71%) | -1.411% (worst) |  3.29% |  5%            | 10% trail on 3 sh GTC, HWM $1022.82, stop $920.54 — 0.341 sh unprotected |
+| V      | 10.256781 | $325.053 | $325.840 |  $3,342.07 |   +$8.07 (+0.24%) | +0.028% |  3.32% |  5%            | 10% trail on 10 sh GTC, HWM $328.99, stop $296.09 — 0.257 sh unprotected |
+| BRK.B  |  6.883950 | $484.315 | $481.300 |  $3,313.25 |  -$20.75 (-0.62%) | -0.292% |  3.29% |  5%            | 10% trail on 6 sh GTC, HWM $488.30, stop $439.47 — 0.884 sh unprotected |
 
-Final equity at close (yfinance official close prices for all 8 holdings + cash):
-**$100,739.35** vs yesterday close $101,237.77 → **Day P&L -$498.42 / -0.4924%**.
-SPY closed at **$739.17** → **SPY day -1.2029%**. Bull beat SPY by **+71 bp** on
-the day — cleanest day-alpha tightening of the week, driven by MSFT's +3.05%
-close (against a tape with AVGO -3.32% and the AI sleeve broadly red) plus the
-37.7% cash sleeve absorbing ~45 bp of the macro drag and V/LLY/BRK.B
-(defensive ballast) collectively hugging flat against the down-tape.
-
-Alpha vs SPX at close: **-7.754%** — tightened **7 bp** from the 04-pre-close
--7.828% read at 19:32Z, continuing the day's "defensive-on-weak-tape" pattern
-into the print. Cumulative week alpha trajectory: Thu close -8.62% → Fri AM
-open -7.79% → Fri midday -7.84% → Fri pre-close -7.83% → **Fri close -7.75%**
-= +0.87 pp YTD-alpha tightening for the week on a SPY -1.20% Friday closer.
-
-Note on broker feed: Alpaca live API at 21:10Z showed equity $100,592.43 due
-to IEX quote lag (broker prices ~30-60 bp stale vs official close on most
-names). Reconstructed equity from yfinance close prices for the canonical
-EOD record above. ~$147 reconciliation gap will close to zero by Mon AM when
-Alpaca's overnight mark-to-market catches up. No action needed.
-
-## Open Positions (close-of-session marks)
-
-| Symbol | Qty | Avg Entry | Close | Market Value | Unrealized P&L | Day Δ | Alloc % | Target % | Trail-Stop |
-|--------|----:|----------:|------:|-------------:|---------------:|------:|--------:|---------:|------------|
-| VOO    | 49.332341 | $675.703 | $679.440 | $33,514.27 | +$180.30 (+0.55%) | -1.21% | 33.27% | 50% (Core ETF) | 10% trail on 49 sh GTC, HWM $689.10, stop $620.19 — 0.332 sh unprotected |
-| MSFT   | 11.521758 | $404.973 | $421.920 |  $4,862.07 | +$195.27 (+4.19%) | **+3.05%** (best day) |  4.83% |  7%            | 10% trail on 11 sh GTC, HWM **$428.17** (↑) , stop **$385.35** (↑) — 0.522 sh unprotected |
-| AVGO   | 11.264102 | $414.236 | $425.190 |  $4,789.65 | +$123.36 (+2.65%) | **-3.32%** (worst day) |  4.75% |  7%            | 10% trail on 11 sh GTC, HWM $442.36, stop $398.12 — 0.264 sh unprotected |
-| GOOGL  | 12.047273 | $387.308 | $396.780 |  $4,780.32 | +$114.10 (+2.45%) | -1.07% |  4.75% |  7%            | 10% trail on 12 sh GTC, HWM $403.70, stop $363.33 — 0.047 sh unprotected |
-| META   |  7.767476 | $600.710 | $614.230 |  $4,771.27 | +$105.07 (+2.25%) | -0.68% |  4.74% |  7%            | 10% trail on 7 sh GTC, HWM $623.73, stop $561.36 — 0.767 sh unprotected |
-| LLY    |  3.341161 | $997.857 |$1004.920 |  $3,357.65 |  +$23.59 (+0.71%) | -0.18% |  3.33% |  5%            | 10% trail on 3 sh GTC, HWM $1022.82, stop $920.54 — 0.341 sh unprotected |
-| V      | 10.256781 | $325.053 | $325.750 |  $3,341.16 |   +$7.16 (+0.21%) | **+1.00%** |  3.32% |  5%            | 10% trail on 10 sh GTC, HWM $328.99, stop $296.09 — 0.257 sh unprotected |
-| BRK.B  |  6.883950 | $484.315 | $482.700 |  $3,322.96 |  -$11.12 (-0.33%) | -0.28% |  3.30% |  5%            | 10% trail on 6 sh GTC, HWM $488.30, stop $439.47 — 0.884 sh unprotected |
-
-Total committed: $62,739.35 (62.28% of equity)
-Cash retained: $38,000.00 (37.72%)
+Total committed: $62,562.42 (62.21% of equity)
+Cash retained: $38,000.00 (37.79%)
 Open positions: 8 / 10 (NVDA deferred; 9th slot held in reserve)
 Leverage: 0.62x (cap 2x)
-Day P&L: -$498.42 (-0.492%) — Bull beat SPY day -1.203% by **+71 bp** on cash
-drag + MSFT outperformance + V positive on the day. Alpha vs SPX **tightened**
-into the close (-7.83% pre-close → -7.75% close) as the AI sleeve red-but-not-
-bleeding traded down less than SPY's mega-cap-weighted basket.
-Fractional uncovered: ~3.40 sh aggregate ≈ ~$1,890 notional (~1.88% of equity).
-Mitigation still deferred until after tranche 3 consolidates remainders to ≥1 whole share.
+All 8 trailing stops verified `status=new` GTC on Alpaca @ 13:37Z. HWMs unchanged from Fri close — no fresh intraday highs in first ~7 min. Cushion ≥6.8% on every name.
+Fractional uncovered: ~3.40 sh aggregate ≈ ~$1,890 notional (~1.88% of equity). Mitigation deferred until after tranche 3 consolidates remainders to ≥1 whole share.
 
 ## Pending (not yet opened)
 
 - **NVDA** — target 7%. Earnings 2026-05-20 (Wed) post-close. Guardrail-#8 earnings
   window **open since 2026-05-15**. Entry blocked. Re-evaluate post-print Thu 5/21
   per strategy caveat (still needs ≥1 -3% red day before completing tranches 2+3).
-- **DCA tranche 3 of 3** — **DEFERRED PER ROBIN DECISION 2026-05-16: Option B**.
-  Robin confirmed Option B via Claude Code chat session on 2026-05-16 (see
-  `memory/inbox.md` Processed). T3 deferred ~1 week into post-NVDA + post-Warsh
-  window. Earliest re-evaluation window: Thu 2026-05-21 in 01-pre-market (post
-  NVDA-print + 3 trading days of Warsh-era tape). Even then, T3 execution remains
-  conditional on (a) the strategy caveat for NVDA-block (≥1 -3% red day on the
-  AI sleeve, not just NVDA itself) and (b) no fresh thesis-break events. Most
-  likely actual execution: Mon 2026-05-25 or Tue 2026-05-26 if tape settles
-  cleanly. T3 sizing per `strategy.md` v2 DCA rule: VOO capped at
-  `min($16,667, 0.30 × cash_at_open)`, residual rolls forward to T4/T5.
-- **Robin's WhatsApp "B" reply (sent 2026-05-15/16) never arrived** — CallMeBot
-  is outbound-only. See lesson 2026-05-16 + new `memory/inbox.md` channel.
-  Future Robin replies must go via inbox.md, not WhatsApp text.
+- **DCA tranche 3 of 3** — **DEFERRED PER ROBIN DECISION 2026-05-16: Option B**
+  (Processed in `memory/inbox.md`). Earliest re-evaluation window: Thu 2026-05-21
+  in 01-pre-market (post NVDA-print + 3 trading days of Warsh-era tape). Most likely
+  actual execution: Mon 2026-05-25 or Tue 2026-05-26 if tape settles cleanly. T3
+  sizing per `strategy.md` v2 DCA rule: VOO capped at `min($16,667, 0.30 × cash_at_open)`,
+  residual rolls forward to T4/T5.
 
 ## DCA progression
 
 - Tranche 1 of 3: **executed 2026-05-12** (8 names, $30,999.62 notional).
 - Tranche 2 of 3: **executed 2026-05-13** (8 names, $30,999.62 notional).
-- Tranche 3 of 3: **NOT EXECUTED 2026-05-14** — blocked by missing pre-market draft.
-- Tranche 3 of 3: **NOT EXECUTED 2026-05-15** — same root cause + Robin A/B reply pending.
+- Tranche 3 of 3: **DEFERRED** to earliest Thu 2026-05-21 evaluation; most-likely-execution Mon 2026-05-25 / Tue 2026-05-26.
+
+## Today's trades
+
+**Zero trades placed in 02-market-open.** Plan from 01-pre-market executed cleanly: all 8 holds = HOLD, NVDA = WAIT, T3 = DEFER. No watchlist trigger fired. No stop maintenance required (HWMs unchanged, no breaches). See `memory/daily/2026-05-18.md` for full attribution.
 
 ## Recent Closed Positions (last 5)
 
