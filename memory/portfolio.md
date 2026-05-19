@@ -1,66 +1,69 @@
 ---
-last_updated: 2026-05-19T13:33:00Z
+last_updated: 2026-05-19T16:35:00Z
 broker: alpaca
 account_type: paper
-total_value_usd: 100365.22
+total_value_usd: 100276.57
 cash_usd: 38000.00
-day_pnl_pct_vs_mon_close: -0.3190
-day_spy_pct_vs_mon_close: -0.5889
-day_alpha_bp_vs_spy: +27.0
-ytd_pnl_pct: 0.3652
-benchmark_spx_ytd: 7.7777
+day_pnl_pct_vs_mon_close: -0.4073
+day_spy_pct_vs_mon_close: -0.5050
+day_alpha_bp_vs_spy: +9.8
+ytd_pnl_pct: 0.2766
+benchmark_spx_ytd: 7.8688
 spy_ytd_reference_date: 2026-01-02
 spy_ytd_reference_close: 681.31
-spy_current_price: 734.30
-alpha_vs_spx: -7.4125
-ytd_alpha_narrowing_vs_mon_close_bp: +31.7
+spy_current_price: 734.92
+alpha_vs_spx: -7.5922
+ytd_alpha_narrowing_vs_mon_close_bp: +13.8
 position_count: 8
 leverage_x: 0.62
 ---
 
-# Portfolio — 02-market-open 2026-05-19 (open snapshot, 13:33Z / 09:33 ET)
+# Portfolio — 03-midday 2026-05-19 (midday snapshot, 16:35Z / 12:35 ET)
 
-## Open snapshot vs Mon (5/18) close
+## Midday snapshot vs Mon (5/18) close and vs Tue open
 
-| Metric                  |  Mon close (20:15Z) | Tue open (13:33Z) |  Δ                |
-|-------------------------|--------------------:|------------------:|------------------:|
-| Equity                  |         $100,686.35 |       $100,365.22 |  -$321.13 (-0.32%) |
-| SPY                     |             $738.65 |           $734.30 |  -$4.35 (-0.589%) |
-| Cash %                  |              37.74% |            37.86% |  +0.12 pp         |
-| Position count          |                  8  |                8  |       0           |
+| Metric                  |  Mon close (20:15Z) | Tue open (13:33Z) | Tue midday (16:35Z) |  Δ vs Mon close      |
+|-------------------------|--------------------:|------------------:|--------------------:|---------------------:|
+| Equity                  |         $100,686.35 |       $100,365.22 |         $100,276.57 |  -$409.78 (-0.407%)  |
+| SPY                     |             $738.65 |           $734.30 |             $734.92 |  -$3.73   (-0.505%)  |
+| Cash %                  |              37.74% |            37.86% |              37.90% |  +0.16 pp            |
+| Position count          |                  8  |                8  |                  8  |       0              |
 
-- **Day P&L: -$321.13 (-0.319%) vs SPY -0.589%** → **day alpha +27.0 bp** at open.
-  Defensive ballast + cash sleeve doing the relative-performance work on a weak-tape
-  open (futures led red overnight on hawkish-Warsh tape + Iran-strike-cancellation
-  oil-down + 10Y at 4.61%).
-- **YTD: Bull +0.365% vs SPX +7.778% → Alpha -7.413%.** Vs Mon close alpha (-7.730%):
-  **+31.7 bp narrowing** into the open. First reading of "AI-Capex Barbell" working
-  on a real weak-tape day.
+- **Day P&L: -$409.78 (-0.407%) vs SPY -0.505%** → **day alpha +9.8 bp** (narrowed from
+  +27.0 bp at open as SPY ticked back up +0.084% while the book leaked -0.09%, mostly
+  on MSFT -2.15% and GOOGL -1.20% mid-session). Defensive sleeve doing real work today:
+  LLY +2.92% intraday recovery (was -1.28% UPL at open, now +1.60% UPL), BRK.B +0.17%,
+  V -0.12%. AI/Quality sleeve is the day's drag.
+- **YTD: Bull +0.277% vs SPX +7.869% → Alpha -7.592%.** Vs Mon close alpha (-7.730%):
+  **+13.8 bp narrowing** still (down from +31.7 bp at open). Still net positive
+  weak-tape behaviour, just lighter than the open print.
 
-## Open positions (broker mark @ 13:33Z)
+## Open positions (broker mark @ 16:35Z)
 
-| Symbol | Qty       | Avg Entry | Open Mark  | Market Value | Unrealized P&L | UPL%     | Alloc % | Target | Day Δ vs Fri | Trail Stop                                                |
-|--------|----------:|----------:|-----------:|-------------:|---------------:|---------:|--------:|-------:|-------------:|-----------------------------------------------------------|
-| VOO    | 49.332341 |  $675.703 |   $675.085 |   $33,303.52 |        -$30.48 |  -0.091% |  33.18% | 50% (Core) | -0.526%   | 10% trail / 49 sh GTC / HWM $689.10 / stop $620.19 / cushion 8.13% — 0.332 sh unprotected |
-| MSFT   | 11.521758 |  $404.973 |   $426.850 |    $4,918.06 |       +$252.06 |  +5.402% (best UPL) |   4.90% |  7% | +0.731%   | 10% trail / 11 sh GTC / **HWM $432.70** (auto-advanced from $428.17) / **stop $389.43** / cushion 8.77% — 0.522 sh unprotected |
-| GOOGL  | 12.047273 |  $387.308 |   $392.840 |    $4,732.65 |        +$66.65 |  +1.428% |   4.72% |  7% | -1.015%   | 10% trail / 12 sh GTC / HWM $408.61 / stop $367.75 / cushion 6.39% — 0.047 sh unprotected |
-| META   |  7.767476 |  $600.710 |   $606.800 |    $4,713.30 |        +$47.30 |  +1.014% |   4.70% |  7% | -0.622%   | 10% trail / 7 sh GTC / HWM $623.73 / stop $561.36 / cushion 7.49% — 0.767 sh unprotected |
-| AVGO   | 11.264102 |  $414.236 |   $414.810 |    $4,672.46 |         +$6.46 |  +0.138% |   4.66% |  7% | -1.236%   | 10% trail / 11 sh GTC / HWM $442.36 / stop $398.12 / **cushion 4.02% (tightest)** — 0.264 sh unprotected |
-| V      | 10.256781 |  $325.053 |   $331.010 |    $3,395.10 |        +$61.10 |  +1.833% |   3.38% |  5% | -0.414%   | 10% trail / 10 sh GTC / **HWM $334.59** (auto-advanced from $333.43) / **stop $301.13** / cushion 9.03% — 0.257 sh unprotected |
-| BRK.B  |  6.883950 |  $484.315 |   $485.000 |    $3,338.72 |         +$4.72 |  +0.141% |   3.33% |  5% | -0.412%   | 10% trail / 6 sh GTC / HWM $489.36 / stop $440.42 / cushion 9.19% — 0.884 sh unprotected |
-| LLY    |  3.341161 |  $997.857 |   $985.108 |    $3,291.41 |        -$42.59 |  -1.278% (worst) |   3.28% |  5% | -0.486%   | 10% trail / 3 sh GTC / HWM $1022.82 / stop $920.54 / cushion 6.55% — 0.341 sh unprotected |
+| Symbol | Qty       | Avg Entry | Midday Mark | Market Value | Unrealized P&L | UPL%     | Alloc % | Target | Day Δ vs Mon close | Trail Stop                                                |
+|--------|----------:|----------:|------------:|-------------:|---------------:|---------:|--------:|-------:|-------------------:|-----------------------------------------------------------|
+| VOO    | 49.332341 |  $675.703 |    $675.670 |   $33,332.38 |         -$1.62 |  -0.005% |  33.24% | 50% (Core) | -0.440%        | 10% trail / 49 sh GTC / HWM $689.10 / stop $620.19 / cushion 8.21% — 0.332 sh unprotected |
+| MSFT   | 11.521758 |  $404.973 |    $417.690 |    $4,812.52 |       +$146.52 |  +3.140% |   4.80% |  7% | -2.150% (worst day Δ) | 10% trail / 11 sh GTC / HWM $432.70 / stop $389.43 / cushion 6.77% — 0.522 sh unprotected |
+| GOOGL  | 12.047273 |  $387.308 |    $388.120 |    $4,675.79 |         +$9.79 |  +0.210% |   4.66% |  7% | -1.201%            | 10% trail / 12 sh GTC / HWM $408.61 / stop $367.75 / cushion 5.25% — 0.047 sh unprotected |
+| META   |  7.767476 |  $600.710 |    $602.105 |    $4,676.84 |        +$10.84 |  +0.232% |   4.66% |  7% | -0.775%            | 10% trail / 7 sh GTC / HWM $623.73 / stop $561.36 / cushion 6.77% — 0.767 sh unprotected |
+| AVGO   | 11.264102 |  $414.236 |    $413.360 |    $4,656.13 |         -$9.87 |  -0.212% |   4.64% |  7% | -1.586% (3rd red day) | 10% trail / 11 sh GTC / HWM $442.36 / stop $398.12 / **cushion 3.69% (tightest)** — 0.264 sh unprotected |
+| V      | 10.256781 |  $325.053 |    $330.620 |    $3,391.10 |        +$57.10 |  +1.713% |   3.38% |  5% | -0.118%            | 10% trail / 10 sh GTC / **HWM $335.17** (auto-advanced from $334.59) / **stop $301.65** / cushion 8.76% — 0.257 sh unprotected |
+| BRK.B  |  6.883950 |  $484.315 |    $485.820 |    $3,344.36 |        +$10.36 |  +0.311% |   3.34% |  5% | +0.169%            | 10% trail / 6 sh GTC / HWM $489.36 / stop $440.42 / cushion 9.35% — 0.884 sh unprotected |
+| LLY    |  3.341161 |  $997.857 |   $1013.855 |    $3,387.45 |        +$53.45 |  +1.603% (best Δ today) |   3.38% |  5% | +2.919% (best day Δ) | 10% trail / 3 sh GTC / HWM $1022.82 / stop $920.54 / cushion 9.21% — 0.341 sh unprotected |
 
-Total committed: $62,365.22 (62.14% of equity)
-Cash retained: $38,000.00 (37.86%)
+Total committed: $62,276.57 (62.10% of equity)
+Cash retained: $38,000.00 (37.90%)
 Open positions: 8 / 10 (NVDA deferred — earnings 5/20 PM; 9th slot reserved)
 Leverage: 0.62x (cap 2x)
 
-**All 8 trailing stops verified `OrderStatus.NEW` GTC at open.** MSFT and V HWMs auto-advanced
-overnight via IEX marks (MSFT +$4.53 to $432.70 / stop +$4.08 to $389.43; V +$1.16 to $334.59 /
-stop +$1.04 to $301.13). **Tightest cushion: AVGO 4.02%** (was 5.21% at Mon close — third
-consecutive down-day for AVGO, no thesis-break but on the watchlist). Second-tightest: GOOGL
-6.39% (newly tighter; pulled back -1.0% intraday from Mon close mostly on the tech-sell-off
-tape). Third: LLY 6.55%. All still inside the strategy's 10%-trail design band.
+**All 8 trailing stops verified `OrderStatus.NEW` GTC at 03-midday.** V's HWM auto-advanced
+intraday from $334.59 → $335.17 (stop $301.13 → $301.65). All other HWMs unchanged (no
+position made a new 52w-mark intraday). **Tightest cushion: AVGO 3.69%** (was 4.02% at
+open, -33 bp; third consecutive down-day for AVGO, mark $413.36 vs HWM $442.36 → 6.55%
+off HWM, still well inside 10% trail). Second-tightest: GOOGL 5.25% (was 6.39%, -114 bp).
+Joint third: MSFT and META at 6.77% (MSFT had the biggest tightening, -200 bp from open
+on its -2.15% intraday drop). All cushions still inside the strategy's 10% trail design
+band — no stop-out risk at current marks.
 
 Fractional uncovered: ~3.40 sh aggregate ≈ ~$1,890 notional (~1.88% of equity). Unchanged.
 
@@ -86,11 +89,12 @@ Fractional uncovered: ~3.40 sh aggregate ≈ ~$1,890 notional (~1.88% of equity)
 
 ## Today's trades
 
-**Zero trades placed at 02-market-open.** Plan from this morning's 01-pre-market
-(`memory/daily/2026-05-19.md`) was unanimous HOLD across all 8 names; no spec triggers
-fired (no thesis-break, no stop breach, no earnings-window resolution, no Robin inbox
-reply, no fresh -3% red day on NVDA, no T3 unlock). Bias = inaction unless a spec
-trigger fires (lesson 2026-05-16). 6th consecutive routine with no trades.
+**Zero trades through 03-midday.** 02-market-open executed no orders per pre-market
+plan; 03-midday Step-3 spec checks also clean (no UPL ≤ -7%, no UPL ≥ +15%, no
+thesis-break, no -3% NVDA red day, no inbox reply, no T3 unlock). Worst UPL: AVGO
+-0.21%. Best UPL: MSFT +3.14% (down from +5.40% at open but still nowhere near the
++15% trail-tighten threshold). Bias = inaction unless a spec trigger fires
+(lesson 2026-05-16). **7th consecutive no-action routine.**
 
 ## Recent Closed Positions (last 5)
 
