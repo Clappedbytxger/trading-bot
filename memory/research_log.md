@@ -154,3 +154,30 @@ entries (> 30 days) can be pruned by the weekly-review routine.
 **No thesis-break events on any of the 8 holdings; no entry triggers fired for new names. NVDA wait + T3 defer both still binding.**
 
 **Cited sources:** Gemini Search-Grounding (Warsh confirmation + bio, NVDA consensus, analyst PTs, Jensen comments, SK Hynix sales, hyperscaler capex). yfinance for quant. See `memory/daily/2026-05-18.md` for portfolio detail.
+
+---
+
+## 2026-05-19 — Pre-market (KW 21 Day 2, NVDA earnings T-1)
+
+**Macro (Gemini):**
+- **10Y yield 4.61%** (up ~4 bp from 5/15's 4.57%, 12 bp from 5/14). DXY 99.23 — 5-week high holds. Brent ~$110, WTI ~$103 — both off -1.5% overnight on Trump calling off planned Iran strike.
+- **Pre-market futures red**: S&P -0.23 to -0.40%, Nasdaq leading lower on tech sell-off, Dow -0.15 to -0.7%. Chip names (NVDA -1%, MU, STX, WDC) all under pressure into NVDA print.
+- **FOMC minutes** from Warsh-pre-handover meeting expected this week; market-implied Fed rate-hike-in-2026 probabilities have ticked up. Some sell-side warning 10Y could test 5.5% on hawkish minutes.
+- **BRK exited UNH stake** — material headline for BRK.B (positive-to-neutral, derisking from a stressed name). BRK.B itself +1.18% on Mon, no thesis impact.
+
+**NVDA pre-earnings preview (Gemini, earnings Wed 5/20 post-close):**
+- Q1 FY27 consensus: rev **$78-79.2B** (whispers $80B+, NVDA's own guide $78B ±2%), EPS **$1.77-1.78**, data center **~$73B** (>90% of total sales). Blackwell ramp + hyperscaler demand the focus.
+- **Q2 FY27 guidance is the bigger catalyst than the Q1 print** — consensus $85-87B, whispers $90B. >$87B confirms acceleration; <$85B = deceleration flag.
+- **5/18 PT raises**: DA Davidson **$300 (from $250)**, Morgan Stanley **$285 (from $260)**, KeyBanc **$300 (from $275)**, Wedbush reiterates $300. Net hawkish flow; B of A $320 / Susquehanna $275 / UBS $275 still standing from earlier.
+- **Options market pricing 8-10% post-earnings move.** Stock has fallen after 4 of last 5 prints — high bar.
+- **Bull stance unchanged: WAIT.** Earnings-window guardrail #8 blocking entry; strategy caveat ≥1 -3% red day NOT yet triggered (pre-mkt -1%). Re-evaluate Thu 5/21 01-pre-market post-print.
+
+**Quant pulse (yfinance, prior-session close):**
+- All 9 strategy names: fundamentals (fwd P/E, op margin, beta) within 1 decimal of 5/18. **No thesis-break flags.**
+- Day-over-day notable moves: **AVGO -1.05%** (2nd consecutive red day; cushion tightest in book at ~5.2%, still inside design band), **NVDA -1.33%** (pullback into print, %52w-Hi 95.26% → 93.99%), **LLY -1.67%** (lone defensive red name, cushion ~7%, beta 0.48 role intact). Best: V +2.11%, BRK-B +1.18%, MSFT +0.38%.
+- Earnings-window check: **only NVDA** (5/20). AVGO 2026-06-03 now 11 td out (still clean of guardrail #8).
+- T3 DCA: deferred per Robin Option B; next re-evaluation Thu 2026-05-21.
+
+**No thesis-break events on any of the 8 holdings; no entry triggers fired for new names. NVDA WAIT + T3 defer both still binding. Bias = inaction.**
+
+**Cited sources:** Gemini Search-Grounding (10Y/DXY/oil levels, pre-market futures, NVDA consensus, 5/18 PT actions, BRK-UNH exit headline). yfinance for quant. See `memory/daily/2026-05-19.md` for portfolio detail.
