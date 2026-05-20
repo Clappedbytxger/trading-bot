@@ -181,3 +181,35 @@ entries (> 30 days) can be pruned by the weekly-review routine.
 **No thesis-break events on any of the 8 holdings; no entry triggers fired for new names. NVDA WAIT + T3 defer both still binding. Bias = inaction.**
 
 **Cited sources:** Gemini Search-Grounding (10Y/DXY/oil levels, pre-market futures, NVDA consensus, 5/18 PT actions, BRK-UNH exit headline). yfinance for quant. See `memory/daily/2026-05-19.md` for portfolio detail.
+
+---
+
+## 2026-05-20 — Pre-market (KW 21 Day 3, NVDA earnings T-0 PM; **LAST LIVE-PHASE DAY**)
+
+**Phase note:** Today is the final Live-Phase routine (Core-only). Tomorrow 5/21 the date sentinel flips Bull to Learning-Month mode (all 5 sleeves active, sleeve-specific ALM rules).
+
+**Macro (Gemini):**
+- **10Y yield 4.64%** (-3 bp intraday from 4.67%, +3 bp vs Mon 4.61%). 16-month high of 4.687% still in the rear-view. Elevated borrowing-cost concern persists.
+- **DXY 99.38** — six-week highs; USD strength reflects inflation & rate-hike repricing.
+- **Brent $110.15** (-1%), **WTI $103.30** (-1.1%). Strait of Hormuz disruption ongoing; Citi bullish PT $150.
+- **Pre-mkt futures GREEN**: S&P +0.15%, Nasdaq +0.4%. NVDA +1.3% pre-mkt into print. Potential snap of 3-day losing streak.
+- **FOMC minutes today 18:00Z** — last Powell-era meeting (Apr 28-29), four dissents (most since 1992). Warsh formally starts as Chair Fri 5/22. Vice Chair Barr speaks today.
+- **Geo:** US-Iran conflict / Strait of Hormuz / Xi-Putin in Beijing today. Tail-risk maintained, no new catalyst.
+- **Macro risk-off triggers (SPY -3%/day OR VIX > 40): NEITHER fired.** Pre-mkt tape green.
+
+**NVDA print (tonight post-close):**
+- Q1 FY27 consensus rev ~$78B (whispers $79-80B+), EPS $1.77, DC ~$73B. >$80B revenue clears whisper bar.
+- **Q2 FY27 guidance is the bigger catalyst:** consensus $85-87B, whispers $90B. >$87B = clean acceleration; <$85B = deceleration flag.
+- **Options-implied move 8-10%.** NVDA shares +1.3% pre-mkt; -4.67% cumulative over last 5 sessions vs 5/15 close $231.42 → $220.61 (no single -3% day — max single-session was -1.33% on 5/19).
+- Standing PT raises (5/18): DA Davidson $300, Morgan Stanley $285, KeyBanc $300, Wedbush $300 reiterate, BofA $320 standing. Net hawkish flow.
+- **Bull stance: WAIT.** Entry blocked by guardrail #8 today; minimum re-entry window opens 2026-05-23 (3 td post-print). Per `strategy.md` v3 flip on 5/21, NVDA re-evaluation moves to Swing-sleeve framework (not Core-add) — first eval on Thu 5/21 01-pre-market under Learning-Month rules.
+
+**Quant pulse (yfinance, pre-open):**
+- All 9 strategy names: fundamentals (fwd P/E, op margin, beta) within 1 decimal of 5/19. **No thesis-break flags.**
+- Overnight tape: **AVGO recovered +1.86%** (broker mark $410.02 → $417.65), breaking 4-day red streak; cushion 2.90% → 4.68%. **LLY +0.62%** new HWM $1023.29; trail stop auto-advanced $920.54 → $920.96 (+10.00% fresh cushion). All other names within ±0.6% of Tue close.
+- Earnings-window check: **only NVDA** (today PM). AVGO 2026-06-03 now 10 td out (still clean of guardrail #8). All other held names > 6 weeks out.
+- T3 DCA: deferred per Robin Option B (5/16); per `strategy.md` v3 frozen-Core rule effective 5/21, T3 is implicitly suspended until 6/21+ unless Robin overrides.
+
+**No thesis-break events on any of the 8 holdings; no entry triggers fired for new names. NVDA WAIT + T3 defer both still binding. Bias = inaction. 10th consecutive no-action routine.**
+
+**Cited sources:** Gemini Search-Grounding (10Y/DXY/oil levels, pre-mkt futures, NVDA Q1+Q2 consensus & whispers, options-implied move, FOMC-minutes context, geo-risk). yfinance for quant + earnings calendar. Alpaca broker for pre-mkt position marks. See `memory/daily/2026-05-20.md` for portfolio detail.
