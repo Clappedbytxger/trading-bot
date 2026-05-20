@@ -237,3 +237,99 @@ This is the **12th consecutive no-action routine** since 5/18. Logging here:
   to per-sleeve tagged entries with mandatory `sleeve:` + `strategy:` fields per
   ALM-1, and includes Crypto sleeve actions on weekends.
 
+
+---
+
+## 2026-05-20T19:39Z — 04-pre-close (no orders placed) — final Live-Phase 04
+
+Routine: `04-pre-close`. Broker: Alpaca paper (`paper-api.alpaca.markets` ✓).
+Phase: **LIVE PHASE (legacy)** — last 04-pre-close under Variant C; flips to
+Learning-Month multi-sleeve at the 5/21 04-pre-close (Daytrade FORCE-FLAT branch
+activates, Swing/Options stop checks, Crypto Friday-tighten on Fri 5/22).
+
+Plan loaded from `memory/daily/2026-05-20.md` 03-midday section: **HOLD all 8,
+no trades, NVDA blocked (Earnings T-0 PM, post-close), T3 deferred to 6/21+**.
+Routine timing: 21 min to close (well inside the 30-min pre-close window per
+spec; no "fired early" log-flag).
+
+### Decisions
+- **All 8 Core positions HOLD.** No new entries, no trims, no stop adjustments;
+  no HWM advances since 03-midday.
+- **NVDA: blocked** by guardrail #8 (earnings tonight 20:00Z+). Re-eval Thu 5/21
+  (first Learning-Month routine) under **Swing-sleeve `swing-earnings-drift`
+  framework** per `strategy.md` v3 — sized ~$1.5-2k, ATR-stop -5 to -7%.
+- **T3 DCA: deferred** to 6/21+ per Learning-Month Core-freeze.
+
+### State changes recorded (broker-side only, no manual orders)
+- **No HWM auto-advances since 03-midday.** LLY HWM remains $1037.88 (set at
+  intraday high in the 03-midday window). Mark recovered to $1013.995 = -2.30%
+  off HWM (vs -3.06% at 03-midday → continued recovery, not a new round-trip).
+- **GOOGL cushion recovery**: 03-midday 4.32% (tightest) → 19:39Z 5.26% (+94 bp).
+  Mark $384.35 → $388.17 (+0.99% intraday). UPL -0.76% → +0.22% (flipped to green).
+  **GOOGL no longer tightest in book.**
+- **AVGO inherits "tightest cushion" label at 4.80%** (was 4.86% at 03-midday;
+  -6 bp give-back; still well inside 10% trail design band, **>3% spec-threshold
+  ⇒ no log-flag, no WhatsApp**).
+- **MSFT extends**: UPL +3.024% (03-midday) → +3.844% (19:39Z) = +$38.25 intraday;
+  cushion 6.66% → 7.40% (+74 bp). Best UPL in book.
+- **LLY recovers**: UPL +0.823% → +1.617% = +$26.49 intraday; cushion 7.15% →
+  7.88% (+73 bp).
+
+### Account & alpha (19:39Z vs 03-midday 16:39Z)
+- Equity $100,626.38 (intraday +$249.99 / +0.249% vs 03-midday).
+- vs Tue close: +$499.77 / +0.499%. SPY +1.033% → **day-alpha -53.4 bp**
+  (widened from -44.8 bp at 03-midday by another -8.6 bp; post-FOMC-minutes
+  broad-tape lead outpaced Bull's concentrated AI+defensive book).
+- vs Mon close: -0.060% vs SPY +0.353% → 2-day-alpha **-41.3 bp** (-7.7 bp
+  from 03-midday).
+- YTD: Bull +0.625% vs SPX +8.807% → Alpha -8.182% (-11.0 bp vs 03-midday).
+
+### Macro pulse (post-FOMC-minutes drop)
+- SPY $741.31 (+1.033% day). VIX 17.43 (eased -2.0% vs 03-midday). 10Y yield
+  4.572% (-2 bp vs 03-midday; -10 bp on the day). DXY 99.07 (-0.07%).
+- **Macro risk-off triggers** (SPY -3% / VIX > 40): **NEITHER fired**.
+- FOMC minutes (18:00Z drop) read as **neutral-to-mildly-dovish** by tape: yields
+  eased, VIX softened, SPY rallied +33 bp post-minutes. Last Powell-era minutes;
+  Warsh formally Chair Fri 5/22. No position-changing surprise.
+- NVDA into print at $223.21 (+1.18% day, intraday range $5.64 / 2.55%);
+  options-implied move 8-10% — realized intraday well below implied, big move
+  comes tonight.
+
+### EOD targets achieved (per routine-spec template, Live-Phase variant)
+- Daytrade flat: **N/A** (no Daytrade sleeve in Live Phase) — activates 5/22.
+- Swing stops verified: **N/A** (no Swing positions in Live Phase) — activates 5/21.
+- Crypto Friday-tighten applied: **N/A** (Thu today; first runs Fri 5/22).
+- Options Greeks reviewed: **N/A** (no Options positions in Live Phase) — activates 5/21.
+- Core sleeve stop-cushion check: **DONE** — tightest AVGO 4.80% > 3% spec, no flags.
+
+### Phase-transition handoff (final Live-Phase 04)
+
+**Tomorrow at 13:00Z (01-pre-market) is the first Learning-Month routine.** Operational
+state at the boundary:
+- 8 Core positions, $62,626 committed, $38k cash, 0 stop-outs, 0 thesis-breaks,
+  0 guardrail violations across the 8-day Live-Phase paper run (5/12 T1 → 5/20).
+- Live-Phase total P&L: +0.651% / -8.24% alpha vs SPY (broad-tape outperformance
+  Bull doesn't own from a 62%-deployed book).
+- 13 consecutive no-action routines into the Learning-Month boundary — bias-check
+  discipline (per lesson 2026-05-16) verified by Live-Phase exit.
+- Hard-overrides surviving the flip: #9 auto-commit, #10 env-var API keys, new
+  ALM-8 paper-endpoint-only.
+- Pro-Plan cron action still owed by Robin (`03-midday` `1-5` → `1-7` for weekend
+  crypto; deadline 5/23 to catch the first Sat-cycle).
+- This file's entry format flips to **mandatory `sleeve:` + `strategy:` tags
+  per ALM-1** starting with the 5/21 02-market-open entries.
+
+### Why this matters as a trade-log entry
+
+This is the **13th consecutive no-action routine** since 5/18. Logging here:
+- Records the broker-state read at the Live-Phase exit boundary (8 stops intact,
+  AVGO tightest cushion 4.80%, GOOGL recovered +94 bp, LLY recovering off
+  intraday round-trip low).
+- Marks the **last Live-Phase 04-pre-close**. Tomorrow this entry-log section
+  flips to per-sleeve tagged entries with mandatory `sleeve:` + `strategy:`
+  fields per ALM-1, and the routine spec branches (3b Swing, 3c Daytrade
+  force-flat, 3d Crypto, 3e Options) start firing in earnest as positions
+  accumulate from 5/21 onward.
+- Closes the loop on the 04-pre-close routine deliberately, rather than
+  silently skipping (per lesson 2026-05-16: no-action days are intentional,
+  not lazy).
