@@ -333,3 +333,117 @@ This is the **13th consecutive no-action routine** since 5/18. Logging here:
 - Closes the loop on the 04-pre-close routine deliberately, rather than
   silently skipping (per lesson 2026-05-16: no-action days are intentional,
   not lazy).
+
+---
+
+## 2026-05-20T21:15Z — 05-close-summary (no orders placed) — **FINAL Live-Phase EOD**
+
+### Decisions
+
+**0 orders placed.** 14th consecutive no-action routine and the final 05-close-summary
+under Live-Phase legacy rules. Sleeve mapping (today still Live-Phase = Core-only):
+
+| Sleeve     | Action | Reason |
+|------------|:------:|--------|
+| Core       | HOLD all 8 | All trail stops GTC intact at the bell. AVGO tightest cushion 4.70% (>3% spec threshold). No thesis-break events. NVDA print landed post-close; detailed read deferred to tomorrow 01-pre-market per spec. |
+| Swing      | N/A    | Live Phase — sleeve activates 2026-05-21 01-pre-market. |
+| Daytrade   | N/A    | Live Phase — sleeve activates 2026-05-21 01-pre-market. |
+| Crypto     | N/A    | Live Phase — sleeve activates 2026-05-21 01-pre-market. |
+| Options    | N/A    | Live Phase — sleeve activates 2026-05-21 01-pre-market. L3 enabled, options BP $69,305.24 (operational pre-check). |
+
+(Today's table is still single-row-Core because Learning Month doesn't start until
+00:00Z 5/21. Tomorrow's trade_log entries will carry mandatory `sleeve:` +
+`strategy:` tags per ALM-1, even for the Core sleeve.)
+
+### State changes recorded (broker-side only, no manual orders)
+
+- HWMs at close: unchanged from 03-midday on all 8 names (LLY $1037.88 stands).
+- Stop-prices at close (re-verified `OrderStatus.NEW` GTC at 21:15Z):
+  - VOO $620.19 / MSFT $389.43 / GOOGL $367.749 / META $561.357 / AVGO $398.124 /
+    V $301.653 / BRK.B $440.424 / LLY $934.092 — all 8 intact, no fills today.
+- Daytrade count (rolling 5d): 0 / 3. PDT flag: False (carries into LM start).
+
+### Account & alpha (21:15Z final vs 04-pre-close 19:39Z, vs Tue close, vs Live-Phase start)
+
+- Equity 21:15Z: $100,610.49
+  - vs 04-pre-close 19:39Z: -$15.89 / -0.016% (essentially flat into the bell)
+  - vs Tue close $100,126.61: +$483.88 / +0.483%
+  - vs Mon close $100,686.35: -$75.86 / -0.075%
+  - vs Live-Phase start (5/12 post-T1 close ~$99,975.92): **+$634.57 / +0.635%**
+- SPY 21:15Z: $741.26
+  - vs 04-pre-close $741.31: -$0.05 / -0.007% (broad-tape flat into close)
+  - vs Tue close $733.73: +$7.53 / +1.026%
+  - vs Live-Phase start (5/12 ~$680.79): **+8.88%**
+- VIX 17.36 (-0.07 from 04-pre-close 17.43). 10Y 4.572% (flat). DXY 99.07 (flat).
+- Day-alpha vs SPY: -54.3 bp (vs -53.4 bp at 04-pre-close → -0.9 bp final slip).
+- 2-day alpha vs SPY (vs Mon close): -42.8 bp.
+- YTD alpha vs SPY: **-8.19%** (Bull +0.610% vs SPY +8.80%).
+- **Live-Phase 9-day alpha vs SPY: -8.24%** — essentially the entire YTD-alpha deficit
+  accumulated in 9 trading days during a strong-tape +8.88% SPY window, with Bull
+  62%-deployed and 38% cash.
+
+### NVDA print (T-0 PM)
+
+- Regular-hours close: $223.47 (+1.30% day; range $223.18-$226.13).
+- 16:15 ET AH initial read: ~$223.46 (effectively flat-on-print, 5min in).
+- Conference call typically 21:00Z+ — guide is the bigger catalyst per
+  01-pre-market analyst PT-raise tape ($85-87B consensus / $90B whisper Q2).
+- **Detailed analysis deferred to tomorrow 01-pre-market** per routine spec.
+- Options-implied move was 8-10%; AH ≤ ±2% so far → IV crush plays primary
+  story even if underlying stays flat. Note for tomorrow's Options sleeve scan.
+
+### EOD targets achieved (per routine-spec template, Live-Phase variant)
+
+- Daytrade flat: **N/A** (no Daytrade sleeve in Live Phase) → activates 5/21.
+- Swing stops verified: **N/A** (no Swing positions in Live Phase) → activates 5/21.
+- Crypto end-of-week tighten: **N/A** (Thu today; first runs Fri 5/22 if any
+  Crypto positions are open by then).
+- Options Greeks reviewed: **N/A** (no Options positions in Live Phase) → activates 5/21.
+- Core sleeve EOD stop-cushion check: **DONE** — tightest AVGO 4.70%, no flags,
+  all 8 trails GTC verified live.
+- Final EOD account snapshot pulled + portfolio.md flipped to EOD form: **DONE**.
+- Per-sleeve P&L attribution computed: **DONE** (Core-only this period).
+- Experiment ledger refresh: **DONE** (no per-strategy KPI deltas; last_update
+  bumped on `core-buy-and-hold` row).
+- Daily file 05-close-summary section appended: **DONE**.
+- WhatsApp German brief sent: **DONE** (this routine is one of two daily-WhatsApp routines).
+
+### Live-Phase 9-day book recap (final)
+
+- **Equity start (post-T1 5/12 close)**: ~$99,975.92.
+- **Equity end (5/20 close)**: $100,610.49.
+- **Live-Phase P&L**: **+$634.57 / +0.635%** over 9 trading days (16 fills T1+T2,
+  0 stop-outs, 0 thesis-breaks, 0 guardrail violations).
+- **Live-Phase alpha vs SPY**: **-8.24%** (SPY +8.88% same window).
+- **14 consecutive no-action routines** across the Live-Phase exit week (Mon
+  5/18 four + Tue 5/19 five + Wed 5/20 five).
+- **Best UPL**: MSFT +3.76% (entry $404.97 → $420.20).
+- **Worst UPL**: BRK.B -0.71% (entry $484.31 → $480.90, contained by 8.42% cushion).
+- All operational issues across the run caught and either fixed or surfaced to Robin
+  (cron misses, fractional-stop rejections, DCA-vs-#5 mechanics, WhatsApp shorthand,
+  inbox.md introduction, PR-auto-merge no-op trap). Zero silent failures.
+
+### Phase-transition (FINAL Live-Phase entry; LM starts 00:00Z 5/21)
+
+- This is the **last 05-close-summary entry in trade_log.md under Live-Phase rules**.
+- Starting tomorrow morning (13:00Z 5/21 01-pre-market), all entries here carry mandatory
+  `sleeve:` + `strategy:` tags per ALM-1, even when the action is HOLD on Core. Example
+  header for a no-action LM 04-pre-close Core row:
+  `sleeve: Core | strategy: core-buy-and-hold | action: HOLD | reason: trail intact, no thesis-break`
+- Hard-overrides surviving the flip: #9 auto-commit, #10 env-var API keys, ALM-8
+  paper-endpoint-only.
+- Cron extension owed (Robin action by 5/23): `03-midday * * 1-5` → `* * 1-7`.
+
+### Why this matters as a trade-log entry
+
+This is the **14th consecutive no-action routine** since 5/18 and **the closing
+entry of the Live-Phase paper run**. Logging here:
+- Records the final broker-state read at the Live-Phase exit (8 stops intact GTC,
+  AVGO tightest at 4.70%, no fills, daytrade-count 0, options BP $69,305 / L3 ✓).
+- Closes the Live-Phase book at $100,610.49 (+0.635% / -8.24% alpha vs SPY) with a
+  clean operational ledger.
+- Marks the last single-book entry; tomorrow's entries flip to mandatory per-sleeve
+  tagging.
+- Closes the loop on the 05-close-summary routine deliberately, rather than silently
+  skipping (per lesson 2026-05-16).
+  not lazy).
