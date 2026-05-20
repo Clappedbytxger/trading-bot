@@ -4,101 +4,130 @@
 `30 14 * * 1-5` (UTC) — 15:30 Berlin = 09:30 ET, market just opened.
 
 ## You are
-Bull, at market open. **Now you execute.** Take the draft plan from this morning's
-01-pre-market routine (read from `memory/daily/<today>.md`) and execute it — within guardrails.
+Bull. Market just opened. Goal: execute the planned trade-set from this morning's
+01-pre-market across all active sleeves, then send a German WhatsApp brief.
 
 ## Required env vars
-`GEMINI_API_KEY`, `TAVILY_API_KEY` (for `deep_research`), `ALPACA_API_KEY_ID`, `ALPACA_API_SECRET_KEY`, `CALLMEBOT_API_KEY`, `WHATSAPP_PHONE`
+`GEMINI_API_KEY`, `ALPACA_API_KEY_ID`, `ALPACA_API_SECRET_KEY`,
+`CALLMEBOT_API_KEY`, `WHATSAPP_PHONE`, `POLYGON_API_KEY` (Learning-Month).
+
+## Phase Sentinel
+Same as 01-pre-market. Log the active mode in today's daily file.
 
 ## Step 1 — Read
-- `CLAUDE.md` (hard guardrails — re-read every time)
-- `memory/strategy.md` (abort if not approved)
+- `CLAUDE.md`
+- `memory/strategy.md`
+- `memory/playbook.md` (Learning Month)
 - `memory/portfolio.md`
-- `memory/lessons.md` (tail)
-- `memory/daily/<today>.md` — must contain the 01-pre-market draft. If missing, do NOT execute new trades; only check existing positions for stop-loss breaches.
+- `memory/inbox.md` — process any Robin reply that hit between routines
+- `memory/daily/<today>.md` — pick up the 01-pre-market trade-idea draft
+- `memory/lessons.md` (tail 30)
+- `memory/experiments/_ledger.md` (Learning Month)
+- `memory/trade_log.md` (last 20)
 
-## Step 2 — Verify market is open
+If today's daily file is missing OR has no 01-pre-market section, **abort entries**:
+that means 01 failed to fire and you have no validated plan. Take account snapshot,
+log the gap, and send a German WhatsApp flagging "kein pre-market plan verfügbar —
+keine neuen entries heute."
+
+## Step 2 — Verify market state
 ```python
+broker = get_broker()
 clock = broker.get_clock()
-assert clock.is_open, "Market not open — abort trade execution"
+account = broker.get_account()
+positions = broker.get_positions()
+```
+- If `clock.is_open == False` at 14:30Z + 5min grace, log and abort (early-close day or scheduling glitch).
+- Refresh per-sleeve position counts and cash budgets vs `playbook.md` caps.
+
+## Step 3 — Execute trade plan (per-sleeve)
+
+For each planned action from 01-pre-market, before placing the order, re-verify
+**guardrails active in current phase**:
+- Live Phase: original #1-#10.
+- Learning Month: ALM-1 through ALM-8 (sleeve discipline, sleeve cash budgets,
+  sleeve stops, sleeve logging, hard-overrides).
+
+Order sequence (lowest-risk first to leave buying power for higher-risk):
+
+1. **Core sleeve** (unchanged in Learning Month) — execute any STOP-CHECK adjustments
+   or thesis-break exits decided in 01.
+2. **Crypto sleeve** — 24/7 market, place planned crypto entries first while equity
+   spread is still tight at open.
+3. **Swing sleeve** — place planned swing entries (long + short) at market or limit
+   per playbook. Set ATR-or-pct stops as bracket orders.
+4. **Options sleeve** — place planned options orders. Use multi-leg orders for
+   spreads; single-leg for outright calls/puts. NEVER cross the spread on illiquid
+   contracts (bid-ask > 10% of mid → use a limit order at mid).
+5. **Daytrade sleeve** — set up ORB watches; do NOT place market orders until the
+   ORB level breaks within the first 30min. ORB execution happens in 03-midday for
+   any setup that triggers AFTER this routine ends.
+
+For each fill, immediately:
+- Place sleeve-specific stop order (bracket on Alpaca where supported, separate stop
+  order otherwise).
+- Append `memory/trade_log.md` entry with mandatory `sleeve:` and `strategy:` tags.
+- Append per-strategy file `memory/experiments/<strategy-slug>.md` ENTRY block.
+
+## Step 4 — Update portfolio.md
+Rewrite `memory/portfolio.md` with per-sleeve tables:
+```
+## Core
+| Symbol | Qty | Avg Entry | Mark | MV | UPL | Stop |
+...
+## Swing
+...
+## Daytrade (intraday only — flat by 20:30Z)
+...
+## Crypto
+...
+## Options
+...
 ```
 
-## Step 3 — Pre-flight guardrail check
+Plus the top frontmatter with totals: equity, cash by sleeve, leverage, options_BP,
+daytrade_count, day_pnl by sleeve.
 
-For every planned action from the draft plan, verify:
-- Position-size cap: total allocation <= 35% after the trade
-- Position-count cap: <= 10 open positions after the trade
-- Order-size cap: order notional <= 30% of available cash
-- Earnings-window: `is_in_earnings_window(ticker)` (yfinance) — no entries if True
-- Leverage <= 2x
+## Step 5 — Update experiments ledger
+For each new fill, increment the strategy's trade-count in
+`memory/experiments/_ledger.md`. Closed trades update win-rate, avg-R, RAR.
 
-For any position >20% target allocation, ALSO run `deep_research()` (Gemini + Tavily
-cross-check). If `disagreement_detected` is True → abort and flag to Robin instead.
+## Step 6 — Notify (WhatsApp — German, ≤1000 chars)
 
-If any check fails: skip that trade, log to `lessons.md` with reason.
+Structure (always in German):
+```
+🌅 Morgen-Brief Lern-Monat (Tag N/30)
+Equity: $X (Δ vs gestern: ±$Y / ±%)
+Sleeves: Core $A | Swing $B | DT $C | Crypto $D | Opt $E
 
-## Step 4 — Execute
+Trades heute (Open):
+✓ [Sleeve] BUY/SHORT TICKER @ $X — Stop $Y / Target $Z
+...
 
-For each approved action:
-```python
-from src.brokers.base import Order
-from decimal import Decimal
+Macro: <kurz>
+Risiko-Flags: <wenn vorhanden>
 
-order = Order(symbol=..., side="buy"|"sell", notional=Decimal(...), order_type="market")
-result = broker.place_order(order)
+Top Experiment heute: <slug> (<1-Zeiler>)
+Plan für 03-midday: <kurz>
 ```
 
-For new long positions, also place a **trailing stop** at 10% (per guardrails):
-```python
-stop = Order(symbol=..., side="sell", qty=filled_qty, order_type="trailing_stop",
-             trail_percent=Decimal("10"), time_in_force="gtc")
-broker.place_order(stop)
-```
+If a pending question for Robin exists, spell it out fully per lesson 2026-05-15
+(name decision, options, consequences, instruction "Bitte per memory/inbox.md auf
+GitHub zurückschreiben — WhatsApp ist nur outbound").
 
-Record EVERY trade (including failed/rejected) in `memory/trade_log.md`.
+## Step 7 — Commit + PR + merge
+Per CLAUDE.md Memory Protocol Step 0 end-of-routine.
 
-## Step 5 — Update state
-
-- Refresh `memory/portfolio.md` (overwrite) with current positions, P&L, allocations.
-- Compute alpha vs SPX YTD: pull `get_snapshot("SPY")` for current price; compute YTD vs Jan-1 close (cache the Jan-1 reference in portfolio.md so you don't re-fetch daily).
-- Append today's snapshot to `memory/daily/<today>.md` under section `## 02-market-open`.
-
-## Step 6 — Notify Robin via WhatsApp (German)
-
-Format (< 1000 chars):
-```
-🐂 Market Open — <Mo/Di/Mi/Do/Fr> <DD.MM.>
-
-💼 Portfolio: $X (Cash $Y)
-📊 YTD: +X.X% (S&P: +Y.Y%) → Alpha: +Z.Z%
-
-🔁 Trades heute:
-• BUY 0.2 MSFT @ ~$428 (3% Alloc)
-• SELL VOO 0.05 (Re-Balance)
-(oder: "Keine Trades heute — alle Positionen im Plan.")
-
-⚠️ Risiken/Flags:
-• <ein Punkt, falls relevant — sonst weglassen>
-
-📅 Plan heute: <1 Satz>
-```
-
-If you propose a guardrail override (e.g. higher stop-loss for a specific position),
-clearly state it and ask Robin for explicit confirmation in his next reply.
-
-## Step 7 — Commit + open PR + **actively merge** (highest priority)
-`main` is branch-protected. Follow `CLAUDE.md` Memory Protocol Step 0 (end-of-routine):
-```
-git add memory/
-git commit -m "routine: 02-market-open @ <timestamp>"
-git push -u origin <working-branch>
-```
-Then via GitHub MCP: list/create PR → `enable_pr_auto_merge` → if that returns
-"already clean" (no required checks) or any error, **fall through to
-`merge_pull_request` directly** (mergeMethod `MERGE`) → verify `merged: true` via
-`pull_request_read`. If the merge fails, log to `lessons.md`, add a "MERGE FAILED"
-line to today's daily file, and flag Robin via WhatsApp. The merge must complete
-before the routine ends — downstream routines depend on a fresh `main`.
+## Notes & edge cases
+- **Macro risk-off triggers (SPY -3% / VIX > 40)**: kill all entries except defensive
+  Options (`options-protective-put`). Log the trigger.
+- **Re-fire of this routine within same session**: snapshot-refresh only per lesson
+  2026-05-15. Do NOT re-place orders, do NOT re-send WhatsApp unless material delta.
+- **Hard-borrow short error from Alpaca**: log and skip that short candidate; the
+  strategy remains active for other names.
+- **Options multi-leg order rejection**: try single-leg fallback; if still fails,
+  log and abandon for the day.
 
 ## Token budget
-< 45k input tokens. Most of the budget goes to recent research + reasoning. Keep WhatsApp output < 1k.
+Aim < 50k input tokens. Daily file should already have 01-pre-market section with the
+plan — DO NOT re-research, just execute.

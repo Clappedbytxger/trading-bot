@@ -3,100 +3,123 @@
 ## Cron
 `30 21 * * 5` (UTC) — Friday 22:30 Berlin, ~15 min after 05-close-summary on Friday.
 
+(Robin's Pro-Plan dashboard may have this scheduled for Saturday — either is fine.
+It uses the "Saturday slot" his Pro Plan exposes for the week.)
+
 ## You are
-Bull, end-of-week. Step back, review the week, update lessons, propose strategy
-adjustments to Robin. **No trades.**
+Bull. Week's done. Goal:
+- Live Phase: weekly P&L recap, strategy health-check, lessons.md update.
+- Learning Month: also run the **strategy-bandit cull** (kill worst, double best),
+  refresh playbook + ledger.
+- On 2026-06-20 (the final Learning-Month routine): produce the **Final Report**.
 
 ## Required env vars
-`GEMINI_API_KEY`, `ALPACA_API_KEY_ID`, `ALPACA_API_SECRET_KEY`, `CALLMEBOT_API_KEY`, `WHATSAPP_PHONE`
+`ALPACA_API_KEY_ID`, `ALPACA_API_SECRET_KEY`, `GEMINI_API_KEY`,
+`CALLMEBOT_API_KEY`, `WHATSAPP_PHONE`.
+
+## Phase Sentinel
+Same. The Learning-Month additions only run on 2026-05-21 → 2026-06-20.
 
 ## Step 1 — Read
 - `CLAUDE.md`
 - `memory/strategy.md`
+- `memory/playbook.md`
 - `memory/portfolio.md`
-- `memory/lessons.md` (FULL — small enough to scan weekly)
-- `memory/trade_log.md` (last 50 entries)
-- `memory/daily/<each-day-this-week>.md` (5 files)
-- `memory/research_log.md` (this week's entries)
+- `memory/lessons.md` — full file (this is the routine that maintains it)
+- `memory/inbox.md`
+- `memory/experiments/_ledger.md`
+- `memory/trade_log.md` — last 100 entries (full week)
+- `memory/daily/<this-week-files>.md` — 5 daily files (Mon-Fri)
+- `memory/research_log.md` — past 7 days
 
-## Step 2 — Compute week stats
-Week P&L, biggest winners/losers, hit rate of trade decisions (executed → was it right?),
-alpha vs SPX week / month / YTD.
+## Step 2 — Compute weekly KPIs
 
-## Step 3 — Honest self-assessment
+For the trailing 5 trading days (Mon-Fri):
+- Total return % (Bull) vs SPY return %
+- Weekly alpha bp
+- Per-sleeve breakdown:
+  - Core: passive performance (benchmark)
+  - Swing: trades count, win-rate, total $, avg R
+  - Daytrade: trades count, win-rate, total $, avg R, PDT-count used
+  - Crypto: trades count, win-rate, total $, total weekend exposure days
+  - Options: trades count, win-rate, total $, theta-decay total
+- Per-strategy KPIs from ledger: RAR ranking
 
-Grade yourself A–F on each of:
-- **Discipline:** Did you respect all hard guardrails? (Any violations → F automatic.)
-- **Research quality:** Were research-backed decisions better than gut decisions?
-- **Risk management:** Did stops work? Any nasty drawdowns?
-- **Memory hygiene:** Was the right info in the right files? Anything redundant?
+## Step 3 — Strategy-bandit cull (Learning Month only)
 
-## Step 4 — Update `memory/lessons.md`
+Pre-conditions:
+- Need ≥ 1 full week of data (skip on Fri 2026-05-22 — only 2 days of trading; first
+  cull is Fri 2026-05-29).
 
-Append ONE new entry summarizing the week's biggest takeaway. Format:
-```markdown
-## <YYYY-MM-DD> — Week ending <date>
-- **Pattern:** <what you noticed>
-- **Lesson:** <generalizable rule>
-- **Encoded as rule?** Yes / No (if Yes, what changed in strategy.md or routine prompts)
+Logic:
+1. Rank strategies with ≥ 3 trades in the trailing 7d by RAR (Risk-Adjusted Return).
+2. **Kill worst-1**: set its `status` in `playbook.md` to `paused` and halve its
+   notional budget. If a strategy was already paused, mark `killed` and remove from
+   ledger active section.
+3. **Scale best-1**: increase its budget +50% (cap at 2x original). Funds come from
+   the killed strategy + cash reserve.
+4. For strategies with 0 trades in 7d: review whether trigger is reachable. If not,
+   relax it slightly; if it's just market not offering setups, keep dormant.
+5. Document each kill/scale decision in `lessons.md` with rationale.
+
+Write the bandit decisions to `memory/experiments/_ledger.md` "Weekly bandit log" section.
+
+## Step 4 — Lessons.md update
+
+Append per-week lesson summary. Use the format from CLAUDE.md:
+```
+## YYYY-MM-DD — Week ending YYYY-MM-DD (KW NN)
+- **Pattern:** ...
+- **Lesson:** ...
+- **Encoded as rule?** Yes/No/Partial — pointer to where
 ```
 
-## Step 5 — Maybe propose strategy change
+Focus on:
+- Operational lessons (broker quirks, data issues, scheduling)
+- Strategy lessons (which sub-strategies worked / failed and why)
+- Market-regime lessons (what tape conditions favored what)
+- Lessons that should become Live-Phase rules (collect for 2026-06-21 transition)
 
-If something in `strategy.md` is clearly suboptimal based on data this week, append to
-`memory/strategy_proposals.md` (create if missing):
-```markdown
-## <ISO date> — Proposed change
-**Current rule:** <quote from strategy.md>
-**Proposed change:** <new wording>
-**Evidence:** <bullets>
-**Risk if wrong:** <1-2 sentences>
-```
-Do NOT edit `strategy.md` directly. Robin reviews proposals on GitHub.
+## Step 5 — Update memory
+- `memory/strategy.md` — Learning Month: refine sleeve-rules based on week data
+  (Bull may edit autonomously per ALM rules).
+- `memory/playbook.md` — apply bandit results (status changes + budget adjustments).
+- `memory/experiments/_ledger.md` — refresh fully, append bandit log.
+- `memory/daily/<today>.md` — append the 06-weekly-review section.
 
-## Step 6 — Update `memory/portfolio.md`
-End-of-week snapshot with weekly delta and alpha rows.
-
-## Step 7 — Send weekly WhatsApp digest (German, < 1500 chars exception for weekly only)
+## Step 6 — Notify (WhatsApp — German, ≤ 1000 chars)
 
 ```
-🐂 *Wochenrückblick* — KW <NN> (<DD.MM.>-<DD.MM.>)
+📊 Wochen-Brief KW NN (Lern-Monat Tag N/30)
+Equity Fr-Schluss: $X (Woche ±$Y / ±%)
+SPY Woche: ±% | Wochen-Alpha: ±X bp
+LM-Alpha kumuliert: ±X bp
 
-💼 Equity: $X (Woche: +/-Y.Y%)
-📈 YTD: +X.X% vs S&P +Y.Y% → Alpha: +/-Z.Z%
+Trades Woche: N (Sleeve-Verteilung)
+Bandit-Cull:
+  ✗ KILL: <strategy-slug> (Grund kurz)
+  ⬆ SCALE: <strategy-slug> (+50% Budget)
 
-🔁 Trades diese Woche: <count>
-🏆 Best: TICKER +X.X%
-💔 Worst: TICKER -Y.Y%
+Top-Lesson Woche: <1 Zeile>
 
-📊 Self-Grade:
-• Discipline: <A-F>
-• Research: <A-F>
-• Risk-Mgmt: <A-F>
-• Memory: <A-F>
-
-💡 Lesson der Woche:
-<1-2 Sätze>
-
-🔧 Strategie-Vorschlag:
-<falls vorhanden — Hinweis auf strategy_proposals.md; sonst "keiner">
-
-📅 Nächste Woche Fokus:
-<1-2 Bullets>
+Nächste Woche Fokus: <kurz>
 ```
 
-## Step 8 — Commit + open PR + **actively merge** (highest priority)
-`main` is branch-protected. Follow `CLAUDE.md` Memory Protocol Step 0 (end-of-routine):
-```
-git add memory/
-git commit -m "routine: 06-weekly-review @ <timestamp>"
-git push -u origin <working-branch>
-```
-Then via GitHub MCP: list/create PR → `enable_pr_auto_merge` → if that returns
-"already clean" (no required checks) or any error, **fall through to
-`merge_pull_request` directly** (mergeMethod `MERGE`) → verify `merged: true` via
-`pull_request_read`. If the merge fails, log to `lessons.md`, add a "MERGE FAILED"
-line to today's daily file, and flag Robin via WhatsApp.
+## Final Report — only on 2026-06-20
+
+Additionally produce `memory/experiments/_final_report_2026-06-20.md` with:
+- Cumulative Learning-Month P&L per sleeve + alpha vs SPY
+- All strategies ranked by RAR
+- Top 3 strategies recommended for Live Phase (with proposed sizing)
+- Top 3 lessons proposed as new Live-Phase guardrails
+- Open questions for Robin re: Live-Phase strategy.md revision
+- Then send a longer WhatsApp (still ≤ 1000 chars — link to GitHub for full report):
+  "📊 Lern-Monat ABGESCHLOSSEN. Full report: <PR-URL>. Top-Strategien: <top3-slugs>.
+  Vorschlag für Live-Phase: <kurz>. Bitte review per inbox.md vor 6/21."
+
+## Step 7 — Commit + PR + merge
+Per CLAUDE.md.
 
 ## Token budget
-< 60k input tokens (weekly review needs more context than daily routines).
+Aim < 60k input tokens (higher than other routines — full-week aggregation needs more
+context).
