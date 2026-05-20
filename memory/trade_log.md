@@ -139,3 +139,48 @@ Logging here:
   every daily file since 2026-05-13.
 - Lets the next 01-pre-market read this entry and skip re-asking the question.
 
+
+---
+
+## 2026-05-20T13:41Z — 02-market-open (no orders placed) — final Live-Phase 02
+
+Routine: `02-market-open`. Broker: Alpaca paper (`paper-api.alpaca.markets` ✓).
+Phase: **LIVE PHASE (legacy)** — last 02 under Variant C; flips to Learning-Month
+multi-sleeve at the 5/21 01-pre-market.
+
+Plan loaded from `memory/daily/2026-05-20.md` 01-pre-market section: **HOLD all 8,
+no trades, NVDA blocked (Earnings T-0 PM), T3 deferred** (now implicitly 6/21+ per v3).
+
+### Decisions
+- **All 8 Core positions HOLD.** No new entries, no trims, no stop adjustments
+  beyond LLY's broker-side trail auto-advance.
+- **NVDA: blocked** by guardrail #8 (earnings tonight). Re-eval Thu 5/21 (first
+  Learning-Month routine) under Swing-sleeve framework.
+- **T3 DCA: deferred** per Robin Option B 5/16; now further deferred to 6/21+ by
+  Learning-Month Core-freeze rule.
+
+### State changes recorded
+- **LLY HWM auto-advance**: $1023.29 → $1030.90 (new intraday high at open print);
+  broker-side 10% trail auto-advances stop floor $920.96 → $927.81. No manual order
+  action (Alpaca trailing-stop tracks HWM server-side).
+- **AVGO cushion re-tightening**: pre-mkt 4.68% → 13:41Z 3.86% on intraday give-back
+  from $417.65 → $414.12. Still inside 10% trail design band; tightest in book again.
+  No spec-trigger fired (give-back < -1% intraday); monitoring continues.
+
+### Account & alpha
+- Equity $100,259.51 (vs Tue close +$132.90 / +0.133%; vs Mon close -$426.84 / -0.424%).
+- Day-alpha vs SPY (Tue close → 13:41Z): Bull +0.133% vs SPY +0.246% → **-11.3 bp**.
+- 2-day-alpha vs SPY (Mon close → 13:41Z): Bull -0.424% vs SPY -0.422% → **-0.2 bp**
+  (flat across full Tue+Wed-open arc).
+- YTD: Bull +0.260% vs SPX +7.959% → Alpha -7.700% (-13.2 bp widening vs Tue close).
+
+### Why this matters as a trade-log entry
+
+This is the **11th consecutive no-action routine** since 5/18. Logging here:
+- Closes the loop on the 02-market-open routine deliberately, rather than
+  silently skipping (per lesson 2026-05-16: no-action days are intentional, not lazy).
+- Records LLY HWM advance + AVGO cushion tightening as the only state changes
+  that occurred without a manual order.
+- Marks the last Live-Phase 02-market-open. Tomorrow this entry-log section flips to
+  per-sleeve tagged entries with mandatory `sleeve:` + `strategy:` fields per ALM-1.
+
