@@ -158,3 +158,28 @@ trading decision. Keep entries tight — pattern, lesson, encoded?
   laziness metric." One concrete strategy-mechanics gap *was* surfaced this week
   (DCA tranche sizing vs guardrail #5) — proposed to Robin in
   `memory/strategy_proposals.md` 2026-05-16, awaiting his review.
+
+## 2026-05-20 — Learning Month transition (5/21-6/20)
+- **Pattern:** Robin directed Bull to switch from quasi-passive Live-Phase
+  trading to maximally-exploratory Learning Month before risking real €300
+  capital starting 6/21. Mission inverted: P&L is secondary, lesson-density and
+  per-strategy KPI attribution are primary.
+- **Lesson:** A pre-live "experimentation lab" with parallel sleeves (Core,
+  Swing, Daytrade/Scalp, Crypto, Options) and per-trade strategy tagging is the
+  right way to surface what works for the live phase. Hard guardrails are
+  paused via a date-sentinel in `CLAUDE.md` — they reactivate automatically on
+  2026-06-21. Every Learning-Month trade carries `sleeve:` + `strategy:` tags
+  so KPIs roll up into `memory/experiments/_ledger.md` and feed the weekly
+  bandit cull (kill worst, scale best).
+- **Encoded as rule?** Yes — see `CLAUDE.md` Phase Sentinel + Learning-Month
+  Mode sections, `memory/strategy.md` v3, `memory/playbook.md`,
+  `memory/experiments/_ledger.md`. All 6 routine specs updated for multi-sleeve
+  execution. **Hard-overrides that survive Learning Month:** auto-commit (#9),
+  env-var-only API keys (#10), paper-endpoint-only broker calls (new ALM-8).
+- **Tooling added:** Polygon.io for real-time intraday data + options chains
+  (`POLYGON_API_KEY` env var); Alpaca Options Level 3 enabled; Alpaca crypto
+  active; shorting enabled. Forex/Futures explicitly skipped this month.
+- **Operational note:** 03-midday cron extends to 7 days/week for weekend
+  crypto cycling — Robin must update Pro-Plan dashboard. Saturday slot
+  continues to host 06-weekly-review.
+- **Day-of-trading start:** 2026-05-21 (Thu) 13:00Z = next 01-pre-market.

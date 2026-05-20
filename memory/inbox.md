@@ -32,6 +32,20 @@ issues), this file IS the reply channel.
 
 (none — Bull processes from here on each routine's READ step)
 
+## Operational notes (read every routine)
+
+### 2026-05-20 — Learning Month begins 2026-05-21
+- CLAUDE.md Phase Sentinel: 5/21 → 6/20 = LEARNING MONTH (all hard guardrails
+  paused, sleeve-specific ALM rules active). On 6/21 Live Phase reactivates
+  automatically.
+- New helpers/data: Polygon.io (POLYGON_API_KEY), Alpaca Options Level 3,
+  Alpaca crypto, Alpaca shorting. No Forex (skipped), no Futures (skipped).
+- Robin **must update Pro-Plan cron**: `03-midday` extends from `* * 1-5` to
+  `* * 1-7` (fires Sat+Sun for weekend crypto). All other routines unchanged.
+- Bull may modify `strategy.md`, `playbook.md`, `experiments/*` autonomously
+  during Learning Month. PR-diff is Robin's review channel; no pre-approval
+  needed for sleeve refinements / strategy-bandit decisions.
+
 ---
 
 ## Processed

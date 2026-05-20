@@ -4,82 +4,123 @@
 `15 21 * * 1-5` (UTC) — 22:15 Berlin = 16:15 ET, 15 min after close.
 
 ## You are
-Bull, market closed. **No trading.** Wrap up the day, finalize portfolio state, send
-Robin his daily WhatsApp digest.
+Bull. Day is done. Goal: finalize per-sleeve P&L, update experiment ledger, write
+lessons, send German WhatsApp evening brief.
 
 ## Required env vars
-`GEMINI_API_KEY`, `ALPACA_API_KEY_ID`, `ALPACA_API_SECRET_KEY`, `CALLMEBOT_API_KEY`, `WHATSAPP_PHONE`
+`ALPACA_API_KEY_ID`, `ALPACA_API_SECRET_KEY`, `GEMINI_API_KEY`,
+`CALLMEBOT_API_KEY`, `WHATSAPP_PHONE`.
+
+## Phase Sentinel
+Same. Learning Month adds per-sleeve attribution + ledger refresh.
 
 ## Step 1 — Read
 - `CLAUDE.md`
 - `memory/strategy.md`
-- `memory/portfolio.md` (this morning's state)
-- `memory/daily/<today>.md` (today's actions)
+- `memory/playbook.md`
+- `memory/portfolio.md`
+- `memory/lessons.md` (tail 30)
+- `memory/inbox.md`
+- `memory/daily/<today>.md`
+- `memory/experiments/_ledger.md`
+- `memory/trade_log.md` (last 30 — covers today's trades fully)
+- `memory/research_log.md` (today only)
 
-## Step 2 — Final snapshot
+## Step 2 — Final account snapshot
 ```python
-positions = broker.get_positions()
+broker = get_broker()
 account = broker.get_account()
+positions = broker.get_positions()
 ```
-Compute today's totals: total equity, day P&L, vs prior close.
+Verify `clock.is_open == False`. Pull final equity, cash, options_BP, daytrade_count.
+Pull SPY close for benchmark.
 
-Pull SPX/SPY close via `get_snapshot("SPY")` (yfinance — accurate, no halluc risk). Compute YTD vs Jan-1 reference and alpha.
+## Step 3 — Compute per-sleeve P&L
 
-## Step 3 — Update memory
+For each sleeve, compute:
+- Day P&L $ (realized + unrealized delta vs yesterday's close)
+- Day P&L % (vs sleeve cost-basis)
+- Cumulative P&L $ since Learning-Month start
+- Cumulative alpha vs SPY since Learning-Month start
+- Open positions count
 
-- **Overwrite** `memory/portfolio.md` with the final post-close state (frontmatter
-  updated `last_updated`, YTD vs benchmark numbers).
-- **Append** to `memory/daily/<today>.md` under `## 05-close-summary`:
+SPY benchmark: `spy_today_close - spy_yesterday_close` for the day; cumulative from
+2026-05-20.
+
+## Step 4 — Update experiment ledger
+
+For each strategy with ≥ 1 trade today:
+- Increment trade-count for closes.
+- Recompute win-rate, avg R, max DD, RAR.
+- Update `last_update` date.
+
+Recompute sleeve roll-ups (used cash, cumulative P&L).
+
+If any strategy has crossed a milestone (10th trade, first +5R, first -5R aggregate
+loss), flag it in `lessons.md`.
+
+## Step 5 — Update memory
+- `memory/portfolio.md` — final EOD snapshot per-sleeve.
+- `memory/trade_log.md` — any remaining today's trades (should be empty after
+  03+04 already logged them; this is a backstop).
+- `memory/experiments/_ledger.md` — refreshed KPIs.
+- Per-strategy `memory/experiments/<slug>.md` — close-of-day update if there's a
+  delta vs intraday.
+- `memory/daily/<today>.md` — final section:
   ```
-  ### Daily Summary
-  Equity close: $X (yesterday: $Y, day Δ: +/-Z%)
-  Day P&L: +/-$N (+/-pct)
-  YTD: +X.X% vs SPX +Y.Y% → Alpha: +/-Z.Z%
-  Trades today: <count> (<symbols>)
-
-  Best position today: TICKER +X%
-  Worst position today: TICKER -Y%
-
-  Reflections:
-  - <1-3 bullets about what played out vs expectations>
+  ## 05-close-summary (<timestamp>)
+  Final equity: $X (day Δ: ±$Y / ±%)
+  SPY close: $Z (day Δ: ±%)
+  Day alpha: ±X bp
+  
+  Per-sleeve P&L (today):
+    - Core: ±$X (±%)
+    - Swing: ±$X (±%)
+    - Daytrade: ±$X (±%)
+    - Crypto: ±$X (±%)
+    - Options: ±$X (±%)
+  
+  Cumulative since LM start (2026-05-21):
+    - Total alpha vs SPY: ±X bp
+    - Best sleeve: <name> +$Y
+    - Worst sleeve: <name> ±$Z
+  
+  Top experiment today: <slug> (<one-liner>)
+  Bottom experiment today: <slug> (<one-liner>)
+  
+  Lessons appended today: <count> (refs)
   ```
+- `memory/lessons.md` — append ONLY if a genuinely new generalizable rule emerged.
 
-## Step 4 — Maybe update `memory/lessons.md`
+## Step 6 — Notify (WhatsApp — German, ≤ 1000 chars)
 
-ONLY if a clear, generalizable lesson emerged today (e.g. "earnings surprise pattern X").
-Don't add noise. If nothing rises to that bar, skip.
-
-## Step 5 — Notify Robin (WhatsApp, German, < 1000 chars)
-
+Structure:
 ```
-🐂 Tagesschluss — <Mo/Di/Mi/Do/Fr> <DD.MM.>
+🌙 Abend-Brief Lern-Monat (Tag N/30)
+Equity: $X (Tag ±$Y / ±%)
+SPY: ±% | Day-Alpha: ±X bp
 
-💼 Equity: $X (Tag: +/-Y.Y%)
-📈 YTD: +X.X% (S&P: +Y.Y%) → Alpha: +/-Z.Z%
+Sleeve-Bilanz heute:
+✓ Core ±$X | Swing ±$X | DT ±$X | Crypto ±$X | Opt ±$X
 
-🔁 Trades heute: <count>
-• <kompakter Snapshot der wichtigsten Trades, max 3 Zeilen>
+Trades heute: N (W:K L:M)
+Top: [strategy-slug] +$X
+Flop: [strategy-slug] -$X
 
-🏆 Best: TICKER +X.X%
-💔 Worst: TICKER -Y.Y%
+LM-Alpha kumuliert: ±X bp
+Lessons heute: <ja/nein, kurz>
+Morgen: <kurz, 1 Zeile>
 
-💡 Erkenntnis: <1 Satz, falls Lesson gespeichert wurde — sonst weglassen>
-
-📅 Morgen Fokus: <1 Satz aus 04-pre-close-Plan>
+[Offene Frage an Robin falls vorhanden — vollständig spelled out per lesson 2026-05-15]
 ```
 
-## Step 6 — Commit + open PR + **actively merge** (highest priority)
-`main` is branch-protected. Follow `CLAUDE.md` Memory Protocol Step 0 (end-of-routine):
-```
-git add memory/
-git commit -m "routine: 05-close-summary @ <timestamp>"
-git push -u origin <working-branch>
-```
-Then via GitHub MCP: list/create PR → `enable_pr_auto_merge` → if that returns
-"already clean" (no required checks) or any error, **fall through to
-`merge_pull_request` directly** (mergeMethod `MERGE`) → verify `merged: true` via
-`pull_request_read`. If the merge fails, log to `lessons.md`, add a "MERGE FAILED"
-line to today's daily file, and flag Robin via WhatsApp.
+Per CLAUDE.md WhatsApp rules: max 1000 chars, German, no fluff. If an open question
+for Robin exists, spell it out (decision name + options + consequences + reply-channel
+instruction).
+
+## Step 7 — Commit + PR + merge
+Per CLAUDE.md. **This is one of the highest-priority merges of the day** — tomorrow's
+01-pre-market depends on this state being on main.
 
 ## Token budget
-< 40k input tokens. Output (WhatsApp) < 1k tokens.
+Aim < 45k input tokens.

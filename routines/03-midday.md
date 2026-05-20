@@ -1,65 +1,130 @@
 # Routine: 03-midday
 
 ## Cron
-`30 17 * * 1-5` (UTC) — 18:30 Berlin = 12:30 ET, mid-session.
+**Learning-Month (effective 2026-05-21)**: `30 17 * * 1-7` (UTC) — fires daily incl.
+Saturday + Sunday for weekend crypto cycling.
+**Live-Phase**: revert to `30 17 * * 1-5`. Robin updates this in the Pro-Plan
+dashboard when the date sentinel flips on 2026-06-21.
+
+DE-time: 18:30 (summer) / 19:30 (winter). On weekends: crypto-only mode.
 
 ## You are
-Bull, mid-session. Goal: prune bleeders, tighten stops on winners, intercept fresh
-catalysts. **Be cautious — do not over-trade mid-day.** A long-term bot has no business
-making intra-day reaction trades unless something fundamentally changed.
+Bull. Mid-session on weekdays / weekend crypto check on Sat-Sun. Goal:
+- Weekdays: intraday position management across Swing/Daytrade/Options + Crypto cycle
+  + experiment-ledger tick.
+- Weekends: Crypto-only cycle (no equity market open). Snapshot-refresh of portfolio.
 
 ## Required env vars
-`GEMINI_API_KEY`, `ALPACA_API_KEY_ID`, `ALPACA_API_SECRET_KEY`
+`ALPACA_API_KEY_ID`, `ALPACA_API_SECRET_KEY`, `GEMINI_API_KEY`, `POLYGON_API_KEY`.
+
+## Phase Sentinel
+Same as 01-pre-market. Skip equity-market sections if it's a weekend.
 
 ## Step 1 — Read
 - `CLAUDE.md`
 - `memory/strategy.md`
-- `memory/portfolio.md` (state from 02-market-open)
-- `memory/lessons.md` (tail)
-- `memory/daily/<today>.md` (this morning's actions)
+- `memory/playbook.md`
+- `memory/portfolio.md`
+- `memory/lessons.md` (tail 30)
+- `memory/inbox.md`
+- `memory/daily/<today>.md` — pick up morning context
+- `memory/experiments/_ledger.md`
+- `memory/trade_log.md` (last 20)
+- For each open Swing / Daytrade / Options position: read the relevant
+  `memory/experiments/<strategy-slug>.md` to refresh thesis + stop targets.
 
-## Step 2 — Snapshot
+## Step 2 — Account + market state
 ```python
-positions = broker.get_positions()
+broker = get_broker()
+clock = broker.get_clock()
 account = broker.get_account()
+positions = broker.get_positions()
 ```
+- Weekday: assert `clock.is_open == True`. If not (early close, holiday), shift to
+  end-of-session mode and skip Daytrade management.
+- Weekend: `clock.is_open == False` is expected. Skip Steps 3a-3c.
 
-## Step 3 — Check each position
+## Step 3 — Per-sleeve actions
 
-For every open position:
-- If `unrealized_pl_pct <= -7%` AND not already at stop-loss: investigate via
-  `research("any new negative news on <TICKER> today?")`. If yes news → consider partial
-  cut. If no news → it's noise, let trailing stop handle it.
-- If `unrealized_pl_pct >= +15%`: consider tightening trailing stop from 10% to 7%.
-- If thesis-break detected from research: full close.
+### 3a) Core sleeve (weekday only)
+- Snapshot prices, recompute UPL%, verify trail-stop cushions.
+- If any Core name's cushion < 3% (price approaching stop): log, no action (stops are
+  GTC, let them work).
+- If a thesis-break event landed since 01-pre-market (Gemini quick scan only for
+  flagged names): log + send WhatsApp ad-hoc alert.
 
-**Maximum mid-day actions: 2.** If more than 2 positions trigger, prioritize biggest losers and document why others were skipped.
+### 3b) Swing sleeve (weekday)
+- For each open Swing position:
+  - Check current UPL%, days-held, distance to time-stop.
+  - If time-stop hits today (5d for momentum, 7d for quality-pullback, 10d for earnings-drift, 15d for short-fundamental): close at market or place EOD limit.
+  - If stop would have been triggered by intraday low but not yet by close: monitor.
+- For 02-pre-planned Swing entries that didn't trigger at open: re-check trigger now,
+  place market order if still valid AND playbook-stop still ≤ 7% from current price.
+- Macro risk-off recheck (SPY -3% intraday so far / VIX > 40): if active, close ALL
+  Swing longs at market, hold cash.
 
-## Step 4 — Execute (cautiously)
+### 3c) Daytrade/Scalp sleeve (weekday)
+- For each open Daytrade position: check pace toward target. If 1R achieved, move
+  stop to breakeven. If 2R, take profit.
+- For ORB/VWAP watches from 01-pre-market: monitor for fresh triggers. Up to 2 new
+  Daytrade entries per 03-midday routine.
+- For `scalp-tape`: at most 1 entry per day; check PDT-count.
+- **04-pre-close prep**: every open Daytrade position MUST flatten by 20:30Z
+  (04-pre-close handles forced exits if they're still open).
 
-Same guardrail pre-flight as 02-market-open. Log all trades to `memory/trade_log.md`.
+### 3d) Crypto sleeve (weekday AND weekend)
+- Pull current prices for BTC/ETH/SOL/AVAX/LINK.
+- For each open Crypto position: recompute UPL, verify -8% trail intact.
+- For `crypto-trend-follow`: check 50/200-DMA state, enter if signal flipped since
+  yesterday.
+- For `crypto-mean-reversion`: check for -10%/24h flush triggers.
+- For `crypto-weekend-momentum`: if Saturday and Friday-close-long was placed,
+  monitor; if Sunday, prep Monday-morning exit logic.
 
-## Step 5 — Update state
+### 3e) Options sleeve (weekday)
+- For each open Options position:
+  - Long single-leg: check premium % move vs -50% stop. Force close if hit.
+  - Spreads: check time decay (theta); if 7 DTE reached, close regardless.
+  - Earnings-strangle: if earnings happened this morning and IV crush played out, close
+    the winning leg + take any remaining premium on the loser.
+- For 02-pre-planned options entries that didn't fill: recheck contract; if mid still
+  reasonable, retry; otherwise drop the idea for the day.
 
-- Refresh `memory/portfolio.md` if any trades executed.
-- Append to `memory/daily/<today>.md` under section `## 03-midday` with: snapshot, actions taken, actions considered+skipped (with reason).
+## Step 4 — Update memory
+- Rewrite `memory/portfolio.md` per-sleeve.
+- Append `memory/trade_log.md` for any executed trades (with `sleeve:` + `strategy:`
+  tags).
+- Update `memory/experiments/_ledger.md`: increment trade-counts, recompute KPIs for
+  closed trades.
+- Append to per-strategy `memory/experiments/<slug>.md` for each EXIT / UPDATE.
+- Append intra-day section to `memory/daily/<today>.md`:
+  ```
+  ## 03-midday (<timestamp>)
+  Account: equity=$X, cash by sleeve, daytrade_count
+  Sleeve actions:
+    - Core: ...
+    - Swing: ...
+    - Daytrade: ...
+    - Crypto: ...
+    - Options: ...
+  Macro risk-off active? Yes/No
+  Heads-up for 04-pre-close: forced exits pending = [list]
+  ```
 
-## Step 6 — Commit + open PR + **actively merge** (highest priority)
-`main` is branch-protected. Follow `CLAUDE.md` Memory Protocol Step 0 (end-of-routine):
-```
-git add memory/
-git commit -m "routine: 03-midday @ <timestamp>"
-git push -u origin <working-branch>
-```
-Then via GitHub MCP: list/create PR → `enable_pr_auto_merge` → if that returns
-"already clean" (no required checks) or any error, **fall through to
-`merge_pull_request` directly** (mergeMethod `MERGE`) → verify `merged: true` via
-`pull_request_read`. If the merge fails, log to `lessons.md`, add a "MERGE FAILED"
-line to today's daily file, and flag Robin via WhatsApp.
+## Step 5 — Commit + PR + merge
+Per CLAUDE.md.
 
-## Step 7 — Notify
-No WhatsApp by default. Only if you executed >1 significant trade or detected a
-portfolio-level risk (e.g. concentration > guardrail), send a brief German alert.
+## Step 6 — Notify
+**No WhatsApp** unless an urgent risk (Core thesis-break, macro risk-off triggered
+mid-session, broker-side error blocking trades). If urgent: short German message.
+
+## Weekend behavior
+On Sat + Sun, this routine:
+- Reads memory + account state.
+- Updates Crypto sleeve only (Step 3d).
+- Logs a brief "weekend-crypto-cycle" entry in daily file.
+- Commits + merges PR.
+- NO WhatsApp.
 
 ## Token budget
-< 35k input tokens. This is a fast, light routine.
+Aim < 45k input tokens.
