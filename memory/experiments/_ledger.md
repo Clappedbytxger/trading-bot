@@ -19,7 +19,7 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Strategy slug | Sleeve | Status | Trades | Win-rate | Avg R | Net P&L | Max DD | RAR | Alpha vs SPY | Last update |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---|
-| core-buy-and-hold          | Core      | active | — | — | — | $+0.00 | $0 | — | — | 2026-05-20 |
+| core-buy-and-hold          | Core      | active | 16 fills (T1+T2, no closes) | — | — | +$610.31 (UPL) | $0 (no closes) | — | -8.24% (Live-Phase 9d carryover) | 2026-05-20 EOD |
 | swing-momentum-breakout    | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | swing-mean-reversion       | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | swing-quality-pullback     | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
@@ -46,13 +46,22 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Sleeve | Cash Budget | Used | Open positions | Cumulative P&L | Cumulative Alpha vs SPY |
 |---|---:|---:|---:|---:|---:|
-| Core     | $62,000 | $62,000 | 8 | inherited | — |
+| Core     | $62,000 | $62,610.49 (mark, +$610.31 UPL) | 8 | +$634.57 / +0.635% (9-day Live-Phase carryover) | -8.24% Live-Phase carryover |
 | Swing    | $15,000 | $0      | 0 | $0 | — |
 | Daytrade | $10,000 | $0      | 0 | $0 | — |
 | Crypto   | $5,000  | $0      | 0 | $0 | — |
 | Options  | $5,000  | $0      | 0 | $0 | — |
-| Cash reserve | $3,000 | — | — | — | — |
+| Cash reserve | $3,000 | — (of $38,000 cash total, ≥$3k reserved per ALM-2) | — | — | — |
 
 ## Weekly bandit log (06-weekly-review writes here)
 
 (none yet — first bandit review will fire Fri 2026-05-29 in 06-weekly-review)
+
+## Daily refresh log
+
+- **2026-05-20 EOD (05-close-summary)** — Final Live-Phase EOD pre-LM-start. 0 trades
+  across all 22 seeded strategies (Core in HOLD; Swing/Daytrade/Crypto/Options not
+  yet active). Per-strategy KPIs unchanged from initialization; `core-buy-and-hold`
+  row updated with carryover Live-Phase mark (+$610.31 UPL on $62,610.49 cost-basis,
+  -8.24% alpha vs SPY over the 9-day Live-Phase paper run 5/12 → 5/20). All sleeve
+  budgets ready for LM Day 1 activation tomorrow 13:00Z.
