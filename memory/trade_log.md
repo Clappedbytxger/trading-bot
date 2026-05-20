@@ -184,3 +184,56 @@ This is the **11th consecutive no-action routine** since 5/18. Logging here:
 - Marks the last Live-Phase 02-market-open. Tomorrow this entry-log section flips to
   per-sleeve tagged entries with mandatory `sleeve:` + `strategy:` fields per ALM-1.
 
+---
+
+## 2026-05-20T16:39Z — 03-midday (no orders placed) — final Live-Phase 03
+
+Routine: `03-midday`. Broker: Alpaca paper (`paper-api.alpaca.markets` ✓).
+Phase: **LIVE PHASE (legacy)** — last 03 under Variant C; flips to Learning-Month
+multi-sleeve at the 5/21 03-midday (which also extends to weekends per v3 cron).
+
+Plan loaded from `memory/daily/2026-05-20.md` 02-market-open section: **HOLD all 8,
+no trades, NVDA blocked (Earnings T-0 PM), T3 deferred** (now implicitly 6/21+ per v3).
+
+### Decisions
+- **All 8 Core positions HOLD.** No new entries, no trims, no stop adjustments
+  beyond LLY's broker-side trail auto-advance on a new intraday HWM.
+- **NVDA: blocked** by guardrail #8 (earnings tonight 20:00Z+). Re-eval Thu 5/21
+  (first Learning-Month routine) under Swing-sleeve framework.
+- **T3 DCA: deferred** per Robin Option B 5/16; now further deferred to 6/21+ by
+  Learning-Month Core-freeze rule.
+
+### State changes recorded (broker-side only, no manual orders)
+- **LLY HWM auto-advance**: $1030.90 → $1037.88 (+$6.98) on a fresh intraday high
+  that printed between 13:41Z and 16:39Z. Broker 10% trail-stop auto-advances stop
+  floor $927.81 → $934.092. Mark pulled back to $1006.07 by 16:39Z = -3.06% off the
+  new HWM (round-trip move). No manual action — Alpaca tracks HWM server-side.
+- **AVGO cushion-bleed broken**: 02-open 3.86% (tightest in book) → 16:39Z 4.86%
+  (+100 bp) on intraday recovery $414.12 → $418.46. UPL flipped -0.03% → +1.02%.
+  Bounce that started overnight (+1.86%) followed through after the open give-back.
+- **GOOGL cushion slip**: 02-open 5.46% → 16:39Z 4.32% (-114 bp). Now tightest in
+  book. Mark $388.97 → $384.35 = -1.19% intraday. UPL +0.43% → -0.76%. Still >3%
+  spec-threshold; no log-flag required. Tape-driven, not name-specific (no Gemini
+  scan triggered — no fresh catalyst).
+
+### Account & alpha (16:39Z vs 02-open 13:41Z)
+- Equity $100,376.39 (intraday +$116.88 / +0.117% vs 02-open).
+- vs Tue close: +$249.78 / +0.249%. SPY +0.698% → **day-alpha -44.8 bp** (widened
+  from -11.3 bp at 02-open as mid-session breadth rally outpaced Bull's concentrated
+  AI+defensive book).
+- vs Mon close: -0.308% vs SPY +0.028% → 2-day-alpha **-33.6 bp** (re-opened from
+  -0.2 bp at 02-open by LLY round-trip + GOOGL slip).
+- YTD: Bull +0.376% vs SPX +8.448% → Alpha -8.072% (-37.2 bp widening vs 02-open).
+
+### Why this matters as a trade-log entry
+
+This is the **12th consecutive no-action routine** since 5/18. Logging here:
+- Records broker-side state changes (LLY HWM advance, AVGO cushion-bleed broken,
+  GOOGL new tightest cushion) for audit continuity — none of these were manual
+  orders, but they're material to the next routine's HOLD/CUT decision-making.
+- Closes the loop on the 03-midday routine deliberately, rather than silently
+  skipping (per lesson 2026-05-16: no-action days are intentional, not lazy).
+- Marks the **last Live-Phase 03-midday**. Tomorrow this entry-log section flips
+  to per-sleeve tagged entries with mandatory `sleeve:` + `strategy:` fields per
+  ALM-1, and includes Crypto sleeve actions on weekends.
+
