@@ -508,3 +508,168 @@ without a validated pre-market plan.
 - Records the first 30-day-LM-window data point: 1 day, 0 trades, +28.9 bp
   pure-cash-drag alpha. Not a strategy data point — just baseline cash-vs-SPY drift.
 
+---
+
+## 2026-05-21T16:38Z — 03-midday (LM Day 1 of 30, HOLD)
+
+### Action: HOLD across all 5 sleeves — abort-entries posture continued
+
+| sleeve   | strategy             | action | reason                                                              |
+|----------|----------------------|--------|---------------------------------------------------------------------|
+| Core     | core-buy-and-hold    | HOLD   | Stops live + verified; LLY HWM advanced organically (broker-side)   |
+| Swing    | (all sub-strategies) | NO-OP  | Abort-entries continued per 02-open Day-1 fallback plan             |
+| Daytrade | (all sub-strategies) | NO-OP  | No open intraday positions; POLYGON_API_KEY still unset             |
+| Crypto   | (all sub-strategies) | NO-OP  | Scan run via yfinance — all 5 names 50<200 downtrend, no -10% flush |
+| Options  | (all sub-strategies) | NO-OP  | No open contracts; POLYGON_API_KEY blocks chain reads               |
+
+### Trigger for this entry
+03-midday routine ran on schedule (17:30Z slot, executed at 16:38Z this
+cycle). Per 02-open Day-1 fallback plan recorded in `memory/daily/2026-05-21.md`:
+> "If 01-pre-market still has not back-fired by 03-midday, continue to hold
+> abort-entries posture for all non-Core sleeves until the next valid
+> 01-pre-market cycle (tomorrow 5/22 13:00Z)."
+
+01-pre-market has not back-fired. Holding posture.
+
+### Broker live state captured at 16:38Z
+- Equity $100,504.44 (-$106.05 / -0.105% vs 5/20 close $100,610.49; +$36.26 vs
+  14:30Z snapshot $100,468.18 → mild intraday recovery)
+- Cash $38,000 unchanged; long MV $62,504.44
+- SPY $738.81 (-0.329% vs 5/20 close; +0.10% vs 14:30Z) → **day-alpha +22.4 bp**
+  (compressed from +28.9 bp at open as SPY recovered faster than Core)
+- VIX **17.24** — no macro risk-off (threshold 40)
+- 8 Core positions intact, 0 fills, 0 stops triggered
+- Best UPL: **LLY +4.027%** (took the lead from MSFT — LLY +1.15% intraday on
+  HWM advance; MSFT -0.29% intraday gave back the morning's spike)
+- Worst UPL: **BRK.B -1.071%** (recovered from -1.59% morning)
+- Tightest stop cushion now: **AVGO 3.69%** (was 5.25% this morning; mark
+  $420.17 → $413.36, -1.62% intraday). Above 3% spec-threshold → no log-flag,
+  but watching at 04-pre-close.
+
+### Per-sleeve KPI impact (for `_ledger.md`)
+- `core-buy-and-hold`: cumulative UPL drifts $468.18 → $504.44 (+$36.26
+  intraday). Trade count unchanged at 16 fills, 0 closes. RAR remains
+  undefined (no closed trades).
+- All other strategies: unchanged at 0 trades.
+- Crypto scan logged for the ledger as a "trigger-checked, no-signal" data
+  point on `crypto-trend-follow` (first scan in LM window).
+
+### Stop-cushion notable: LLY HWM advance
+- LLY trail HWM bumped from $1,037.88 (5/20 close) → $1,043.382 (intraday
+  high reached today). Stop price advanced $934.092 → $939.044 (+$4.95).
+- This is the **first organic trail-advance under LM rules**. Recorded for
+  audit / lesson density (organic trail-advances are noise-free signals
+  that a position is breaking out of its prior range).
+- All 7 other stops untouched (no intraday new HWMs).
+
+### Operational issues unchanged
+1. 01-pre-market cron miss #4 still unresolved — escalated 14:30Z; no
+   `inbox.md` reply from Robin yet (he may reply by 04-pre-close 20:30Z).
+2. POLYGON_API_KEY still unset — same status.
+3. Pro-Plan cron `03-midday 1-5 → 1-7` extension still owed (deadline 5/23).
+
+### Why this matters as a trade-log entry
+- Confirms abort-entries posture is being honored consistently across
+  Day-1 routines (no temptation to back-door entries via the more permissive
+  03-midday spec). Discipline > impatience on Day 1.
+- Records first organic trail-stop advance under LM rules (LLY +$4.95 on
+  HWM).
+- Logs first `crypto-trend-follow` trigger-check (all 5 names downtrend,
+  no signal) — establishes the baseline for what a "no-signal scan" looks
+  like in the ledger.
+
+---
+
+## 2026-05-21T19:36Z — 04-pre-close LM-Day-1 HOLD (no-action; Daytrade force-flat = no-op on empty sleeve)
+
+Routine: `04-pre-close`. Broker: Alpaca paper (`paper-api.alpaca.markets`).
+Clock: open, time-to-close **24.3 min**. Phase: **LEARNING MONTH Day 1 of
+30** (sentinel verified). Strategy: `strategy.md` v3 (Learning-Month
+multi-sleeve, approved 5/20).
+
+### Action: NONE (no orders placed, no orders modified)
+
+| Sleeve   | Strategies          | Status | Reason                                                              |
+|----------|---------------------|--------|---------------------------------------------------------------------|
+| Core     | core-buy-and-hold   | NO-OP  | Frozen per LM rules; 8/8 GTC trails verified live; no thesis-break  |
+| Swing    | (all sub-strategies) | NO-OP | Sleeve empty; abort-entries continued; nothing to verify-stop on    |
+| Daytrade | (all sub-strategies) | NO-OP | Sleeve empty → **force-flat step is a no-op**; count = 0 post-step  |
+| Crypto   | (all sub-strategies) | NO-OP | Sleeve empty; Thursday so no Fri-tighten; no scan rerun             |
+| Options  | (all sub-strategies) | NO-OP | Sleeve empty → no Greeks check / 7-DTE / IV-crush exits needed      |
+
+### Trigger for this entry
+04-pre-close routine ran on schedule (~19:36Z, 24 min before market close
+20:00Z). Per 02-open Day-1 fallback plan recorded in
+`memory/daily/2026-05-21.md`:
+> "If 01-pre-market still has not back-fired by 03-midday, continue to
+> hold abort-entries posture for all non-Core sleeves until the next
+> valid 01-pre-market cycle (tomorrow 5/22 13:00Z)."
+
+01-pre-market has not back-fired (still no Robin reply in `inbox.md` to
+Q1 A/B). Posture held through 04-pre-close. 17th consecutive no-action
+routine extending the Live-Phase exit-week streak.
+
+### Broker live state captured at 19:36Z
+- Equity **$100,729.41** (+$118.92 / +0.118% vs 5/20 close $100,610.49;
+  +$224.97 vs 16:38Z $100,504.44 — late-session lift on SPY rally)
+- Cash $38,000 unchanged; long MV $62,729.41
+- SPY $742.78 (+0.206% vs 5/20 close; +0.535% vs 16:38Z) → **day-alpha
+  -8.8 bp** (Bull underperformed on the late rally; compressed from
+  +22.4 bp at 03-midday because Core didn't catch SPY's intraday lift
+  proportionally)
+- VIX **16.89** (-0.35 vs 16:38Z) — no macro risk-off (threshold 40)
+- 8 Core positions intact, 0 fills, 0 stops triggered, 8/8 GTC trails
+  `OrderStatus.NEW`
+- Daytrade count (rolling 5d): **0** / PDT: **False**
+- Options BP $69,364.70 / approved level 3 ✓
+- Best UPL: **LLY +4.369%** (extends lead; HWM advanced again to
+  $1,046.415, stop bumped to $941.7735)
+- Worst UPL: **AVGO -0.476%** (only negative-UPL Core name; cushion
+  3.43% is tightest in book)
+
+### Per-sleeve KPI impact (for `_ledger.md`)
+- `core-buy-and-hold`: cumulative UPL drifts $504.44 → $729.41 (+$224.97
+  intraday). Trade count unchanged at 16 fills, 0 closes. RAR remains
+  undefined (no closed trades). LM Day-1 cumulative UPL flipped negative-
+  to-positive vs 5/20 close (+$118.92 vs -$106.05 at 03-midday).
+- All other strategies: unchanged at 0 trades. `crypto-trend-follow` scan-
+  count remains 1 (no rerun this routine).
+
+### Stop-cushion notable: LLY HWM advance #2 of the day
+- LLY trail HWM bumped $1,043.382 (03-midday) → $1,046.415 (now). Stop
+  price advanced $939.044 → $941.7735 (+$2.73 / +0.29%).
+- 2nd organic trail-advance of the day for LLY (3rd cumulative under LM
+  rules counting 03-midday's first). Recorded for audit / lesson density.
+- All 7 other stops untouched (no intraday new HWMs).
+
+### Stop-cushion notable: AVGO continues to tighten
+- AVGO cushion 5.25% (open) → 3.69% (03-midday) → **3.43%** (now). Tightest
+  in book by ~190 bp. **Still above 3% spec-threshold** → no log-flag /
+  WhatsApp this routine.
+- AVGO is the only Core name with negative UPL today (-0.476%). Top
+  candidate for thesis-check at 5/22 01-pre-market.
+
+### Daytrade force-flat verification (spec Step 3c)
+- Pre-step Daytrade sleeve count: **0**
+- Post-step Daytrade sleeve count: **0** ✓ (spec passes)
+- No roll-to-swing requests in `inbox.md`
+- Daytrade count (rolling 5d): 0 → no PDT watermark concern
+
+### Operational issues unchanged
+1. 01-pre-market cron miss #4 still unresolved — `inbox.md` still empty
+   on Q1 A/B; 05-close-summary in ~95 min will re-broadcast in German
+   WhatsApp.
+2. POLYGON_API_KEY still **NOT SET** — blocks LM Daytrade/Options/Polygon-
+   dependent Swing strategies from ever launching even after 01 back-fires.
+3. Pro-Plan cron `03-midday 1-5 → 1-7` extension still owed (deadline 5/23).
+
+### Why this matters as a trade-log entry
+- Documents that the 04-pre-close FORCE-FLAT step is a clean no-op when
+  the Daytrade sleeve is empty (no temptation to back-door trades just to
+  satisfy a checklist).
+- Records 2nd LLY HWM advance under LM rules — establishes that organic
+  trail-advances on quality compounders are a recurring lesson-density
+  data point worth tracking.
+- Confirms AVGO continues to tighten without crossing the 3% log-threshold
+  — exemplifies why the spec separates "tightening" from "crossing"
+  (one is a watch-item, the other is a flag-item).

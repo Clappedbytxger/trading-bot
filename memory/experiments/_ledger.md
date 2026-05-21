@@ -19,7 +19,7 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Strategy slug | Sleeve | Status | Trades | Win-rate | Avg R | Net P&L | Max DD | RAR | Alpha vs SPY | Last update |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---|
-| core-buy-and-hold          | Core      | active | 16 fills (T1+T2, no closes) | — | — | +$468.18 (UPL) | $0 (no closes) | — | -7.90% (Live-Phase carryover + LM Day 1) | 2026-05-21 02-open |
+| core-buy-and-hold          | Core      | active | 16 fills (T1+T2, no closes) | — | — | +$729.41 (UPL) | $0 (no closes) | — | -8.29% (Live-Phase carryover + LM Day 1) | 2026-05-21 04-pre-close |
 | swing-momentum-breakout    | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | swing-mean-reversion       | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | swing-quality-pullback     | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
@@ -33,7 +33,7 @@ Window: 2026-05-21 → 2026-06-20.
 | daytrade-gap-go            | Daytrade  | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | scalp-tape                 | Daytrade  | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | daytrade-news-catalyst     | Daytrade  | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
-| crypto-trend-follow        | Crypto    | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
+| crypto-trend-follow        | Crypto    | active | 0 (1 scan, no signal) | — | — | $0.00 | $0 | — | — | 2026-05-21 03-midday |
 | crypto-weekend-momentum    | Crypto    | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | crypto-mean-reversion      | Crypto    | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | options-long-call-momentum | Options   | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
@@ -46,7 +46,7 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Sleeve | Cash Budget | Used | Open positions | Cumulative P&L | Cumulative Alpha vs SPY |
 |---|---:|---:|---:|---:|---:|
-| Core     | $62,000 | $62,468.18 (mark, +$468.18 UPL) | 8 | +$492.26 / +0.493% (9-day Live-Phase + LM Day 1 carryover) | -7.90% Live-Phase + LM Day 1 carryover |
+| Core     | $62,000 | $62,729.41 (mark, +$729.41 UPL) | 8 | +$753.49 / +0.756% (9-day Live-Phase + LM Day 1 carryover) | -8.29% Live-Phase + LM Day 1 carryover |
 | Swing    | $15,000 | $0      | 0 | $0 | — |
 | Daytrade | $10,000 | $0      | 0 | $0 | — |
 | Crypto   | $5,000  | $0      | 0 | $0 | — |
@@ -74,3 +74,27 @@ Window: 2026-05-21 → 2026-06-20.
   -0.141% intraday vs SPY -0.430%, alpha from individual-name dispersion). Swing /
   Daytrade / Crypto / Options sleeves remain at 0 trades — no plan = no entries per
   ALM-1. Robin notified via WhatsApp + inbox.md options A/B for unblocking Day 1.
+
+- **2026-05-21 16:38Z (03-midday, LM Day 1)** — **HOLD routine** (abort-entries posture
+  continued; no 01-pre-market back-fire). 0 trades on any sleeve. KPI deltas:
+  `core-buy-and-hold` UPL drifts $468.18 → $504.44 (+$36.26 intraday recovery). Sleeve
+  leadership flipped: LLY +4.027% UPL takes lead from MSFT +3.014% (MSFT gave back the
+  morning spike; LLY HWM bumped to $1,043.38 with stop bumped to $939.04 organically).
+  BRK.B recovered to -1.071% UPL (from -1.59%). AVGO is the new tightest cushion at
+  3.69% (from 5.25% morning). SPY -0.329% intraday → Core day-alpha **+22.4 bp**
+  (compressed from +28.9 bp). `crypto-trend-follow` scanned all 5 universe names: all
+  in 50<200 downtrend → 0 entries triggered. VIX 17.24 (no risk-off). No new
+  inbox.md replies from Robin yet.
+
+- **2026-05-21 19:36Z (04-pre-close, LM Day 1)** — **HOLD routine** (Daytrade sleeve
+  empty → force-flat is a no-op; abort-entries posture continued). 0 trades on any
+  sleeve. KPI deltas: `core-buy-and-hold` UPL drifts $504.44 → **$729.41** (+$224.97
+  on a late-session SPY rally; Bull equity flips green vs 5/20 close, +$118.92 /
+  +0.118%). LLY HWM advanced **again** $1,043.38 → $1,046.415 (stop bumped $939.04
+  → $941.77) — 2nd organic trail-advance of the day, extending LLY's lead to +4.369%
+  UPL. AVGO continued to tighten: cushion 3.69% → **3.43%** (mark $413.36 → $412.265),
+  still above 3% threshold but the only Core name negative on the day (-0.476% UPL).
+  SPY +0.206% intraday into late-day rally → Core day-alpha **-8.8 bp** (compressed
+  from +22.4 bp at 03-midday; SPY out-ran the Core dispersion late). VIX 16.89
+  (no risk-off). Daytrade count (5d): 0 / PDT: False. No new inbox.md replies from
+  Robin yet. No crypto re-scan (no new signal expected within 3h window).
