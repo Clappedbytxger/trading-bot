@@ -19,7 +19,7 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Strategy slug | Sleeve | Status | Trades | Win-rate | Avg R | Net P&L | Max DD | RAR | Alpha vs SPY | Last update |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---|
-| core-buy-and-hold          | Core      | active | 16 fills (T1+T2, no closes) | — | — | +$729.41 (UPL) | $0 (no closes) | — | -8.29% (Live-Phase carryover + LM Day 1) | 2026-05-21 04-pre-close |
+| core-buy-and-hold          | Core      | active | 16 fills (T1+T2, no closes) | — | — | +$761.72 (UPL) | $0 (no closes) | — | -8.26% (Live-Phase carryover + LM Day 1 EOD) | 2026-05-21 05-close-summary |
 | swing-momentum-breakout    | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | swing-mean-reversion       | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | swing-quality-pullback     | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
@@ -33,7 +33,7 @@ Window: 2026-05-21 → 2026-06-20.
 | daytrade-gap-go            | Daytrade  | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | scalp-tape                 | Daytrade  | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | daytrade-news-catalyst     | Daytrade  | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
-| crypto-trend-follow        | Crypto    | active | 0 (1 scan, no signal) | — | — | $0.00 | $0 | — | — | 2026-05-21 03-midday |
+| crypto-trend-follow        | Crypto    | active | 0 (1 scan, no signal) | — | — | $0.00 | $0 | — | — | 2026-05-21 05-close-summary |
 | crypto-weekend-momentum    | Crypto    | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | crypto-mean-reversion      | Crypto    | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | options-long-call-momentum | Options   | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
@@ -46,7 +46,7 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Sleeve | Cash Budget | Used | Open positions | Cumulative P&L | Cumulative Alpha vs SPY |
 |---|---:|---:|---:|---:|---:|
-| Core     | $62,000 | $62,729.41 (mark, +$729.41 UPL) | 8 | +$753.49 / +0.756% (9-day Live-Phase + LM Day 1 carryover) | -8.29% Live-Phase + LM Day 1 carryover |
+| Core     | $62,000 | $62,761.72 (EOD mark, +$761.72 UPL) | 8 | +$761.72 / +1.229% (9-day Live-Phase + LM Day 1 EOD) | -8.26% Live-Phase + LM Day 1 EOD |
 | Swing    | $15,000 | $0      | 0 | $0 | — |
 | Daytrade | $10,000 | $0      | 0 | $0 | — |
 | Crypto   | $5,000  | $0      | 0 | $0 | — |
@@ -98,3 +98,21 @@ Window: 2026-05-21 → 2026-06-20.
   from +22.4 bp at 03-midday; SPY out-ran the Core dispersion late). VIX 16.89
   (no risk-off). Daytrade count (5d): 0 / PDT: False. No new inbox.md replies from
   Robin yet. No crypto re-scan (no new signal expected within 3h window).
+
+- **2026-05-21 20:30Z (05-close-summary, LM Day 1 EOD)** — **EOD HOLD routine** (market
+  closed; 0 trades book-wide for Day 1). KPI deltas: `core-buy-and-hold` UPL drifts
+  $729.41 → **$761.72** (+$32.31 on late-day Core tick-up; AVGO recovered $412.265
+  → $414.2595 cushion 3.43% → 3.90% UPL -$22.21 → +$0.26; LLY HWM advanced
+  **3rd time of the day** $1,046.415 → $1,047.295, stop bumped $941.77 → $942.5655).
+  Bull equity $100,761.72 / **+$151.23 vs 5/20 close +0.150%**. SPY EOD $742.77 /
+  +0.205% → **final Day-1 alpha -5.5 bp** (recovered from -8.8 bp at 04-pre-close
+  as Core ticked up while SPY finished flat from 19:36Z). VIX EOD 16.72 (no risk-off).
+  Daytrade count (5d): 0 / PDT: False post Day-1. Options BP $69,380.85 / L3 ✓.
+  Sleeve P&L attribution Day 1: **Core +$151.23 only**; Swing/DT/Crypto/Options
+  all $0 (empty all day). Top sub-strategy (by elimination): `core-buy-and-hold`
+  (only sleeve with attribution). Bottom (by elimination): 4 POLYGON-dependent
+  sub-strategies (`daytrade-orb`, `daytrade-vwap-pullback`, `scalp-tape`,
+  `options-long-call-momentum`) which couldn't scan a single signal due to
+  POLYGON_API_KEY unset. 18 consecutive no-action routines. Inbox.md still empty
+  on Q1 A/B/C — re-broadcast via WhatsApp this routine. **Day 1 closing baseline
+  locked: cumulative LM-window P&L $0 net + Core carryover UPL +$151.23.**

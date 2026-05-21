@@ -673,3 +673,124 @@ routine extending the Live-Phase exit-week streak.
 - Confirms AVGO continues to tighten without crossing the 3% log-threshold
   — exemplifies why the spec separates "tightening" from "crossing"
   (one is a watch-item, the other is a flag-item).
+
+---
+
+## 2026-05-21T20:30Z — 05-close-summary LM-Day-1 EOD (no-action; Day 1 closes with 0 trades book-wide)
+
+Routine: `05-close-summary`. Broker: Alpaca paper (`paper-api.alpaca.markets`).
+Clock: **closed** (is_open=False, next_open 2026-05-22T13:30Z). Phase:
+**LEARNING MONTH Day 1 of 30** (sentinel verified). Strategy: `strategy.md`
+v3 (Learning-Month multi-sleeve, approved 5/20).
+
+### Action: NONE (no orders placed, no orders modified)
+
+| Sleeve   | Strategies          | Status | Reason                                                              |
+|----------|---------------------|--------|---------------------------------------------------------------------|
+| Core     | core-buy-and-hold   | NO-OP  | Frozen per LM rules; 8/8 GTC trails verified post-close             |
+| Swing    | (all sub-strategies) | NO-OP | Sleeve empty all Day 1; abort-entries posture locked in             |
+| Daytrade | (all sub-strategies) | NO-OP | Sleeve empty all Day 1; PDT count 0 / 5d                            |
+| Crypto   | (all sub-strategies) | NO-OP | Sleeve empty; `crypto-weekend-momentum` setup checks tomorrow's 04+05 |
+| Options  | (all sub-strategies) | NO-OP | Sleeve empty all Day 1; POLYGON_API_KEY still NOT SET blocks chain |
+
+### Trigger for this entry
+05-close-summary routine ran on schedule (~20:30Z, 30 min after market
+close 20:00Z). Per the Day 1 fallback chain (02-open → 03-midday →
+04-pre-close → here), abort-entries posture held all day because
+01-pre-market never back-fired and `inbox.md` remained empty on Q1 A/B
+through EOD. The new `02-market-open` Step 1a inline back-fire spec
+(merged ~20:00Z) cannot affect today retroactively — earliest activation
+is tomorrow's 02 at 2026-05-22T14:30Z, and only if 01 misses again.
+
+### Broker live state captured at 20:30Z (post-close)
+- Equity **$100,761.72** (+$151.23 / +0.1503% vs 5/20 close $100,610.49;
+  +$32.31 vs 04-pre-close 19:36Z $100,729.41)
+- Cash $38,000 unchanged; long MV $62,761.72
+- SPY EOD **$742.77** (+0.205% vs 5/20 close $741.25; ~unchanged vs
+  04-pre-close $742.78) → **day-alpha -5.5 bp** (recovered from -8.8 bp
+  at 19:36Z as Core ticked up modestly into the last 24 min while SPY
+  finished flat from there)
+- VIX EOD **16.72** (-0.17 vs 04-pre-close 16.89) — no macro risk-off
+  (threshold 40)
+- 8 Core positions intact, 0 fills, 0 stops triggered, 8/8 GTC trails
+  `OrderStatus.NEW` post-close
+- Daytrade count (rolling 5d): **0** / PDT: **False**
+- Options BP **$69,380.85** / approved level 3 ✓
+- Best UPL: **LLY +4.389%** (extends lead; HWM advanced AGAIN to
+  $1,047.295, stop bumped to $942.5655 — 3rd organic trail-advance of
+  the day)
+- Worst UPL: **BRK.B -1.015%** (faded into close from -0.94% at 19:36Z;
+  AVGO is now flat-to-positive)
+
+### Per-sleeve KPI impact (for `_ledger.md`)
+- `core-buy-and-hold`: cumulative UPL drifts $729.41 → **$761.72** (+$32.31
+  vs 04-pre-close on late-day Core tick-up; +$151.23 net for Day 1 vs 5/20
+  close UPL $610.31 → $761.72). Trade count unchanged at 16 fills, 0 closes.
+  RAR remains undefined (no closed trades).
+- All other strategies: unchanged at 0 trades. `crypto-trend-follow` scan-
+  count remains 1 (no rerun this routine; closest re-evaluation is tomorrow
+  01-pre-market 13:00Z when crypto names will have rolled forward 1 day).
+- LM Day-1 cumulative alpha vs SPY: **-5.5 bp** (Day 1 contribution). Will
+  carry forward into Day-2 ledger refresh.
+
+### Stop-cushion notable: LLY HWM advance #3 of the day
+- LLY trail HWM bumped $1,046.415 (04-pre-close) → $1,047.295 (EOD).
+  Stop price advanced $941.7735 → $942.5655 (+$0.79 / +0.084%).
+- **3 organic LLY trail-advances on Day 1** is a high lesson-density data
+  point: even a frozen Core sleeve produces positive "protection drift"
+  on names printing intraday HWMs. Cumulative stop walk-up on LLY today:
+  $939.044 (5/20 close) → $942.5655 (5/21 EOD) = +$3.52 / +0.37%.
+- All 7 other stops untouched (no intraday new HWMs).
+
+### Stop-cushion notable: AVGO recovered, intraday rotation reversed
+- AVGO cushion: 5.25% (open) → 3.69% (03-midday) → 3.43% (04-pre-close)
+  → **3.90% (EOD)**. Late-session bid +$1.99 / +0.48% reversed the
+  tightening trend; UPL flipped -0.48% → +0.006% (flat).
+- AVGO ends Day 1 still the tightest cushion in the book but with ~90 bp
+  of buffer to the 3.00% log-flag threshold. Not a thesis-check trigger;
+  still the top candidate to scan first at tomorrow's 01-pre-market if
+  it gaps down again.
+
+### Daily summary for ledger / WhatsApp
+- **Total day-Δ on equity**: +$151.23 / +0.1503%.
+- **Per-sleeve Day-1 attribution**: Core +$151.23 / +0.244% (vs cost
+  basis $62,000); Swing $0; Daytrade $0; Crypto $0; Options $0.
+- **Best sleeve Day 1**: Core (only non-zero contributor by construction).
+- **Worst sleeve Day 1**: tied at $0 (Swing/DT/Crypto/Options all empty).
+- **Day-alpha vs SPY**: -5.5 bp. (Bull +0.150% / SPY +0.205%.) Core
+  dispersion contributed weakly compared to SPY's broad-market lift; the
+  defensive ballast (BRK.B/V) didn't catch the late rally proportionally.
+- **Trade count**: 0 (W:0 L:0). 18 consecutive no-action routines.
+- **Top experiment of the day**: `core-buy-and-hold` (only sleeve with
+  P&L attribution today — by elimination, "the experiment that worked"
+  is the inherited Live-Phase Variant-C book; the *real* LM experiments
+  haven't started yet).
+- **Bottom experiment of the day**: tied across the 21 paused/active-but-
+  zero-fills LM sub-strategies. The most interpretive "bottom" is the
+  4 strategies that needed POLYGON_API_KEY to even scan their universe
+  (`daytrade-orb`, `daytrade-vwap-pullback`, `scalp-tape`, `options-long-
+  call-momentum`) — they couldn't generate a single signal scan all day,
+  not because of market conditions, but because the data feed is missing.
+
+### Why this matters as a trade-log entry
+- Closes the Day-1 audit trail: every routine logged, every action (or
+  non-action) tagged with reason. The trade log proves Bull operated
+  within ALM-1 ("no silent trades") even though the trade count is
+  literally zero — silence is now well-documented.
+- Records that LLY printed 3 organic trail-advances in one trading day;
+  this is the first such data point under LM rules and should be tracked
+  across the month for "how often does a held name walk the stop up
+  meaningfully?"
+- Confirms AVGO cushion can recover intraday after tightening to ~3.4%
+  without triggering a thesis-check — important precedent for not over-
+  reacting to a tightening name when EOD might just walk it back.
+- Day 1 closes with cumulative LM-window P&L $0 + Core carryover UPL
+  +$151.23 — clean baseline for Day 2.
+
+### Operational issues unchanged at Day-1 EOD
+1. **01-pre-market cron miss #4 still unresolved** (Q1 A) — `inbox.md` empty
+   through EOD; this 05-close-summary WhatsApp re-broadcasts Q1+Q2+Q3.
+2. **POLYGON_API_KEY still NOT SET** (Q1 B) — blocks ~12/22 LM strategies
+   from ever generating a signal scan. Robin to set in Pro-Plan ENV vars.
+3. **Pro-Plan cron 03-midday extension** (Q1 C) — deadline Sat 5/23 for
+   weekend crypto cycling. 2 days remaining.
