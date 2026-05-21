@@ -45,6 +45,13 @@ trading decision. Keep entries tight — pattern, lesson, encoded?
 - **Pattern:** 01-pre-market cron slot 13:00Z fired late at 13:48Z today (18 min AFTER market open, AFTER 02-market-open had already executed at 13:30Z without a pre-market draft). 3rd consecutive business day the 13:00Z slot has failed or fired late.
 - **Lesson:** A late-firing 01-pre-market never retroactively authorizes trades — by the time it runs, 02-market-open has already made its no-trade decision per spec. The correct response is to: (a) log the anomaly prominently in the daily file, (b) still complete the routine for audit/continuity (account sanity, quant pulse, macro pulse), (c) record a retroactive trade-idea draft so the next routines have context, (d) NEVER place orders from a late-firing pre-market. Tranche-3-style execution remains tied to *pre-market existing at open*, not *pre-market existing at all*.
 - **Encoded as rule?** Partially — `CLAUDE.md` already says "clock.is_open=True at pre-market time → log and continue cautiously". This entry hardens the rule: continue **cautiously** explicitly means **no orders, draft is audit-only**. Should be reinforced in `routines/01-pre-market.md` Step 2 next time that file is touched. Open question for Robin: 3 consecutive misses suggests a runner-side schedule issue; needs investigation outside of Bull's scope.
+- **2026-05-21 SUPERSESSION:** the "no orders from a late-fire" rule applies
+  only when 01 fires as a SEPARATE routine after 02 has already locked in a
+  no-trade decision. The new policy (per Robin 2026-05-21) lets 02 **back-fire
+  01 inline within the same 02 session** when 01 missed — that compresses
+  plan-then-execute into one routine context with no retroactive authorization
+  problem. See lesson 2026-05-21 "02-market-open back-fires 01-pre-market on
+  miss" and `routines/02-market-open.md` Step 1a.
 
 ## 2026-05-15 — WhatsApp must spell out open questions, not reference them by shorthand
 - **Pattern:** Bull referenced "Robin's A/B/C reply still pending" in 3 consecutive
@@ -273,3 +280,42 @@ trading decision. Keep entries tight — pattern, lesson, encoded?
   Should be reinforced in `src/notify/whatsapp.py` (raise on body+header > MAX_LEN
   by default; explicit `force_truncate=True` to opt-in) and in the WhatsApp
   drafting step of every WhatsApp-yes routine spec (02/05/06).
+
+## 2026-05-21 — 02-market-open back-fires 01-pre-market on miss (was: abort-entries)
+- **Pattern:** Robin's reply to today's WhatsApp Q1 (option A vs B on the LM
+  Day-1 01-pre-market miss): "kannst du deine routine so verändern, dass wenn
+  pre market nicht gelaufen ist, du pre market ausführst und dann zu deinem
+  jetzigen Programm gehst". The pre-existing 02-market-open Step 1 spec aborted
+  entries on miss; the pre-existing lesson 2026-05-15 said late-firing 01 is
+  audit-only and cannot authorize trades. Both encoded the assumption that
+  01's plan and 02's execution were strictly separated in time. They are not
+  — they are separated in **causality** (plan must exist BEFORE execute), and
+  the new policy preserves causality while compressing both into one routine
+  session.
+- **Lesson:** When 01-pre-market fails to fire and 02-market-open enters with
+  no plan available, 02 should **back-fire 01-pre-market inline** (run 01's
+  Steps 1-5 within the 02 session), then continue with its own Steps 2-7 on
+  the freshly-drafted plan. The plan-then-execute causality holds because the
+  back-fire happens in 02's Step 1a BEFORE 02's Step 3 (Execute). This is
+  fundamentally different from the lesson-2026-05-15 case of "01 fires LATE as
+  a separate cron after 02 already made a no-trade decision" — that case
+  remains audit-only (no retroactive authorization). The two cases need to be
+  named separately so Bull doesn't confuse them. **Sleeve-level fallback** is
+  the relief valve when the back-fire is partially blocked (POLYGON unset,
+  hard-borrow shorts, broker outage on one asset class): skip the affected
+  sleeves with a logged reason, run the rest. Wholesale abort only when the
+  back-fire crashes (broker offline, strategy.md not approved, sync conflict).
+- **Encoded as rule?** Yes — `routines/02-market-open.md` Step 1a added today
+  (2026-05-21 mid-routine, on Robin's request via chat); lesson 2026-05-15
+  amended with a supersession note pointing here. Follow-ups still owed:
+  1. Update `CLAUDE.md` Memory Protocol if the spec change is considered
+     stable after ~1 week of LM use (let it bake in routine specs first).
+  2. Consider extending the back-fire pattern to other routines that depend
+     on upstream artifacts (e.g., 05-close-summary depends on 04-pre-close
+     stop-check; 06-weekly-review depends on the week's daily files). Not
+     mechanically the same — those are EOD/EOW aggregations, not authorization
+     gates — but the abstract pattern "if upstream missing, run upstream
+     inline before continuing" might generalize. Defer evaluation to LM week 2.
+  3. If `POLYGON_API_KEY` is set by Robin (separate ask), re-test the back-fire
+     end-to-end on a real cron-miss to confirm the sleeve-level fallback path
+     works as specified.
