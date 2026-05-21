@@ -25,10 +25,43 @@ Same as 01-pre-market. Log the active mode in today's daily file.
 - `memory/experiments/_ledger.md` (Learning Month)
 - `memory/trade_log.md` (last 20)
 
-If today's daily file is missing OR has no 01-pre-market section, **abort entries**:
-that means 01 failed to fire and you have no validated plan. Take account snapshot,
-log the gap, and send a German WhatsApp flagging "kein pre-market plan verfügbar —
-keine neuen entries heute."
+### Step 1a — In-session back-fire of 01-pre-market (added 2026-05-21 per Robin)
+
+If today's daily file is missing OR has no `## 01-pre-market` section, the 13:00Z
+01-pre-market cron failed. **Do NOT abort the routine.** Instead, execute
+`routines/01-pre-market.md` **inline** within this 02-market-open session, then
+continue with Step 2 below as normal:
+
+1. Run all of 01-pre-market Steps 1-5 in order (Phase Sentinel, Account sanity,
+   per-sleeve Research 3a-3f, Decide, Write the `## 01-pre-market` section to
+   `memory/daily/<today>.md` with a clear `**back-fired by 02-market-open at
+   <timestamp>**` note in the header).
+2. Skip 01-pre-market Step 6 (commit) and Step 7 (no-WhatsApp) — this 02 session
+   will commit everything at its own end-of-routine and will send its own German
+   WhatsApp covering the back-fire fact + the resulting trade plan.
+3. Then proceed to 02-market-open Step 2 (Verify market state) with the freshly-
+   drafted plan as the input to Step 3.
+
+**Sleeve-level fallback when back-fire is partially blocked** (e.g., `POLYGON_API_KEY`
+unset, hard-borrow short reject, broker outage on one asset class): execute
+01-pre-market only for the sleeves whose data dependencies are satisfied; mark
+the blocked sleeves with `### <Sleeve> — UNAVAILABLE: <reason>` in the daily file
+and skip their entries at Step 3 with a logged abort-per-sleeve note. The
+routine does not abort wholesale just because one sleeve can't run.
+
+**Abort the whole routine only if** the back-fire itself crashes mid-execution
+(e.g., broker offline, strategy.md not approved, sync conflict). In that case:
+take account snapshot, log to `lessons.md`, send German WhatsApp flagging "01
+back-fire failed: <reason>", and skip Steps 3-5. The Core sleeve remains
+untouched (its trail stops are GTC and run without us).
+
+**Rationale for back-fire-not-abort** (supersedes part of lesson 2026-05-15):
+the original "late-fire is audit-only" lesson applied when 01 fired as a *separate
+routine* AFTER 02 had already locked in a no-trade decision. The new model
+preserves plan-then-execute by compressing both into one 02 session: the plan
+is drafted first, then executed within the same context, so there is no
+retroactive authorization. The 4-misses-in-9-days reliability of the 13:00Z
+cron made the previous abort-policy too costly during Learning Month.
 
 ## Step 2 — Verify market state
 ```python
