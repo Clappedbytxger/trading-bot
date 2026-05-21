@@ -183,3 +183,93 @@ trading decision. Keep entries tight — pattern, lesson, encoded?
   crypto cycling — Robin must update Pro-Plan dashboard. Saturday slot
   continues to host 06-weekly-review.
 - **Day-of-trading start:** 2026-05-21 (Thu) 13:00Z = next 01-pre-market.
+
+## 2026-05-21 — LM Day 1 lost to 01-pre-market cron miss (4th in 9 trading days)
+- **Pattern:** Learning Month Day 1 began with the 13:00Z 01-pre-market slot
+  silently failing — no `memory/daily/2026-05-21.md` existed when 02-market-open
+  ran at 14:30Z. This is the **4th 01-pre-market miss in 9 trading days** (priors:
+  5/13, 5/14, 5/15 per the earlier 2026-05-15 lesson). The earlier misses landed
+  during the Live-Phase HOLD-week where there was nothing to execute anyway. This
+  one lands on the **highest-information day of the entire LM experiment** — the
+  Day-1 inaugural multi-sleeve research draft (Core hold-check + Swing screen +
+  Daytrade gap-scan + Crypto overnight + Options UOA) — and blocks ALL non-Core
+  sleeve activation per `routines/02-market-open.md` Step 1 ("no validated plan
+  → no entries"). The remaining 29 LM days still have value, but the asymmetry
+  of losing Day 1 specifically is bad: it's the day where the broker state and
+  market conditions for the inaugural sleeve activations were fresh and
+  documented in `strategy.md` v3, and any retro-fire after the fact is just
+  audit, not authorization.
+- **Lesson:** The 01-pre-market cron has now demonstrated a 44% miss-rate over
+  the only window where it actually matters operationally (4 misses / 9 trading
+  days). This is no longer "the runner occasionally drops a 13:00Z slot" — this
+  is a **structural reliability problem with the scheduling layer** that blocks
+  routine-spec-compliant trading on miss-days. Two follow-ups are now mandatory
+  (not deferrable past LM week 1):
+  1. **Robin investigates the Pro-Plan cron runner-side** (out of Bull's scope
+     to fix; in Bull's scope to surface loudly until resolved). Options being
+     explored: cron-monitor (UptimeRobot-style heartbeat on the 13:00Z slot
+     that pages Robin on miss), runner change (move from current scheduler to
+     a more reliable trigger like GitHub Actions scheduled workflows), or build
+     a self-heal: 02-market-open could attempt a "back-fire" of 01-pre-market
+     if it detects a miss — but per lesson 2026-05-15 a late-firing 01 is
+     audit-only and cannot retroactively authorize trades, so self-heal still
+     doesn't recover the trading authorization on the same day.
+  2. **Bull adds a WhatsApp escalation on EVERY 01-pre-market miss going
+     forward**, not just on Days 1 / week starts. Today's abort-routine WhatsApp
+     spells out the problem in full (per lesson 2026-05-15) with options A/B
+     for Robin to choose. The standing pattern must be: every miss = same
+     WhatsApp template = same A/B prompt. No silent absorption.
+- **Encoded as rule?** Partially — daily file logs the gap, lesson is recorded
+  here, WhatsApp escalates today. Full encoding pending Robin decision on the
+  reliability fix (runner change vs. heartbeat monitor vs. self-heal helper).
+  `routines/02-market-open.md` Step 1 already specifies the abort-entries
+  behavior; this lesson reinforces it. No autonomous Bull change to
+  `routines/01-pre-market.md` because the failure is upstream of Bull's
+  execution.
+
+## 2026-05-21 — POLYGON_API_KEY required for LM but not set in runner
+- **Pattern:** Required env var `POLYGON_API_KEY` (per CLAUDE.md rule #10
+  LM-addition; needed for `src/research/polygon.py` real-time intraday
+  aggregates + options chains) is NOT present in the cloud-routine runner's
+  env. Non-blocking for today's abort-routine (no research, no trades), but
+  blocking for any future entry on `daytrade-*` strategies and on `options-*`
+  strategies that need chain data, and on the `swing-momentum-breakout` /
+  `swing-short-rejection` sub-strategies that need Polygon 1d aggregates.
+- **Lesson:** LM strategies were designed assuming Polygon access; without it,
+  ~12 of the 22 strategies in the playbook are unable to fire their entry
+  triggers. Bull cannot self-resolve (env vars are runner-side per rule #10:
+  "API keys come from environment variables, never from `.env` files or
+  hardcoded"). The correct response is to (a) detect on startup and log the
+  gap, (b) flag to Robin in WhatsApp, (c) when an affected strategy's entry
+  trigger would otherwise fire, abort that entry only (not the whole routine)
+  with a logged reason "polygon-unset".
+- **Encoded as rule?** Partially — recorded here and flagged in today's
+  WhatsApp. Should be formalized by adding a startup-check in `routines/00-`
+  through `routines/06-` (or a shared helper) that surfaces missing env vars
+  on every routine, not just the one that needs them.
+
+## 2026-05-21 — WhatsApp body must include header overhead in the 1000-char budget
+- **Pattern:** Today's 02-market-open WhatsApp body was 1250 chars total
+  (header `🐂 *02-market-open LM-Tag1* — 13:41\n\n` ~40 chars + 1210-char body).
+  `src/notify/whatsapp.py` MAX_LEN=1000 truncated the tail before sending,
+  cutting Q2 (POLYGON_API_KEY ask) and Q3 (cron reminder) entirely from the
+  message Robin actually received. The truncation is silent — CallMeBot returns
+  HTTP 200 with the truncated text. Recovered by sending a tight 464-char
+  follow-up immediately after with just F2+F3+inbox reminder.
+- **Lesson:** `CLAUDE.md` says "WhatsApp messages: max 1k output tokens" and
+  routine specs say "≤1000 chars" — the budget INCLUDES the header that
+  `send_routine_summary` prepends, not just the body. Two follow-ups:
+  1. Bull must pre-flight `len(header + body) ≤ 1000` BEFORE calling
+     `send_routine_summary`, not the body alone. Today the simplest check is
+     a `len(body) < 950` mental rule; better long-term: refactor `send_routine_summary`
+     to raise or trim with a visible warning when total > MAX_LEN.
+  2. When a WhatsApp must convey >1000 chars (e.g. multiple open questions),
+     pre-split into two messages BEFORE sending the first — don't rely on
+     a follow-up after detecting truncation, because (a) it doubles the
+     notification noise on Robin's phone, (b) CallMeBot rate-limit is
+     ~1/30s so a back-to-back send risks the second being dropped, (c) the
+     first message goes out without the receiver knowing it's incomplete.
+- **Encoded as rule?** Partially — recorded here and applied next routine.
+  Should be reinforced in `src/notify/whatsapp.py` (raise on body+header > MAX_LEN
+  by default; explicit `force_truncate=True` to opt-in) and in the WhatsApp
+  drafting step of every WhatsApp-yes routine spec (02/05/06).

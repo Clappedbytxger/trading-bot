@@ -447,3 +447,64 @@ entry of the Live-Phase paper run**. Logging here:
 - Closes the loop on the 05-close-summary routine deliberately, rather than silently
   skipping (per lesson 2026-05-16).
   not lazy).
+
+---
+
+## 2026-05-21T14:30Z — 02-market-open (LM Day 1 of 30, ABORT-ENTRIES)
+
+**First trade-log entry under Learning-Month rules. All entries carry mandatory
+`sleeve:` + `strategy:` tags per ALM-1 from here on.**
+
+### Action: ABORT-ENTRIES across all 5 sleeves
+
+| sleeve   | strategy             | action | reason                                                        |
+|----------|----------------------|--------|---------------------------------------------------------------|
+| Core     | core-buy-and-hold    | HOLD   | Frozen sleeve, no thesis-break, no stop trigger               |
+| Swing    | (all sub-strategies) | NO-OP  | No 01-pre-market plan → no validated entries → ALM-1 abort    |
+| Daytrade | (all sub-strategies) | NO-OP  | No 01-pre-market gap-scan + POLYGON_API_KEY unset             |
+| Crypto   | (all sub-strategies) | NO-OP  | No 01-pre-market screen                                       |
+| Options  | (all sub-strategies) | NO-OP  | No 01-pre-market candidate list                               |
+
+### Trigger for this entry
+13:00Z 01-pre-market routine did not fire today (4th miss in 9 trading days;
+priors 5/13, 5/14, 5/15 per lesson 2026-05-15). On LM Day 1 this is the
+inaugural multi-sleeve research draft slot — its absence blocks ALL non-Core
+sleeve activation. Per `routines/02-market-open.md` Step 1, no entries
+without a validated pre-market plan.
+
+### Broker live state captured at 14:30Z
+- Equity $100,468.18 (-$142.31 / -0.141% vs 5/20 close $100,610.49)
+- Cash $38,000 unchanged; long MV $62,468.18 (Core sleeve)
+- SPY $738.07 (-0.430% vs 5/20 close $741.26) → **day-alpha so far +28.9 bp**
+  (cash-drag working in Bull's favor on a red-tape morning)
+- 8 Core positions intact, 0 fills, 0 stops triggered
+- Best UPL: MSFT +4.33% (extending the Live-Phase MSFT lead)
+- Worst UPL: BRK.B -1.59% (defensive ballast giving back on a green-Wed-then-red-Thu rotation)
+- Tightest stop cushion: GOOGL 4.49% (was AVGO 4.70% at 5/20 close)
+- All 8 trail stops `OrderStatus.NEW` GTC per 5/20 close; not re-verified
+  this routine (no action required); verification at 03-midday.
+
+### Per-sleeve KPI impact (for `_ledger.md`)
+- `core-buy-and-hold`: cumulative UPL drifts $610.31 → $468.18 (-$142.13 day Δ).
+  Trade count unchanged at 16 fills, 0 closes. RAR remains undefined (no
+  closed trades).
+- All other strategies: unchanged at 0 trades.
+
+### Operational issues surfaced
+1. **01-pre-market cron miss #4** on LM Day 1 — the highest-information day of
+   the whole experiment. Flagged to Robin in WhatsApp + daily file + lessons.md.
+2. **POLYGON_API_KEY env var not set** in the runner — required per CLAUDE.md
+   rule #10 LM-addition. Non-blocking for this abort-routine but blocks any
+   Daytrade/Options/some Swing entry going forward. Flagged to Robin.
+3. **Pro-Plan cron extension still owed** (Robin action): `03-midday * * 1-5`
+   → `* * 1-7` for weekend crypto; deadline 5/23 (Saturday).
+
+### Why this matters as a trade-log entry
+- First per-sleeve-tagged entry on the LM ledger — sets the precedent that
+  HOLD/NO-OP actions are also logged with mandatory tags per ALM-1.
+- Closes the loop on the 02-market-open routine deliberately rather than
+  silently skipping (per lesson 2026-05-16). Robin sees the gap in WhatsApp
+  AND has a written audit trail.
+- Records the first 30-day-LM-window data point: 1 day, 0 trades, +28.9 bp
+  pure-cash-drag alpha. Not a strategy data point — just baseline cash-vs-SPY drift.
+

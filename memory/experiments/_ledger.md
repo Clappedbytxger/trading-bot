@@ -19,7 +19,7 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Strategy slug | Sleeve | Status | Trades | Win-rate | Avg R | Net P&L | Max DD | RAR | Alpha vs SPY | Last update |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---|
-| core-buy-and-hold          | Core      | active | 16 fills (T1+T2, no closes) | — | — | +$610.31 (UPL) | $0 (no closes) | — | -8.24% (Live-Phase 9d carryover) | 2026-05-20 EOD |
+| core-buy-and-hold          | Core      | active | 16 fills (T1+T2, no closes) | — | — | +$468.18 (UPL) | $0 (no closes) | — | -7.90% (Live-Phase carryover + LM Day 1) | 2026-05-21 02-open |
 | swing-momentum-breakout    | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | swing-mean-reversion       | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | swing-quality-pullback     | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
@@ -46,7 +46,7 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Sleeve | Cash Budget | Used | Open positions | Cumulative P&L | Cumulative Alpha vs SPY |
 |---|---:|---:|---:|---:|---:|
-| Core     | $62,000 | $62,610.49 (mark, +$610.31 UPL) | 8 | +$634.57 / +0.635% (9-day Live-Phase carryover) | -8.24% Live-Phase carryover |
+| Core     | $62,000 | $62,468.18 (mark, +$468.18 UPL) | 8 | +$492.26 / +0.493% (9-day Live-Phase + LM Day 1 carryover) | -7.90% Live-Phase + LM Day 1 carryover |
 | Swing    | $15,000 | $0      | 0 | $0 | — |
 | Daytrade | $10,000 | $0      | 0 | $0 | — |
 | Crypto   | $5,000  | $0      | 0 | $0 | — |
@@ -65,3 +65,12 @@ Window: 2026-05-21 → 2026-06-20.
   row updated with carryover Live-Phase mark (+$610.31 UPL on $62,610.49 cost-basis,
   -8.24% alpha vs SPY over the 9-day Live-Phase paper run 5/12 → 5/20). All sleeve
   budgets ready for LM Day 1 activation tomorrow 13:00Z.
+
+- **2026-05-21 14:30Z (02-market-open, LM Day 1)** — **ABORT-ENTRIES routine** because
+  the 13:00Z 01-pre-market did not fire (4th miss in 9 trading days). 0 trades on any
+  sleeve. Only KPI delta: `core-buy-and-hold` UPL drifts $610.31 → $468.18 (-$142.13
+  intraday) on broker mid-morning marks. BRK.B leading the drawdown -1.59% UPL, MSFT
+  leading gains +4.33%. SPY -0.430% intraday → Core day-alpha so far +28.9 bp (Core
+  -0.141% intraday vs SPY -0.430%, alpha from individual-name dispersion). Swing /
+  Daytrade / Crypto / Options sleeves remain at 0 trades — no plan = no entries per
+  ALM-1. Robin notified via WhatsApp + inbox.md options A/B for unblocking Day 1.
