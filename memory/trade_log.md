@@ -508,3 +508,72 @@ without a validated pre-market plan.
 - Records the first 30-day-LM-window data point: 1 day, 0 trades, +28.9 bp
   pure-cash-drag alpha. Not a strategy data point — just baseline cash-vs-SPY drift.
 
+---
+
+## 2026-05-21T16:38Z — 03-midday (LM Day 1 of 30, HOLD)
+
+### Action: HOLD across all 5 sleeves — abort-entries posture continued
+
+| sleeve   | strategy             | action | reason                                                              |
+|----------|----------------------|--------|---------------------------------------------------------------------|
+| Core     | core-buy-and-hold    | HOLD   | Stops live + verified; LLY HWM advanced organically (broker-side)   |
+| Swing    | (all sub-strategies) | NO-OP  | Abort-entries continued per 02-open Day-1 fallback plan             |
+| Daytrade | (all sub-strategies) | NO-OP  | No open intraday positions; POLYGON_API_KEY still unset             |
+| Crypto   | (all sub-strategies) | NO-OP  | Scan run via yfinance — all 5 names 50<200 downtrend, no -10% flush |
+| Options  | (all sub-strategies) | NO-OP  | No open contracts; POLYGON_API_KEY blocks chain reads               |
+
+### Trigger for this entry
+03-midday routine ran on schedule (17:30Z slot, executed at 16:38Z this
+cycle). Per 02-open Day-1 fallback plan recorded in `memory/daily/2026-05-21.md`:
+> "If 01-pre-market still has not back-fired by 03-midday, continue to hold
+> abort-entries posture for all non-Core sleeves until the next valid
+> 01-pre-market cycle (tomorrow 5/22 13:00Z)."
+
+01-pre-market has not back-fired. Holding posture.
+
+### Broker live state captured at 16:38Z
+- Equity $100,504.44 (-$106.05 / -0.105% vs 5/20 close $100,610.49; +$36.26 vs
+  14:30Z snapshot $100,468.18 → mild intraday recovery)
+- Cash $38,000 unchanged; long MV $62,504.44
+- SPY $738.81 (-0.329% vs 5/20 close; +0.10% vs 14:30Z) → **day-alpha +22.4 bp**
+  (compressed from +28.9 bp at open as SPY recovered faster than Core)
+- VIX **17.24** — no macro risk-off (threshold 40)
+- 8 Core positions intact, 0 fills, 0 stops triggered
+- Best UPL: **LLY +4.027%** (took the lead from MSFT — LLY +1.15% intraday on
+  HWM advance; MSFT -0.29% intraday gave back the morning's spike)
+- Worst UPL: **BRK.B -1.071%** (recovered from -1.59% morning)
+- Tightest stop cushion now: **AVGO 3.69%** (was 5.25% this morning; mark
+  $420.17 → $413.36, -1.62% intraday). Above 3% spec-threshold → no log-flag,
+  but watching at 04-pre-close.
+
+### Per-sleeve KPI impact (for `_ledger.md`)
+- `core-buy-and-hold`: cumulative UPL drifts $468.18 → $504.44 (+$36.26
+  intraday). Trade count unchanged at 16 fills, 0 closes. RAR remains
+  undefined (no closed trades).
+- All other strategies: unchanged at 0 trades.
+- Crypto scan logged for the ledger as a "trigger-checked, no-signal" data
+  point on `crypto-trend-follow` (first scan in LM window).
+
+### Stop-cushion notable: LLY HWM advance
+- LLY trail HWM bumped from $1,037.88 (5/20 close) → $1,043.382 (intraday
+  high reached today). Stop price advanced $934.092 → $939.044 (+$4.95).
+- This is the **first organic trail-advance under LM rules**. Recorded for
+  audit / lesson density (organic trail-advances are noise-free signals
+  that a position is breaking out of its prior range).
+- All 7 other stops untouched (no intraday new HWMs).
+
+### Operational issues unchanged
+1. 01-pre-market cron miss #4 still unresolved — escalated 14:30Z; no
+   `inbox.md` reply from Robin yet (he may reply by 04-pre-close 20:30Z).
+2. POLYGON_API_KEY still unset — same status.
+3. Pro-Plan cron `03-midday 1-5 → 1-7` extension still owed (deadline 5/23).
+
+### Why this matters as a trade-log entry
+- Confirms abort-entries posture is being honored consistently across
+  Day-1 routines (no temptation to back-door entries via the more permissive
+  03-midday spec). Discipline > impatience on Day 1.
+- Records first organic trail-stop advance under LM rules (LLY +$4.95 on
+  HWM).
+- Logs first `crypto-trend-follow` trigger-check (all 5 names downtrend,
+  no signal) — establishes the baseline for what a "no-signal scan" looks
+  like in the ledger.
