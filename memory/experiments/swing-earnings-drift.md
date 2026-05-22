@@ -56,6 +56,25 @@ Sleeve: Swing. Status: active. Playbook reference: `memory/playbook.md`.
 - **Uncovered slice (re-check)**: 0.978463 sh × $376.785 ≈ $369 still
   unprotected by the 3-share stop. Today's intraday range did not stress
   it; carry forward to 05-close-summary / next Tue 01-pre-market.
+- **2026-05-22 20:16Z (05-close-summary Day 1 EOD)**: EOD mark $377.04
+  (vs entry $377.03, **+0.003% / +$0.04 UPL**). Stop $350.64
+  `OrderStatus.NEW` GTC verified live post-close. **Cushion improved
+  further 6.94% → 7.00% into the close** (RL ticked up $0.255 in the
+  final 24 min). Distance to target $414.73: 9.99% upside required. Day
+  1 effectively flat ($0.04 UPL) — consistent with the PEAD playbook
+  expectation where the Day-after-entry is often a digestion day before
+  Day 3-5 drift takes hold. No tighten-to-breakeven (rule requires +5%+
+  UPL). **No action.** Time-stop date 2026-06-05 unchanged.
+  **Day 1 P&L attribution**: RL contributed +$0.04 to the Bull EOD —
+  net-neutral. PEAD thesis intact; the drift signal hasn't fired yet but
+  the +$0 mark vs entry is preferable to the alternative (a Day-2 fade
+  back to pre-print prices).
+- **Uncovered slice (EOD re-check)**: 0.978463 sh × $377.04 ≈ $369 still
+  unprotected by the 3-share stop. Day 1 intraday range didn't stress
+  it. Carry forward to Tue 5/26 01-pre-market — if RL gaps down >5%
+  overnight Mon → Tue, the uncovered slice prints $18 of additional loss
+  beyond the planned -7% stop-out. Note: long-weekend gap risk is real
+  but RL has no major catalysts on the calendar for the long weekend.
 
 ### Outcome (TBD — to be filled in post-exit)
 

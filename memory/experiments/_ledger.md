@@ -19,13 +19,13 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Strategy slug | Sleeve | Status | Trades | Win-rate | Avg R | Net P&L | Max DD | RAR | Alpha vs SPY | Last update |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---|
-| core-buy-and-hold          | Core      | active | 16 fills (T1+T2, no closes) | — | — | +$1,000.49 (UPL) | $0 (no closes) | — | -8.63% (Live-Phase carryover + LM Day 2 pre-close) | 2026-05-22 04-pre-close |
-| swing-momentum-breakout    | Swing     | active | 0 (ARM WATCH → MISSED 13:30-14:00Z; intraday H $315 → C $304.66 fade; re-arm on close <$290) | — | — | $0.00 | $0 | — | — | 2026-05-22 04-pre-close |
+| core-buy-and-hold          | Core      | active | 16 fills (T1+T2, no closes) | — | — | +$951.01 (UPL) | $0 (no closes) | — | -8.57% (Live-Phase carryover + LM Day 2 EOD) | 2026-05-22 05-close-summary |
+| swing-momentum-breakout    | Swing     | active | 0 (ARM WATCH → MISSED 13:30-14:00Z; intraday H $315 → C $304.66 fade; re-arm on close <$290) | — | — | $0.00 | $0 | — | — | 2026-05-22 05-close-summary |
 | swing-mean-reversion       | Swing     | active | 0 (1 SKIP = INTU thesis-risk) | — | — | $0.00 | $0 | — | — | 2026-05-22 02-market-open |
-| swing-quality-pullback     | Swing     | active | **1 open (NVDA)** | — | — | -$40.20 (UPL) | $0 (no closes) | — | — | 2026-05-22 04-pre-close |
-| swing-earnings-drift       | Swing     | active | **1 open (RL)** | — | — | -$0.97 (UPL) | $0 (no closes) | — | — | 2026-05-22 04-pre-close |
+| swing-quality-pullback     | Swing     | active | **1 open (NVDA)** | — | — | -$45.02 (UPL) | $0 (no closes) | — | — | 2026-05-22 05-close-summary |
+| swing-earnings-drift       | Swing     | active | **1 open (RL)** | — | — | +$0.04 (UPL) | $0 (no closes) | — | — | 2026-05-22 05-close-summary |
 | swing-insider-buys         | Swing     | paused | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
-| swing-short-rejection      | Swing     | active | 0 (1 WATCH = AAPL — EOD candle UP +1.00% w/ fresh $311.40 52w-Hi extension; PASS today, re-watch Tue 5/26) | — | — | $0.00 | $0 | — | — | 2026-05-22 04-pre-close |
+| swing-short-rejection      | Swing     | active | 0 (1 WATCH = AAPL — EOD final candle UP +1.00% close $309.13 with fresh $311.40 52w-Hi extension; PASS today, re-watch Tue 5/26) | — | — | $0.00 | $0 | — | — | 2026-05-22 05-close-summary |
 | swing-short-fundamental    | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | daytrade-orb               | Daytrade  | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | daytrade-vwap-pullback     | Daytrade  | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
@@ -46,8 +46,8 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Sleeve | Cash Budget | Used | Open positions | Cumulative P&L | Cumulative Alpha vs SPY |
 |---|---:|---:|---:|---:|---:|
-| Core     | $62,000 | $63,178.49 (live mark, +$1,000.49 UPL) | 8 | +$1,000.49 / +1.605% (9-day Live-Phase + LM Day 1-2 pre-close) | -8.63% Live-Phase + LM Day 2 pre-close |
-| Swing    | $15,000 | $3,500 cost (NVDA $2k + RL $1.5k) | 2 | -$41.17 UPL (NVDA -2.01% cushion 3.05%, RL -0.07% cushion 6.94%) | — |
+| Core     | $62,000 | $62,951.01 (live mark, +$951.01 UPL) | 8 | +$951.01 / +1.534% (10-day Live-Phase + LM Day 1-2 EOD) | -8.57% Live-Phase + LM Day 2 EOD |
+| Swing    | $15,000 | $3,500 cost (NVDA $2k + RL $1.5k) | 2 | -$44.98 UPL (NVDA -2.25% cushion 2.81%, RL +0.003% cushion 7.00%) | — (Day 1 of hold; no realized P&L yet) |
 | Daytrade | $10,000 | $0      | 0 | $0 | — |
 | Crypto   | $5,000  | $0      | 0 | $0 | — |
 | Options  | $5,000  | $0      | 0 | $0 | — |
@@ -162,6 +162,43 @@ Window: 2026-05-21 → 2026-06-20.
   back some midday gains while Bull held). Macro risk-off NOT active
   (SPY +0.45% / VIX 16.73 / no -3% or >40 threshold). No WhatsApp this
   routine (per spec — only on urgent risk).
+
+- **2026-05-22 20:16Z (05-close-summary, LM Day 2 EOD)** — **EOD HOLD routine**
+  (market closed; 0 trades; EOD reconcile only). KPI deltas: `core-buy-and-hold`
+  UPL drifts $1,000.49 → **$951.01** (-$49.48; LLY mark eased $1,067.13 →
+  $1,065.50, no HWM walk-up #7 today; AVGO + GOOGL marks recovered modestly
+  → cushions improved 3.43% → **3.78%** and 3.93% → **4.08%**; MSFT mark up
+  $418.32 → $419.02; rest of Core ±$0.30 mark drifts). `swing-quality-pullback`
+  UPL $-40.20 → **-$45.02** (NVDA mark $215.54 → $215.01, -$0.53 in the close;
+  **cushion compressed 3.05% → 2.81% — tightest since fill**, but still above
+  -5% playbook trigger). `swing-earnings-drift` UPL $-0.97 → **+$0.04** (RL
+  mark $376.785 → $377.04, recovered $0.255 in the close; cushion 6.94% →
+  7.00%). Bull equity $100,880.46 → **$100,906.04** (+$25.58 / +0.025% intraday
+  drift from 04-pre-close; vs Day-1 baseline $100,761.72 +$144.32 / +0.143%).
+  SPY EOD $745.70 (+0.401% DoD vs 5/21 EOD $742.72) → **Day-2 final alpha
+  -25.8 bp** (improved from -32.8 bp at 04-pre-close as Core ticked up modestly
+  while SPY held). VIX EOD 16.82 (no risk-off). Daytrade count (5d): 2 / PDT:
+  False (UNCHANGED from 02-market-open watermark). Options BP $67,697.39 /
+  L3 ✓. Sleeve P&L attribution Day 2: **Core +$189.29** (UPL drift $761.72
+  → $951.01 over the full Day 2 trading session), **Swing -$44.98** (NVDA
+  -$45.02 + RL +$0.04, both opened today at 02-market-open), DT/Crypto/Options
+  all $0 (empty all day). **Top sub-strategy Day 2**: `core-buy-and-hold`
+  +$189.29 (only sleeve with positive attribution). **Bottom Day 2**:
+  `swing-quality-pullback` -$45.02 (NVDA only). `swing-earnings-drift` +$0.04
+  (net-neutral; PEAD thesis intact for Day 3+). `crypto-weekend-momentum`
+  final Fri-close trigger NOT MET (BTC 7d -3.02% << +2% threshold) → confirmed
+  NO entry at EOD. `crypto-mean-reversion` pre-trigger watch over long weekend
+  (5/23-5/25; Mon 5/25 = Memorial Day closed). Options sleeve `options-vertical-
+  bull-call-spread` (NVDA) still BLOCKED on Polygon chain (4th re-test deferred).
+  Inbox.md Pending: empty (Robin Q1 A/B/C still partially open — A resolved
+  by no-recurrence, B resolved POLYGON set / chain still gated, C cron extension
+  TBD for Sat 5/23). Robin notified via WhatsApp at 21:00Z (LM Day 2 evening
+  brief in German, ≤1000 chars per CLAUDE.md spec). **LM Day 2 closing baseline
+  locked: Bull equity $100,906.04 / cumulative LM-window P&L $0 realized +
+  Core UPL $951.01 + Swing UPL -$44.98; LM cum alpha -25.8 bp; LM cum trade
+  count 2 (both open).** Next routine: Tue 5/26 01-pre-market 13:00Z (Mon 5/25
+  Memorial Day = closed cash session, weekday cron may fire and log `is_open=False`
+  skip; Sat+Sun 03-midday extension awaits Robin inbox Q1 C confirmation).
 
 - **2026-05-22 16:42Z (03-midday, LM Day 2)** — **HOLD routine** (0 trades).
   Equity drifted $101,208.22 → **$100,982.35** (-$225.87 / -0.223%) on Core
