@@ -37,6 +37,19 @@ Sleeve: Swing. Status: active. Playbook reference: `memory/playbook.md`.
   well above the playbook -5% trigger). Distance to target $235.36: 8.71%
   upside still required. No action taken; UPL within the routine-spec
   drift band (-2% / +3%). Time-stop date 2026-06-02 unchanged.
+- **2026-05-22 19:36Z (04-pre-close Day 1 of hold)**: mark $215.5401 (vs
+  entry $219.9612, **-2.010% / -$40.20 UPL**). Stop $208.96 intact
+  (`OrderStatus.NEW` GTC verified at broker, id `ffb5e5a9-50fb-4e39-abef-
+  849d72b8f323`). **Cushion compressed 3.47% → 3.05% intraday** (tightest
+  since fill) but still above the playbook -5% trigger. Distance to target
+  $235.36: 9.20% upside still required. No tighten-to-breakeven (rule
+  requires +5%+ UPL — NVDA is at -2.01%). No time-stop hit (today is fill
+  day; first time-stop check on 6/2 close). **No action**; UPL drift -1.5%
+  below entry over Day 1 is within the playbook expected variance for a
+  $1.5-2k 7-day swing. Time-stop date 2026-06-02 unchanged. Flagged for
+  re-check on Tue 5/26 open (Mon 5/25 = Memorial Day closed) for any
+  further cushion compress to <2% which would warrant a tighter management
+  posture.
 
 ### Outcome (TBD — to be filled in post-exit)
 
