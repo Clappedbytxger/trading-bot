@@ -794,3 +794,101 @@ is tomorrow's 02 at 2026-05-22T14:30Z, and only if 01 misses again.
    from ever generating a signal scan. Robin to set in Pro-Plan ENV vars.
 3. **Pro-Plan cron 03-midday extension** (Q1 C) — deadline Sat 5/23 for
    weekend crypto cycling. 2 days remaining.
+
+---
+
+## 2026-05-22T13:37Z — 02-market-open: first non-Core LM fills (NVDA + RL Swing entries)
+
+Routine: `02-market-open`. Broker: Alpaca paper (`paper-api.alpaca.markets` verified).
+Clock: open. Mode: **LEARNING MONTH** (Day 2 of 30 per Phase Sentinel).
+
+Plan inherited from today's 01-pre-market section in `memory/daily/2026-05-22.md`
+(routine fired on schedule at 12:20Z; no Step-1a back-fire needed).
+
+### Trades executed
+
+| # | Side | Symbol | Notional | Filled Qty | Avg Fill | Order ID | sleeve | strategy |
+|--:|------|--------|---------:|-----------:|---------:|----------|--------|----------|
+| 1 | BUY  | NVDA  | $2,000   | 9.092513   | $219.9612 | b9755836-53af-4198-8df3-5511e453af3e | Swing | swing-quality-pullback |
+| 2 | BUY  | RL    | $1,500   | 3.978463   | $377.0300 | 3f64d479-d578-4bc4-b96a-86679bc97c63 | Swing | swing-earnings-drift   |
+
+### Stop placement (sleeve-specific, fractional handling = floor-qty + uncovered slice)
+
+| Symbol | Stop Qty | Stop Price | TIF | Stop Order ID                          | Uncovered slice | Stop %    |
+|--------|---------:|-----------:|-----|----------------------------------------|----------------:|----------:|
+| NVDA   | 9        | $208.96    | GTC | ffb5e5a9-50fb-4e39-abef-849d72b8f323   | 0.092513 sh (~$20) | -5%    |
+| RL     | 3        | $350.64    | GTC | 9e45b1e8-cf59-408d-a702-9691f5dc3620   | 0.978463 sh (~$367) | -7% |
+
+Fractional remainder unprotected per playbook 2026-05-20 "fractional handled via
+floor(qty) + uncovered slice". RL has a relatively large uncovered slice (~$367
+≈ 25% of position) due to the high share price + small notional — accepted; if
+RL breaches the stop, the integer portion fills first and the fractional slice
+becomes a residual that's separately closed at market.
+
+### Guardrails verified (ALM-1 through ALM-8 active per LM mode)
+
+- **ALM-1 sleeve discipline**: both fills tagged with `sleeve:` and `strategy:`. ✓
+- **ALM-2 sleeve cash budget**: Swing used $3,500 of $15,000 → $11,500 remaining,
+  2 of 8 positions (NVDA $2k, RL $1.5k — both within $4k/name cap). ✓
+- **ALM-3 sleeve-specific stops**: NVDA -5% (`swing-quality-pullback`), RL -7%
+  (`swing-earnings-drift` wider per playbook). Both GTC. ✓
+- **ALM-4 strategy logging**: both entries appended to per-strategy experiment
+  files (`memory/experiments/swing-quality-pullback.md`,
+  `memory/experiments/swing-earnings-drift.md`). KPI rolled up in `_ledger.md`. ✓
+- **ALM-5 weekly bandit**: N/A (first review fires 2026-05-29). ✓
+- **ALM-6 short selling**: not used this routine (NVDA + RL are longs). ✓
+- **ALM-7 earnings-day plays**: RL is Day-2 post-print (5/21 earnings); falls
+  under `swing-earnings-drift` per playbook, not the earnings-day exclusion. ✓
+- **ALM-8 hard-overrides**: endpoint verified `paper-api.alpaca.markets` ✓.
+  No real-money calls.
+
+### Pre-flight checks at entry
+
+- Macro risk-off active? **NO** (SPY +0.60% vs 5/21 EOD; VIX ~16; no -3% / 40 triggers).
+- NVDA opening within ±2% of $219.51? **YES** ($219.92 = +0.187% → trigger fires).
+- RL opening ≥ $356.16 (95% of Thu close $374.90)? **YES** ($373.67 = -0.328%
+  from Thu close → trigger fires).
+- AAPL rejection candle present yet? **NO** ($308.43 = +1.13% from 5/21,
+  printing fresh 52w-Hi at open → no short-rejection trigger; WATCH).
+- ARM consolidation > $290 confirmed? **NO yet** ($294.90 live; needs 5-min
+  consolidation + ORB-style break — defer to 03-midday).
+- Hard-borrow check (only needed if AAPL short triggers): not needed today
+  (no shorts placed).
+
+### Decisions NOT to execute (logged for audit)
+
+- **ARM (`swing-momentum-breakout`)**: Live $294.90 at 13:37Z but no 5-min
+  consolidation or break confirmation yet. WATCH; re-check at 03-midday.
+- **AAPL (`swing-short-rejection`)**: No rejection candle today; needs daily
+  close < open AT 52w-Hi. WATCH till EOD.
+- **INTU (`swing-mean-reversion`)**: SKIPPED — falling-knife AI-disruption
+  narrative; quantitative signals fire but thesis-risk filter fails per
+  yesterday's 01-pre-market decision.
+- **NVDA bull-call-spread (`options-vertical-bull-call-spread`)**: BLOCKED
+  on Polygon options-chain access (gated tier). NVDA conviction routed
+  through equity sleeve (`swing-quality-pullback` $2k) as fallback.
+- **Crypto entries**: 0 signals — all 5 universe coins still in 50<200
+  downtrend; `crypto-weekend-momentum` 2% trigger not in play (BTC 7d -2.08%).
+- **Daytrade entries**: ORB watches active but resolve AFTER 13:35Z; execution
+  deferred to 03-midday per routine spec. Max 1 ORB scalp budgeted.
+
+### Organic broker events (not Bull actions, recorded for audit)
+
+- **LLY trail HWM advanced ORGANICALLY at the cash open** from $1,047.295
+  → ~$1,063.67. **Stop bumped $942.5655 → $957.303 (+1.55%)**. Biggest
+  single-day organic trail-walk in the LM window so far. LLY UPL +6.519%
+  ($1,062.91 mark). 4th consecutive HWM advance.
+- **AVGO mark recovered overnight** $412.265 → $418.53 at the open
+  (+1.52% intraday rebound); UPL +1.037%. Cushion improved 3.90% → 4.87%.
+
+### Account post-fill snapshot
+
+- Equity: **$101,208.22** (+$451.65 / +0.448% vs last_equity $100,756.57;
+  +$446.50 / +0.443% vs 5/21 EOD $100,761.72).
+- Cash: $34,500.00 (down $3,500 vs 5/21 EOD on NVDA + RL fills).
+- Long MV: $66,708.22 (Core $63,218.04 + Swing $3,490.24).
+- Options BP: $67,854.10 / Level 3.
+- Day-trade count (rolling 5d): **2** (up from 0; Alpaca pre-counts open
+  positions w/ same-day GTC stops as eligible day-trades — PDT watermark
+  observation, not at 4-trade threshold).
+- Day-alpha snap @ 13:38Z: Bull +0.45% vs SPY +0.60% → **-15.2 bp** day-alpha.

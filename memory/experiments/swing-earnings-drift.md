@@ -1,0 +1,44 @@
+# Experiment Log — `swing-earnings-drift`
+
+Sleeve: Swing. Status: active. Playbook reference: `memory/playbook.md`.
+
+**Thesis (one line):** Post-earnings strong beats (rev + EPS beat + guide raise) trigger 1-2 week drift higher (post-earnings announcement drift, PEAD).
+
+---
+
+## 2026-05-22 — Entry #1: RL
+
+- **Routine**: 02-market-open, 13:37:23Z.
+- **Entry trigger fired**: RL opened at $373.67, above the 95% threshold of
+  Thu's close $374.90 → $356.16. Day-1 reaction Thu 5/21 was +10.26% on Q4
+  FY26 beat.
+- **Catalyst**: Q4 FY26 EPS beat consensus, driven by "strong full-price
+  selling" (per Gemini macro scan 5/21). Day-1 +10.26% reaction is above
+  the playbook's ≥5% threshold.
+- **PT raises within 24h**: Not yet confirmed name-by-name in Gemini scan;
+  the +10.26% Day-1 reaction itself is the primary positive-drift signal.
+  (Future improvement: verify PT raise count is ≥2 before entry.)
+- **Position size**: $1,500 notional → 3.978463 sh @ $377.03 avg.
+- **Stop**: $350.64 GTC (3 sh; 0.978463 sh uncovered slice ≈ $367 ≈ 25% of
+  position unprotected — accepted per fractional handling lesson) → -7% from fill.
+- **Target**: +10% (~$414.73) OR 10 trading days time-stop.
+- **Time stop**: 10 trading days → exit on 2026-06-05 close if neither
+  target nor stop hit.
+- **Expected R-multiple**: 1.4R (target +10% / stop -7%).
+- **Order IDs**: buy `3f64d479-d578-4bc4-b96a-86679bc97c63`, stop
+  `9e45b1e8-cf59-408d-a702-9691f5dc3620`.
+- **Risk**: Retail/consumer discretionary is sleeve-outside-of-typical-tech-
+  comfort. WMT printed weak guide same week → broader retail tape pressure
+  possible. Sized smaller ($1.5k vs NVDA $2k) to reflect lower conviction.
+- **Sleeve attribution**: Sleeve = Swing. $1.5k counted against $15k Swing
+  budget → $11.5k remaining post NVDA + RL.
+
+### Outcome (TBD — to be filled in post-exit)
+
+- Exit date:
+- Exit price / exit reason:
+- Realized P&L $:
+- Realized R-multiple:
+- Days held:
+- Delta vs expectation:
+- Lesson:
