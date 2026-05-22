@@ -50,6 +50,24 @@ Sleeve: Swing. Status: active. Playbook reference: `memory/playbook.md`.
   re-check on Tue 5/26 open (Mon 5/25 = Memorial Day closed) for any
   further cushion compress to <2% which would warrant a tighter management
   posture.
+- **2026-05-22 20:16Z (05-close-summary Day 1 EOD)**: EOD mark $215.01
+  (vs entry $219.9612, **-2.251% / -$45.02 UPL**). Stop $208.96
+  `OrderStatus.NEW` GTC verified live post-close. **Cushion compressed
+  further 3.05% → 2.81% into the close** (mark slipped another $0.53 from
+  04-pre-close mark $215.54). Tightest cushion since fill, by a wide
+  margin. Distance to target $235.36: 9.46% upside required. NVDA -2.25%
+  Day 1 still within the -5% stop and matches the historical "Day 1 fade
+  after a +85% YoY earnings print is priced-in" pattern; no thesis-break
+  catalyst surfaced (no fresh AI-capex digestion headlines on the wires
+  post-close per Gemini macro scan-skip). No tighten-to-breakeven (rule
+  requires +5%+ UPL). **No action.** Time-stop date 2026-06-02 unchanged.
+  **Day 1 P&L attribution**: NVDA contributed -$45.02 to the Bull EOD,
+  the single biggest negative contributor outside the Core mark drift.
+  **Watch on Tue 5/26 open**: if cushion compresses to <2% (mark
+  ≈ $213.22), tighten posture — consider half-out at market to lock the
+  remaining 1-1.5% cushion against a gap-down through the stop. Note:
+  Mon 5/25 = Memorial Day, US market closed; weekend headlines could
+  meaningfully reprice NVDA at Tue's open.
 
 ### Outcome (TBD — to be filled in post-exit)
 
