@@ -6,6 +6,95 @@ entries (> 30 days) can be pruned by the weekly-review routine.
 
 ---
 
+## 2026-05-22 — Pre-market (LM Day 2 of 30, Fri KW 21 day 5)
+
+**Macro (Gemini):**
+- 10Y Treasury yield 4.56% (-1bp); DXY 99.36 (+0.10%, 6-week high consolidating).
+- Oil: WTI $98.08 +1.8%, Brent $104.96 +2.3% on US-Iran tension / Strait of
+  Hormuz supply-disruption concerns.
+- Pre-market futures: ES +0.17% at 7,479; NQ +0.14% at 29,490; RTY +0.07%.
+  Light calendar; primary scheduled releases: U-Mich final sentiment +
+  inflation expectations (10 ET = 14Z), BLS State Employment April (10 ET).
+- Fed: Waller lecture Frankfurt 10 ET; **Warsh sworn in as Fed Chair 11 ET**
+  (~15Z) — watch for unexpected commentary post-ceremony.
+- Notable overnight earnings/movers: NVDA flat AH (priced-in blow-out), TTWO +
+  (GTA VI launch reaffirmed), WDAY + (Q1 beat + guide raise), RL +10.26% Thu
+  (Q4 beat / strong full-price selling), WMT mixed (EPS beat / weak guide),
+  Ross beat. **No FOMC/CPI/PPI/NFP today** → no tier-1 macro-catalyst day.
+
+**NVDA Q1 FY27 post-earnings recap (Gemini):**
+- Revenue $81.6B (+85% YoY, +20% QoQ) vs consensus $78.8-79.1B. Non-GAAP EPS
+  $1.87 vs Street $1.75-1.77. GAAP EPS $2.39.
+- **Q2 guidance $91B ±2% vs Street $86-87B** (huge raise; ex-China Data Center).
+- Data Center rev $75.2B +92% YoY. Hyperscale specifically $37.9B +115% YoY.
+  Now ~50/50 split hyperscalers vs ACIE (AI Clouds/Industrial/Enterprise/
+  Sovereign), broadening customer base.
+- Analyst PT raises within 24h: HSBC $295→$325, MS $260→$285, Jefferies
+  $275→$300, Baird $300→$500, BofA $320→$350, GS $250→$285.
+- Day-1 reaction (Thu 5/21): close $219.51, -1.77% on the session ("priced in"
+  reaction, not thesis break). Intraday high $227.40, low $217.93 (vol 202M).
+- Risks Wall Street flags: (1) valuation elevated, (2) China exclusion in Q2
+  guide, (3) supply commitments balance up to $119B (memory cost edge could
+  fade post-FY27).
+- **Plays it enables (per playbook)**: `swing-quality-pullback` (top-pick), and
+  `options-vertical-bull-call-spread` aligned with the same thesis.
+
+**INTU thesis-risk scan (Gemini):**
+- -20% Thu drop driven by (1) 17% workforce cut announcement (~3,000 layoffs,
+  $300-340M restructuring charges), (2) lowered FY26 TurboTax revenue
+  projections citing AI-driven competition, (3) preliminary FY27 guidance
+  (revG 11-12%, non-GAAP EPS growth $3.56-3.62 — provided, not cut against
+  prior outlook), (4) multiple analyst PT cuts overnight.
+- Decision: `swing-mean-reversion` quant signal fires (z20 -2σ, RSI <25) but
+  the qualitative "AI-disruption + restructuring" thesis-risk overlay
+  disqualifies the playbook's "quality name that pulls back" precondition.
+  **SKIPPED for today's plan.** Re-evaluate once INTU reclaims 5-DMA OR
+  analyst PT actions stabilize.
+
+**ARM catalyst scan (Gemini):**
+- +16% Thu rally to $298.23 on (1) Bernstein upgrade to Outperform $300 PT
+  citing AI data-center demand, (2) read-through from NVDA Q1 print —
+  Vera CPU "$20B forecast" with material Arm royalty exposure, (3) prior Q4
+  FY26 earnings beat (5/6/2026) provided underlying positive sentiment.
+- Decision: `swing-momentum-breakout` quant signal fires but the +30% 5d
+  context calls for confirmation entry not chase. WATCH for 13:30-14:00Z
+  consolidation above $290 + 5-min ORB-break before entry. Reject any
+  $310+ gap-up open.
+
+**Polygon connectivity (Day 2 first-use, LM):**
+- POLYGON_API_KEY confirmed SET (was unset on Day 1). Stock daily aggregates
+  (NVDA, SPY, QQQ, TLT) returned successfully; pulled 5-day bars 5/15-5/21.
+- Rate-limit: free-tier 5/min — hit a 429 burst when querying 11 tickers in
+  one tight loop; spaced subsequent calls. Implication: pre-market scanners
+  must batch via the snapshot endpoint, not per-ticker aggregates.
+- VIX endpoint returned 0 bars (Polygon doesn't supply on this tier).
+- BTC-USD/ETH-USD/SOL-USD/AVAX-USD/LINK-USD returned 429 in the same burst;
+  fell back to yfinance for daily-resolution crypto returns + DMA calc.
+- `get_iv_rank` returned None for NVDA / ARM / RL → options-chain endpoint
+  appears NOT enabled on the current Polygon tier (Options-Starter add-on
+  required per playbook). **DATA GAP** for `options-earnings-strangle`,
+  `options-long-call-momentum`, `options-vertical-bull-call-spread` until
+  resolved. NVDA conviction routes through equity sleeve as the
+  primary play; options spread is on WATCH not BUY.
+
+**Crypto state (yfinance):**
+- BTC $77,422 / 7d -2.08% (vs trigger +2% for `crypto-weekend-momentum`)
+- ETH $2,132 / 7d -4.10% — weakest momentum in universe
+- SOL $87.48 / 7d -1.93%; AVAX $9.52 / 7d -0.18%; LINK $9.90 / 7d -1.65%
+- All 5 names 50-DMA < 200-DMA → `crypto-trend-follow` no cross-up signal.
+  No -10% intraday flushes → `crypto-mean-reversion` no signal.
+- Re-check 03-midday + 05-close-summary 21Z for weekend-momentum BTC weekly +2%.
+
+**Cited sources:** Gemini Search-Grounding (Investing.com / TIKR / MarketBeat
+/ Seeking Alpha for INTU; Motley Fool / Seeking Alpha / KoalaGains for ARM;
+multi-source consensus for NVDA Q1 FY27; standard macro sources for
+10Y/DXY/oil/futures and U-Mich/State Employment/Fed schedule). yfinance for
+quant + earnings dates. Polygon for stock daily aggregates. Alpaca broker
+for pre-mkt position marks + account sanity. See `memory/daily/2026-05-22.md`
+for portfolio detail + per-sleeve plan draft.
+
+---
+
 ## 2026-05-12 — Initial pre-market research, all 9 strategy positions
 
 **Macro (Gemini):**
