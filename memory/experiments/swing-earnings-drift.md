@@ -43,6 +43,19 @@ Sleeve: Swing. Status: active. Playbook reference: `memory/playbook.md`.
 - **Uncovered slice watch**: 0.978463 sh × $376.05 ≈ $368 still unprotected
   by the 3-share stop (per fractional handling lesson). Today's intraday
   range did not stress this; flag for 04-pre-close again.
+- **2026-05-22 19:36Z (04-pre-close Day 1 of hold)**: mark $376.785 (vs
+  entry $377.03, **-0.065% / -$0.97 UPL**). Stop $350.64 intact
+  (`OrderStatus.NEW` GTC verified at broker, id `9e45b1e8-cf59-408d-a702-
+  9691f5dc3620`). **Cushion improved 6.76% → 6.94% intraday** as RL
+  recovered into the close ($376.05 → $376.785). Distance to target
+  $414.73: 10.07% upside still required. Day 1 essentially flat —
+  consistent with PEAD pattern where Day 2 reaction is muted before Day
+  3-5 drift takes hold. No tighten-to-breakeven (rule requires +5%+ UPL).
+  No time-stop hit (today is fill day; first time-stop check on 6/5 close).
+  **No action**. Time-stop date 2026-06-05 unchanged.
+- **Uncovered slice (re-check)**: 0.978463 sh × $376.785 ≈ $369 still
+  unprotected by the 3-share stop. Today's intraday range did not stress
+  it; carry forward to 05-close-summary / next Tue 01-pre-market.
 
 ### Outcome (TBD — to be filled in post-exit)
 
