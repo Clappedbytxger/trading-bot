@@ -33,6 +33,17 @@ Sleeve: Swing. Status: active. Playbook reference: `memory/playbook.md`.
 - **Sleeve attribution**: Sleeve = Swing. $1.5k counted against $15k Swing
   budget → $11.5k remaining post NVDA + RL.
 
+### Midday updates
+
+- **2026-05-22 16:42Z (03-midday Day 1 of hold)**: mark $376.05 (vs entry
+  $377.03, -0.260% / -$3.90 UPL). Stop $350.64 intact (cushion 6.76%).
+  Distance to target $414.73: 10.28% upside still required. RL recovered
+  slightly from open-session low ($374.945 → $376.05). No action taken;
+  UPL within routine-spec drift band. Time-stop date 2026-06-05 unchanged.
+- **Uncovered slice watch**: 0.978463 sh × $376.05 ≈ $368 still unprotected
+  by the 3-share stop (per fractional handling lesson). Today's intraday
+  range did not stress this; flag for 04-pre-close again.
+
 ### Outcome (TBD — to be filled in post-exit)
 
 - Exit date:

@@ -30,6 +30,14 @@ Sleeve: Swing. Status: active. Playbook reference: `memory/playbook.md`.
   concentration if a sentiment air-pocket hits the AI block (NVDA/AVGO/MSFT all
   correlated). Mitigated by -5% hard stop.
 
+### Midday updates
+
+- **2026-05-22 16:42Z (03-midday Day 1 of hold)**: mark $216.475 (vs entry
+  $219.9612, -1.585% / -$31.70 UPL). Stop $208.96 intact (cushion 3.47% —
+  well above the playbook -5% trigger). Distance to target $235.36: 8.71%
+  upside still required. No action taken; UPL within the routine-spec
+  drift band (-2% / +3%). Time-stop date 2026-06-02 unchanged.
+
 ### Outcome (TBD — to be filled in post-exit)
 
 - Exit date:
