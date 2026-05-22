@@ -19,11 +19,11 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Strategy slug | Sleeve | Status | Trades | Win-rate | Avg R | Net P&L | Max DD | RAR | Alpha vs SPY | Last update |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---|
-| core-buy-and-hold          | Core      | active | 16 fills (T1+T2, no closes) | — | — | +$1,217.05 (UPL) | $0 (no closes) | — | -8.48% (Live-Phase carryover + LM Day 2 open) | 2026-05-22 02-market-open |
-| swing-momentum-breakout    | Swing     | active | 0 (1 WATCH = ARM) | — | — | $0.00 | $0 | — | — | 2026-05-22 02-market-open |
+| core-buy-and-hold          | Core      | active | 16 fills (T1+T2, no closes) | — | — | +$1,018.43 (UPL) | $0 (no closes) | — | -8.65% (Live-Phase carryover + LM Day 2 midday) | 2026-05-22 03-midday |
+| swing-momentum-breakout    | Swing     | active | 0 (ARM WATCH → MISSED trigger window 13:30-14:00Z) | — | — | $0.00 | $0 | — | — | 2026-05-22 03-midday |
 | swing-mean-reversion       | Swing     | active | 0 (1 SKIP = INTU thesis-risk) | — | — | $0.00 | $0 | — | — | 2026-05-22 02-market-open |
-| swing-quality-pullback     | Swing     | active | **1 open (NVDA)** | — | — | -$1.47 (UPL) | $0 (no closes) | — | — | 2026-05-22 02-market-open |
-| swing-earnings-drift       | Swing     | active | **1 open (RL)** | — | — | -$8.30 (UPL) | $0 (no closes) | — | — | 2026-05-22 02-market-open |
+| swing-quality-pullback     | Swing     | active | **1 open (NVDA)** | — | — | -$31.70 (UPL) | $0 (no closes) | — | — | 2026-05-22 03-midday |
+| swing-earnings-drift       | Swing     | active | **1 open (RL)** | — | — | -$3.90 (UPL) | $0 (no closes) | — | — | 2026-05-22 03-midday |
 | swing-insider-buys         | Swing     | paused | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | swing-short-rejection      | Swing     | active | 0 (1 WATCH = AAPL) | — | — | $0.00 | $0 | — | — | 2026-05-22 02-market-open |
 | swing-short-fundamental    | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
@@ -46,8 +46,8 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Sleeve | Cash Budget | Used | Open positions | Cumulative P&L | Cumulative Alpha vs SPY |
 |---|---:|---:|---:|---:|---:|
-| Core     | $62,000 | $63,218.04 (live mark, +$1,217.05 UPL) | 8 | +$1,217.05 / +1.963% (9-day Live-Phase + LM Day 1-2) | -8.48% Live-Phase + LM Day 2 open |
-| Swing    | $15,000 | $3,500 cost (NVDA $2k + RL $1.5k) | 2 | -$9.76 UPL (fresh opens, intra-fill drift) | — |
+| Core     | $62,000 | $63,018.43 (live mark, +$1,018.43 UPL) | 8 | +$1,018.43 / +1.642% (9-day Live-Phase + LM Day 1-2 midday) | -8.65% Live-Phase + LM Day 2 midday |
+| Swing    | $15,000 | $3,500 cost (NVDA $2k + RL $1.5k) | 2 | -$35.60 UPL (NVDA -1.59%, RL -0.26%) | — |
 | Daytrade | $10,000 | $0      | 0 | $0 | — |
 | Crypto   | $5,000  | $0      | 0 | $0 | — |
 | Options  | $5,000  | $0      | 0 | $0 | — |
@@ -133,3 +133,30 @@ Window: 2026-05-21 → 2026-06-20.
   bull-call-spread BLOCKED on Polygon options-chain gate; NVDA conviction routed
   through equity sleeve as fallback. Day-alpha snap 13:38Z: Bull +0.448% vs
   SPY +0.60% → -15.2 bp.
+
+- **2026-05-22 16:42Z (03-midday, LM Day 2)** — **HOLD routine** (0 trades).
+  Equity drifted $101,208.22 → **$100,982.35** (-$225.87 / -0.223%) on Core
+  mark fade into midday (MSFT +4.575% → +3.513%, META +2.264% → +1.159%,
+  AVGO +1.037% → -0.105% cushion 4.87% → **3.79% tightest in book**, GOOGL
+  -0.059% → -0.456% cushion 4.61%, V mild giveback). `core-buy-and-hold`
+  UPL$ $1,217.05 → **$1,018.43** (-$198.62). Only Core gainers vs 13:38Z:
+  BRK.B (small) and LLY (HWM organic walk-up #5 $1,063.67 → $1,069.11
+  → stop $957.303 → $962.199, +0.51% additional bump; cumulative LLY
+  trail walk over 2 LM days: $942.5655 → $962.199 = +2.08%, biggest-ever
+  organic protection drift in Live-Phase + LM record). Swing sleeve drift:
+  NVDA UPL -0.073% → -1.585% (cushion to stop 3.47% — above the playbook
+  -5% trigger), RL UPL -0.553% → -0.260% (cushion 6.76%). No Swing exits.
+  ARM `swing-momentum-breakout` WATCH: trigger window 13:30-14:00Z closed
+  without a clean ORB-style consolidation+break; price grinded to $307.64
+  (+4.32% intraday from 13:37Z $294.90, now 0.77% below the "DO NOT chase
+  above $310" line). Decision: **PASS** — missed trigger, do not chase
+  → will re-arm only if ARM closes back below $290. AAPL `swing-short-
+  rejection`: defer to 04-pre-close EOD candle. Daytrade sleeve: ORB
+  window closed, no clean signal — 0 entries; PDT count UNCHANGED at 2/5.
+  Crypto sleeve: all 5 still 50<200 downtrend, deepest 24h move BTC
+  -0.91%, no signal. Options: Polygon options-chain re-tested at 16:40Z
+  → **still 403 Forbidden** (`get_iv_rank('NVDA')` returns None); 0 entries.
+  Day-alpha snap 16:42Z: Bull +0.219% vs SPY +0.571% → **-34.7 bp**
+  (widened from -15.2 bp at 13:38Z; Core mark-fade outpaced SPY drift).
+  Macro risk-off NOT active (SPY +0.57% / VIX 16.59 / no -3% or >40
+  threshold). No WhatsApp this routine (per spec — only on urgent risk).
