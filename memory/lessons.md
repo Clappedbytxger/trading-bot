@@ -319,3 +319,68 @@ trading decision. Keep entries tight — pattern, lesson, encoded?
   3. If `POLYGON_API_KEY` is set by Robin (separate ask), re-test the back-fire
      end-to-end on a real cron-miss to confirm the sleeve-level fallback path
      works as specified.
+
+## 2026-05-22 — daytrade_count pre-counts open positions w/ same-day GTC stops
+- **Pattern:** Placed 2 Swing BUY orders (NVDA + RL) at 13:37Z with same-day
+  GTC protective stops attached. Immediately after fills, `daytrade_count`
+  jumped 0 → 2 even though both positions remained OPEN (no closing fills
+  occurred). Alpaca's `daytrade_count` field appears to pre-count any position
+  opened today that has an outstanding sell order (e.g. our protective stops)
+  — i.e., the system treats them as "eligible to round-trip same-day" and
+  pre-debits the PDT budget. If the stops don't trigger today (most likely
+  scenario for properly-sized Swing entries), the count should reverse at
+  next-day rollover, but the budget IS provisionally consumed.
+- **Lesson:** When budgeting PDT round-trips per session, subtract one from
+  the budget for every same-day-opened position with an active GTC stop, not
+  just for actual completed round-trips. Today we have 2 ORB / scalp round-
+  trips of headroom remaining (4-threshold − 2-pre-counted = 2), not 4.
+  This is more conservative than the playbook's "max 3 day-trades per rolling
+  5-day window" comment implies in practice; account for the watermark
+  reservation before planning Daytrade execution at 03-midday.
+- **Mitigation options for future LM sessions:**
+  - **Accept the watermark**: cap intended same-day Daytrade execution to
+    `4 − (Swing-opens-w/-GTC-stop-today)` to avoid PDT flip risk.
+  - **Defer the Swing stop**: place the Swing BUY first, run the session,
+    THEN place the GTC stop in a later routine (03-midday or 04-pre-close).
+    This avoids the pre-count but leaves the Swing position unprotected
+    during the 13:30-18:30Z window. **Not recommended** — ALM-3 requires
+    sleeve stops at entry, and a -5% gap intraday would burn more than the
+    PDT-watermark cost.
+  - **Use a Limit-sell at target instead of a Stop-sell**: a sell-LIMIT at
+    the target price might not trigger the same pre-count (Limit orders
+    away from market are not "round-trip-imminent"). Untested. Defer to
+    a future routine to verify.
+- **Encoded as rule?** Yes — recorded here and noted in today's daily file
+  and `_ledger.md` refresh log. Follow-up next routine (03-midday): verify
+  the count remained at 2 (no unexpected drift), and confirm the count
+  resolves at 5/23 daily rollover. If it persists across sessions, escalate.
+
+## 2026-05-22 — fractional Swing stops leave meaningful unprotected slice on high-priced names
+- **Pattern:** RL Swing fill at $377.03 for $1,500 notional → 3.978463 sh.
+  Stop placed on `floor(qty) = 3 sh` per the playbook fractional-handling
+  convention (inherited from Core 2026-05-12). Uncovered slice = 0.978463 sh
+  ≈ **$367 ≈ 25% of position** unprotected by the stop. Compare NVDA fill
+  at $219.96 for $2,000 → 9.092513 sh, uncovered slice 0.092513 sh ≈ $20
+  ≈ 1% of position. The high share price + small notional combo on RL
+  makes the uncovered fraction disproportionately large.
+- **Lesson:** For Swing entries on names priced > $200 with notional ≤ $1.5k,
+  consider:
+  (a) **Round notional up** so the floor-share-count cleanly covers ≥95%
+      of position (e.g. $1,500 → $1,886 on RL would give 5 sh stop coverage
+      with ~$31 uncovered, but then breaches ALM-2's $4k cap less and stays
+      within Swing budget).
+  (b) **Round notional down** so we trade integer shares from the start
+      (e.g. $1,500 → 3 sh × $377 = $1,131 → 3-sh BUY + 3-sh stop, 0
+      uncovered). Smaller position but full stop coverage.
+  (c) **Stop limit on fractional**: Alpaca's docs say STOP orders require
+      whole shares; STOP_LIMIT may support fractional in some configs.
+      Untested.
+  Today's choice was (default playbook path): take the fill at the planned
+  notional, accept the slice. For RL specifically, the slice is large enough
+  that a hard breach-and-gap could cost ~$367 instead of the planned ~$105
+  stop loss. Sized small enough that this is tolerable (~3% of Swing budget),
+  but worth flagging.
+- **Encoded as rule?** Partially. Recorded here. Defer rule-change to LM
+  week-2 review after seeing how often the Swing sleeve actually hits these
+  high-priced + low-notional combos. If 3+ occurrences, change the playbook
+  to prefer integer-share sizing for names > $200 share price.

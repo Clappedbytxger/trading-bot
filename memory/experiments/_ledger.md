@@ -19,13 +19,13 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Strategy slug | Sleeve | Status | Trades | Win-rate | Avg R | Net P&L | Max DD | RAR | Alpha vs SPY | Last update |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---|
-| core-buy-and-hold          | Core      | active | 16 fills (T1+T2, no closes) | — | — | +$761.72 (UPL) | $0 (no closes) | — | -8.26% (Live-Phase carryover + LM Day 1 EOD) | 2026-05-21 05-close-summary |
-| swing-momentum-breakout    | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
-| swing-mean-reversion       | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
-| swing-quality-pullback     | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
-| swing-earnings-drift       | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
+| core-buy-and-hold          | Core      | active | 16 fills (T1+T2, no closes) | — | — | +$1,217.05 (UPL) | $0 (no closes) | — | -8.48% (Live-Phase carryover + LM Day 2 open) | 2026-05-22 02-market-open |
+| swing-momentum-breakout    | Swing     | active | 0 (1 WATCH = ARM) | — | — | $0.00 | $0 | — | — | 2026-05-22 02-market-open |
+| swing-mean-reversion       | Swing     | active | 0 (1 SKIP = INTU thesis-risk) | — | — | $0.00 | $0 | — | — | 2026-05-22 02-market-open |
+| swing-quality-pullback     | Swing     | active | **1 open (NVDA)** | — | — | -$1.47 (UPL) | $0 (no closes) | — | — | 2026-05-22 02-market-open |
+| swing-earnings-drift       | Swing     | active | **1 open (RL)** | — | — | -$8.30 (UPL) | $0 (no closes) | — | — | 2026-05-22 02-market-open |
 | swing-insider-buys         | Swing     | paused | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
-| swing-short-rejection      | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
+| swing-short-rejection      | Swing     | active | 0 (1 WATCH = AAPL) | — | — | $0.00 | $0 | — | — | 2026-05-22 02-market-open |
 | swing-short-fundamental    | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | daytrade-orb               | Daytrade  | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | daytrade-vwap-pullback     | Daytrade  | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
@@ -46,12 +46,12 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Sleeve | Cash Budget | Used | Open positions | Cumulative P&L | Cumulative Alpha vs SPY |
 |---|---:|---:|---:|---:|---:|
-| Core     | $62,000 | $62,761.72 (EOD mark, +$761.72 UPL) | 8 | +$761.72 / +1.229% (9-day Live-Phase + LM Day 1 EOD) | -8.26% Live-Phase + LM Day 1 EOD |
-| Swing    | $15,000 | $0      | 0 | $0 | — |
+| Core     | $62,000 | $63,218.04 (live mark, +$1,217.05 UPL) | 8 | +$1,217.05 / +1.963% (9-day Live-Phase + LM Day 1-2) | -8.48% Live-Phase + LM Day 2 open |
+| Swing    | $15,000 | $3,500 cost (NVDA $2k + RL $1.5k) | 2 | -$9.76 UPL (fresh opens, intra-fill drift) | — |
 | Daytrade | $10,000 | $0      | 0 | $0 | — |
 | Crypto   | $5,000  | $0      | 0 | $0 | — |
 | Options  | $5,000  | $0      | 0 | $0 | — |
-| Cash reserve | $3,000 | — (of $38,000 cash total, ≥$3k reserved per ALM-2) | — | — | — |
+| Cash reserve | $3,000 | — (of $34,500 cash total, ≥$3k reserved per ALM-2) | — | — | — |
 
 ## Weekly bandit log (06-weekly-review writes here)
 
@@ -116,3 +116,20 @@ Window: 2026-05-21 → 2026-06-20.
   POLYGON_API_KEY unset. 18 consecutive no-action routines. Inbox.md still empty
   on Q1 A/B/C — re-broadcast via WhatsApp this routine. **Day 1 closing baseline
   locked: cumulative LM-window P&L $0 net + Core carryover UPL +$151.23.**
+
+- **2026-05-22 13:38Z (02-market-open, LM Day 2)** — **FIRST NON-CORE LM FILLS**.
+  2 Swing entries placed at the open: NVDA $2k notional (`swing-quality-pullback`)
+  + RL $1.5k notional (`swing-earnings-drift`). Both filled within 1.4 seconds:
+  NVDA 9.092513 sh @ $219.9612, RL 3.978463 sh @ $377.03. Sleeve-specific stops
+  live GTC: NVDA $208.96 (-5%), RL $350.64 (-7%). Swing sleeve used $3,500 of
+  $15k → $11,500 remaining; 2/8 positions. `core-buy-and-hold` UPL drifted
+  $761.72 → $1,217.05 (+$455.33) on broad Core green print at the open, biggest
+  contributor LLY (+$70+) which advanced HWM ORGANICALLY $1,047.295 → ~$1,063.67
+  (stop $942.5655 → $957.303, +1.55%). AVGO recovered 3.90% → 4.87% cushion.
+  Day-trade count: 0 → 2 (Alpaca pre-counts open positions w/ same-day GTC stops
+  as eligible day-trades — observation only, threshold is 4). Daytrade sleeve
+  empty; ORB watches set for SPY/QQQ/NVDA/TSLA/AAPL/AMD but execution deferred
+  to 03-midday per routine spec. Crypto + Options remain empty. NVDA options
+  bull-call-spread BLOCKED on Polygon options-chain gate; NVDA conviction routed
+  through equity sleeve as fallback. Day-alpha snap 13:38Z: Bull +0.448% vs
+  SPY +0.60% → -15.2 bp.
