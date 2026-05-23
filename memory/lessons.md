@@ -355,6 +355,87 @@ trading decision. Keep entries tight — pattern, lesson, encoded?
   the count remained at 2 (no unexpected drift), and confirm the count
   resolves at 5/23 daily rollover. If it persists across sessions, escalate.
 
+## 2026-05-23 — Week ending 2026-05-22 (KW 21) — first LM cross-phase week
+
+- **Pattern:** KW 21 was a cross-phase week (Mon 5/18 → Wed 5/20 = final 3
+  Live-Phase HOLD days under v2 strategy; Thu 5/21 → Fri 5/22 = Learning
+  Month Day 1 + Day 2 under v3 multi-sleeve strategy). Bull week +0.382%
+  (broker) vs SPY +0.883% = **-50 bp week-alpha**, a regression from KW 20's
+  +60 bp. LM Day 1 (5/21) was lost to a 4th 01-pre-market cron miss (now
+  4/10 miss-rate over the window where it actually matters operationally,
+  per the 5/21 lesson). LM Day 2 (5/22) executed cleanly with the new
+  Step-1a inline back-fire: 01-pre-market drafted within the same 02-market-
+  open session, 2 Swing entries fired at the open (NVDA $2k swing-quality-
+  pullback, RL $1.5k swing-earnings-drift), both with sleeve-specific stops
+  GTC. 0 closes book-wide; 0 trades on Daytrade/Crypto/Options across the
+  entire week. 100% of P&L attribution this week sits on `core-buy-and-hold`
+  (+$340.52 UPL Δ; LLY HWM walked up 6+ times for cumulative +$24.27 /
+  +2.58% organic protection drift — biggest single-week trail-walk in the
+  book's history).
+- **Lesson 1 (operational, primary):** **A cross-phase week + operational
+  disruptions (cron miss + missing POLYGON key 5/21 + Polygon options-chain
+  tier-gate 5/21-5/22) inevitably produces a thin LM sample.** Bull's first
+  KW under multi-sleeve discipline saw 19 of 22 sub-strategies at 0 trades
+  in 7d, but the attribution is mostly *operational* (data feeds, cron
+  reliability), not *strategic* (concept failure). The 06-weekly-review
+  bandit cull would have over-fit on this noise; the spec's "≥3 trades per
+  strategy" gate correctly held off cull-day-1. **Generalizable rule**:
+  bandit decisions must distinguish "no signal because the feed didn't
+  scan" from "no signal because the market didn't offer the setup" — the
+  former is operational debt to fix (Robin / Bull), the latter is the
+  signal *itself*. This requires per-strategy logging of "attempted scans"
+  not just "completed scans" — defer this to a `routines/*.md` enhancement
+  in week 2.
+- **Lesson 2 (market-regime):** SPY +0.88% week, VIX 16.59-17.79 range (no
+  spike), no -3% day. This is a **slow-grind-up tape that disfavors mean-
+  reversion and gap-fade strategies and favors quality-pullback + earnings-
+  drift + buy-and-hold**. Both Swing entries on 5/22 (NVDA quality-pullback
+  + RL earnings-drift) were taken into a tape where their playbook profile
+  matches the regime — that's a positive selection decision and not luck;
+  worth keeping a running log of "regime classification per week" to validate
+  this matching post-hoc. Crypto sleeve: 5/5 universe still 50<200 across
+  the week, 24h moves all <2%, weekend-momentum trigger NOT met (BTC 7d
+  -3.02%). Crypto staying empty in this regime is correct behavior — not
+  a strategy failure to scale down next week.
+- **Lesson 3 (encoding candidate):** "Bias = inaction unless a spec-trigger
+  fires." KW 21 trade count = 2 across 5 trading days × 22 active+paused
+  sub-strategies × 5 sleeves = ~0.4% of the theoretical execution surface.
+  Recurrence of the KW 20 lesson ("action discipline > action count"). This
+  has now held cleanly across 2 consecutive weeks under 2 different
+  strategy regimes (Live-Phase HOLD + Learning Month multi-sleeve), and is
+  ripe to encode as a **routine-spec line** in `routines/03-midday.md` and
+  `routines/04-pre-close.md`: "no-trade-day hit-rate is a quality metric,
+  not a laziness metric." Defer the actual file-edit to a Robin-acknowledged
+  pass since it touches routine specs.
+- **Lesson 4 (LM design validation, partial):** The "Core sleeve as
+  Live-Phase benchmark" mechanism is working — KW 21 Core attribution
+  +$340.52 / +0.55% on $62k cost-basis is the comparator the other 4
+  sleeves must beat over the LM window to justify their existence in the
+  Live-Phase strategy.md v4 (post-6/21). With 28 LM days remaining, the
+  other sleeves have a real but narrowing window to demonstrate per-strategy
+  RAR ≥ Core's ~0.55%/week pace. The 2 Swing positions opened 5/22 will
+  be the first realized data points (target +7% on NVDA / +10% on RL vs
+  -5% / -7% stops). If Swing closes the LM window with realized P&L worse
+  than Core's UPL drift, the 6/20 final report should propose folding
+  Swing's discretionary budget into Core ETF for Phase 2 (€300 live).
+- **Lesson 5 (operational follow-up, **STILL OPEN**):** 01-pre-market cron
+  miss-rate is now **4/10 trading days** (5/13, 5/14, 5/15, 5/21) — i.e.
+  40% silent-fail. Robin has not yet replied on inbox.md Q1 A (cron
+  reliability fix: heartbeat monitor vs. runner change vs. accept the
+  back-fire workaround). The 02-market-open Step-1a back-fire spec
+  (merged 5/21) handles the symptom — execution still happens — but
+  doesn't fix the root cause and adds latency to the morning prep on
+  miss-days. Until Robin chooses a fix path, **Bull continues to surface
+  this loudly in every 06-weekly-review WhatsApp**. The cron is upstream
+  of Bull's execution scope; resolution requires Robin-side investigation.
+- **Encoded as rule?** Partial:
+  - Lessons 1-4: recorded here, no rule-edits yet (insufficient LM sample to
+    justify changes to `strategy.md` / `playbook.md` / `routines/*.md`).
+    Re-evaluate at KW 22 EOW.
+  - Lesson 5: surfaced loudly to Robin each weekly WhatsApp. No autonomous
+    routine-spec change (it's upstream of Bull). Defer rule-encoding pending
+    Robin's fix-path choice.
+
 ## 2026-05-22 — fractional Swing stops leave meaningful unprotected slice on high-priced names
 - **Pattern:** RL Swing fill at $377.03 for $1,500 notional → 3.978463 sh.
   Stop placed on `floor(qty) = 3 sh` per the playbook fractional-handling

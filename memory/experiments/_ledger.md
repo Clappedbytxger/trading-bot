@@ -55,7 +55,77 @@ Window: 2026-05-21 → 2026-06-20.
 
 ## Weekly bandit log (06-weekly-review writes here)
 
-(none yet — first bandit review will fire Fri 2026-05-29 in 06-weekly-review)
+### 2026-05-23 (Sat-slot 06-weekly-review for KW 21) — **NO CULL** (pre-condition not met)
+
+- **Window**: Mon 5/18 → Sat 5/23 (5 trading days; 3 Live-Phase HOLD + 2 LM Day 1-2 + Sat weekend).
+- **Pre-condition check**: Routine spec requires ≥1 full week of LM data and
+  ≥3 trades per strategy in the trailing 7d. **NOT MET** — only 2 LM trading
+  days have occurred (5/21 + 5/22); no strategy has ≥3 trades; `swing-quality-
+  pullback` and `swing-earnings-drift` each have 1 open trade with $0 realized P&L.
+- **Decision**: Skip kill / scale / budget re-allocation. Sleeves remain at
+  initialized budgets (Core $62k, Swing $15k, Daytrade $10k, Crypto $5k,
+  Options $5k, Cash $3k reserve). Status of all 22 sub-strategies unchanged
+  from playbook v1 initialization (5/20).
+- **First eligible bandit cull**: Fri 2026-05-29 21:30Z OR Sat 2026-05-30 (KW
+  22 EOW) — first full LM week with realistic per-strategy KPI sample.
+- **Reference for next week's bandit**: "Top by RAR" candidates are the
+  Swing strategies that have already touched the tape (`swing-quality-
+  pullback`, `swing-earnings-drift`); they will have either closed exits or
+  open UPL with meaningful sample by 5/29. "Bottom by RAR" candidates are
+  the Daytrade strategies that haven't generated a single signal in
+  ~10 trading days under POLYGON_unset → POLYGON_set transition — but
+  attribution there is operational (data gap) more than strategy (concept gap),
+  and the bandit should account for that.
+
+### Weekly KPI roll-up — KW 21 (week ending Fri 2026-05-22, broker-basis)
+
+- Bull week: $100,522.33 (5/15 broker EOD) → $100,906.04 (5/22 broker EOD) = **+$383.71 / +0.382%**
+- SPY week: $739.17 (5/15 EOD) → $745.70 (5/22 EOD) = **+0.883%**
+- **Weekly alpha: -50.1 bp** (regression from KW 20's +60 bp)
+- LM-window cumulative (since 5/21 EOD baseline): **+$144.32 / +0.143% equity / -25.8 bp alpha vs SPY**
+- YTD: Bull +0.891% vs SPY +9.464% → **YTD alpha -857 bp**
+- Max equity intra-week: $101,208.22 (5/22 13:38Z post-fill watermark)
+- Min equity intra-week: $100,126.61 (5/19 EOD)
+- Peak-to-trough drawdown intra-week: -1.07% (5/19), recovered fully by 5/20 close
+- VIX range: 16.59 → 17.79; EOD 5/22 = 16.82 (no risk-off across the week)
+- Total trades book-wide: 2 (both Swing entries on 5/22; 0 closes)
+- PDT day-trade count Fri EOD: 2/5 (Alpaca pre-counted from Swing-w/-GTC-stop entries; no actual round-trips)
+
+### Per-sleeve P&L attribution (KW 21)
+
+| Sleeve     | Days active | Trades | Realized $ | Open UPL Δ (Fri-EOD vs prior Fri) | Net P&L attribution |
+|------------|------------:|-------:|-----------:|----------------------------------:|--------------------:|
+| Core       | 5          | 0      |  $0        | +$340.52 (UPL $610.49 → $951.01)   | **+$340.52** |
+| Swing      | 1 (Fri)    | 2      |  $0        | -$44.98 (NVDA -$45.02 + RL +$0.04)  | **-$44.98**  |
+| Daytrade   | 5          | 0      |  $0        | $0                                  | $0           |
+| Crypto     | 5          | 0      |  $0        | $0                                  | $0           |
+| Options    | 5          | 0      |  $0        | $0                                  | $0           |
+| **Total**  | —          | 2      |  $0        | **+$295.54**                        | **+$295.54** |
+
+**Best sub-strategy KW 21**: `core-buy-and-hold` (+$340.52 UPL Δ — only sleeve
+with positive net attribution; LLY HWM walked +2.58% cumulative across the
+week, biggest organic protection drift in book history).
+
+**Worst sub-strategy KW 21**: `swing-quality-pullback` (NVDA -$45.02 UPL EOD;
+Day 1 of 7-td hold; thesis intact, cushion 2.81% Fri → 2.96% Sat).
+
+**Strategies with 0 trades in 7d**: 19 of 22 (Crypto + Daytrade + Options
+sleeves entirely + 6 of 8 Swing sub-strategies). Per routine spec, "review
+whether trigger is reachable":
+- POLYGON-dependent (10 strategies, now resolved 5/22 AM): triggers are
+  reachable from KW 22 onward.
+- Polygon-options-chain-dependent (4 Options strategies): triggers
+  STILL not reachable until tier-gate resolves. Status quo through KW 22.
+- Crypto trend-follow + mean-reversion: triggers reachable, market simply
+  didn't offer setups (50<200 across the entire 5-coin universe; 24h drops
+  all <2%). Keep dormant — this is tape, not concept.
+- Crypto weekend-momentum: trigger reachable, didn't fire (BTC 7d -3.02%).
+  Keep dormant.
+- `swing-mean-reversion`, `swing-short-rejection`, `swing-momentum-breakout`,
+  `swing-short-fundamental`: triggers reachable, market didn't offer clean
+  setups or the qualitative filter (INTU thesis-risk) overrode. Keep dormant.
+- `swing-insider-buys`: still paused (Polygon Form-4 not in base tier).
+- `options-cash-secured-put`: still paused.
 
 ## Daily refresh log
 
@@ -226,6 +296,21 @@ Window: 2026-05-21 → 2026-06-20.
   (widened from -15.2 bp at 13:38Z; Core mark-fade outpaced SPY drift).
   Macro risk-off NOT active (SPY +0.57% / VIX 16.59 / no -3% or >40
   threshold). No WhatsApp this routine (per spec — only on urgent risk).
+
+- **2026-05-23 20:47Z (06-weekly-review, Sat-slot for KW 21)** — **NO BANDIT CULL**
+  (pre-condition: ≥3 trades per strategy not met; only 2 LM trading days have
+  occurred). Weekly KPI roll-up appended above. Weekly alpha -50.1 bp (regression
+  from KW 20's +60 bp). LM-window cumulative since 5/21 EOD baseline: +$144.32 /
+  +0.143% / -25.8 bp alpha. Top sub-strategy KW 21: `core-buy-and-hold` +$340.52
+  UPL Δ (LLY HWM walked +2.58% cumulative). Bottom: `swing-quality-pullback`
+  -$45.02 EOD (NVDA Day 1 of 7-td hold; thesis intact). 19/22 sub-strategies
+  at 0 trades 7d — attribution mostly POLYGON-unset (resolved 5/22 AM) +
+  Polygon-options-chain-gated (still open) + tape-not-offering-setups (Crypto/
+  some Swing). 5 lessons appended to `memory/lessons.md` as week-ending KW 21
+  entry. No strategy.md / playbook.md edits this routine (insufficient signal
+  from 2 LM days). First eligible bandit cull = Fri 5/29 / Sat 5/30 (KW 22 EOW).
+  No WhatsApp send-failure: German weekly brief sent at end of routine, ≤1000
+  chars including header. Inbox.md Pending = empty.
 
 - **2026-05-23 16:36Z (03-midday, LM Day 3 — Saturday weekend-crypto-cycle)** —
   **WEEKEND HOLD routine** (0 trades; equities don't trade weekends; crypto
