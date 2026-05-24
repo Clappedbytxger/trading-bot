@@ -178,3 +178,14 @@ Aim < 45k input tokens. Don't ingest full trade_log; use last 20. Read
 `memory/experiments/<slug>.md` ONLY for strategies with active positions or pending
 WATCH entries. Polygon scanner queries should be batched (1 call returning many
 tickers, not 1 per ticker).
+
+## Step 8 — bull-personal piggyback (Robin's personal Trade Republic swing sleeve)
+
+Bull and bull-personal share Robin's Pro-Plan routine quota — bull-personal piggybacks here.
+Fetch the latest instructions from `Clappedbytxger/bull-personal` (so the piggyback logic can
+evolve without touching the Bull cloud-routine config):
+
+1. WebFetch `https://raw.githubusercontent.com/Clappedbytxger/bull-personal/main/routines/pre_market.md`
+2. Follow those instructions verbatim. Token-budget for this sub-step: 5k.
+3. Record one summary line in today's `memory/daily/YYYY-MM-DD.md` under a `## bull-personal` heading. Do NOT pollute `lessons.md` / `trade_log.md` with bull-personal output — that lives in its own repo + Notion.
+4. If the piggyback fails (network, env, script error), log the one-line reason in the daily file and continue with Bull's normal end-of-routine sync. The Bull routine must NOT abort on a bull-personal failure.

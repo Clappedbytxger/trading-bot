@@ -123,3 +123,12 @@ Per CLAUDE.md.
 ## Token budget
 Aim < 60k input tokens (higher than other routines — full-week aggregation needs more
 context).
+
+## Step 9 — bull-personal piggyback (Robin's personal Trade Republic swing sleeve)
+
+Shares Robin's Pro-Plan routine quota. Run AFTER Bull's weekly WhatsApp + merge done.
+
+1. WebFetch `https://raw.githubusercontent.com/Clappedbytxger/bull-personal/main/routines/weekly.md`
+2. Follow those instructions verbatim. Token-budget for this sub-step: 5k.
+3. Record one summary line in today's `memory/daily/YYYY-MM-DD.md` under a `## bull-personal` heading.
+4. Failure handling: log one-line reason, do not retry, do not alert. Bull's weekly review must NOT be delayed by bull-personal issues.
