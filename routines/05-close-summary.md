@@ -124,3 +124,13 @@ Per CLAUDE.md. **This is one of the highest-priority merges of the day** — tom
 
 ## Token budget
 Aim < 45k input tokens.
+
+## Step 8 — bull-personal piggyback (Robin's personal Trade Republic swing sleeve)
+
+Shares Robin's Pro-Plan routine quota. Run AFTER Bull's WhatsApp has been sent and the
+merge is verified — bull-personal must never delay Bull's own close-summary.
+
+1. WebFetch `https://raw.githubusercontent.com/Clappedbytxger/bull-personal/main/routines/eod.md`
+2. Follow those instructions verbatim. Token-budget for this sub-step: 5k.
+3. Record one summary line in today's `memory/daily/YYYY-MM-DD.md` under a `## bull-personal` heading.
+4. If the piggyback fails, log a one-line reason in the daily file and exit. Bull's routine is already done — bull-personal failures must NOT trigger any retry or alert beyond the daily-file log.
