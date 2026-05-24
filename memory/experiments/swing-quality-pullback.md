@@ -69,6 +69,19 @@ Sleeve: Swing. Status: active. Playbook reference: `memory/playbook.md`.
   Mon 5/25 = Memorial Day, US market closed; weekend headlines could
   meaningfully reprice NVDA at Tue's open.
 
+- **2026-05-24 16:36Z (03-midday Day 1+weekend hold, Sun)**: weekend
+  mark $215.33, identical to Sat 5/23 snapshot (broker's weekend quote
+  stream produced no fresh tick Sat → Sun on NVDA). UPL **-2.105%
+  / -$42.11**, cushion **2.96%** — both unchanged from Sat. Stop $208.96
+  `OrderStatus.NEW` GTC verified live. No action. Time-stop date
+  2026-06-02 unchanged (Mon 5/25 = Memorial Day, US market closed → first
+  live tick on this position arrives Tue 5/26 13:30Z open). **Tue 5/26
+  open watch reaffirmed**: if cushion compresses to <2% (mark ≈ $213.22),
+  tighten posture — consider half-out at market to lock the remaining
+  1-1.5% cushion against a gap-down through the stop. Long-weekend
+  AI-capex headline risk possible but no specific catalyst on the
+  calendar.
+
 ### Outcome (TBD — to be filled in post-exit)
 
 - Exit date:

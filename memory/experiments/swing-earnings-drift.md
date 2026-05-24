@@ -76,6 +76,19 @@ Sleeve: Swing. Status: active. Playbook reference: `memory/playbook.md`.
   beyond the planned -7% stop-out. Note: long-weekend gap risk is real
   but RL has no major catalysts on the calendar for the long weekend.
 
+- **2026-05-24 16:36Z (03-midday Day 1+weekend hold, Sun)**: weekend
+  mark $377.78, identical to Sat 5/23 snapshot. UPL **+0.199% / +$2.98**,
+  cushion **7.19%** — both unchanged from Sat. Stop $350.64
+  `OrderStatus.NEW` GTC verified live. No action. Time-stop date
+  2026-06-05 unchanged. PEAD thesis intact for Day-3+ of hold; typical
+  drift profile is Day 3-5 acceleration, which first ticks live on
+  Tue 5/26 open (Mon 5/25 = Memorial Day, closed). **Uncovered slice
+  re-check**: 0.978463 sh × $377.78 ≈ $370 still unprotected by the
+  3-share stop. Long-weekend gap risk monitored — no RL catalysts on
+  the calendar Mon → Tue; if RL gaps down >5% overnight Mon → Tue
+  open, the uncovered slice prints ~$18 of additional loss beyond the
+  planned -7% stop-out. Acceptable given Swing budget context.
+
 ### Outcome (TBD — to be filled in post-exit)
 
 - Exit date:
