@@ -1,8 +1,8 @@
-From 6f1a9418054bbf87d3b86b3ee820c9493cde5a63 Mon Sep 17 00:00:00 2001
+From 1fcd19ed10133bce92ce470ec2db816ab0670092 Mon Sep 17 00:00:00 2001
 From: Bull Bot <bot@trading.local>
-Date: Mon, 25 May 2026 22:25:18 +0000
-Subject: [PATCH] fix: TR-compatible position sizing (integer shares,
- EUR-primary display)
+Date: Mon, 25 May 2026 22:51:56 +0000
+Subject: [PATCH] =?UTF-8?q?fix:=20TR-compatible=20position=20sizing=20+=20?=
+ =?UTF-8?q?=E2=82=AC1k/1.5%=20risk=20envelope?=
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -11,27 +11,32 @@ Trade Republic does NOT support fractional shares on Stop-Buy /
 Stop-Market / Limit orders — only Market orders. The strategy uses
 Stop-Buy for entry, so sizing must be in integer shares.
 
-Bug 1 (currency mismatch, pre-existing): risk_eur (EUR) was divided
-by risk_per_share (USD). Fix: convert risk-per-share to EUR before
+Bug 1 (currency mismatch): risk_eur (EUR) was divided by
+risk_per_share (USD). Fix: convert risk-per-share to EUR before
 sizing.
 
-Bug 2 (silent under-sizing, pre-existing): int() truncation gave 0
-shares for any setup where 1 share's risk exceeded the budget — but
-those setups were still printed as 'tradeable' with 0sh = $0
-notional. Fix: explicitly classify setups as 'affordable' (>=1 share
-within risk budget) vs 'over-budget' (1 share already exceeds
-budget); the latter are shown in a 'Skipped' section with 1-share
-risk %, so Robin can decide whether to override the 1% rule.
+Bug 2 (silent under-sizing): int() truncation gave 0 shares for any
+setup where 1 share's risk exceeded the budget — but those setups
+were still printed as 'tradeable' with 0sh = $0 notional. Fix:
+explicitly classify setups as 'affordable' (>=1 share within risk
+budget) vs 'over-budget' (1 share already exceeds budget). The
+latter are shown in a 'Skipped' section with 1-share-risk %, so
+Robin can decide whether to override the 1% rule.
 
-Display (Robin pref 2026-05-25): entry / SL / TP are EUR-primary
+Risk envelope (Robin pref 2026-05-25):
+- ACCOUNT_EQUITY_EUR: 500 -> 1000 (env-var driven, default fallback
+  updated to 1000 in config.py for safety).
+- STRATEGY['risk_per_trade_pct']: 1.0 -> 1.5 (€15 budget/trade).
+
+Display (Robin pref 2026-05-25): entry / SL / TP shown EUR-primary
 with USD alongside in 'EUR / USD' format, in both Notion table and
-WhatsApp. EUR for at-a-glance risk sizing; USD kept because TR
-books US stocks in USD.
+WhatsApp message. EUR for at-a-glance risk sizing; USD kept because
+TR books US stocks in USD for order entry.
 
-Setup now exposes: shares (int), one_share_risk_eur, one_share_risk_pct,
-affordable (bool). format_notion_markdown splits tradeable vs
-over-budget tables. format_whatsapp lists tradeable first, then
-SKIP rows with the over-budget reason.
+Setup now exposes: shares (int), one_share_risk_eur,
+one_share_risk_pct, affordable (bool). format_notion_markdown
+splits tradeable vs over-budget tables. format_whatsapp lists
+tradeable first, then SKIP rows with the over-budget reason.
 
 fx_rate threaded through scan() / evaluate() as optional param;
 falls back to usd_to_eur_rate() if omitted.
@@ -39,10 +44,33 @@ falls back to usd_to_eur_rate() if omitted.
 Order-Anleitung footer extended with explicit TR fractional-share
 caveat.
 ---
+ src/config.py                    |  4 +-
  src/routines/pre_market_brief.py | 80 +++++++++++++++++++++++++-------
  src/scanner.py                   | 41 +++++++++++++---
- 2 files changed, 98 insertions(+), 23 deletions(-)
+ 3 files changed, 100 insertions(+), 25 deletions(-)
 
+diff --git a/src/config.py b/src/config.py
+index bd004c9..815852d 100644
+--- a/src/config.py
++++ b/src/config.py
+@@ -25,7 +25,7 @@ STRATEGY = {
+     "pullback_lookback": 3,           # last N daily bars
+     "stop_pct": 8.0,
+     "target_pct": 16.0,
+-    "risk_per_trade_pct": 1.0,
++    "risk_per_trade_pct": 1.5,
+     "max_positions": 3,
+     "earnings_blackout_days": 3,
+     "entry_buffer_pct": 0.1,          # stop-buy 0.1% above confirmation high
+@@ -37,7 +37,7 @@ NOTION_DB_PREMARKET = os.getenv("NOTION_DB_PREMARKET", "")
+ NOTION_DB_JOURNAL = os.getenv("NOTION_DB_JOURNAL", "")
+ CALLMEBOT_API_KEY = os.getenv("CALLMEBOT_API_KEY", "")
+ WHATSAPP_PHONE = os.getenv("WHATSAPP_PHONE", "")
+-ACCOUNT_EQUITY_EUR = float(os.getenv("ACCOUNT_EQUITY_EUR", "500"))
++ACCOUNT_EQUITY_EUR = float(os.getenv("ACCOUNT_EQUITY_EUR", "1000"))
+ 
+ 
+ def require(name: str, value: str) -> str:
 diff --git a/src/routines/pre_market_brief.py b/src/routines/pre_market_brief.py
 index 9214a0f..86c3a43 100644
 --- a/src/routines/pre_market_brief.py
