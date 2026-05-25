@@ -6,6 +6,70 @@ entries (> 30 days) can be pruned by the weekly-review routine.
 
 ---
 
+## 2026-05-25 — Pre-market (LM Day 5 of 30, Mon US Memorial Day, cash CLOSED)
+
+**Macro (Gemini, post-weekend pre-flight for Tue 5/26 reopen):**
+- S&P 500 futures (ES) +0.35-0.92% on holiday-shortened tape; Nasdaq 100
+  futures +0.42-1.36%. Equity-positive overnight.
+- 10Y Treasury yield 4.51% (eased from 4.56% Fri 5/22). Dovish drift.
+- DXY ~99.0 (-0.27%); USD softness on risk-on sentiment.
+- WTI crude $90.65 (-4.7%) on US-Iran peace-agreement optimism;
+  disinflationary impulse.
+- Risk sentiment improved on geopolitical hopes.
+- VIX 16.65 (vs Fri 16.70); no -3% SPY signal; SPY +0.39% Fri close
+  (week +0.88%).
+- Scheduled releases next 5 td: **Thu 2026-05-28 13:30Z = April PCE +
+  Q1 GDP 2nd estimate** (only major release in the window; next CPI 6/10,
+  PPI 6/11, FOMC minutes 7/8). May U Mich consumer sentiment revised
+  LOWER to record low Fri 5/22.
+- Earnings this week (none in Bull's book): CRM, SNOW, MRVL, DELL, HP.
+
+**Per-position weekend news scan (Gemini):**
+- **NVDA**: zero new material weekend news beyond the 5/20 print recap
+  (already captured). Analyst median PT $275 (range $180-$400); Baird
+  $500 (high). Vera CPU shipments to OpenAI/Anthropic/SpaceXAI/Oracle
+  confirmed. CEO Huang "parabolic AI demand" at Dell World 5/19. NVDA at
+  TD Cowen Tech Conf 5/28 + BofA Global Tech 6/4 — both upside catalyst
+  candidates within the swing-hold window.
+- **RL**: weekend analyst re-rating flow on the 5/21 print: JPM/Barclays/
+  UBS/DB maintained BUY 5/23; UBS PT $511 raised 5/22, Needham $400→$405.
+  FY27 guide mid-single-digit rev growth. Strong reinforcement of the
+  Day-3 PEAD thesis on the open RL position.
+- **AVGO**: Citi PT $475→$500 (5/12 catch-up), UBS $475→$490 (5/19),
+  Goldman bullish on AI-infra. AVGO earnings 2026-06-03 = 6 td out from
+  Tue 5/26 (outside the 3-td earnings exclusion window for new entries,
+  but Core is frozen anyway during LM).
+- **MSFT, GOOGL, META, V, BRK.B, LLY, VOO**: no material weekend news
+  flagged.
+
+**Crypto (yfinance, Mon 12:11Z 24h close):**
+- BTC $77,247.33 +0.35% 24h, +0.38% 7d, 50/200 gap **-4.31%** (narrowed
+  from -4.67% Sun; weekend convergence continues at ~0.36 pp/day pace).
+- ETH $2,111.57 +0.65% / -0.80% / -10.89% gap.
+- SOL $85.72 +0.55% / +0.50% / -18.98% gap.
+- AVAX $9.37 +1.77% / +1.47% / -15.61% gap.
+- LINK $9.52 +1.01% / -0.72% / **-12.63%** gap; 50-DMA $9.51 vs 200-DMA
+  $9.50 — on the cusp but not a clean cross (within noise).
+- `crypto-trend-follow` decision: **HOLD scan** — BTC convergence
+  continues but no cross-up yet; LINK in noise-cusp watch. Next scan at
+  Tue 03-midday.
+
+**Plays this enables (Tue 5/26 draft only — no execution today, market
+closed)**:
+- Tue 02-market-open: full Account state re-pull + 10 GTC stop verification.
+- Polygon options-chain **4th re-test** at Tue 01-pre-market.
+- If chain unblocks AND PCE+GDP confirmed Thu 5/28 13:30Z: **2 SPY OTM
+  protective puts** (~5% OTM, ~30 DTE, $1k total premium) per
+  `options-protective-put` playbook spec (1 put per $30k Core equity).
+- Swing screens: re-scan momentum-breakout / mean-reversion / quality-
+  pullback / short-rejection / short-fundamental; AAPL re-watch; ARM
+  re-arm if <$290.
+- Daytrade: PDT budget full 5/5; post-holiday lighter-vol → tighten ORB
+  filter to 1.7x avg-vol.
+- Crypto: LINK 50/200 cusp watch + BTC continued convergence monitor.
+
+---
+
 ## 2026-05-22 — Pre-market (LM Day 2 of 30, Fri KW 21 day 5)
 
 **Macro (Gemini):**
