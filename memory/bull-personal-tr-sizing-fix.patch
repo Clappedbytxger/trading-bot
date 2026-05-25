@@ -1,0 +1,242 @@
+From 6f1a9418054bbf87d3b86b3ee820c9493cde5a63 Mon Sep 17 00:00:00 2001
+From: Bull Bot <bot@trading.local>
+Date: Mon, 25 May 2026 22:25:18 +0000
+Subject: [PATCH] fix: TR-compatible position sizing (integer shares,
+ EUR-primary display)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Trade Republic does NOT support fractional shares on Stop-Buy /
+Stop-Market / Limit orders — only Market orders. The strategy uses
+Stop-Buy for entry, so sizing must be in integer shares.
+
+Bug 1 (currency mismatch, pre-existing): risk_eur (EUR) was divided
+by risk_per_share (USD). Fix: convert risk-per-share to EUR before
+sizing.
+
+Bug 2 (silent under-sizing, pre-existing): int() truncation gave 0
+shares for any setup where 1 share's risk exceeded the budget — but
+those setups were still printed as 'tradeable' with 0sh = $0
+notional. Fix: explicitly classify setups as 'affordable' (>=1 share
+within risk budget) vs 'over-budget' (1 share already exceeds
+budget); the latter are shown in a 'Skipped' section with 1-share
+risk %, so Robin can decide whether to override the 1% rule.
+
+Display (Robin pref 2026-05-25): entry / SL / TP are EUR-primary
+with USD alongside in 'EUR / USD' format, in both Notion table and
+WhatsApp. EUR for at-a-glance risk sizing; USD kept because TR
+books US stocks in USD.
+
+Setup now exposes: shares (int), one_share_risk_eur, one_share_risk_pct,
+affordable (bool). format_notion_markdown splits tradeable vs
+over-budget tables. format_whatsapp lists tradeable first, then
+SKIP rows with the over-budget reason.
+
+fx_rate threaded through scan() / evaluate() as optional param;
+falls back to usd_to_eur_rate() if omitted.
+
+Order-Anleitung footer extended with explicit TR fractional-share
+caveat.
+---
+ src/routines/pre_market_brief.py | 80 +++++++++++++++++++++++++-------
+ src/scanner.py                   | 41 +++++++++++++---
+ 2 files changed, 98 insertions(+), 23 deletions(-)
+
+diff --git a/src/routines/pre_market_brief.py b/src/routines/pre_market_brief.py
+index 9214a0f..86c3a43 100644
+--- a/src/routines/pre_market_brief.py
++++ b/src/routines/pre_market_brief.py
+@@ -122,17 +122,43 @@ def format_notion_markdown(
+         )
+         return head + macro_section + earnings_section + setups_section
+ 
++    tradeable = [s for s in setups if s.affordable]
++    over_budget = [s for s in setups if not s.affordable]
++
+     rows = ["## Setups (mit Position-Sizing)\n",
+-            "| Sym | Entry | SL | TP | Shares | Notional USD | Notional EUR | Risk EUR | R:R |",
+-            "|---|---:|---:|---:|---:|---:|---:|---:|---:|"]
+-    for s in setups:
+-        notional_usd = round(s.shares * s.entry, 2)
+-        notional_eur = round(notional_usd * fx_rate, 2)
+-        rows.append(
+-            f"| {s.symbol} | {s.entry:.2f} | {s.stop:.2f} | {s.target:.2f} | "
+-            f"{s.shares} | ${notional_usd:,.0f} | €{notional_eur:,.0f} | "
+-            f"€{s.risk_eur:.2f} | 1:{s.rr:.1f} |"
+-        )
++            "| Sym | Entry (EUR / USD) | SL (EUR / USD) | TP (EUR / USD) | Shares | Notional EUR | Risk EUR | R:R |",
++            "|---|---:|---:|---:|---:|---:|---:|---:|"]
++    if tradeable:
++        for s in tradeable:
++            notional_usd = round(s.shares * s.entry, 2)
++            notional_eur = round(notional_usd * fx_rate, 2)
++            entry_eur = round(s.entry * fx_rate, 2)
++            stop_eur = round(s.stop * fx_rate, 2)
++            target_eur = round(s.target * fx_rate, 2)
++            actual_risk_eur = round(s.shares * (s.entry - s.stop) * fx_rate, 2)
++            rows.append(
++                f"| {s.symbol} | €{entry_eur:.2f} / ${s.entry:.2f} | "
++                f"€{stop_eur:.2f} / ${s.stop:.2f} | €{target_eur:.2f} / ${s.target:.2f} | "
++                f"{s.shares} | €{notional_eur:,.2f} | "
++                f"€{actual_risk_eur:.2f} | 1:{s.rr:.1f} |"
++            )
++    else:
++        rows.append("| _(keine tradebare Setups — alle Setups übersteigen das Risk-Budget bei 1 share)_ |")
++
++    if over_budget:
++        rows.append("\n### Skipped (1 share über Risk-Budget)\n")
++        rows.append("| Sym | Entry (EUR / USD) | SL (EUR / USD) | 1sh Risk EUR | 1sh Risk % Equity | Budget % | Reason |")
++        rows.append("|---|---:|---:|---:|---:|---:|---|")
++        for s in over_budget:
++            entry_eur = round(s.entry * fx_rate, 2)
++            stop_eur = round(s.stop * fx_rate, 2)
++            multiple = round(s.one_share_risk_eur / s.risk_eur, 1) if s.risk_eur > 0 else 0
++            rows.append(
++                f"| {s.symbol} | €{entry_eur:.2f} / ${s.entry:.2f} | "
++                f"€{stop_eur:.2f} / ${s.stop:.2f} | €{s.one_share_risk_eur:.2f} | "
++                f"{s.one_share_risk_pct:.1f}% | €{s.risk_eur:.2f} | "
++                f"1 sh = {multiple}× budget |"
++            )
+ 
+     detail = ["\n\n## Per-Setup Recherche\n"]
+     for s in setups:
+@@ -151,7 +177,11 @@ def format_notion_markdown(
+         "1. Stop-Buy 0.1% über Entry-High platzieren (nicht Market).\n"
+         "2. SL als Stop-Market direkt nach Fill setzen.\n"
+         "3. TP optional als Limit (1:2 R:R); oder manuelle Exit-Entscheidung bei EOD-Review.\n"
+-        "4. Bei +1R: SL auf Break-Even ziehen (Bull-Personal meldet das im EOD-Review).\n"
++        "4. Bei +1R: SL auf Break-Even ziehen (Bull-Personal meldet das im EOD-Review).\n\n"
++        "**Hinweis Bruchstücke**: TR erlaubt Bruchstücke NUR bei Market-Orders. "
++        "Stop-Buy, Stop-Market und Limit benötigen ganze Aktien. Daher sind die Setups "
++        "oben mit Integer-Sizing gerechnet; \"Skipped\"-Setups (1 share > 1% Risk-Budget) "
++        "können entweder übersprungen oder mit erhöhtem Risk-Akzept manuell entered werden.\n"
+     )
+ 
+     return head + macro_section + earnings_section + "\n".join(rows) + "\n" + "".join(detail) + footer
+@@ -171,13 +201,29 @@ def format_whatsapp(
+         f"{len(setups)} Setup(s) · Equity {ACCOUNT_EQUITY_EUR:.0f}€",
+         "",
+     ]
+-    for s in setups[:3]:
+-        notional_usd = round(s.shares * s.entry, 0)
+-        notional_eur = round(notional_usd * fx_rate, 0)
++    tradeable = [s for s in setups if s.affordable]
++    over_budget = [s for s in setups if not s.affordable]
++
++    if not tradeable and over_budget:
++        lines.append(f"Keine tradebare Setups (alle {len(over_budget)} über Risk-Budget bei 1 share).")
++    for s in tradeable[:3]:
++        entry_eur = round(s.entry * fx_rate, 2)
++        stop_eur = round(s.stop * fx_rate, 2)
++        target_eur = round(s.target * fx_rate, 2)
++        notional_eur = round(s.shares * s.entry * fx_rate, 2)
++        actual_risk_eur = round(s.shares * (s.entry - s.stop) * fx_rate, 2)
++        lines.append(
++            f"• {s.symbol} {s.shares}sh\n"
++            f"  Entry €{entry_eur:.2f} / ${s.entry:.2f}\n"
++            f"  SL €{stop_eur:.2f} / ${s.stop:.2f}\n"
++            f"  TP €{target_eur:.2f} / ${s.target:.2f}\n"
++            f"  Pos €{notional_eur:,.2f} · Risk €{actual_risk_eur:.2f} · 1:{s.rr:.1f}"
++        )
++    for s in over_budget[:3]:
++        entry_eur = round(s.entry * fx_rate, 2)
+         lines.append(
+-            f"• {s.symbol} {s.shares}sh @ ${s.entry:.2f}\n"
+-            f"  Pos: ${notional_usd:,.0f} (~€{notional_eur:,.0f}) · Risk €{s.risk_eur:.2f}\n"
+-            f"  SL ${s.stop:.2f} · TP ${s.target:.2f} · 1:{s.rr:.1f}"
++            f"• {s.symbol} SKIP · Entry €{entry_eur:.2f} / ${s.entry:.2f}\n"
++            f"  1sh-Risk €{s.one_share_risk_eur:.2f} ({s.one_share_risk_pct:.1f}% Equity) > €{s.risk_eur:.2f} Budget"
+         )
+     if len(setups) > 3:
+         lines.append(f"\n+{len(setups) - 3} weitere → Notion-Brief")
+diff --git a/src/scanner.py b/src/scanner.py
+index 28565df..b7f60f8 100644
+--- a/src/scanner.py
++++ b/src/scanner.py
+@@ -5,6 +5,7 @@ from dataclasses import dataclass, asdict
+ from typing import Optional
+ 
+ from .config import STRATEGY, ACCOUNT_EQUITY_EUR
++from .fx import usd_to_eur_rate
+ from .market import Bars, ema, fetch_bars, in_earnings_blackout
+ 
+ 
+@@ -23,14 +24,20 @@ class Setup:
+     rr: float
+     shares: int
+     risk_eur: float
++    one_share_risk_eur: float        # what 1 share would cost in EUR risk
++    one_share_risk_pct: float        # 1-share risk as % of equity
++    affordable: bool                 # True if shares >= 1 within risk budget
+     notes: str
+ 
+     def to_dict(self) -> dict:
+         return asdict(self)
+ 
+ 
+-def evaluate(symbol: str) -> Optional[Setup]:
+-    """Returns Setup if Strategy-v1 conditions met, else None."""
++def evaluate(symbol: str, fx_rate: Optional[float] = None) -> Optional[Setup]:
++    """Returns Setup if Strategy-v1 conditions met, else None.
++
++    `fx_rate` is EUR per 1 USD (e.g. 0.8583). If omitted, fetched on demand.
++    """
+     bars = fetch_bars(symbol, days=120)
+     if bars is None:
+         return None
+@@ -69,9 +76,25 @@ def evaluate(symbol: str) -> Optional[Setup]:
+     entry = round(bars.last_high * (1 + buf), 2)
+     stop = round(entry * (1 - STRATEGY["stop_pct"] / 100.0), 2)
+     target = round(entry * (1 + STRATEGY["target_pct"] / 100.0), 2)
+-    risk_per_share = entry - stop
++    risk_per_share_usd = entry - stop  # USD
+     risk_eur = ACCOUNT_EQUITY_EUR * STRATEGY["risk_per_trade_pct"] / 100.0
+-    shares = max(int(risk_eur / risk_per_share), 0) if risk_per_share > 0 else 0
++    # Trade Republic does NOT support fractional shares on Stop-Buy /
++    # Stop-Market / Limit orders (only Market). Strategy uses Stop-Buy
++    # for entry → must size integer shares. If 1 share already exceeds
++    # the risk budget, flag as unaffordable rather than silently breaking
++    # the 1% rule.
++    fx = fx_rate if fx_rate is not None else usd_to_eur_rate()
++    risk_per_share_eur = risk_per_share_usd * fx if fx > 0 else 0.0
++    one_share_risk_eur = round(risk_per_share_eur, 2)
++    one_share_risk_pct = round(
++        (risk_per_share_eur / ACCOUNT_EQUITY_EUR * 100.0) if ACCOUNT_EQUITY_EUR > 0 else 0.0,
++        2,
++    )
++    if risk_per_share_eur <= 0:
++        shares = 0
++    else:
++        shares = int(risk_eur // risk_per_share_eur)  # floor
++    affordable = shares >= 1
+ 
+     pullback_low = float(recent_lows.min())
+ 
+@@ -89,15 +112,21 @@ def evaluate(symbol: str) -> Optional[Setup]:
+         rr=round(STRATEGY["target_pct"] / STRATEGY["stop_pct"], 2),
+         shares=shares,
+         risk_eur=round(risk_eur, 2),
++        one_share_risk_eur=one_share_risk_eur,
++        one_share_risk_pct=one_share_risk_pct,
++        affordable=affordable,
+         notes=f"close {close:.2f} vs 20EMA {e20:.2f} ({(close/e20-1)*100:+.1f}%)",
+     )
+ 
+ 
+-def scan(symbols: list[str]) -> list[Setup]:
++def scan(symbols: list[str], fx_rate: Optional[float] = None) -> list[Setup]:
++    """Scan symbols for setups. `fx_rate` propagates to sizing; fetched lazily if None."""
++    if fx_rate is None:
++        fx_rate = usd_to_eur_rate()
+     out: list[Setup] = []
+     for s in symbols:
+         try:
+-            setup = evaluate(s)
++            setup = evaluate(s, fx_rate=fx_rate)
+             if setup is not None:
+                 out.append(setup)
+         except Exception as exc:
+-- 
+2.43.0
+
