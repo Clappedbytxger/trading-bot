@@ -19,11 +19,11 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Strategy slug | Sleeve | Status | Trades | Win-rate | Avg R | Net P&L | Max DD | RAR | Alpha vs SPY | Last update |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---|
-| core-buy-and-hold          | Core      | active | 16 fills (T1+T2, no closes) | — | — | +$941.97 (UPL Sun weekend mark) | $0 (no closes) | — | -8.57% (Live-Phase carryover + LM Day 4 Sun) | 2026-05-24 03-midday |
+| core-buy-and-hold          | Core      | active | 16 fills (T1+T2, no closes) | — | — | +$941.97 (UPL Mon holiday mark) | $0 (no closes) | — | -8.57% (Live-Phase carryover + LM Day 5 Mon holiday) | 2026-05-25 03-midday |
 | swing-momentum-breakout    | Swing     | active | 0 (ARM WATCH → MISSED 13:30-14:00Z; intraday H $315 → C $304.66 fade; re-arm on close <$290; weekend = no scan) | — | — | $0.00 | $0 | — | — | 2026-05-22 05-close-summary |
 | swing-mean-reversion       | Swing     | active | 0 (1 SKIP = INTU thesis-risk) | — | — | $0.00 | $0 | — | — | 2026-05-22 02-market-open |
-| swing-quality-pullback     | Swing     | active | **1 open (NVDA)** | — | — | -$42.11 (UPL Sun weekend mark) | $0 (no closes) | — | — | 2026-05-24 03-midday |
-| swing-earnings-drift       | Swing     | active | **1 open (RL)** | — | — | +$2.98 (UPL Sun weekend mark) | $0 (no closes) | — | — | 2026-05-24 03-midday |
+| swing-quality-pullback     | Swing     | active | **1 open (NVDA)** | — | — | -$42.11 (UPL Mon holiday mark) | $0 (no closes) | — | — | 2026-05-25 03-midday |
+| swing-earnings-drift       | Swing     | active | **1 open (RL)** | — | — | +$2.98 (UPL Mon holiday mark) | $0 (no closes) | — | — | 2026-05-25 03-midday |
 | swing-insider-buys         | Swing     | paused | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | swing-short-rejection      | Swing     | active | 0 (1 WATCH = AAPL — EOD final candle UP +1.00% close $309.13 with fresh $311.40 52w-Hi extension; PASS today, re-watch Tue 5/26) | — | — | $0.00 | $0 | — | — | 2026-05-22 05-close-summary |
 | swing-short-fundamental    | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
@@ -33,9 +33,9 @@ Window: 2026-05-21 → 2026-06-20.
 | daytrade-gap-go            | Daytrade  | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | scalp-tape                 | Daytrade  | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | daytrade-news-catalyst     | Daytrade  | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
-| crypto-trend-follow        | Crypto    | active | 0 (5 scans, no signal; BTC 50/200 gap narrowed -6.2% → -5.09% → -4.67% over the weekend — leading the convergence but no cross) | — | — | $0.00 | $0 | — | — | 2026-05-24 03-midday |
-| crypto-weekend-momentum    | Crypto    | active | 0 (Fri 5/22 trigger NOT met: BTC 7d -3.02% << +2%; no Sat/Sun monitor needed; closed) | — | — | $0.00 | $0 | — | — | 2026-05-24 03-midday |
-| crypto-mean-reversion      | Crypto    | active | 0 (Sun scan: largest 24h move AVAX -1.86% — far from -10% trigger) | — | — | $0.00 | $0 | — | — | 2026-05-24 03-midday |
+| crypto-trend-follow        | Crypto    | active | 0 (7 scans, no signal; BTC 50/200 gap -6.2% → -5.09% → -4.67% → -4.31% Mon — leading the convergence; gap stalled flat 12:11Z → 16:39Z) | — | — | $0.00 | $0 | — | — | 2026-05-25 03-midday |
+| crypto-weekend-momentum    | Crypto    | active | 0 (Fri 5/22 trigger NOT met: BTC 7d -3.02% << +2%; no Sat/Sun/Mon monitor needed; closed; re-arm next Fri 5/29) | — | — | $0.00 | $0 | — | — | 2026-05-25 03-midday |
+| crypto-mean-reversion      | Crypto    | active | 0 (Mon 16:39Z scan: largest 24h move AVAX +2.53% — opposite of -10% flush trigger) | — | — | $0.00 | $0 | — | — | 2026-05-25 03-midday |
 | options-long-call-momentum | Options   | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | options-protective-put     | Options   | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | options-vertical-bull-call-spread | Options | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
@@ -46,7 +46,7 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Sleeve | Cash Budget | Used | Open positions | Cumulative P&L | Cumulative Alpha vs SPY |
 |---|---:|---:|---:|---:|---:|
-| Core     | $62,000 | $62,941.97 (Sun weekend mark, +$941.97 UPL) | 8 | +$941.97 / +1.519% (10-day Live-Phase + LM Day 1-4 Sun weekend) | -8.57% Live-Phase + LM Day 4 Sun carryover |
+| Core     | $62,000 | $62,941.97 (Mon holiday mark, +$941.97 UPL) | 8 | +$941.97 / +1.519% (10-day Live-Phase + LM Day 1-5 Mon holiday) | -8.57% Live-Phase + LM Day 5 Mon holiday carryover |
 | Swing    | $15,000 | $3,500 cost (NVDA $2k + RL $1.5k) | 2 | -$39.13 UPL (NVDA -1.92% cushion 2.96%, RL +0.199% cushion 7.19%) | — (Day 1 td of hold; no realized P&L yet) |
 | Daytrade | $10,000 | $0      | 0 | $0 | — |
 | Crypto   | $5,000  | $0      | 0 | $0 | — |
@@ -376,3 +376,39 @@ whether trigger is reachable":
   Next routine: Sun 2026-05-24 03-midday at 17:30Z (weekend crypto-cycle
   Day 2 of 2; Mon 5/25 Memorial Day cash session closed; Tue 5/26
   01-pre-market at 13:00Z is next equity touchpoint).
+
+- **2026-05-25 16:39Z (03-midday, LM Day 5 — Memorial Day weekday holiday)** —
+  **HOLIDAY HOLD routine** (0 trades; cash session closed; equity sleeves
+  snapshot-only; crypto sleeve full scan, 0 entries). KPI deltas vs Mon
+  01-pre-market 12:13Z snap: **ALL marks identical** for the 10 equity
+  positions (broker pushing zero fresh ticks on the holiday). `core-buy-
+  and-hold` UPL = **+$941.97** (UNCHANGED), `swing-quality-pullback` UPL =
+  **-$42.11** (UNCHANGED), `swing-earnings-drift` UPL = **+$2.98**
+  (UNCHANGED). Bull equity **$100,901.97** (UNCHANGED vs Sun + vs 12:13Z;
+  -$4.07 vs 5/22 EOD; +$140.25 / +0.139% vs 5/21 EOD baseline). SPY: no
+  Mon holiday tape, carryover Fri close $745.70; VIX 16.82 carryover.
+  **LM Day 5 alpha (carryover from 5/22 EOD): -25.8 bp** (identical to
+  5/22-5/24 carryover). Daytrade count (5d): **0** (RESET held from 5/23
+  broker rollover). Options BP $67,700.98 / L3 ✓. Sleeve P&L attribution
+  Day 5: Core $0 / Swing $0 / DT $0 / Crypto $0 / Options $0 (no fresh
+  attribution on holiday snap). **Top / Bottom sub-strategy Day 5**: n/a
+  (no fresh attribution). **Crypto scan @ 16:39Z**: BTC +0.75%/24h
+  (+0.78%/7d, gap **-4.31%** UNCHANGED from 12:11Z — convergence stalled
+  intraday; full Tue session needed to resume). ETH +1.40%/24h. SOL
+  +0.95%/24h. AVAX **+2.53%/24h** (largest move, positive direction).
+  LINK +1.80%/24h. **0 crypto entries**: 0/5 50/200 cross-up, 0/5
+  -10%/24h flush, weekend-momentum no-monitor (no Fri-close fill).
+  Macro risk-off N/A (no Mon SPY/VIX tape; carryover NOT active; pre-
+  market futures + 10Y dovish drift from 12:13Z scan still in effect).
+  **Correction note**: 12:13Z report claimed LINK 50-DMA was above
+  200-DMA-trail by $0.01; fresh authoritative scan shows LINK 200-DMA
+  $10.88 (well above 50-DMA $9.509). LINK is NOT on the cusp; BTC
+  remains the leading convergence candidate. Inbox.md Pending: empty.
+  **LM Day 5 (Mon holiday) running tally locked: Bull equity
+  $100,901.97 / cumulative LM-window P&L $0 realized + Core UPL $941.97
+  + Swing UPL -$39.13 = $902.84 UPL total / LM cum alpha -25.8 bp / LM
+  cum trade count 2 (both open).** Next routine: Tue 2026-05-26
+  01-pre-market at 13:00Z (post-holiday open; full equity execution
+  resumes; AAPL `swing-short-rejection` re-watch, ARM `swing-momentum-
+  breakout` re-arm watch, Polygon options-chain 4th re-test, SPY
+  protective-put pre-flight for Thu 5/28 PCE+GDP).
