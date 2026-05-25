@@ -34,12 +34,12 @@ issues), this file IS the reply channel.
 
 ## Operational notes (read every routine)
 
-### 2026-05-25 — Robin TR-sizing + EUR-display preferences (bull-personal)
+### 2026-05-25 — Robin TR-sizing + EUR-display + risk envelope (bull-personal)
 
 **EUR-primary prices**: entry / SL / TP shown EUR-primary, USD
 secondary in Notion briefs and WhatsApp. Format `€XXX.XX / $YYY.YY`.
-Reason: TR €500 sub-account is EUR-native; USD kept because TR books
-US stocks in USD for order entry.
+Reason: TR sub-account is EUR-native; USD kept because TR books US
+stocks in USD for order entry.
 
 **Integer-only share sizing**: Trade Republic does NOT support
 fractional shares on Stop-Buy / Stop-Market / Limit orders (only
@@ -49,18 +49,30 @@ integer shares.
 Setups are classified into:
 - **Tradeable**: integer shares ≥ 1 within risk budget → execute normally.
 - **Over-budget**: 1 share alone exceeds risk budget → SKIP, but show
-  1-share-risk % so Robin can decide whether to override the 1% rule
+  1-share-risk % so Robin can decide whether to override the rule
   manually for a high-conviction trade.
 
-**Both encoded in** `memory/bull-personal-tr-sizing-fix.patch`
-(commit `6f1a941`). Pending Robin manual-apply to bull-personal repo
-(Bull's GitHub MCP scope = trading-bot only, can't push to
-bull-personal from cloud routines).
+**Risk envelope (Robin update 2026-05-25 evening)**:
+- `ACCOUNT_EQUITY_EUR` env var: **€1,000** (was €500).
+- `STRATEGY["risk_per_trade_pct"]`: **1.5%** (was 1.0%).
+- Budget per trade: **€15** (was €5).
+- Watchlist sizing: stocks with risk-per-share ≤ €15
+  (≈ $17.46 USD, ≈ entry $218 with 8% stop) fit cleanly on
+  1 share. Stocks above that price still hit the SKIP path.
 
-Until patch is merged: Bull SHOULD respect both preferences when
-re-running the bull-personal piggyback manually. For Bull's own
-portfolio (Alpaca paper USD broker), prices stay USD — no cosmetic
-EUR layer because the broker holds USD natively.
+**Encoded in** `memory/bull-personal-tr-sizing-fix.patch`
+(commit `1fcd19e`). Pending Robin manual-apply to bull-personal repo
+(Bull's GitHub MCP scope = trading-bot only, can't push to
+bull-personal from cloud routines). Robin also needs to update
+`ACCOUNT_EQUITY_EUR=1000` in the Bull cloud-routine secrets store
+(the patch only updates the default fallback in config.py; the
+real source-of-truth is the env var).
+
+Until patch is merged: Bull SHOULD respect all preferences when
+re-running the bull-personal piggyback manually (in-process
+override of equity, risk %, EUR-display, integer-sizing). For
+Bull's own portfolio (Alpaca paper USD broker), prices stay USD —
+no cosmetic EUR layer because the broker holds USD natively.
 
 ### 2026-05-20 — Learning Month begins 2026-05-21
 - CLAUDE.md Phase Sentinel: 5/21 → 6/20 = LEARNING MONTH (all hard guardrails
