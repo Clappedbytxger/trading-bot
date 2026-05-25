@@ -1,39 +1,59 @@
-From f53c5bbbb87848ce93a7022521e6f760f3c1e730 Mon Sep 17 00:00:00 2001
+From dbc522c7f16813859cbc19c444392c29d870d66b Mon Sep 17 00:00:00 2001
 From: Bull Bot <bot@trading.local>
-Date: Mon, 25 May 2026 13:06:43 +0000
-Subject: [PATCH] fix: fractional share sizing for Trade Republic
+Date: Mon, 25 May 2026 13:35:10 +0000
+Subject: [PATCH] fix: EUR-primary price display + fractional share sizing for
+ Trade Republic
 
-Bug 1 (currency mismatch): risk_eur was divided by risk_per_share_usd
-directly, giving a meaningless quotient. Fix: convert risk budget EUR
-to USD via fx_rate before sizing.
+Bug 1 (currency mismatch): risk_eur (EUR) was divided by
+risk_per_share_usd (USD) directly. Fix: convert risk budget EUR to
+USD via fx_rate before sizing.
 
 Bug 2 (int truncation): int(risk/risk_per_share) truncated all sub-1
 share positions to 0, blocking any $500 sub-account trade above ~$5
-price. Fix: use float division and round to 4 decimals (Trade Republic
+price. Fix: use float division, round to 4 decimals (Trade Republic
 fractional precision).
+
+Display (Robin pref 2026-05-25): entry/SL/TP now shown EUR-primary
+with USD alongside ('EUR / USD') in both Notion table and WhatsApp
+message. EUR for at-a-glance risk sizing; USD kept so TR-order entry
+stays direct (TR books US stocks in USD).
 
 Setup.shares dtype changed int -> float; format strings updated to
 :.4f. fx_rate threaded through scan()/evaluate() as optional param;
 falls back to usd_to_eur_rate() if omitted.
 ---
- src/routines/pre_market_brief.py | 10 +++++-----
+ src/routines/pre_market_brief.py | 27 ++++++++++++++++++---------
  src/scanner.py                   | 27 ++++++++++++++++++++-------
- 2 files changed, 25 insertions(+), 12 deletions(-)
+ 2 files changed, 38 insertions(+), 16 deletions(-)
 
 diff --git a/src/routines/pre_market_brief.py b/src/routines/pre_market_brief.py
-index 9214a0f..1e1d217 100644
+index 9214a0f..1b83241 100644
 --- a/src/routines/pre_market_brief.py
 +++ b/src/routines/pre_market_brief.py
-@@ -130,7 +130,7 @@ def format_notion_markdown(
+@@ -123,14 +123,18 @@ def format_notion_markdown(
+         return head + macro_section + earnings_section + setups_section
+ 
+     rows = ["## Setups (mit Position-Sizing)\n",
+-            "| Sym | Entry | SL | TP | Shares | Notional USD | Notional EUR | Risk EUR | R:R |",
+-            "|---|---:|---:|---:|---:|---:|---:|---:|---:|"]
++            "| Sym | Entry (EUR / USD) | SL (EUR / USD) | TP (EUR / USD) | Shares | Notional EUR | Risk EUR | R:R |",
++            "|---|---:|---:|---:|---:|---:|---:|---:|"]
+     for s in setups:
+         notional_usd = round(s.shares * s.entry, 2)
          notional_eur = round(notional_usd * fx_rate, 2)
++        entry_eur = round(s.entry * fx_rate, 2)
++        stop_eur = round(s.stop * fx_rate, 2)
++        target_eur = round(s.target * fx_rate, 2)
          rows.append(
-             f"| {s.symbol} | {s.entry:.2f} | {s.stop:.2f} | {s.target:.2f} | "
+-            f"| {s.symbol} | {s.entry:.2f} | {s.stop:.2f} | {s.target:.2f} | "
 -            f"{s.shares} | ${notional_usd:,.0f} | €{notional_eur:,.0f} | "
-+            f"{s.shares:.4f} | ${notional_usd:,.2f} | €{notional_eur:,.2f} | "
++            f"| {s.symbol} | €{entry_eur:.2f} / ${s.entry:.2f} | "
++            f"€{stop_eur:.2f} / ${s.stop:.2f} | €{target_eur:.2f} / ${s.target:.2f} | "
++            f"{s.shares:.4f} | €{notional_eur:,.2f} | "
              f"€{s.risk_eur:.2f} | 1:{s.rr:.1f} |"
          )
  
-@@ -172,11 +172,11 @@ def format_whatsapp(
+@@ -172,12 +176,17 @@ def format_whatsapp(
          "",
      ]
      for s in setups[:3]:
@@ -41,14 +61,21 @@ index 9214a0f..1e1d217 100644
 -        notional_eur = round(notional_usd * fx_rate, 0)
 +        notional_usd = round(s.shares * s.entry, 2)
 +        notional_eur = round(notional_usd * fx_rate, 2)
++        entry_eur = round(s.entry * fx_rate, 2)
++        stop_eur = round(s.stop * fx_rate, 2)
++        target_eur = round(s.target * fx_rate, 2)
          lines.append(
 -            f"• {s.symbol} {s.shares}sh @ ${s.entry:.2f}\n"
 -            f"  Pos: ${notional_usd:,.0f} (~€{notional_eur:,.0f}) · Risk €{s.risk_eur:.2f}\n"
-+            f"• {s.symbol} {s.shares:.4f}sh @ ${s.entry:.2f}\n"
-+            f"  Pos: ${notional_usd:,.2f} (~€{notional_eur:,.2f}) · Risk €{s.risk_eur:.2f}\n"
-             f"  SL ${s.stop:.2f} · TP ${s.target:.2f} · 1:{s.rr:.1f}"
+-            f"  SL ${s.stop:.2f} · TP ${s.target:.2f} · 1:{s.rr:.1f}"
++            f"• {s.symbol} {s.shares:.4f}sh\n"
++            f"  Entry €{entry_eur:.2f} / ${s.entry:.2f}\n"
++            f"  SL €{stop_eur:.2f} / ${s.stop:.2f}\n"
++            f"  TP €{target_eur:.2f} / ${s.target:.2f}\n"
++            f"  Pos €{notional_eur:,.2f} · Risk €{s.risk_eur:.2f} · 1:{s.rr:.1f}"
          )
      if len(setups) > 3:
+         lines.append(f"\n+{len(setups) - 3} weitere → Notion-Brief")
 diff --git a/src/scanner.py b/src/scanner.py
 index 28565df..58a9899 100644
 --- a/src/scanner.py
