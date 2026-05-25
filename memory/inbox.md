@@ -34,23 +34,33 @@ issues), this file IS the reply channel.
 
 ## Operational notes (read every routine)
 
-### 2026-05-25 — Robin price-display preference (bull-personal)
-- Robin requested entry / SL / TP prices be shown **EUR-primary, USD
-  secondary** in bull-personal Notion briefs and WhatsApp messages.
-  Format: `€XXX.XX / $YYY.YY` (EUR first, USD alongside).
-- Reason: bull-personal manages Robin's €500 EUR Trade Republic
-  sub-account; EUR makes risk/sizing intuitive at a glance. USD is
-  kept alongside because TR books US stocks in USD (order entry
-  needs the USD reference).
-- **Encoded in `memory/bull-personal-fractional-shares.patch`**
-  (commit `dbc522c`). Pending Robin manual-apply to bull-personal
-  repo (Bull's GitHub MCP scope = trading-bot only, can't push to
-  bull-personal from cloud routines).
-- Until patch is merged: Bull SHOULD respect this preference when
-  re-running the bull-personal piggyback manually (e.g. via inline
-  override in a fix-up routine). For Bull's own portfolio (Alpaca
-  paper USD), prices stay USD — the broker holds USD and there is
-  no EUR translation step.
+### 2026-05-25 — Robin TR-sizing + EUR-display preferences (bull-personal)
+
+**EUR-primary prices**: entry / SL / TP shown EUR-primary, USD
+secondary in Notion briefs and WhatsApp. Format `€XXX.XX / $YYY.YY`.
+Reason: TR €500 sub-account is EUR-native; USD kept because TR books
+US stocks in USD for order entry.
+
+**Integer-only share sizing**: Trade Republic does NOT support
+fractional shares on Stop-Buy / Stop-Market / Limit orders (only
+Market). The bull-personal strategy uses Stop-Buy → sizing MUST be
+integer shares.
+
+Setups are classified into:
+- **Tradeable**: integer shares ≥ 1 within risk budget → execute normally.
+- **Over-budget**: 1 share alone exceeds risk budget → SKIP, but show
+  1-share-risk % so Robin can decide whether to override the 1% rule
+  manually for a high-conviction trade.
+
+**Both encoded in** `memory/bull-personal-tr-sizing-fix.patch`
+(commit `6f1a941`). Pending Robin manual-apply to bull-personal repo
+(Bull's GitHub MCP scope = trading-bot only, can't push to
+bull-personal from cloud routines).
+
+Until patch is merged: Bull SHOULD respect both preferences when
+re-running the bull-personal piggyback manually. For Bull's own
+portfolio (Alpaca paper USD broker), prices stay USD — no cosmetic
+EUR layer because the broker holds USD natively.
 
 ### 2026-05-20 — Learning Month begins 2026-05-21
 - CLAUDE.md Phase Sentinel: 5/21 → 6/20 = LEARNING MONTH (all hard guardrails
