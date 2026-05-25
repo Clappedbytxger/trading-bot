@@ -1,0 +1,124 @@
+From f53c5bbbb87848ce93a7022521e6f760f3c1e730 Mon Sep 17 00:00:00 2001
+From: Bull Bot <bot@trading.local>
+Date: Mon, 25 May 2026 13:06:43 +0000
+Subject: [PATCH] fix: fractional share sizing for Trade Republic
+
+Bug 1 (currency mismatch): risk_eur was divided by risk_per_share_usd
+directly, giving a meaningless quotient. Fix: convert risk budget EUR
+to USD via fx_rate before sizing.
+
+Bug 2 (int truncation): int(risk/risk_per_share) truncated all sub-1
+share positions to 0, blocking any $500 sub-account trade above ~$5
+price. Fix: use float division and round to 4 decimals (Trade Republic
+fractional precision).
+
+Setup.shares dtype changed int -> float; format strings updated to
+:.4f. fx_rate threaded through scan()/evaluate() as optional param;
+falls back to usd_to_eur_rate() if omitted.
+---
+ src/routines/pre_market_brief.py | 10 +++++-----
+ src/scanner.py                   | 27 ++++++++++++++++++++-------
+ 2 files changed, 25 insertions(+), 12 deletions(-)
+
+diff --git a/src/routines/pre_market_brief.py b/src/routines/pre_market_brief.py
+index 9214a0f..1e1d217 100644
+--- a/src/routines/pre_market_brief.py
++++ b/src/routines/pre_market_brief.py
+@@ -130,7 +130,7 @@ def format_notion_markdown(
+         notional_eur = round(notional_usd * fx_rate, 2)
+         rows.append(
+             f"| {s.symbol} | {s.entry:.2f} | {s.stop:.2f} | {s.target:.2f} | "
+-            f"{s.shares} | ${notional_usd:,.0f} | €{notional_eur:,.0f} | "
++            f"{s.shares:.4f} | ${notional_usd:,.2f} | €{notional_eur:,.2f} | "
+             f"€{s.risk_eur:.2f} | 1:{s.rr:.1f} |"
+         )
+ 
+@@ -172,11 +172,11 @@ def format_whatsapp(
+         "",
+     ]
+     for s in setups[:3]:
+-        notional_usd = round(s.shares * s.entry, 0)
+-        notional_eur = round(notional_usd * fx_rate, 0)
++        notional_usd = round(s.shares * s.entry, 2)
++        notional_eur = round(notional_usd * fx_rate, 2)
+         lines.append(
+-            f"• {s.symbol} {s.shares}sh @ ${s.entry:.2f}\n"
+-            f"  Pos: ${notional_usd:,.0f} (~€{notional_eur:,.0f}) · Risk €{s.risk_eur:.2f}\n"
++            f"• {s.symbol} {s.shares:.4f}sh @ ${s.entry:.2f}\n"
++            f"  Pos: ${notional_usd:,.2f} (~€{notional_eur:,.2f}) · Risk €{s.risk_eur:.2f}\n"
+             f"  SL ${s.stop:.2f} · TP ${s.target:.2f} · 1:{s.rr:.1f}"
+         )
+     if len(setups) > 3:
+diff --git a/src/scanner.py b/src/scanner.py
+index 28565df..58a9899 100644
+--- a/src/scanner.py
++++ b/src/scanner.py
+@@ -5,6 +5,7 @@ from dataclasses import dataclass, asdict
+ from typing import Optional
+ 
+ from .config import STRATEGY, ACCOUNT_EQUITY_EUR
++from .fx import usd_to_eur_rate
+ from .market import Bars, ema, fetch_bars, in_earnings_blackout
+ 
+ 
+@@ -21,7 +22,7 @@ class Setup:
+     risk_pct: float
+     reward_pct: float
+     rr: float
+-    shares: int
++    shares: float
+     risk_eur: float
+     notes: str
+ 
+@@ -29,8 +30,11 @@ class Setup:
+         return asdict(self)
+ 
+ 
+-def evaluate(symbol: str) -> Optional[Setup]:
+-    """Returns Setup if Strategy-v1 conditions met, else None."""
++def evaluate(symbol: str, fx_rate: Optional[float] = None) -> Optional[Setup]:
++    """Returns Setup if Strategy-v1 conditions met, else None.
++
++    `fx_rate` is EUR per 1 USD (e.g. 0.8583). If omitted, fetched on demand.
++    """
+     bars = fetch_bars(symbol, days=120)
+     if bars is None:
+         return None
+@@ -69,9 +73,15 @@ def evaluate(symbol: str) -> Optional[Setup]:
+     entry = round(bars.last_high * (1 + buf), 2)
+     stop = round(entry * (1 - STRATEGY["stop_pct"] / 100.0), 2)
+     target = round(entry * (1 + STRATEGY["target_pct"] / 100.0), 2)
+-    risk_per_share = entry - stop
++    risk_per_share_usd = entry - stop  # USD
+     risk_eur = ACCOUNT_EQUITY_EUR * STRATEGY["risk_per_trade_pct"] / 100.0
+-    shares = max(int(risk_eur / risk_per_share), 0) if risk_per_share > 0 else 0
++    # Convert risk budget EUR → USD for share-count (entry/stop are USD).
++    # Trade Republic supports fractional shares → use float, round to 4 dp.
++    fx = fx_rate if fx_rate is not None else usd_to_eur_rate()
++    risk_usd = risk_eur / fx if fx > 0 else 0.0
++    shares = round(risk_usd / risk_per_share_usd, 4) if risk_per_share_usd > 0 else 0.0
++    if shares < 0:
++        shares = 0.0
+ 
+     pullback_low = float(recent_lows.min())
+ 
+@@ -93,11 +103,14 @@ def evaluate(symbol: str) -> Optional[Setup]:
+     )
+ 
+ 
+-def scan(symbols: list[str]) -> list[Setup]:
++def scan(symbols: list[str], fx_rate: Optional[float] = None) -> list[Setup]:
++    """Scan symbols for setups. `fx_rate` propagates to sizing; fetched lazily if None."""
++    if fx_rate is None:
++        fx_rate = usd_to_eur_rate()
+     out: list[Setup] = []
+     for s in symbols:
+         try:
+-            setup = evaluate(s)
++            setup = evaluate(s, fx_rate=fx_rate)
+             if setup is not None:
+                 out.append(setup)
+         except Exception as exc:
+-- 
+2.43.0
+
