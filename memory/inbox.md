@@ -34,6 +34,24 @@ issues), this file IS the reply channel.
 
 ## Operational notes (read every routine)
 
+### 2026-05-25 — Robin price-display preference (bull-personal)
+- Robin requested entry / SL / TP prices be shown **EUR-primary, USD
+  secondary** in bull-personal Notion briefs and WhatsApp messages.
+  Format: `€XXX.XX / $YYY.YY` (EUR first, USD alongside).
+- Reason: bull-personal manages Robin's €500 EUR Trade Republic
+  sub-account; EUR makes risk/sizing intuitive at a glance. USD is
+  kept alongside because TR books US stocks in USD (order entry
+  needs the USD reference).
+- **Encoded in `memory/bull-personal-fractional-shares.patch`**
+  (commit `dbc522c`). Pending Robin manual-apply to bull-personal
+  repo (Bull's GitHub MCP scope = trading-bot only, can't push to
+  bull-personal from cloud routines).
+- Until patch is merged: Bull SHOULD respect this preference when
+  re-running the bull-personal piggyback manually (e.g. via inline
+  override in a fix-up routine). For Bull's own portfolio (Alpaca
+  paper USD), prices stay USD — the broker holds USD and there is
+  no EUR translation step.
+
 ### 2026-05-20 — Learning Month begins 2026-05-21
 - CLAUDE.md Phase Sentinel: 5/21 → 6/20 = LEARNING MONTH (all hard guardrails
   paused, sleeve-specific ALM rules active). On 6/21 Live Phase reactivates
