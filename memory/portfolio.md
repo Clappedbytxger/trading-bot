@@ -1,12 +1,12 @@
 ---
-last_updated: 2026-05-25T19:37:00Z
+last_updated: 2026-05-25T20:17:00Z
 broker: alpaca
 account_type: paper
 broker_endpoint: paper-api.alpaca.markets
-phase: learning-month (Day 5 of 30 — Mon 5/25 Memorial Day holiday EOD; cash session CLOSED all day; crypto-only execution scan)
+phase: learning-month (Day 5 of 30 — Mon 5/25 Memorial Day holiday EOD WhatsApp slot; cash session CLOSED all day)
 phase_window: 2026-05-21 → 2026-06-20
 phase_flip_next: 2026-06-21T00:00:00Z (Live-Phase Variant C reactivates)
-routine: 04-pre-close (weekday holiday; market closed; 0 trades; equity snapshot-only; crypto scan = 0 signals; Daytrade force-flat = no-op on empty sleeve; Friday-tighten N/A on Monday)
+routine: 05-close-summary (weekday holiday; market closed; 0 trades book-wide today; equity reconciliation; per-sleeve LM-cum attribution; WhatsApp DE evening brief sent; bull-personal piggyback follows)
 total_value_usd: 100901.97
 cash_usd: 34500.00
 long_market_value_usd: 66401.97
@@ -59,23 +59,29 @@ market_state: closed (Mon 2026-05-25 Memorial Day; next_open Tue 2026-05-26T13:3
 next_open: 2026-05-26T13:30:00Z
 ---
 
-# Portfolio — 04-pre-close 2026-05-25 (LM Day 5 EOD, Memorial Day holiday; cash session closed all day)
+# Portfolio — 05-close-summary 2026-05-25 (LM Day 5 EOD LOCKED, Memorial Day holiday)
 
-> **Phase note**: Mon 2026-05-25 04-pre-close EOD snapshot. Memorial
-> Day cash session was closed all day; `clock.is_open=False` confirmed
-> at 19:37Z broker re-pull. Equity execution impossible book-wide;
-> only Crypto sleeve (24/7) ran a full scan. **0 trades book-wide
-> on Mon 5/25.** Equity UNCHANGED from Sun + 12:13Z + 16:39Z snapshots
-> at **$100,901.97** (broker re-quote stream pushed zero new ticks
-> Sun → Mon 12:13Z → 16:39Z → 19:37Z across all 10 positions). Crypto
-> scan @ 19:37Z = 0/5 50/200 cross-up, 0/5 -10%/24h flushes, weekend-
-> momentum closed. **0 crypto entries.** Macro risk-off N/A (no Mon
-> SPY/VIX tape; carryover NOT active). Daytrade force-flat = no-op
-> (sleeve empty). Friday-tighten N/A (Mon, not Fri). All 10 GTC stops
-> verified `OrderStatus.NEW`. Next equity touchpoint: Tue 2026-05-26
-> 01-pre-market at 13:00Z (post-holiday open).
+> **Phase note**: Mon 2026-05-25 05-close-summary EOD WhatsApp slot.
+> Memorial Day cash session was closed all day; `clock.is_open=False`
+> confirmed at 20:17Z broker re-pull (next_open Tue 2026-05-26
+> 13:30Z). Equity execution impossible book-wide; only Crypto sleeve
+> (24/7) could have fired, and the 04-pre-close 19:37Z scan returned
+> 0 signals. **0 trades book-wide on Mon 5/25.** Equity UNCHANGED
+> across all 4 Mon intraday snapshots + Sun at **$100,901.97**
+> (broker re-quote stream pushed zero new ticks Sun → 12:13Z → 16:39Z
+> → 19:37Z → 20:17Z across all 10 positions). Day P&L vs Fri 5/22
+> EOD: **-$4.07 / -0.0040%** (broker reconciliation noise; UPL-Δ
+> attribution Core -$9.04, Swing +$5.85, others $0). Day alpha vs
+> SPY: **0 bp** (no Mon tape; carryover -25.8 bp from 5/22 final).
+> LM cumulative since 5/21 baseline: **+$140.25 / +0.1392% equity;
+> -26.2 bp alpha vs SPY** (≈ -25.8 bp reported carryover, within
+> reconciliation noise). Per-sleeve LM cum: **Core +$180.25 (best) /
+> Swing -$39.13 (worst) / DT $0 / Crypto $0 / Options $0**. All 10
+> GTC stops verified `OrderStatus.NEW` at 20:17Z. WhatsApp DE
+> evening brief sent. Next equity touchpoint: **Tue 2026-05-26
+> 01-pre-market at 13:00Z**.
 
-## Sleeve summary (Mon 5/25 19:37Z EOD holiday snapshot — identical to 12:13Z + 16:39Z)
+## Sleeve summary (Mon 5/25 20:17Z 05-close-summary holiday EOD — identical to 19:37Z + 16:39Z + 12:13Z)
 
 | Sleeve     | Cash budget          | Used                  | Open positions | Sleeve UPL$ | Sleeve UPL% | Δ vs 5/22 EOD | Notes                       |
 |------------|---------------------:|----------------------:|---------------:|------------:|------------:|--------------:|-----------------------------|
