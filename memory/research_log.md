@@ -6,6 +6,115 @@ entries (> 30 days) can be pruned by the weekly-review routine.
 
 ---
 
+## 2026-05-26 — Pre-market (LM Day 6 of 30, Tue, first session post-Memorial Day)
+
+**Macro (Gemini, 12:21Z):**
+- **10Y yield 4.49%** (-12bp vs Fri 5/22 4.61%); bond rally on Middle-East
+  de-escalation talks (US-Iran deal optimism). Pre-Tue dovish drift continues.
+- **DXY 99.03** (-0.21% / -35bp vs 5/22 99.38). Risk-on currency tape.
+- **Brent $97.9** (+1.8%), **WTI $91.33** (-5.18%). Diverging crude on
+  Strait-of-Hormuz reopening expectation.
+- **Pre-market futures GREEN**: S&P +0.68%, Nasdaq +0.7%, Dow +0.59%.
+  Pre-open SPY gap implied < 1% → ORB rule guard satisfied.
+- **VIX 16.85** (vs 5/22 16.82; futures +1.29% pre-open). No risk-off.
+- **PCE + Q1-GDP-2nd-estimate** confirmed Thu 5/28 13:30Z — only material
+  scheduled release in next 5td. No FOMC/CPI/PPI/NFP.
+
+**NVDA post-earnings update (Gemini):**
+- **BofA PT $350 (from $320)** 5/22 post-print; **UBS PT $280** (from $275)
+  5/21; KeyBanc/MS/DA Davidson/Truist/Jefferies/JPM/Benchmark/Rosenblatt/
+  Needham/MS all maintained ratings or raised PTs 5/21-22.
+- **Vera CPU launch** announced 5/26: "up to 1.5× faster than alternatives",
+  $200B agentic-AI-CPU TAM (includes China per Jensen 5/25), $20B CPU
+  revenue projected current FY.
+- Q1 FY27 print 5/20: revenue **$81.6B** (vs $78-80B consensus / whispers),
+  +85% YoY; DC **$75.2B** / +92% YoY; **$80B fresh buyback authorization**;
+  dividend +25% to $0.25 quarterly. Hyperscale rev +115% to $37.9B.
+- Counter-take: **Michael Burry 5/26 cautions** "temporary AI demand" +
+  hyperscaler debt-funded capex concentration. Logged as bear input; no
+  thesis-break trigger.
+- **Bull stance**: `swing-quality-pullback` thesis intact and strengthened.
+  Position NVDA $2k @ $219.96 from 5/22 → pre-mkt cushion 4.235% (vs 2.96%
+  Mon EOD). Tighten-to-breakeven trigger ≥ +5% UPL = ≈ $230.96 mark.
+
+**RL post-earnings update (Gemini):**
+- FY26 revenue **> $8B** (+15% YoY); 6.5M new DTC customers.
+- Post-print PT raises 5/22: **UBS $511** (from $480), **Barclays $439**
+  (from $430), **Wells $415** (from $400). All OW.
+- "Next Great Chapter: Drive" strategy showing positive results.
+- **Bull stance**: `swing-earnings-drift` PEAD thesis reinforced. Position
+  RL $1.5k @ $377.03 from 5/22 → pre-mkt cushion ~7.7% (UPL +1.31%).
+  Tighten-to-breakeven trigger ≥ +5% UPL ≈ $395.88 mark.
+
+**AVGO into 6/3 earnings (Gemini):**
+- **Citi top-semi pick 2026** (Atif Malik $500 PT from $475, 5/12 ahead of
+  print). AI rev +106% YoY to $8.4B (Q1 FY26).
+- Partnerships 5/19-22: LSEG 5y VMware Cloud Foundation 9; $125M
+  semiconductor hub at UCLA w/ Meta, Applied, GlobalFoundries, Synopsys;
+  joins Applied EPIC platform for advanced chip packaging.
+- No pre-announcement / Apple-chip news in last 24h.
+- **Bull stance**: AVGO Core position FROZEN (Live-Phase #8 PAUSED but
+  Core sleeve is in LM-freeze regardless). No Core-add. Earnings-strangle
+  candidate via Options sleeve BLOCKED on Polygon chain (5th re-test
+  pending Wed 5/27).
+
+**Other tickers checked:**
+- AAPL: no specific 24h catalyst. 5/22 daily was UP candle ($306.12 →
+  $308.82) with fresh 52w-Hi $311.40 → no `swing-short-rejection` trigger.
+  WATCH today.
+- ARM: no specific 24h catalyst. 5/22 daily $290.07 open / $315.00 H /
+  $306.51 C → wide 8.6% range; close in $290-$310 WATCH band per Mon spec
+  ("re-arm only if ARM closes back below $290; above $290 + below $310
+  stays WATCH"). No `swing-momentum-breakout` trigger (close < $310). WATCH.
+
+**Polygon operational status (recurring blocker):**
+- **`get_market_movers` (snapshot/locale/us/markets/stocks/gainers|losers)**:
+  **403 Forbidden** (tier gate; same as LM Days 1-5).
+- **Stock snapshot (snapshot/locale/us/markets/stocks/tickers/NVDA)**:
+  **403 Forbidden** (tier gate).
+- **Options chain (v3/snapshot/options/NVDA)**: **403 Forbidden** (5th
+  re-test; tier gate persists).
+- Daily aggregates (v2/aggs/ticker/{sym}/range/...): **works** but rate-
+  limited at ~5 calls/min on free tier (got NVDA/AAPL/ARM/SPY cleanly,
+  429'd on QQQ/AVGO/RL).
+- **Operational impact**: Daytrade gap-scan + Options-strangle / protective-
+  put strategies require chain/snapshot access; remain effectively gated
+  pending Polygon-tier upgrade.
+
+**Crypto universe (yfinance, 12:20Z):**
+- BTC-USD $77,000.88 (24h -0.36%, 7d +0.33%); 50DMA $77,100 / 200DMA $80,274;
+  gap **-3.95%** (+0.36pp convergence overnight vs Mon 19:37Z -4.31%
+  stall).
+- ETH $2,116.40, gap -10.65% (+0.24pp); SOL $85.05, gap -18.60% (+0.38pp);
+  AVAX $9.37, gap -15.22% (+0.39pp); LINK $9.56, gap -12.24% (+0.39pp).
+- 5/5 50<200; 0 cross-up. 0/5 24h flush > -10% (largest 24h: BTC -0.36%,
+  wrong direction). `crypto-weekend-momentum` closed (Fri trigger NOT met).
+- **0 crypto entries.**
+
+**Bull's account snapshot (Alpaca paper, 12:20Z)**:
+- Equity $101,242.86 (+$381.65 vs Mon close on overnight re-quote).
+- Cash $34,500.00, Long MV $66,742.86, Options BP $67,871.43 / L3.
+- DT count 0/5d; PDT False; Crypto ACTIVE; multiplier 2x.
+- All 10 GTC stops `OrderStatus.NEW`.
+- Notable pre-mkt: VOO +0.69%, LLY +1.06% (new HWM imminent), NVDA-Swing
+  +1.33% (cushion to 4.235%), RL-Swing +1.11% (UPL flips to +1.31%).
+  V -0.24% only red Core name pre-mkt.
+
+**No thesis-break events. NVDA + RL Swing positions both materially
+healthier pre-mkt vs Mon EOD. Macro tape supportive. Risk-off: NO. Bias
+remains "no action unless spec-trigger fires" — likely outcome at 02-
+market-open is HOLD across the book with potential AAPL short-rejection
+watch + ARM momentum re-arm contingent on intraday tape.**
+
+**Cited sources:** Gemini Search-Grounding (10Y/DXY/oil, futures, VIX,
+PCE+GDP calendar, NVDA post-print PT changes + Vera CPU, RL FY26 + PT
+raises, AVGO Citi PT + partnerships, Burry counter-take). yfinance for
+fundamentals + crypto daily. Polygon for NVDA/AAPL/ARM/SPY daily
+aggregates. Alpaca for broker account + pre-mkt position marks. See
+`memory/daily/2026-05-26.md` for portfolio + draft plan.
+
+---
+
 ## 2026-05-25 — Pre-market (LM Day 5 of 30, Mon US Memorial Day, cash CLOSED)
 
 **Macro (Gemini, post-weekend pre-flight for Tue 5/26 reopen):**
