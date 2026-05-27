@@ -475,3 +475,78 @@ for portfolio detail + per-sleeve plan draft.
 **No thesis-break events on any of the 8 holdings; no entry triggers fired for new names. NVDA WAIT + T3 defer both still binding. Bias = inaction. 10th consecutive no-action routine.**
 
 **Cited sources:** Gemini Search-Grounding (10Y/DXY/oil levels, pre-mkt futures, NVDA Q1+Q2 consensus & whispers, options-implied move, FOMC-minutes context, geo-risk). yfinance for quant + earnings calendar. Alpaca broker for pre-mkt position marks. See `memory/daily/2026-05-20.md` for portfolio detail.
+
+---
+
+## 2026-05-27 — Pre-market (LM Day 7 of 30, Wed)
+
+**Macro (Gemini, 1 grounded query):**
+- **10Y yield 4.46-4.47%** (-2 bp vs Tue 4.49%; 2-week low).
+- **DXY 99.08-99.11** (~-0.06 to -0.1% intraday).
+- **Brent ~$94-97 (-0.5 to -3%); WTI ~$90-93 (-0.9 to -4%)** — US-Iran peace-
+  talks optimism dismantling energy.
+- **Pre-mkt futures GREEN**: S&P +0.1 to +0.28%, Nasdaq flat to +0.45%,
+  Dow +0.2 to +0.43%. VIX 16-17 (fading toward 16).
+- **PCE+GDP Thu 5/28 12:30Z** confirmed (Fed-preferred inflation + Q1 GDP
+  2nd estimate; Q1 advance was 2.0% annualized). No FOMC/CPI/PPI/NFP next 5d.
+- **AVGO earnings Wed 6/3 post-close**: consensus rev $22.08B, EPS $2.40
+  (AI-semi tailwind).
+- **AAPL**: BofA PT $330 → $380, citing AI roadmap; WWDC June 8-12. Record
+  intraday $311.82 fresh 52w-Hi Tue, but closed -1.10% lower → mechanical
+  rejection candle (close < open at 52w-Hi).
+
+**Quant pulse (Polygon prev-day aggregates + yfinance fundamentals + Alpaca live mark):**
+- SPY 750.59 (+0.65% Tue), QQQ 730.28 (tech-led rally).
+- Core 8: VOO HWM walked +0.35% to $691.51 (stop $622.36); LLY HWM walked
+  +1.08% to $1,081.94 (stop $973.75). 6 other Core trails unchanged; AVGO
+  intraday H $435.31 < prior HWM $442.36 → no walk despite +3.23% UPL.
+  All 10 GTC stops verified `OrderStatus.NEW`.
+- Tightest Core cushion **flipped from AVGO 3.87% (Mon) → GOOGL 4.85% (Wed)**
+  as AVGO ripped +$13.46 Tue.
+- Swing NVDA: Tue O=216.54 / H=218.18 / L=212.00 / C=214.86 on **187M shares**
+  (3× normal); intraday low cushion 1.45% but closed at 2.94%. Time-stop 6/2
+  (4 td).
+- Swing RL: Tue O=385 / H=392.10 / L=381.04 / C=381.78 on 0.95M shares; UPL
+  flipped from +0.20% (Mon) to +2.02% (Wed live $384.65).
+- **ARM new candidate** (`swing-momentum-breakout`): Tue close **$321.22**
+  cleared $310 watch band; vol 10.9M elevated. 52w-Hi $325 only +1.2% above.
+- **AMD new candidate** (`swing-momentum-breakout`): Tue close **$503.89**,
+  fresh 52w-Hi $506.96 intraday on 38.5M vol (+4% on day). Fwd P/E 38 rich.
+- **AAPL** (`swing-short-rejection`): mechanical trigger valid (52w-Hi +
+  close-below-open), but BofA $380 PT raise + WWDC catalyst vetoes via
+  ALM-6 short-thesis-required filter. **SKIP**.
+
+**Polygon ops** (LM Day 7):
+- Gainers/losers scanner: **403 Forbidden** (6th re-test consistently gated).
+- Daily aggregates: 200 OK on first 5 calls then 429; sufficient for next-day
+  watchlist.
+- Options snapshot: **403 Forbidden** (5th re-test, NVDA Jun chain). Reference-
+  contracts endpoint: 200 OK but no IV/Greeks/quotes (insufficient).
+
+**Crypto scan (yfinance 220d, computed 50/200 DMA)**:
+- BTC -3.73% gap (Tue -3.95% → +0.22 pp; convergence resumed); ETH -10.58%;
+  SOL -18.38%; AVAX -15.00%; LINK -12.01%. 0/5 cross-up; 0/5 -10% flush.
+  At Wed pace (~+0.22 pp/d), BTC ~17 td to neutral cross.
+
+**Strategic read**:
+- Tape today is "peace-trade risk-on": oil -3-4%, 10Y -2 bp, futures +0.2%,
+  VIX <17. Supportive for tech / AI sleeve; reduced hedge urgency into PCE Thu.
+- AVGO Tue ripped pre-earnings froth ($435 intraday H); 4 td to print. Core
+  frozen → no action. Strangle blocked by Polygon chain.
+- NVDA two-way coin-flip into Wed: 187M-share distribution day or capitulation
+  bottom. Cushion 2.94% from stop; close-decision window 6/2.
+- ARM + AMD momentum-breakout candidates queued for 02 with confirmation
+  triggers ($325 ARM / $507 AMD). Both Swing $1.5k notional / -5 to -6% stops.
+- AAPL short-rejection veto'd by BofA PT $380 + WWDC narrative — re-watch
+  if 2nd consecutive 52w-Hi rejection prints + PT flow reverses.
+
+**No thesis-break events on any 8 Core holdings; 2 Swing legs HOLD per
+tighten-rules; 2 new Swing-momentum candidates conditional on 02 confirmation;
+short-rejection vetoed; crypto + options sleeves dormant.**
+
+**Cited sources:** Gemini Search-Grounding (macro levels, pre-mkt futures, oil,
+PCE/GDP timing, AAPL BofA PT raise, AVGO earnings consensus). Polygon prev-day
+aggregates (15 names; gainers/losers + options snapshots gated 403). yfinance
+for fundamentals + crypto 220d history. Alpaca broker (paper endpoint verified)
+for account + positions + open-stop status. See `memory/daily/2026-05-27.md`
+for full per-sleeve detail.
