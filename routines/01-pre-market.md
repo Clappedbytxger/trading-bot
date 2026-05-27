@@ -168,10 +168,124 @@ git push -u origin <working-branch>
 ```
 Then PR-and-merge per CLAUDE.md Memory Protocol Step 0 end-of-routine.
 
-## Step 7 — Notify
-**No WhatsApp** unless an urgent risk emerged (e.g. a Core position has critical news,
-or macro risk-off triggers). If urgent, send a short German alert per CLAUDE.md
-WhatsApp rules.
+## Step 7 — Notify (WhatsApp DE: Top-5 News + urgent-risk overlay)
+
+This routine **always** sends one German WhatsApp brief — a "Top-5 News & Auswirkungen"
+read for Robin, in plain language. (Previously: no WhatsApp unless urgent.) The
+brief is a layperson translation of what's moving the tape today and what it
+historically does to prices — not a trade order or recommendation.
+
+### 7a) Compose the Top-5 News digest
+
+Pick the **5 most market-moving items** from the research gathered in Step 3,
+ranked by likely impact on Bull's book + Robin's broader interest. Sources MUST
+already be in the routine's research output (no extra Gemini round trips).
+Candidates to choose from, in priority order:
+
+1. **Macro releases / Fed talk** today or tomorrow (FOMC, CPI, PCE, GDP, NFP,
+   PPI, jobless claims, Powell/Warsh remarks).
+2. **Earnings prints** within the next 5 trading days, especially:
+   - Any Core holding (Live-Phase #8 mind-set: 3-td-before window).
+   - Any active Swing position.
+   - Mega-cap or index-bellwether earnings (MSFT, GOOGL, META, NVDA, AVGO,
+     AAPL, AMZN, TSLA, JPM, etc.).
+3. **Geopolitics / commodities** with second-order equity impact (oil shocks,
+   trade-war headlines, Strait of Hormuz, Treasury auctions).
+4. **Single-stock catalysts** on names Bull holds OR is actively watching
+   (analyst PT raises/cuts, M&A, regulatory, product launches).
+5. **Crypto / FX / yields** if they're outside their recent ranges or printing
+   a new high/low that matters for risk sentiment.
+
+If fewer than 5 items rise above noise on a given day, **still emit 5 items**
+by including macro-context lines (e.g. "10Y yield -2 bp, dollar weaker"). Never
+pad with fluff like "market is open today".
+
+### 7b) Format (German, layperson tone, no jargon-without-translation)
+
+Header (fixed):
+```
+Hier sind die wichtigsten News heute und die voraussichtlichen Auswirkungen:
+```
+
+Then 5 numbered entries, each on the model:
+```
+<N>. <eine kurze, klare deutsche Schlagzeile mit Ticker/Begriff>.
+    Auswirkungen: <ein Satz: was hat eine solche Nachricht in der Vergangenheit oft mit dem Preis gemacht>.
+```
+
+**Earnings entries MUST be put in context** — always frame against the
+consensus / Erwartung, not just the absolute number. Use this pattern:
+
+```
+<N>. <Ticker> Earnings am <Datum>: Konsens Umsatz ~$XB / EPS $Y.YY.
+    Auswirkungen: Übertrifft das Unternehmen die Erwartung → Kurs steigt
+    historisch nach Print; bleibt es darunter → Rücksetzer. (Implizite
+    Bewegung laut Optionsmarkt: ±X%.)
+```
+
+For non-earnings items, give the historical / mechanistic effect in plain
+German, e.g.:
+- Niedriger PCE als erwartet → "Inflation kühlt → Anleihezinsen fallen oft
+  → Aktien (besonders Tech) steigen meist."
+- Höhere Ölpreise → "Energiewerte profitieren; Verbraucher- und Transport-
+  Aktien geraten unter Druck; Gold steigt in geopolitischen Eskalationen
+  historisch oft."
+- Schwacher US-Dollar → "Rohstoffe und Gold tendieren historisch nach oben;
+  internationale Umsätze von US-Mega-Caps werden begünstigt."
+- 10Y-Yield-Sprung > 10 bp → "Wachstums-/Tech-Aktien historisch unter Druck;
+  Finanzwerte oft gestützt."
+- Risk-off-Trigger (SPY -3% / VIX > 40) → "Defensive rotieren, Gold und
+  US-Treasuries als Safe-Haven historisch stark."
+
+Keep each entry ≤ 2 lines so the full message fits CallMeBot's ~1000-char
+budget. Use plain `1.` / `2.` / ... numbering. No Markdown bold/italic in the
+list body — CallMeBot doesn't render Markdown reliably.
+
+**Hard length guard**: `send_routine_summary` prepends a header (~30 chars)
+and `send_whatsapp` truncates the combined message at 1000 chars. Therefore
+the **body alone must be ≤ 960 characters** (incl. newlines). Before calling
+`send_routine_summary`, assert `len(body_de) <= 960`; if over, trim the
+non-Auswirkungen tails first, then drop entry 5 → 4 → 3 as the urgent-risk
+overlay rule prescribes. NEVER let CallMeBot do the truncation — it cuts
+mid-sentence and the last entry will be unreadable.
+
+### 7c) Urgent-risk overlay (existing behavior, preserved)
+
+If an urgent risk has emerged this routine (e.g. a Core position has critical
+news, macro risk-off triggers per strategy.md: SPY -3%/day OR VIX > 40, a
+Core stop is within < 2% of trigger, or a Swing position's thesis breaks),
+**append a separate `*Dringend:*` block AT THE TOP of the message** above the
+Top-5 News header, e.g.:
+
+```
+*Dringend:* NVDA Cushion 1.4% — Stop heute wahrscheinlich getroffen.
+
+Hier sind die wichtigsten News heute ...
+```
+
+If the combined message would exceed 1000 chars, drop entries 5 → 4 → 3 of
+the news list to make room; never drop the urgent block.
+
+### 7d) Send
+
+```python
+from src.notify.whatsapp import send_routine_summary
+send_routine_summary("01-pre-market", body_de, dry_run=False)
+```
+
+If `send_routine_summary` raises (network, CallMeBot rate-limit), log
+`"WhatsApp: FAILED — <reason>"` in today's daily file, do NOT abort the
+routine, and DO NOT retry within the same routine (next routine will surface
+state via its own brief). Surface the failure in the next 02-market-open
+WhatsApp brief one-liner.
+
+### 7e) Daily-file mirror
+
+Append the **exact body** that was sent to WhatsApp (without the CallMeBot
+header) under a `### WhatsApp (sent <HH:MM>Z)` sub-heading inside today's
+`memory/daily/YYYY-MM-DD.md`, so future routines can grep "what did Robin
+already see today" without an outbound API call. This is part of WRITE
+step 5, not a separate file write.
 
 ## Token budget
 Aim < 45k input tokens. Don't ingest full trade_log; use last 20. Read

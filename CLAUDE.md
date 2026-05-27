@@ -293,7 +293,7 @@ the day with 1-line attribution.
 
 | Slug | Cron (UTC) | DE-Time | WhatsApp | Purpose (Live-Phase) | Purpose (Learning-Month) |
 |---|---|---|---|---|---|
-| `01-pre-market` | `0 13 * * 1-5` | 14:00 | No | Research, earnings calendar | Multi-sleeve research: Core hold-check, Swing screen, Daytrade gap-scan, Crypto overnight, Options UOA |
+| `01-pre-market` | `0 13 * * 1-5` | 14:00 | **YES (Top-5 News DE)** | Research, earnings calendar + daily Top-5 News digest DE | Multi-sleeve research: Core hold-check, Swing screen, Daytrade gap-scan, Crypto overnight, Options UOA + daily Top-5 News digest DE |
 | `02-market-open` | `30 14 * * 1-5` | 15:30 | **YES** | Execute planned trades | Execute per-sleeve entries; ORB activation; WhatsApp brief with sleeve attribution |
 | `03-midday` | `30 17 * * 1-7` | 18:30 | No | Mid-session check, cut bleeders | Multi-sleeve intraday management; Crypto cycle (also fires Sat+Sun for weekend crypto) |
 | `04-pre-close` | `30 20 * * 1-5` | 21:30 | No | Final adjustments, draft tomorrow | Daytrade FORCE-FLAT, Swing stop-check, Crypto weekend-gap prep on Fri, Options Greeks |

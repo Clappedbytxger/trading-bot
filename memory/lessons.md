@@ -465,3 +465,21 @@ trading decision. Keep entries tight — pattern, lesson, encoded?
   week-2 review after seeing how often the Swing sleeve actually hits these
   high-priced + low-notional combos. If 3+ occurrences, change the playbook
   to prefer integer-share sizing for names > $200 share price.
+
+## 2026-05-27 — CallMeBot WhatsApp body must be ≤ ~960 chars (header eats ~30)
+- **Pattern:** First send of the new Top-5 News digest (Step 7 of the rewritten
+  `01-pre-market` workflow) used a 1032-char body. `send_routine_summary`
+  prepends "🐂 *<routine>* — HH:MM\n\n" (~30 chars), then `send_whatsapp`
+  truncates the combined message at 1000 chars. Net effect: the last ~62 chars
+  of the body were silently dropped by CallMeBot mid-sentence — the 5th
+  "Auswirkungen:" line was unreadable.
+- **Lesson:** Never let CallMeBot do the truncation. Compose the body to ≤ 960
+  chars and assert before sending. If over, trim from "Auswirkungen:" tails
+  first (they have more give than the news headlines), then drop entry 5 → 4
+  → 3 as the urgent-risk overlay rule prescribes. The urgent block (if any)
+  always stays.
+- **Encoded as rule?** Yes — Step 7b of `routines/01-pre-market.md` now has
+  an explicit "Hard length guard" sub-section that requires `len(body_de) <=
+  960` before `send_routine_summary`. Same constraint applies to any other
+  routine using this notifier (02-market-open, 05-close-summary, 06-weekly-
+  review) — propagate at next touch of those specs.
