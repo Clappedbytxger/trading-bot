@@ -237,17 +237,32 @@ German, e.g.:
 - Risk-off-Trigger (SPY -3% / VIX > 40) → "Defensive rotieren, Gold und
   US-Treasuries als Safe-Haven historisch stark."
 
-Keep each entry ≤ 2 lines so the full message fits CallMeBot's ~1000-char
-budget. Use plain `1.` / `2.` / ... numbering. No Markdown bold/italic in the
-list body — CallMeBot doesn't render Markdown reliably.
+Keep each entry ≤ 2 lines so the brief stays scannable on a phone screen.
+Use plain `1.` / `2.` / ... numbering. No Markdown bold/italic in the list
+body — CallMeBot doesn't render Markdown reliably.
 
-**Hard length guard**: `send_routine_summary` prepends a header (~30 chars)
-and `send_whatsapp` truncates the combined message at 1000 chars. Therefore
-the **body alone must be ≤ 960 characters** (incl. newlines). Before calling
-`send_routine_summary`, assert `len(body_de) <= 960`; if over, trim the
-non-Auswirkungen tails first, then drop entry 5 → 4 → 3 as the urgent-risk
-overlay rule prescribes. NEVER let CallMeBot do the truncation — it cuts
-mid-sentence and the last entry will be unreadable.
+**Length handling — always use multi-part sender**: CallMeBot's documented
+1000-char ceiling is misleading; in practice it truncates somewhere around
+700-800 chars (lesson 2026-05-27). Therefore do NOT compose for a single
+message and do NOT trim — write the full 5-item brief at natural length and
+let the sender split it. Use:
+
+```python
+from src.notify.whatsapp import send_long_routine_message
+send_long_routine_message("01-pre-market", body_de, dry_run=False)
+```
+
+`send_long_routine_message` splits on blank-line paragraph boundaries so each
+news item stays in one part, prefixes each part with `🐂 *01-pre-market*
+(N/M) — HH:MM`, and sleeps ~35 s between parts to respect CallMeBot's rate
+limit. The 5-item brief typically lands as **2 parts** (items 1-3 in part 1,
+items 4-5 in part 2); the urgent-risk overlay block stays at the very top of
+part 1.
+
+Pre-flight assertion before sending: each emitted part's body chunk (without
+header) must be ≤ 670 chars (SAFE_PART_LEN 700 minus max header 30). The
+splitter enforces this automatically; failure to enforce is a bug in the
+notifier, not in the routine.
 
 ### 7c) Urgent-risk overlay (existing behavior, preserved)
 
@@ -269,15 +284,16 @@ the news list to make room; never drop the urgent block.
 ### 7d) Send
 
 ```python
-from src.notify.whatsapp import send_routine_summary
-send_routine_summary("01-pre-market", body_de, dry_run=False)
+from src.notify.whatsapp import send_long_routine_message
+send_long_routine_message("01-pre-market", body_de, dry_run=False)
 ```
 
-If `send_routine_summary` raises (network, CallMeBot rate-limit), log
-`"WhatsApp: FAILED — <reason>"` in today's daily file, do NOT abort the
-routine, and DO NOT retry within the same routine (next routine will surface
-state via its own brief). Surface the failure in the next 02-market-open
-WhatsApp brief one-liner.
+If the call raises mid-way through a multi-part send (network, CallMeBot
+rate-limit, partial-send), log `"WhatsApp: PARTIAL — sent N/M parts, reason: <…>"`
+in today's daily file, do NOT abort the routine, and DO NOT retry within the
+same routine (next routine will surface state via its own brief). Surface the
+failure in the next 02-market-open WhatsApp brief one-liner. Robin re-stitches
+parts in order using the `(N/M)` header tag.
 
 ### 7e) Daily-file mirror
 

@@ -466,20 +466,28 @@ trading decision. Keep entries tight — pattern, lesson, encoded?
   high-priced + low-notional combos. If 3+ occurrences, change the playbook
   to prefer integer-share sizing for names > $200 share price.
 
-## 2026-05-27 — CallMeBot WhatsApp body must be ≤ ~960 chars (header eats ~30)
-- **Pattern:** First send of the new Top-5 News digest (Step 7 of the rewritten
-  `01-pre-market` workflow) used a 1032-char body. `send_routine_summary`
-  prepends "🐂 *<routine>* — HH:MM\n\n" (~30 chars), then `send_whatsapp`
-  truncates the combined message at 1000 chars. Net effect: the last ~62 chars
-  of the body were silently dropped by CallMeBot mid-sentence — the 5th
-  "Auswirkungen:" line was unreadable.
-- **Lesson:** Never let CallMeBot do the truncation. Compose the body to ≤ 960
-  chars and assert before sending. If over, trim from "Auswirkungen:" tails
-  first (they have more give than the news headlines), then drop entry 5 → 4
-  → 3 as the urgent-risk overlay rule prescribes. The urgent block (if any)
-  always stays.
-- **Encoded as rule?** Yes — Step 7b of `routines/01-pre-market.md` now has
-  an explicit "Hard length guard" sub-section that requires `len(body_de) <=
-  960` before `send_routine_summary`. Same constraint applies to any other
-  routine using this notifier (02-market-open, 05-close-summary, 06-weekly-
-  review) — propagate at next touch of those specs.
+## 2026-05-27 — CallMeBot's "1000 char" cap is actually ~700-800; use multi-part
+- **Pattern (initial reading):** First send of the new Top-5 News digest used
+  a 1032-char body → truncated. Trimmed to 898 chars and re-sent → STILL
+  truncated mid-item-4 per Robin. CallMeBot's documented 1000-char ceiling is
+  misleading; in practice messages get cut somewhere around 700-800 chars
+  (possibly the URL-encoded length once newlines `\n → %0A` and the emoji
+  `🐂 → %F0%9F%90%82` expand, or simply a stricter server-side limit than
+  the docs admit).
+- **First fix that didn't hold:** A 960-char body limit. 898 was already
+  under that and still got cut.
+- **Lesson:** Never rely on a single CallMeBot message for the Top-5 News
+  brief (or any multi-section daily WhatsApp). Always use the multi-part
+  sender. Split on paragraph boundaries (`\n\n`) at a conservative
+  `SAFE_PART_LEN = 700` chars/part so each news item stays in one part, and
+  sleep ~35-45 s between parts (rate limit ~1 msg / 30 s). Each part gets a
+  `(N/M)` header tag so Robin re-stitches in order.
+- **Encoded as rule?** Yes —
+  - `src/notify/whatsapp.py` got `send_long_routine_message(...)` and
+    `_split_on_blank_lines(...)` with `SAFE_PART_LEN = 700` and
+    `INTER_PART_SLEEP = 35`.
+  - `routines/01-pre-market.md` Step 7d now mandates that helper for the
+    news brief and explicitly drops the 960-char body limit.
+  - Other routines that use the same notifier (02-market-open, 05-close-
+    summary, 06-weekly-review) should switch to `send_long_routine_message`
+    at next touch — propagate this when those specs are next edited.
