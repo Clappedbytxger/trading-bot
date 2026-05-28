@@ -6,6 +6,35 @@ entries (> 30 days) can be pruned by the weekly-review routine.
 
 ---
 
+## 2026-05-28 — Pre-market (LM Day 8 of 30, Thu, PCE+GDP day)
+
+**Macro (Gemini, 12:05Z; cached):**
+- **10Y yield 4.50%** (+2 bp vs Wed 4.48%; bounce off 2-wk low) — hawkish-Fed expectations + Mideast risk.
+- **DXY 99.36** (+0.16% intraday; +0.40% / month strengthening). Driven by Mideast escalations and hawkish Fed expectations.
+- **WTI $91.52 (+3.20%); Brent $95.01 (+0.76%)** — fresh US-Iran strike fears + Strait of Hormuz disruption headlines REVERSE Wed's peace-trade narrative.
+- **Pre-mkt futures**: S&P -0.25%, Nasdaq -0.43%, Dow -0.20% (cash Dow at fresh ATH 50,649 Wed; +0.36%).
+- **VIX 16.76** (+2.89% vs Wed; benign).
+- **PCE+GDP Thu 12:30Z**: PCE YoY consensus **3.8%** vs prior **3.5%** (hot tilt). DXY holding above 99.00 ahead of release; markets focused on Fed-path implications.
+
+**Single-stock catalysts (last 24h, Gemini):**
+- **META (+3.74% Wed close $635.26 → ATH HWM $638.50)**: Zuckerberg "cloud computing definitely on the table" if data-center overbuild; **paid subscription plans launched** globally for Facebook/Instagram/WhatsApp Plus (revenue diversification); **2026 AI capex guide raised to $125-145B**; embedding engineers with customers to drive AI adoption. **Thesis-reinforce**, not break.
+- **AVGO (flat -0.04% Wed close $421.86)**: Samsung Wi-Fi 8 / 5G Modem reference platform partnership; FuriosaAI alliance on 3rd-gen AI accelerator; BCM68850 50G home gateway SoC with integrated AI accel. Earnings 6/3 post-close: PC consensus rev $22.04B / EPS $2.40; options imply ±7.5% move.
+- **LLY (+1.71% Wed close $1,082.92 → HWM $1,093.00)**: Acquisitions of 3 vaccine developers (Curevo, LimmaTech, Vaccine Company) for ~$3.83B total — infectious disease pipeline diversification leveraging obesity-drug cash flow. Q1 2026 already beat (EPS $8.55 / rev $19.80B / 2026 outlook raised). **Thesis-reinforce**.
+- **MSFT, GOOGL, V, BRK.B, NVDA**: no fresh single-stock catalysts in last 24h.
+- **AAPL (Wed +0.82% close $310.85)**: WWDC 6/8-12 anticipation continues; no fresh news today.
+- **ARM (-5.76% Wed close $302.71)**: Mizuho PT $290 → **$360 Outperform** (CPU ramp tailwinds); EverSource Wealth Advisors cut stake -59.5% (5,658 sh sold Q4). Mixed flow.
+- **AMD (-1.66% Wed close $495.54)**: Q1 2026 rev +37.8% YoY $10.25B (consolidated); Data Center +57% to $5.8B (record). Stock reversed from intraday $510.21 on valuation concerns; **ARK trimmed ~38,529 sh / $16.2M**.
+
+**Wed 5/27 EOD aggregates (yfinance)** captured in daily file table; META + LLY HWM walk-ups documented.
+
+**NVDA stop-out (Wed 5/27 15:00:34Z @ $208.95)**: -1R clean stop fire on `swing-quality-pullback`; -$99.10 realized. First LM closed trade. No fundamental thesis-break catalyst on tape — pure technical breakdown (Tue 187M-sh distribution → Wed continuation lower).
+
+**Crypto scan (yfinance Thu 12:05Z)**: 5/5 still 50<200 DOWN; BTC gap -3.50% (continued convergence +0.23 pp/day); LINK 7d -9.11% nearing weekly flush threshold but 24h moves all <-3%. **0 entries**.
+
+**Citations**: Gemini search-grounded answer cached at session; sources include market commentary (10Y, DXY, oil futures), Meta press releases (cloud / paid subs / AI capex), Broadcom partnership announcements (Samsung / FuriosaAI), Eli Lilly M&A coverage, Mizuho ARM PT note, AMD Q1 2026 earnings release, AVGO 6/3 consensus estimates.
+
+---
+
 ## 2026-05-26 — Pre-market (LM Day 6 of 30, Tue, first session post-Memorial Day)
 
 **Macro (Gemini, 12:21Z):**

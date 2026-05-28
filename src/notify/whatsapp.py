@@ -32,7 +32,7 @@ def send_whatsapp(message: str, *, dry_run: bool = False) -> str:
     """Send a WhatsApp message via CallMeBot.
 
     Args:
-        message: The text body. Keep under 1000 chars. Markdown is NOT rendered — WhatsApp
+        message: The text body. Keep under 1000 chars. Markdown is NOT rendered - WhatsApp
                  supports limited formatting (*bold*, _italic_, ~strikethrough~).
         dry_run: If True, prints message to stdout instead of sending.
 
@@ -76,9 +76,9 @@ def send_routine_summary(
     """Prepend a small header so Robin can tell which routine sent the message.
 
     For a single short message only. If `body_de` may exceed ~700 chars,
-    use `send_long_routine_message` instead — CallMeBot cuts above that.
+    use `send_long_routine_message` instead - CallMeBot cuts above that.
     """
-    header = f"🐂 *{routine_name}* — {time.strftime('%H:%M')}"
+    header = f"🐂 *{routine_name}* - {time.strftime('%H:%M')}"
     message = f"{header}\n\n{body_de}"
     return send_whatsapp(message, dry_run=dry_run)
 
@@ -99,7 +99,7 @@ def _split_on_blank_lines(body: str, max_chars: int) -> list[str]:
         if current:
             chunks.append(current)
             current = ""
-        # Paragraph alone may still exceed limit — hard-split as last resort.
+        # Paragraph alone may still exceed limit - hard-split as last resort.
         while len(p) > max_chars:
             chunks.append(p[:max_chars])
             p = p[max_chars:]
@@ -121,17 +121,21 @@ def send_long_routine_message(
     when the body would exceed CallMeBot's effective truncation window.
 
     - Single-part path: same header as `send_routine_summary`.
-    - Multi-part path: each part gets a "🐂 *<routine>* (N/M) — HH:MM" header
+    - Multi-part path: each part gets a "🐂 *<routine>* (N/M) - HH:MM" header
       so Robin can re-stitch them in order. Sleeps `inter_part_sleep` seconds
       between parts to respect CallMeBot's ~1 msg / 30 s rate limit.
 
     Returns the list of CallMeBot response bodies, one per part.
+
+    Note: header uses ASCII hyphen, not em-dash. CallMeBot 403s on URLs that
+    encode em-dash (`%E2%80%94`) in multi-part rapid-fire sends — see lesson
+    2026-05-28.
     """
     timestamp = time.strftime("%H:%M")
     # Reserve room for the longest possible header. Multi-part header pattern:
-    #   "🐂 *<routine>* (N/M) — HH:MM\n\n"
+    #   "🐂 *<routine>* (N/M) - HH:MM\n\n"
     # max(N) and max(M) bounded by 9 each (we never expect >9 parts).
-    header_budget = len(f"🐂 *{routine_name}* (9/9) — {timestamp}\n\n")
+    header_budget = len(f"🐂 *{routine_name}* (9/9) - {timestamp}\n\n")
     chunk_budget = max(50, safe_part_len - header_budget)
 
     chunks = _split_on_blank_lines(body_de, chunk_budget)
@@ -140,9 +144,9 @@ def send_long_routine_message(
     responses: list[str] = []
     for idx, chunk in enumerate(chunks, start=1):
         if total == 1:
-            header = f"🐂 *{routine_name}* — {timestamp}"
+            header = f"🐂 *{routine_name}* - {timestamp}"
         else:
-            header = f"🐂 *{routine_name}* ({idx}/{total}) — {timestamp}"
+            header = f"🐂 *{routine_name}* ({idx}/{total}) - {timestamp}"
         message = f"{header}\n\n{chunk}"
         responses.append(send_whatsapp(message, dry_run=dry_run))
         if idx < total and not dry_run:

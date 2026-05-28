@@ -82,12 +82,15 @@ Sleeve: Swing. Status: active. Playbook reference: `memory/playbook.md`.
   AI-capex headline risk possible but no specific catalyst on the
   calendar.
 
-### Outcome (TBD — to be filled in post-exit)
+### Outcome — STOP-OUT on 2026-05-27
 
-- Exit date:
-- Exit price / exit reason:
-- Realized P&L $:
-- Realized R-multiple:
-- Days held:
-- Delta vs expectation:
-- Lesson:
+- **Exit event**: Stop order `ffb5e5a9-50fb-4e39-abef-849d72b8f323` (NVDA SELL STOP 9 sh @ $208.96 GTC) **FILLED Wed 2026-05-27 15:00:34Z** at avg $208.95 (1 ¢ slip vs trigger).
+- **Exit price / reason**: $208.95 avg / stop-loss triggered intraday Wed (intraday L $208.78 per yfinance — broke ~$0.18 below trigger; -5% playbook stop fired cleanly).
+- **Realized P&L $ (main 9 sh)**: 9 × ($208.95 − $219.961202) = **−$99.10**.
+- **Realized R-multiple (main 9 sh)**: −1.00R (the stop = the planned -5% risk; loss is exactly 1R).
+- **Days held**: 5 calendar (5/22 fill → 5/27 stop); 2 td elapsed prior to stop (5/22 fill, 5/26 holiday-skip, 5/27 stop on td2 mid-session).
+- **Delta vs expectation**: planned exit by 2026-06-02 close at +7% target ($235.36) OR -5% stop ($208.96); actual = -5% stop on td2. Trade reached its downside boundary in ~30% of the allotted holding window.
+- **Fractional stub close (5/28)**: 0.092513 sh @ ~$210 mark = ~$19 mv liquidated via market SELL fractional DAY at 02-market-open 13:30Z (~$0-1 P&L impact; lesson 2026-05-22 fractional-Swing-stop convention left this slice uncovered).
+- **Final attribution `swing-quality-pullback`**: ≈ **−$100 / −5.0% of $2,000 cost basis** (main stop + stub close).
+- **Lesson**: NVDA `swing-quality-pullback` thesis-broke on technical distribution (Tue 187M-sh day → Wed continuation breakdown) rather than a fundamental catalyst. The -5% stop fired cleanly with no slippage of consequence. **No thesis-break narrative on the tape** — sentiment + flow pressed below the -5% trigger band absent a discrete catalyst. Reinforces playbook: -5% stops on quality-pullback need to hold even when the fundamental thesis is intact, because flow can overwhelm narrative on a 2-day horizon. Sample = 1 trade; defer broader strategy implications until KW 22 EOW review with more closed trades.
+
