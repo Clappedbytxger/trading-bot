@@ -466,6 +466,32 @@ trading decision. Keep entries tight — pattern, lesson, encoded?
   high-priced + low-notional combos. If 3+ occurrences, change the playbook
   to prefer integer-share sizing for names > $200 share price.
 
+## 2026-05-28 — CallMeBot 403s on em-dashes in multi-part rapid-fire sends; use ASCII hyphen
+- **Pattern**: Today's 01-pre-market 4-part multi-part WhatsApp send via
+  `send_long_routine_message` returned HTTP 403 on **every** part within seconds
+  of each other. Diagnostic probes isolated the cause: an em-dash (`—` U+2014)
+  encoded as `%E2%80%94` in the URL — present in the helper's standard header
+  pattern `🐂 *<routine>* (N/M) — HH:MM` AND inline in the body text (German
+  layperson prose uses em-dash freely). A simple GET with em-dash + short body
+  ~30 seconds later succeeded; back-to-back em-dash-containing URLs 403. Pattern:
+  CallMeBot likely has a WAF/rate-limit rule that flags em-dash + fast
+  successive requests as suspicious, returns 403, and silently cooldowns. The
+  Wed 22:35-22:45Z burst of 503s on the same helper looked transient at the
+  time; it was almost certainly the same root cause (em-dash + rate-burst).
+- **Lesson**: Use ASCII hyphen `-` in WhatsApp message headers and bodies,
+  not em-dash `—`. Hyphens are URL-safe and pass through CallMeBot reliably
+  even on multi-part rapid sends. Em-dashes are aesthetic — Robin's WhatsApp
+  reads identically with `-`.
+- **Encoded as rule?** Yes:
+  - `src/notify/whatsapp.py` headers in `send_routine_summary` and
+    `send_long_routine_message` now use ASCII hyphen.
+  - Docstring updated with the explicit note "CallMeBot 403s on em-dash in
+    multi-part rapid-fire sends".
+  - Routine specs should also avoid em-dashes in the German body templates;
+    propagate when those specs are next touched.
+  - Today's 01-pre-market WhatsApp send used a manual ASCII-hyphen header
+    bypass; landed 4/4 parts queued first try.
+
 ## 2026-05-27 — CallMeBot's "1000 char" cap is actually ~700-800; use multi-part
 - **Pattern (initial reading):** First send of the new Top-5 News digest used
   a 1032-char body → truncated. Trimmed to 898 chars and re-sent → STILL
