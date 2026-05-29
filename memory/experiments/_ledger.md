@@ -19,11 +19,11 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Strategy slug | Sleeve | Status | Trades | Win-rate | Avg R | Net P&L | Max DD | RAR | Alpha vs SPY | Last update |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---|
-| core-buy-and-hold          | Core      | active | 16 fills (T1+T2, no closes) | — | — | +$941.97 (UPL Mon holiday EOD mark) | $0 (no closes) | — | -8.57% (Live-Phase carryover + LM Day 5 Mon holiday EOD) | 2026-05-25 05-close-summary |
-| swing-momentum-breakout    | Swing     | active | 0 (ARM WATCH → MISSED 13:30-14:00Z; intraday H $315 → C $304.66 fade; re-arm on close <$290; weekend = no scan) | — | — | $0.00 | $0 | — | — | 2026-05-22 05-close-summary |
+| core-buy-and-hold          | Core      | active | 16 fills (T1+T2, no closes) | — | — | +$2084.08 (UPL Fri pre-mkt mark; LLY +$424.81 leads after +5.13% Thu walk) | $0 (no closes) | — | TBD intraday (Thu LM +0.83% / SPY +0.55% → +28 bp Thu daily snap) | 2026-05-29 01-pre-market |
+| swing-momentum-breakout    | Swing     | active | 0 (AMD CANDIDATE for Fri open after Thu +4.55% clean break $510 hold; ARM EXTENDED → SKIP after Thu +10.76% ATH; AAPL no rejection) | — | — | $0.00 | $0 | — | — | 2026-05-29 01-pre-market |
 | swing-mean-reversion       | Swing     | active | 0 (1 SKIP = INTU thesis-risk) | — | — | $0.00 | $0 | — | — | 2026-05-22 02-market-open |
-| swing-quality-pullback     | Swing     | active | **1 open (NVDA)** | — | — | -$42.11 (UPL Mon holiday EOD mark) | $0 (no closes) | — | — | 2026-05-25 05-close-summary |
-| swing-earnings-drift       | Swing     | active | **1 open (RL)** | — | — | +$2.98 (UPL Mon holiday EOD mark) | $0 (no closes) | — | — | 2026-05-25 05-close-summary |
+| swing-quality-pullback     | Swing     | active | **1 CLOSED (NVDA stop-out Wed 5/27 @ $208.95; -$99.10 / -5.0%) + STUB 0.0925 sh pending Fri liquidate** | 0 → 1 (Wed close + Fri stub) | — | -$99.10 realized + -$0.46 stub UPL = ~-$99.56 final | -$99.10 | -1.0 | — | 2026-05-29 01-pre-market |
+| swing-earnings-drift       | Swing     | active | **1 open (RL)** | — | — | -$24.27 (UPL Fri pre-mkt mark; cushion 5.79%, day-7 cal / 4 td) | $0 (no closes) | — | — | 2026-05-29 01-pre-market |
 | swing-insider-buys         | Swing     | paused | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | swing-short-rejection      | Swing     | active | 0 (1 WATCH = AAPL — EOD final candle UP +1.00% close $309.13 with fresh $311.40 52w-Hi extension; PASS today, re-watch Tue 5/26) | — | — | $0.00 | $0 | — | — | 2026-05-22 05-close-summary |
 | swing-short-fundamental    | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
@@ -46,12 +46,12 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Sleeve | Cash Budget | Used | Open positions | Cumulative P&L | Cumulative Alpha vs SPY |
 |---|---:|---:|---:|---:|---:|
-| Core     | $62,000 | $62,941.97 (Mon holiday EOD LOCKED, +$941.97 UPL) | 8 | +$941.97 / +1.519% (10-day Live-Phase + LM Day 1-5 Mon holiday EOD LOCKED) | -8.57% Live-Phase + LM Day 5 Mon holiday carryover |
-| Swing    | $15,000 | $3,500 cost (NVDA $2k + RL $1.5k) | 2 | -$39.13 UPL (NVDA -2.105% cushion 2.96%, RL +0.199% cushion 7.19%) | — (Day 1 td of hold; 5/25 holiday doesn't count; no realized P&L yet) |
-| Daytrade | $10,000 | $0      | 0 | $0 | — |
-| Crypto   | $5,000  | $0      | 0 | $0 | — |
-| Options  | $5,000  | $0      | 0 | $0 | — |
-| Cash reserve | $3,000 | — (of $34,500 cash total, ≥$3k reserved per ALM-2) | — | — | — |
+| Core     | $62,000 | $64,084.65 (Fri 5/29 pre-mkt; +$2084.08 UPL) | 8 | +$2,084.08 / +3.36% (10-day Live-Phase + LM Day 1-9 Fri pre-mkt; LLY +12.74% / META +5.31% / MSFT +6.62% / VOO +2.87% lead) | TBD intraday (LM-window: Bull equity Fri pre-mkt $101,961 vs 5/21 EOD baseline $100,761.72 = +1.19% / SPY +1.60% over same window → ~-41 bp LM alpha; first realized Swing close drag -$99) |
+| Swing    | $15,000 | $1,495.62 (NVDA stub $19.89 + RL $1,475.73; main NVDA $2k cost closed Wed -$99.10) | 2 (1 closing stub + 1 active) | -$99.10 realized + -$0.46 stub + -$24.27 RL = -$123.83 net (UPL incl. realized) | — |
+| Daytrade | $10,000 | $0      | 0 | $0 | — (PDT 0/5d full budget; ORB watches re-arm Fri 13:30Z) |
+| Crypto   | $5,000  | $0      | 0 | $0 | — (BTC convergence -3.26% Fri; ~14 td to neutral at +0.24 pp/day pace) |
+| Options  | $5,000  | $0      | 0 | $0 | — (6th Polygon chain re-test FAILED Fri 12:08Z) |
+| Cash reserve | $3,000 | — (of $36,381 cash total, ≥$3k reserved per ALM-2) | — | — | — |
 
 ## Weekly bandit log (06-weekly-review writes here)
 
@@ -128,6 +128,38 @@ whether trigger is reachable":
 - `options-cash-secured-put`: still paused.
 
 ## Daily refresh log
+
+- **2026-05-29 12:05Z (01-pre-market, LM Day 9 — Fri post-PCE risk-on tape)** —
+  **NORMAL pre-market routine** (broker reachable; account pulled; clock
+  is_open=False 85 min to cash open; futures green; VIX 15.80; no risk-off).
+  KPI deltas vs Thu 5/28 12:05Z snap: `core-buy-and-hold` UPL **$+1,481.91 →
+  $+2,084.08 (+$602.17 on Thu's broad rally)** — LLY ATH walk +$116.94 (+5.13%
+  trail walk from $1093 HWM to $1149.10 = biggest single-day organic trail
+  walk in book history), MSFT +$188.16 (+3.47%), AVGO +$200.61 (+1.12%
+  continuation pre-6/3 earnings), META +$5.78 (flat close but new intraday
+  ATH $643 / stop walked +0.70%), VOO walked HWM $691.51 → $694.29 (+0.40%).
+  `swing-quality-pullback` realized -$99.10 (NVDA stop Wed) + stub UPL -$0.46
+  (Thu 02-open close DID NOT FIRE — re-queue Fri); `swing-earnings-drift`
+  UPL **+$2.98 → -$24.27 (-$27.25 on Thu RL -1.45% giveback)** cushion
+  compressed 7.19% → 5.79%. Bull equity **$100,901.97 → $101,960.92 (+$1,058.95
+  / +1.05%)** over the 5/26-5/28 stretch since Mon holiday EOD lock; vs 5/21 EOD
+  baseline +$1,199.20 / +1.19%. SPY: Fri pre-mkt $754.60 close Thu vs $745.70
+  5/22 EOD = +1.19% over the same stretch → **LM cum alpha drift roughly neutral
+  ~-41 bp** (refined intraday). VIX 15.80 (-5.7% Thu; risk-on confirmed).
+  Daytrade count (5d): **0** (still RESET; full PDT budget). Options BP
+  $69,170.73 / L3 ✓. **Polygon options-chain 6th re-test FAILED 12:08Z** —
+  all 4 Options sub-strategies remain BLOCKED. **AMD swing-momentum-breakout
+  CANDIDATE** for Fri 02-open entry (Thu +4.55% clean break + hold $510 = $518.09
+  close; new 52w-Hi $527.20 intraday; sizing 3 sh @ ~$520 = ~$1,560 stop $494
+  GTC target $572). **ARM SKIP** (Thu +10.76% extended ATH $349.42; sub-1R now).
+  **AAPL SKIP** (no rejection candle Thu; WWDC 6/8-12 ahead). **NVDA stub close
+  re-queue Fri 02-open** (Thu plan failed to execute; cash unchanged confirms).
+  RL HOLD; tighten-to-breakeven only at UPL ≥+5%. Crypto 0/5 cross-up; BTC
+  -3.26% gap (+0.24 pp/day Thu pace). Inbox.md Pending: empty. WhatsApp
+  Top-5 News DE multi-part scheduled for 12:??Z send via
+  `send_long_routine_message` (ASCII hyphen workaround per lesson 2026-05-28
+  baked into helper). Macro risk-off NOT active. **First eligible bandit
+  cull** still scheduled Fri 5/29 21:30Z (today; 06-weekly-review).
 
 - **2026-05-20 EOD (05-close-summary)** — Final Live-Phase EOD pre-LM-start. 0 trades
   across all 22 seeded strategies (Core in HOLD; Swing/Daytrade/Crypto/Options not

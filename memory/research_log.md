@@ -579,3 +579,94 @@ aggregates (15 names; gainers/losers + options snapshots gated 403). yfinance
 for fundamentals + crypto 220d history. Alpaca broker (paper endpoint verified)
 for account + positions + open-stop status. See `memory/daily/2026-05-27.md`
 for full per-sleeve detail.
+
+---
+
+## 2026-05-29 (Fri 12:05Z, 01-pre-market, LM Day 9 — post-PCE risk-on follow-through)
+
+**Macro tape (yfinance + Gemini)**:
+- ES +0.12% / NQ +0.09% / YM +0.28% — mild green follow-through.
+- **VIX 15.80** (-5.7% Thu; first sub-16 print in 2 weeks; firm risk-on).
+- **10Y 4.45%** (-3 bp Thu / -5 bp Wed; dovish drift continuing).
+- DXY 99.05 (flat); **WTI $87.92 -1.10%; Brent $91.45 -2.41%** (peace-trade
+  returns; US-Iran ceasefire + open Strait of Hormuz).
+- **Gold $4,564 +1.44%** (continued bid even on risk-on tape; UBS YE forecast
+  cut to $5,500 still bullish long-term).
+- Thu PCE/GDP: headline PCE 3.8% YoY (matched consensus), core PCE +0.2% MoM
+  (beat lower end), Q1 GDP revised down 1.6% adv → 2nd est, jobless claims
+  215k. Market read "cooling enough, soft-landing intact." SPY +0.55% to
+  ATH $754.60; QQQ +0.84%; LLY +4.05% to ATH on CVS Zepbound reinstatement
+  + new Foundayo coverage; MSFT +3.47%; ARM +10.76% to ATH $349.42 (YTD +210%);
+  AMD +4.55% clean break $510 hold (intraday ATH $527.20).
+- **No FOMC speakers Fri 5/29**. Calendar light.
+
+**Earnings calendar next 5 td**:
+- HPE Mon 6/1 (EPS $0.53 / rev $9.77B consensus).
+- CRWD Tue 6/3 post-close (EPS $1.07 / rev $1.36B).
+- **AVGO Tue 6/3 post-close** (EPS $2.40 / rev $22.11B; options imply ±7.5%; **Core holding — Core frozen, no add; strangle would fire but Polygon chain blocked**).
+- LULU Wed 6/4 (EPS $1.68 / rev $2.44B).
+- DOCU Wed 6/4 (EPS $0.99 / rev $0.82B).
+
+**Single-stock catalysts (Thu 5/28 carry into Fri)**:
+- **LLY** $1126.80 +4.05% ATH — CVS reinstates Zepbound + adds new Foundayo
+  obesity pill; mkt cap > $1T crossed. **Core holding** — pipeline-positive,
+  thesis-reinforcing.
+- **ARM** $335.27 +10.76% ATH $349.42; YTD +210%; Mizuho PT $360 (Outperform).
+  **Swing momentum CANDIDATE — but EXTENDED**; sub-1R now → SKIP. Re-arm rule:
+  3-5 td consolidation + higher-low base above $320 then pullback to $315-320.
+- **AMD** $518.09 +4.55% clean break + hold > $510; new 52w-Hi $527.20.
+  Past 12mo +300%. **Swing momentum CANDIDATE — TRIGGER FIRED CLEAN.** Entry
+  plan Fri 02-open: 3 sh @ ~$520 ≈ $1,560; stop $494 GTC (-5%); target $572
+  (+10%) or 5-DMA-break; time-stop 6/5.
+- **META** $635.29 flat close — hit intraday ATH $643 then gave back;
+  consolidation, not rejection. Core holding stays.
+- **MSFT** $426.99 +3.47% — Core holding; post-PCE tech bid carry.
+- **AAPL** $312.51 +0.53% — 0.24% off 52w-Hi; **no rejection candle**;
+  BofA PT $380 + WWDC 6/8-12 catalyst → `swing-short-rejection` SKIP per
+  ALM-6.
+- **CRM** beat Wed 5/27 (rev $11.31B / EPS $3.27); **MRVL** beat 5/27 — semis
+  confidence carries to AVGO 6/3.
+
+**Polygon options-chain 6th re-test (12:08Z)**: **STILL 403 Forbidden**.
+- `get_options_chain("SPY")` → 403.
+- `get_iv_rank("NVDA")` → None.
+- All 4 Options sub-strategies remain BLOCKED. 7th re-test scheduled Mon
+  6/1 01-pre-market. If 7th fails, escalate as Robin operational item
+  (7+ consecutive routines = systemic, not transient).
+
+**Crypto scan (yfinance 250d, computed 50/200 DMA)**:
+- BTC $73,311 -0.31%/24h -2.88%/7d gap **-3.26%** (Thu -3.50% → +0.24 pp Fri);
+  ETH $1999 -0.38%/24h gap -10.35%; SOL $81.64 gap -17.79%; AVAX $8.86 gap
+  -14.42%; LINK $8.92 gap -11.43%. **0/5 cross-up; 0/5 -10%/24h flush**.
+  At Fri pace (+0.24 pp/d), BTC ~14 td to neutral cross.
+- `crypto-weekend-momentum` re-arms today 21:00Z (05-close-summary); BTC 7d
+  -2.88% << +2% threshold → low fire probability.
+
+**Strategic read**:
+- Tape: **post-PCE risk-on follow-through**, VIX broke 16, 10Y dovish drift,
+  oil reverses Thu's geopolitical spike. Supportive for tech/AI sleeve;
+  zero hedge urgency through Fri close.
+- LLY +5.13% trail walk = biggest single-day organic protection drift in
+  book history. Core sleeve mechanical compounding is working as designed.
+- AMD clean trigger after Wed/Thu re-test pattern — entry queued for Fri
+  02-open with confirmation gate (first-5-min hold > $510).
+- ARM EXTENDED — chase entry has sub-1R risk-reward; skip and re-arm on
+  consolidation.
+- NVDA stub re-queue (Thu plan didn't execute; cash unchanged confirms);
+  realized -$99.56 final attribution to `swing-quality-pullback`.
+- AAPL short-rejection still vetoed (no rejection candle Thu; WWDC ahead).
+- Crypto + Options sleeves dormant; Polygon options-chain 6th block →
+  escalate if 7th fails.
+
+**No thesis-break events on any 8 Core holdings; 2 Swing legs HOLD (1 closing
+stub + 1 active RL); 1 new Swing-momentum AMD candidate conditional on 02
+confirmation; short-rejection vetoed; crypto + options sleeves dormant; Polygon
+chain still blocked.**
+
+**Cited sources**: Gemini Search-Grounding (Thu PCE/GDP take, FOMC speakers
+calendar, AVGO/CRWD/LULU consensus, LLY CVS catalyst, ARM/AMD price moves,
+oil ceasefire reports, gold UBS forecast). yfinance EOD aggregates (17
+equities + 5 crypto + 8 futures/macro). Alpaca paper-api broker (account
++ 10 positions + 9 open stop orders verified `OrderStatus.NEW`). Polygon
+options-chain probe (403 6th time). See `memory/daily/2026-05-29.md` for
+full per-sleeve detail.
