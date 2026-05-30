@@ -89,6 +89,48 @@ Sleeve: Swing. Status: active. Playbook reference: `memory/playbook.md`.
   open, the uncovered slice prints ~$18 of additional loss beyond the
   planned -7% stop-out. Acceptable given Swing budget context.
 
+### KW 22 mid-hold checkpoint (06-weekly-review 2026-05-30)
+
+- **Day 8 calendar / 5 td elapsed** (5/22 fill + holiday-skip 5/25 + 5/26 td1
+  + 5/27 td2 + 5/28 td3 + 5/29 td4 = wait that's only 4 td; let me recount:
+  5/22 = fill day (counts as td1 of hold per playbook), 5/25 holiday-skip,
+  5/26 td2, 5/27 td3, 5/28 td4, 5/29 td5). 5 td elapsed; 5 td remaining
+  before time-stop 2026-06-05 close.
+- **Fri 5/29 EOD mark**: $363.90, UPL **-$52.24 / -3.482%**.
+- **Cushion**: 3.66% (vs stop $350.64) — compressed from KW 21 EOW 7.00%
+  to KW 22 EOW 3.66% over 5 td. Net -3.34 pp cushion erosion.
+- **Trajectory KW 22**: Tue +1.31% (post-holiday pop, $377.78 → $381.97 pre-mkt,
+  Day 3 of hold = textbook PEAD acceleration window) → Wed +2.02% (held the
+  early-week pop $384.65, PEAD pattern firing as expected) → Thu -1.45% (giveback
+  $376.23, consumer-discretionary weakness; WMT-sympathy retail tape drag) →
+  Fri -1.85% ($363.90 close, sharper continuation lower; no specific RL
+  catalyst, broader retail bid evaporated).
+- **PEAD thesis assessment**: Original entry expected 1-2 week drift higher
+  on Q4 FY26 beat + guide. Tue+Wed delivered the Day 3-5 PEAD acceleration
+  textbook (+3.36% peak vs entry). Thu+Fri reversal completely retraced
+  the drift and pushed UPL deeper red than entry-day (-3.48% vs entry +0.20%
+  Day 1). **Thesis is weakening, not yet broken.** The 4 fresh PT raises
+  on 5/22 weekend (UBS $511, Barclays $439, Wells $415, Needham $405)
+  remain in-force but flow has stopped converting.
+- **Decision Sat 5/30**: HOLD (no tighten-to-breakeven; UPL still negative;
+  no emergency tighten — cushion 3.66% > 3.0% playbook threshold by 66 bp).
+  Stop $350.64 GTC verified live.
+- **Mon 6/1 watch**: if RL gaps red >2% pre-mkt (mark <$357), cushion drops
+  to <2% and emergency tighten is on the table. Otherwise HOLD into td6.
+- **Time-stop schedule (10 td from fill = 6/5 close)**:
+  - Mon 6/1 = td6 (HOLD)
+  - Tue 6/2 = td7 (HOLD; AVGO earnings day = -1d to AVGO catalyst Tue post-close)
+  - Wed 6/3 = td8 (HOLD; AVGO post-close = sympathy risk if AVGO misses)
+  - Thu 6/4 = td9 (HOLD; final tighten-or-cut decision window)
+  - Fri 6/5 = td10 (TIME-STOP: close at market if neither target $414.73
+    nor stop $350.64 hit by close)
+- **Expected R outcome at current trajectory**: If RL drifts back to entry
+  by 6/5 close = $377.03 = 0R. If RL continues bleed at Thu+Fri pace
+  (~-1.5% per day) = $363.90 × (1-0.015)^4 = ~$342.79 = STOP HIT before
+  time-stop = -1.0R (matches NVDA stop outcome). If RL bounces back to
+  +5% by 6/5 = $395.88 = +0.7R. **Modal outcome from here: -1.0R stop-out
+  or 0R time-stop close.** Below the planned 1.4R expectation.
+
 ### Outcome (TBD — to be filled in post-exit)
 
 - Exit date:

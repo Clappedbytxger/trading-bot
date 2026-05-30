@@ -892,3 +892,203 @@ becomes a residual that's separately closed at market.
   positions w/ same-day GTC stops as eligible day-trades — PDT watermark
   observation, not at 4-trade threshold).
 - Day-alpha snap @ 13:38Z: Bull +0.45% vs SPY +0.60% → **-15.2 bp** day-alpha.
+
+---
+
+## 2026-05-27T15:00:34Z — ORGANIC BROKER FILL: NVDA stop triggered (first LM closed trade)
+
+Routine: organic broker event (no Bull routine call). Broker: Alpaca paper
+(`paper-api.alpaca.markets` verified). Phase: **LEARNING MONTH Day 7 of 30**.
+
+### Trade closed (organic stop fill)
+
+| # | Side | Symbol | Trigger | Filled Qty | Avg Fill | Order ID | sleeve | strategy |
+|--:|------|--------|--------:|-----------:|---------:|----------|--------|----------|
+| 1 | SELL STOP | NVDA | $208.96 | 9 sh | $208.95 | ffb5e5a9-50fb-4e39-abef-849d72b8f323 | Swing | swing-quality-pullback |
+
+- **Original entry**: NVDA 9.092513 sh @ $219.9612 ($2k notional) on 5/22 13:37:24Z.
+- **Stop placement**: $208.96 GTC (9 sh; -5% from entry) on 5/22 13:37Z post-fill.
+- **Fill mechanics**: $208.95 avg = 1 ¢ slip vs $208.96 trigger; intraday L
+  $208.78 per yfinance Wed = broke ~$0.18 below trigger so the fill happened
+  mid-breakdown. Effectively zero slippage of consequence.
+- **Realized P&L $**: 9 × ($208.95 - $219.9612) = **-$99.10**.
+- **Realized R-multiple**: -1.0R exactly (planned -5% / $11.0012 per share × 9 sh = $99.11 = exactly the planned risk).
+- **Days held**: 5 calendar (5/22 fill → 5/27 stop); 2 td elapsed prior to
+  stop (5/22 fill day + 5/26 td1 + 5/27 stop on td2 mid-session); Mon 5/25
+  Memorial Day skipped.
+- **Fractional stub remaining**: 0.092513 sh @ $210.32 Wed mark = $19.46 mv
+  (UPL -$0.89). Stub close attempted Thu 5/28 + Fri 5/29 02-market-open
+  both MISSED (cron miss cluster); re-queue Mon 6/1 02-market-open as
+  3rd attempt.
+
+### Why this was an organic event, not a Bull routine action
+
+- Stop order was placed by Bull on 5/22 13:37Z immediately after the buy fill
+  per ALM-3 sleeve-stop-at-entry discipline.
+- Stop sat live GTC for 3 trading days (5/22 + 5/23 ovr-weekend Sat/Sun +
+  5/24 Sun ovr-weekend + 5/25 Memorial Day skip + 5/26 td1 + 5/27 td2)
+  with no Bull intervention required.
+- Wed 5/27 15:00:34Z (≈11:00 ET, mid-session), price broke through trigger
+  and Alpaca filled per the GTC order. No Bull routine fired at that
+  timestamp (03-midday fires at 17:30Z = 4 hours later).
+- The fill is recorded here for the audit trail; Wed 5/27 03-midday and later
+  routines would normally have picked it up and updated portfolio + experiment
+  log, but the Wed daily file shows only the 01-pre-market section (suggests
+  another cron-miss pattern on Wed afternoon, similar to the Fri 5/29 cluster).
+
+### Strategy attribution
+
+- **`swing-quality-pullback`** first LM closed trade. Validates -5% stop
+  mechanic: fired cleanly at the planned -1.0R loss with no broker drama.
+- Thesis was fundamentally INTACT at stop time (NVDA Q1 FY27 print + $80B
+  buyback + 65% op margin / 85% rev growth unchanged from 5/22 entry). The
+  loss came from technical distribution flow (Tue 5/26 187M-sh distribution
+  day → Wed continuation breakdown), not a fundamental catalyst.
+- Reinforces playbook: -5% stops on quality-pullback need to hold even
+  when the fundamental thesis is intact, because flow can overwhelm narrative
+  on a 2-td horizon.
+- Sample = 1 trade; defer broader strategy implications until KW 23-24 EOW
+  with more closed trades.
+
+### Account post-fill snapshot (broker reconciliation)
+
+- Equity Wed 5/27 EOD: $101,345.49 (broker `last_equity` Thu pre-mkt)
+- Cash Wed 5/27 EOD: $36,380.55 (up $1,880.55 from $34,500 = 9 sh × $208.95 fill proceeds)
+- Long MV Wed 5/27 EOD: $64,964.94 (Core $63,484 + Swing RL $1,481 + NVDA stub $19)
+- Daytrade count (5d): **0** UNCHANGED — Alpaca correctly recognized that
+  this was NOT a same-day round-trip (entry 5/22, exit 5/27, 5-day hold).
+  PDT budget remains full 5/5 for KW 23.
+
+### Guardrails verified
+
+- **ALM-1 sleeve discipline**: stop fill tagged `Swing` + `swing-quality-pullback`. ✓
+- **ALM-2 sleeve cash budget**: Swing sleeve_used drops $3,500 → $1,500 (RL only) → $13,500 budget remaining. ✓
+- **ALM-3 sleeve stops**: stop fired at the planned -5% level. ✓
+- **ALM-4 strategy logging**: experiment file `swing-quality-pullback.md` updated with closed-trade outcome section (Wed 5/27 stop-out). ✓
+- **ALM-8 hard-overrides**: paper-endpoint verified at broker reconciliation. ✓
+
+---
+
+## 2026-05-30T20:38Z — 06-weekly-review LM-KW22 (Sat-slot weekly review; NO bandit cull)
+
+Routine: `06-weekly-review`. Broker: Alpaca paper. Phase: **LEARNING MONTH
+Day 10 of 30** (Sat 5/30 = KW 22 EOW + 1d). Strategy: v3 approved 2026-05-20.
+Sat-slot fire (Fri 21:30Z slot apparently MISSED — no Fri commit; consistent
+with Fri 02-05 cluster miss).
+
+### Action: NONE (no orders placed; weekly review is read-only on positions)
+
+| Sleeve   | Strategies          | Status | Reason                                                              |
+|----------|---------------------|--------|---------------------------------------------------------------------|
+| Core     | core-buy-and-hold   | NO-OP  | Frozen per LM rules; 8/8 GTC trails verified `OrderStatus.NEW` Sat  |
+| Swing    | (RL + NVDA stub)    | NO-OP  | RL HOLD (Day 8 cal / 5 td; cushion 3.66%); NVDA stub re-queue Mon 6/1 |
+| Daytrade | (all sub-strategies) | NO-OP | Sleeve empty all week; PDT count 0 / 5d                            |
+| Crypto   | (all sub-strategies) | NO-OP | Sleeve empty; 0 cross-up signals; 0 -10%/24h flushes Mon-Fri        |
+| Options  | (all sub-strategies) | NO-OP | Sleeve empty; Polygon chain BLOCKED 6 consecutive routines → ESCALATION |
+
+### Weekly KPI snapshot (Fri 5/22 EOD → Fri 5/29 EOD; full week aggregation)
+
+- Bull: $100,906.04 → $102,178.75 = **+$1,272.71 / +1.2614%**
+- SPY: $745.70 → $756.48 = **+1.4456%**
+- **KW 22 weekly alpha: -18.4 bp** (improvement from KW 21's -50 bp; +32 bp recovery)
+- LM cumulative since 5/21 EOD baseline: **+$1,417.03 / +1.4063% equity / -44.6 bp alpha**
+- YTD: Bull +2.179% vs SPY +11.033% → YTD alpha **-885 bp** (improvement from -857 bp; +28 bp YTD-gap tightening)
+- VIX: 16.82 → 15.32 (-8.9% week; broke below 16; firm risk-on)
+- Max equity intra-week: $102,219.92 (Fri close broker `last_equity`)
+- Min equity intra-week: $100,901.97 (Tue pre-open; carryover Mon holiday)
+- Peak-to-trough drawdown intra-week: -0.0% (monotonic up post-holiday)
+- Total trades book-wide: 1 close (NVDA Wed stop-out)
+- PDT count Fri EOD: 0 / 5
+
+### Per-sleeve attribution KW 22
+
+| Sleeve     | Trades | Realized $ | Open UPL Δ (Fri 5/29 vs Fri 5/22) | Net P&L attribution |
+|------------|-------:|-----------:|----------------------------------:|--------------------:|
+| Core       | 0      | $0         | +$1,379.91                        | **+$1,379.91** |
+| Swing      | 1 close | -$99.10   | -$8.08                             | **-$107.18**   |
+| Daytrade   | 0      | $0         | $0                                 | $0             |
+| Crypto     | 0      | $0         | $0                                 | $0             |
+| Options    | 0      | $0         | $0                                 | $0             |
+| **Total**  | 1      | -$99.10    | **+$1,371.83**                     | **+$1,272.71** (matches broker Δ within $0.02 reconciliation noise) |
+
+### Bandit cull decision
+
+- **NO CULL** (pre-condition ≥3 trades/strategy NOT MET for any of 22 strategies).
+- Top by attribution: `core-buy-and-hold` +$1,379.91 (sole positive contributor).
+- Bottom by attribution: `swing-quality-pullback` -$99.10 realized (1 trade, -1.0R clean).
+- Sleeve budgets UNCHANGED. Strategy statuses UNCHANGED.
+- Reason for skip: 1-trade samples don't statistically distinguish strategy
+  failure from single-trade outcome. Sleeve activation barriers (Polygon
+  options-chain) are the dominant constraint, not strategy concept. The
+  right action this week is **fix activation barriers**, not cull strategies.
+- Next eligible bandit cull: Fri 6/5 / Sat 6/6 (KW 23 EOW).
+
+### Notable broker events KW 22 (recorded for audit)
+
+- **Wed 5/27 15:00:34Z**: NVDA stop fill (see separate trade log entry above).
+- **Thu 5/28 intraday**: LLY trail HWM walked $1,093.00 → $1,149.10 (+5.13% —
+  biggest single-day Core HWM advance in book history; CVS Zepbound + Foundayo
+  triple-catalyst). Broker stop bumped $983.70 → $1,034.19.
+- **Thu 5/28 intraday**: META HWM $638.50 → $643.00; stop $574.65 → $578.70.
+- **Thu 5/28 intraday**: VOO HWM $691.51 → $694.29; stop bumped to $624.86.
+- **Fri 5/29 intraday**: 4-Core HWM cluster walk (book-record single-day):
+  - VOO $694.29 → $697.00 (+0.39%); stop $624.86 → $627.30
+  - MSFT $432.70 → $450.33 (+4.08%, biggest MSFT walk in book); stop $389.43 → $405.30
+  - AVGO $442.36 → $448.88 (+1.47%, pre-earnings froth); stop $398.12 → $403.99
+  - (META and LLY already walked Thu; broker stops carried through Fri)
+
+### Lessons appended to `memory/lessons.md`
+
+5 lessons under KW 22 entry (`2026-05-30 — Week ending 2026-05-29 (KW 22)`):
+- **L1**: Fri 5/29 cron-miss cluster (4 consecutive routines missed) —
+  structurally different from single 01-miss; back-fire spec doesn't cover.
+- **L2**: NVDA stop validates -5% mechanic; -1.0R exactly; flow-driven not
+  thesis-driven.
+- **L3**: 2 consecutive weeks of slow-grind-up regime favor Core + PEAD,
+  disfavor extended-momentum and mean-reversion. Encoding candidate.
+- **L4**: Polygon options-chain blocked 6 consecutive routines → ESCALATION
+  to Robin (subscribe Options Starter $79/mo OR reallocate $5k budget).
+- **L5**: CallMeBot 403 isn't just em-dash — length+content WAF hypothesis;
+  mitigation: cap 3-4 parts × ≤400 chars × 60+ s inter-part sleep.
+
+### Memory writes
+
+- `memory/portfolio.md` — overwritten (Fri 5/29 EOD broker state).
+- `memory/lessons.md` — appended KW 22 weekly entry.
+- `memory/experiments/_ledger.md` — fully refreshed; KW 22 weekly KPI rollup; NO-CULL bandit log entry.
+- `memory/experiments/swing-earnings-drift.md` — appended KW 22 RL mid-hold checkpoint.
+- `memory/experiments/swing-quality-pullback.md` — no edit (Wed outcome section already finalized).
+- `memory/playbook.md` — no edit (insufficient signal for status changes).
+- `memory/strategy.md` — no edit (insufficient signal for sleeve refinement; defer to KW 23 EOW).
+- `memory/daily/2026-05-30.md` — written.
+- `memory/trade_log.md` — this entry.
+
+### Why this matters as a trade-log entry
+
+- Closes the KW 22 audit trail: 1 realized trade (NVDA stop) + 1 open trade
+  (RL deteriorating, time-stop 6/5) + 0 new entries (Fri AMD missed on cron).
+- Documents the first LM bandit-cull decision (NO CULL) so KW 23 review has
+  a precedent if pre-condition again not met.
+- Records the 4-Core-HWM-cluster Fri 5/29 + Thu LLY +5.13% walk = highest
+  organic protection drift week in book history.
+- Confirms the 02/03/04/05 Fri cron miss (only 01-pre-market commit Fri =
+  $36,380.54 cash unchanged Thu→Fri = no fills executed Fri = AMD + NVDA
+  stub both planned but not fired). This is a major operational data point
+  for the L1 lesson encoding direction.
+
+### WhatsApp planned
+
+- German weekly brief sent Sat 5/30 evening, ≤1000 chars per CLAUDE.md spec.
+- Structure: Equity Fr / SPY-Woche / Alpha-bp / LM-Alpha kum / Trades / Bandit /
+  Top-Lesson / Polygon-Eskalation-Frage / Nächste-Woche-Fokus.
+- Channel: `send_routine_summary` single-part (≤950 char body to stay under
+  CallMeBot effective cap per L5 mitigation).
+
+### Operational issues unchanged at KW 22 EOW
+
+1. **01-pre-market cron miss-rate 4 of 14 trading days** (L1 5/21 still open
+   in Robin's inbox; today's WhatsApp re-broadcasts).
+2. **02-05 Fri cron-miss cluster** (new from KW 22; L1 5/30 lesson recorded
+   above; surface to Robin).
+3. **Polygon options-chain 6-consecutive-block** (L4 5/30 lesson; ESCALATION
+   trigger fires in today's WhatsApp; Robin to decide path).
