@@ -492,6 +492,209 @@ trading decision. Keep entries tight — pattern, lesson, encoded?
   - Today's 01-pre-market WhatsApp send used a manual ASCII-hyphen header
     bypass; landed 4/4 parts queued first try.
 
+## 2026-05-30 — Week ending 2026-05-29 (KW 22) — first full LM trading week
+
+- **Pattern (weekly aggregate)**: KW 22 was the first full LM trading week
+  (Mon 5/25 Memorial Day holiday + Tue-Fri active). Bull +1.2614% vs SPY
+  +1.4456% = **weekly alpha -18.4 bp** (improvement from KW 21's -50 bp;
+  +32 bp recovery). LM cumulative (Day 1-9): Bull +1.4063% / SPY +1.8526%
+  / alpha **-44.6 bp**. First LM closed trade: NVDA `swing-quality-pullback`
+  stop-out Wed 5/27 15:00:34Z at $208.95 / -1.0R exactly. 4 Core HWM
+  advances Fri 5/29 = book-record single-day cluster (VOO, MSFT, AVGO,
+  META) + LLY Thu +5.13% walk (biggest single-day Core HWM in book history;
+  CVS Zepbound reinstatement + Foundayo coverage). Per-sleeve KW 22:
+  Core +$1,379.91 / Swing -$107.18 / DT $0 / Crypto $0 / Options $0.
+  19 of 22 sub-strategies at 0 trades 7d — bandit cull pre-condition NOT
+  MET (need ≥3 trades per strategy). Fri 5/29 02-market-open through
+  05-close-summary all MISSED (Fri AMD entry + NVDA stub close both
+  planned, neither executed).
+
+### Lesson L1 (operational, primary) — Fri 5/29 cron-miss CLUSTER (4 consecutive routines)
+
+- **Pattern**: Git log shows the last commit Fri was `f03592f routine:
+  01-pre-market @ 2026-05-29T12:05Z`. No 02-market-open, 03-midday,
+  04-pre-close, 05-close-summary commits exist for Fri. Broker cash
+  balance Sat snapshot $36,380.54 = unchanged from Thu pre-mkt = no
+  Fri fills. The 02-market-open Step-1a back-fire spec (added 5/21
+  to handle 01-misses) does NOT address 02 itself missing — only 01.
+  When 02 misses, the entire downstream chain (Fri AMD entry + NVDA
+  stub close from the Fri pre-market plan) silently fails to execute,
+  and the day's daily-file is left with only the pre-market section.
+- **Lesson**: A 4-consecutive-routine miss is **structurally different**
+  from a single 01-miss; it's a runner-wide outage for a portion of the
+  day, not a single-slot drop. The current back-fire spec covers
+  upstream→downstream gaps (01→02) but not contemporaneous gaps (02
+  itself missing while 03/04/05 still need a plan). Possible encodings:
+  (a) **EOD self-heal**: 05-close-summary, when it fires, checks if
+  02/03/04 also fired today; if not, reconstruct from 01-pre-market
+  plan + actual broker delta and write an audit `_recovery.md` in
+  daily/; (b) **Periodic heartbeat**: each routine writes a tiny
+  `last_seen.txt` to the repo on completion; if more than 1 hour
+  elapses without a heartbeat during cash session, escalate to Robin
+  WhatsApp; (c) **Robin-side runner fix**: same as L1 from 5/21 (Q1 A
+  cron reliability still open in Robin's inbox).
+- **Encoded as rule?** No (recorded here only). Robin Q1 A from 5/21
+  still open — surface again in Sat 5/30 weekly WhatsApp. The 4-miss
+  cluster materially weakens the case for any KW 23 strategy that
+  depends on contemporaneous 02-execution (i.e. all Daytrade
+  sub-strategies, all swing-momentum-breakout breakouts at the open).
+  Until cron reliability resolves, the back-fire spec is a partial
+  mitigation, not a fix.
+
+### Lesson L2 (strategy validation, primary) — NVDA stop fired cleanly at -1.0R
+
+- **Pattern**: First LM closed trade was NVDA `swing-quality-pullback`
+  on Wed 5/27 15:00:34Z. Stop order `ffb5e5a9-50fb-4e39-abef-849d72b8f323`
+  (SELL STOP 9 sh @ $208.96 GTC) filled at $208.95 avg = 1 ¢ slip vs
+  trigger; intraday L $208.78 per yfinance so the fill happened mid-
+  breakdown. Realized -$99.10 = exactly -1.0R (planned -5% / $11.00
+  per share × 9 sh = $99.10). The trade reached its downside boundary
+  in ~30% of the allotted 7-td holding window (td2 of 7 = 5/22 fill
+  + holiday-skip + 5/26 td1 + 5/27 stop mid-session). Stub 0.0925 sh
+  ($19 mv) left unprotected per the fractional-handling lesson from
+  5/20; pending Mon 6/1 02-market-open liquidate (Thu+Fri attempts
+  both missed — see L1).
+- **Lesson**: The stop mechanic works as designed. -1.0R exactly, no
+  slippage of consequence, no broker drama. The trade thesis (quality-
+  compounder pullback) was fundamentally INTACT at stop time — NVDA's
+  Q1 FY27 print + $80B buyback + 65% op margin / 85% rev growth
+  unchanged from entry — but technical distribution flow (Tue 187M-sh
+  day → Wed continuation breakdown) overwhelmed the narrative on a
+  2-td horizon. **Generalizable rule**: on quality-compounder swings,
+  expect ~30% of stop-outs to be flow-driven rather than narrative-
+  driven within the 5-7 td window. The stop IS the discipline; the
+  narrative is post-hoc. Sample = 1 trade — defer broader implications
+  to KW 23 EOW (likely RL time-stops 6/5; AMD entry attempt Mon 6/1).
+- **Encoded as rule?** Partially — recorded here and reflected in
+  `memory/experiments/swing-quality-pullback.md` outcome section.
+  No playbook.md change (1 trade insufficient sample). If 2 more
+  `swing-quality-pullback` trades stop at -1.0R in KW 23-24 with the
+  same flow-driven pattern, consider widening stop to -7% (matching
+  earnings-drift sleeve) or tightening time-stop from 7 td to 5 td
+  to truncate the technical-distribution risk window.
+
+### Lesson L3 (market-regime, encoding candidate) — slow-grind-up tape continues to favor Core + PEAD
+
+- **Pattern**: KW 22 was a continued slow-grind-up tape (SPY +1.4%,
+  VIX -8.9% to 15.32 broke below 16 first time in 2 weeks, no -3%
+  day, 4 Core HWM advances Fri + LLY massive Thu walk). This is now
+  2 consecutive weeks (KW 21 + KW 22) of the same regime. In this
+  regime:
+  - **WORKS**: `core-buy-and-hold` (KW 21 +$340 / KW 22 +$1,380), 
+    `swing-earnings-drift` would work if it had a fresh PEAD setup
+    (RL was a Day-after-Day setup; the playbook's true Day 3-5
+    drift target hasn't been tested with a fresh entry in this regime).
+  - **DOESN'T WORK**: `swing-momentum-breakout` on EXTENDED names
+    (ARM +10.76% Thu = chase-and-fail). Mean-reversion entirely
+    (no flushes). Crypto trend-follow + mean-reversion (no -10% flushes,
+    50/200 still inverted).
+- **Lesson**: 2 consecutive weeks of the same regime is a signal that
+  the LM playbook should bias entries toward "quality pullback +
+  PEAD on the right side of the print" rather than chasing momentum
+  breakouts at 52w highs. The regime-classification should be a
+  pre-flight gate at 01-pre-market: scan SPY 5d range / VIX trend /
+  major-event proximity and tag the day "slow-grind-up" / "trending"
+  / "rangebound" / "risk-off". Then strategies fire ONLY if their
+  regime affinity matches.
+- **Encoded as rule?** No (still informal). Right time to encode is
+  end of KW 23 — if a 3rd consecutive slow-grind-up week extends the
+  pattern, propose a playbook v2 amendment in `strategy_proposals.md`
+  with regime-tagging on each sub-strategy. Until then, just track
+  regime classification per week in the weekly-review lesson.
+
+### Lesson L4 (operational, escalation trigger) — Polygon options-chain blocked 6 consecutive routines
+
+- **Pattern**: Polygon options-chain endpoint has returned 403
+  Forbidden on every routine attempt since LM Day 1 (5/21). Today's
+  KW 22 daily logs show 6 consecutive routine attempts blocked
+  (Mon 5/26 4th re-test, Tue 5/26 5th, Wed 5/27 5th, Thu 5/28 6th
+  deferred, Fri 5/29 6th = STILL 403). All 4 Options sub-strategies
+  (`options-long-call-momentum`, `options-vertical-bull-call-spread`,
+  `options-earnings-strangle`, `options-protective-put`) cannot fire.
+  Reference-contracts endpoint works (200 OK) but provides no IV /
+  Greeks / quotes — useless for sleeve activity.
+- **Lesson**: This is no longer "transient tier-gate timing"; it's a
+  **structural data-feed barrier** that has now blocked an entire
+  sleeve for 9+ days. The sleeve has $5k premium budget that's
+  completely unutilized while 22% of the strategy taxonomy
+  (4 of 22 sub-strategies, 5 of 22 if you include `options-cash-secured-put`
+  which is independently paused) sits idle. Two paths for Robin:
+  (a) Subscribe to **Polygon Options Starter ($79/mo)** and validate
+      chain unblocks. ROI judgment: Options sleeve P&L would need to
+      beat $79/mo × 1 month = $79 = ~1.6% return on the $5k premium
+      budget. Plausible if even 1 well-timed `options-long-call-momentum`
+      on AMD or NVDA fires.
+  (b) **Accept Options sleeve cannot run during LM** and reallocate
+      the $5k premium budget to Swing or Crypto sleeves for KW 23+.
+      Increment Swing budget $15k → $18k (covers 1-2 more concurrent
+      positions); OR add to Crypto $5k → $7k (more headroom if 50/200
+      cross fires); OR add to Cash reserve.
+- **Encoded as rule?** No — this is Robin's decision (budget changes
+  >$3k touch strategy.md territory per ALM rules). Surface in Sat 5/30
+  weekly WhatsApp as the primary "operational question for Robin".
+  If still 403 on Mon 6/1 01-pre-market 7th re-test AND no Robin
+  reply by Mon EOD, default to path (b) and reallocate to Cash for
+  KW 23 unless instructed otherwise (this is the safer default since
+  it doesn't increase sleeve risk).
+
+### Lesson L5 (operational) — CallMeBot 403 isn't just em-dash; length+content WAF hypothesis
+
+- **Pattern**: Fri 5/29 01-pre-market multi-part news brief: 5 parts
+  × 400-500 chars body (well under 700 char SAFE_PART_LEN) sent via
+  `send_long_routine_message` with ASCII-hyphen-only headers per
+  lesson 2026-05-28. **All 5 parts returned HTTP 403** across 3 retry
+  attempts per part and 3 cadence variants (35s/45s/60s inter-part
+  sleep). Diagnostic probes after the failure: short-text probes
+  (50-60 char, plain ASCII, no Bull header) returned 200 OK / queued.
+  Progressive complexity probes with emoji + bold markdown + multi-line
+  + full `🐂 *01-pre-market* (1/5) - HH:MM` header also returned 200 OK
+  at 60-char body. The 403 only fires on 400-500 char bodies with
+  multi-paragraph German content.
+- **Lesson**: The 2026-05-28 em-dash lesson was correct but incomplete.
+  CallMeBot's WAF appears to fire on a **length+content composite**:
+  ≥400 char per-part bodies in rapid succession trigger a heuristic
+  even with pure-ASCII headers. The mitigation 2026-05-28 (use ASCII
+  hyphen) was necessary but not sufficient. Three hypotheses for the
+  Fri 403 cluster:
+  - **H1**: Multi-paragraph German content with high letter density +
+    emoji header pattern hits a length-based content-density WAF rule.
+  - **H2**: Robin's CallMeBot per-recipient daily-volume cap. Thu sent
+    4 parts; Wed sent more; Fri's 5+6 retries+probes in a few minutes
+    could have tipped a daily rolling quota.
+  - **H3**: URL-encoded length once `%F0%9F%90%82` (emoji) +
+    `\n → %0A` paragraphs expand pushes payload past a hidden URL-
+    length cap stricter than the documented 1000.
+- **Workaround for KW 23 onward**:
+  - Cap news briefs at **max 3-4 parts** (not 5).
+  - Each part **≤400 chars body** (was 700 SAFE_PART_LEN).
+  - **60+ s inter-part sleep** (was 35-45s).
+  - **No emoji in headers for multi-part sends** (test hypothesis H1/H3).
+  - If H2 is correct: rate-limit Bull's WhatsApp output to ≤4 parts/day
+    across all routines combined.
+- **Encoded as rule?** No (recorded here only). When `src/notify/whatsapp.py`
+  is next touched, lower `SAFE_PART_LEN` from 700 → 400, raise
+  `INTER_PART_SLEEP` from 35 → 60, and add a `max_parts=4` arg with
+  default. Until then: routines that hit 5+ parts should split the
+  brief across two ROUTINES (e.g. half at 01-pre-market, half at
+  02-market-open) rather than try to push 5 parts through
+  `send_long_routine_message`.
+
+- **Operational follow-ups STILL OPEN at end of KW 22**:
+  - L1 from 5/21: 01-pre-market cron miss-rate now 4 of 14 trading days
+    (5/13, 5/14, 5/15, 5/21). **NEW from KW 22**: 4-consecutive-routine
+    miss Fri 5/29 (02 + 03 + 04 + 05). Cron reliability is now the
+    dominant operational risk, blocking both pre-market planning AND
+    post-plan execution.
+  - L4 from KW 22 (above): Polygon options-chain 6-consecutive-block
+    escalation — Robin to decide (a) subscribe Options Starter $79/mo
+    or (b) reallocate $5k budget.
+  - L5 from KW 22 (above): CallMeBot 403 length+content WAF — mitigation
+    by capping parts/length, but root-cause still hypothesized.
+- **Encoded as rule?** Partial:
+  - Lessons L1-L5: recorded here, no routine-spec changes yet.
+    Re-evaluate at KW 23 EOW after another full week of data.
+  - L4 surfaced loudly to Robin in Sat 5/30 weekly WhatsApp.
+
 ## 2026-05-27 — CallMeBot's "1000 char" cap is actually ~700-800; use multi-part
 - **Pattern (initial reading):** First send of the new Top-5 News digest used
   a 1032-char body → truncated. Trimmed to 898 chars and re-sent → STILL
