@@ -670,3 +670,106 @@ equities + 5 crypto + 8 futures/macro). Alpaca paper-api broker (account
 + 10 positions + 9 open stop orders verified `OrderStatus.NEW`). Polygon
 options-chain probe (403 6th time). See `memory/daily/2026-05-29.md` for
 full per-sleeve detail.
+
+---
+
+## 2026-06-01 (Mon 12:01Z, 01-pre-market, LM Day 12 — Strait of Hormuz oil shock)
+
+**Macro tape (yfinance + Gemini)**:
+- ES +0.04% / NQ -0.25% / YM +0.38% — mixed; Dow leads on energy bid.
+- **VIX 15.78** (+2.87% vs Fri 15.32; small risk-off uptick but firmly sub-16).
+- **10Y 4.453%** (flat-flat vs Fri 4.45%; Gemini news feed cites 4.47%).
+- DXY 99.06 (flat).
+- **WTI $90.36 (+0.69% Mon / +2.81% vs Fri $87.92)**, **Brent $93.69 (+0.44% Mon)**
+  — continuation of Fri's geopolitical bid; reversal of Thu's peace-trade pullback.
+- **Gold $4,536.30 (-0.21% Mon)** — surprisingly soft despite oil shock; positioning
+  unwind ahead of FOMC 6/16?
+- **Geopolitics — STRAIT OF HORMUZ ~90% TANKER COLLAPSE**: largest oil supply
+  disruption in recorded history per Gemini grounding. US-Israel-Iran conflict
+  escalated; reports of attacks on Ali Al Salem Airbase Kuwait; unverified rumors
+  of Iranian president's resignation; Iran speculation re Strait transit fees.
+
+**Earnings calendar next 5 td**:
+- **Mon 6/1**: HPE post-close (EPS $0.53 / rev $9.77B consensus).
+- **Tue 6/2**: light morning calendar.
+- **Wed 6/3 post-close**: **AVGO (Core holding; EPS $2.40 / rev $22.11B; implied
+  move ±7.5%; strangle BLOCKED)**, **CRWD (EPS $1.07 / rev $1.36B; cyber bellwether)**.
+- **Thu 6/4 post-close**: LULU (EPS $1.68 / rev $2.44B), DOCU (EPS $0.99 / rev $0.82B).
+- **Fri 6/5 13:30Z = market-open**: NFP release (consensus ~150k jobs).
+
+**Fed speaker calendar**: FOMC June 16-17 (Warsh Chair debut; first press conf).
+No FOMC speakers Mon 6/1. CPI 6/11, PPI 6/13.
+
+**Core holdings snap** (Alpaca pre-mkt marks 12:01Z):
+- VOO $697.25 / MSFT $468.46 (+4.05%) / GOOGL $377.78 (-0.67%, cushion 2.66% tightest in book) /
+  META $636.96 / AVGO $456.90 (+2.27% pre-earnings) / V $325.55 / BRK.B $473.90 /
+  LLY $1097.77 (-0.65%).
+- Material-news scan: 0/8 names trigger >5% overnight / margin shrink / downgrade.
+  AVGO earnings 2 td out flagged but expected (consensus + implied move via Gemini).
+  LLY Thu CVS Zepbound + Foundayo catalyst carrying through; no fresh news 24h.
+  GOOGL cushion compression (2.66%) flagged for 03-midday emergency-watch.
+
+**Swing candidates**:
+- **AMD** $516.10 close Fri (-0.38% intraday; H $522 / L $503.43 — held above $510
+  spec threshold all session). 5-DMA ≈ $500.23. RSI(14)>60 sustained. **TRIGGER INTACT.**
+  Mon 6/1 02-market-open RE-QUEUE 2nd attempt: BUY 3 sh @ market ≈ $516 = ~$1,548
+  notional; stop $490 GTC (-5.05%); target $568 (+10%) or 5-DMA break; time-stop 6/8.
+  Confirmation gate: skip if opens <$510.
+- **ARM** $353.29 close Fri (+5.38% intraday to new ATH $356.45). EXTENDED — SKIP.
+  Re-arm only on 3-5 td consolidation + higher-low base above $320 then pullback.
+- **AAPL** $312.06 close vs $311.78 open Fri = +0.09% **UP candle, NO rejection**.
+  SKIP. WWDC 6/8-12 veto.
+- **NVDA stub** liquidate re-queued 3rd attempt (locks -$99.92 final attribution).
+- **RL** HOLD; td6 of 10; cushion 3.66% > 3% emergency threshold; UPL -3.48% < +5%
+  tighten-to-breakeven. Modal outcome: -1.0R stop OR 0R time-stop.
+
+**Polygon options-chain 7th re-test (12:08Z)**: **STILL 403 Forbidden**.
+- `get_options_chain('SPY')` → 403.
+- `get_iv_rank('NVDA')` → None.
+- **L4 ESCALATION FIRES**: 7-consecutive-routine block = systemic. Surface to Robin
+  in Mon 6/1 WhatsApp digest *Dringend* overlay. Robin to decide path (a) Options
+  Starter $79/mo OR (b) reallocate $5k premium budget (>$3k = strategy.md approval territory).
+
+**Polygon market-movers ALSO 403 today** (probed 12:08Z) — pre-mkt gap-scanner
+unavailable. New documentation: free tier of Polygon supports aggregates only
+(rate-limited 5/min); movers + chain both require paid tier. Daytrade gap-scanner
+partially affected.
+
+**Crypto scan (yfinance 250d, computed 50/200 DMA)**:
+- BTC $72,268 -1.78%/24h -6.49%/7d **gap -2.68%** (Fri -3.26% → Mon -2.68% =
+  +0.58 pp weekend convergence, faster than Mon-Fri +0.23 pp/day pace).
+- ETH $1,980 -1.21%/24h gap -10.19%.
+- SOL $80.76 -1.87%/24h gap -17.07%.
+- AVAX $8.83 -1.45%/24h gap -13.72%.
+- LINK $8.99 -1.45%/24h gap -10.61%.
+- **0/5 cross-up; 0/5 -10%/24h flush**. BTC ETA cross at current pace ~9-12 td.
+- `crypto-weekend-momentum` Fri 5/29 trigger NOT met (BTC 7d -2.88% << +2%);
+  re-arm Fri 6/5 21:00Z.
+
+**Strategic read**:
+- Tape: **oil shock + risk-off uptick + flat tech futures**. Energy benefits;
+  transport/consumer-discretionary headwind; tech mixed on AVGO pre-earnings froth
+  vs Nasdaq mild red. No book-wide kill-switch trigger (VIX 15.78 << 40; SPY +0.10%).
+- AMD trigger remains clean post-Fri hold-above-$510. Entry queued for 02-market-open
+  with confirmation gate.
+- NVDA stub 3rd liquidate attempt — if again misses, escalate cron reliability item.
+- RL bleed continues but cushion still above emergency threshold; modal outcome remains
+  -1.0R stop or 0R time-stop per experiment file.
+- GOOGL Core cushion at 2.66% = tightest LM has produced; mechanical -10% trail still
+  intact ($367.749) — no action, just emergency-watch flag for 03-midday.
+- Options sleeve L4 escalation surfaces today; Polygon chain BLOCKED 7 consecutive.
+- Crypto convergence accelerated weekend — BTC cross potentially earlier than the
+  6/15-6/17 Fri estimate.
+
+**No thesis-break events on any 8 Core holdings; 2 Swing legs HOLD/LIQUIDATE; 1 new
+Swing-momentum AMD candidate at confirmation gate; short-rejection vetoed; crypto +
+options sleeves dormant; Polygon chain still blocked (7th).**
+
+**Cited sources**: Gemini Search-Grounding (Strait of Hormuz tanker collapse 90%,
+Kuwait Ali Al Salem attacks, US-Iran ceasefire uncertainty, AVGO/CRWD/LULU/DOCU/HPE
+consensus, FOMC Warsh June debut). yfinance EOD aggregates (8 Core + 4 Swing watch
++ 5 crypto + 7 macro/futures + VIX). Alpaca paper-api broker (account + 10 positions
++ 9 open stop orders verified `OrderStatus.NEW`). Polygon aggregates (5 names sampled
+OK; MSFT/META/GOOGL/AVGO/SPY/QQQ rate-limited 429). Polygon options-chain probe
+(403 7th time). Polygon market-movers probe (403; documented gating). See
+`memory/daily/2026-06-01.md` for full per-sleeve detail.
