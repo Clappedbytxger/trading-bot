@@ -6,6 +6,52 @@ entries (> 30 days) can be pruned by the weekly-review routine.
 
 ---
 
+## 2026-06-02 — Pre-market (LM Day 13 of 30, Tue, post-Mon AI-capex rotation + Iran flare)
+
+**Macro (Gemini, 12:10Z):**
+- **10Y yield 4.43%** (-2 bp vs Mon 4.45%); modest bond rally on Mideast risk-off flight-to-quality.
+- **DXY 99.07** (-0.13% Tue); Mon was +0.X% safe-haven bid on Iran-suspends-ceasefire-talks headline.
+- **WTI $91.13 (-1.12% Tue)** after Mon +5% spike. **Brent $94.06 (-0.97% Tue)**. Strait of Hormuz still effectively choked (~20% of world oil supply offline); 24 ships transited Mon per Iranian Revolutionary Guards; shipping execs refuse passage until peace deal signed.
+- **Pre-mkt futures**: ES -0.14%, NQ -0.01%, YM -0.40% (Dow weakest); cash market closed at record Mon for all 3 indices.
+- **VIX 16.15 / futures +2.61% pre-mkt**; firmly sub-17.
+- **Gold $4,558.50 (+1.86%)** continued safe-haven bid.
+- **Fed speakers today**: Cleveland Fed Hammack — rate-outlook cues; no FOMC speakers Wed/Thu.
+- **Economic releases**: JOLTS April 14:00Z today; **NFP Fri 6/5 13:30Z (consensus ~150k)**.
+
+**Single-stock catalysts (last 24h, Gemini)**:
+- **AVGO**: Pre-mkt **+7% to ~$488** on Google $80B AI-capex bond raise (AVGO is Google's TPU/AI-accelerator partner = direct beneficiary). Earnings tonight 6/3 post-close (Q2 FY26; consensus rev $22.11B / EPS $2.40; implied ±7.5% straddle).
+- **GOOGL**: Mon **-1.04% on $80B share issuance announcement** for AI data-center expansion; includes $10B sold to Berkshire Hathaway. Pre-mkt -2 to -3% continuation. Bull Core position underwater (avg $387.31 / mark $365.89) - **trail stop $367.749 in immediate danger of firing at RTH open** (pre-mkt mark below stop by $1.86).
+- **NVDA**: Mon **+6.26% close $224.36 on new AI-PC processor unveiling**; Tue pre-mkt +1.31%. Bull's `swing-quality-pullback` stub (0.0925 sh) now in green +$0.69 (was -$0.82 Sat baseline).
+- **META**: Mon **-5.07% close $600.47** without specific fresh catalyst per Gemini scan; positioning unwind / rotation hypothesis (META out, NVDA+AVGO in). Pre-mkt +0.76% bounce. Cushion compressed 9.15% → 4.55%.
+- **AMD**: Mon close **$510.13 AT breakout line** ($510 confirmation gate); intraday O=$500.16 << gate. Tue pre-mkt $503.60 << gate. `swing-momentum-breakout` SKIP; re-arm only on close > 5/28 20-day high $518.09.
+- **ARM**: Mon **+15.73% to $408.85** (blow-off into ATH +27% across 5 sessions); Tue pre-mkt $412.90. EXTENDED, sub-1R; SKIP. Re-arm only on 3-5 td consolidation above $380.
+- **AAPL**: Mon -1.84% to $306.31; no rejection candle for `swing-short-rejection` setup. WWDC 6/8-12 catalyst veto continues. SKIP.
+- **TSLA**: Mon -4.57% ($415.88); not in Bull book.
+- **CRWD**: Earnings tonight 6/3 post-close (Q1 FY27; consensus EPS $1.07 / rev $1.363B / +23.5% YoY).
+
+**Geopolitics — Strait of Hormuz status (Gemini)**:
+- Iran reportedly suspended ceasefire talks with US Mon evening, sparking +5% oil surge.
+- 24 ships transited Mon (some commerce flowing per Iranian Revolutionary Guards Navy); commercial shipping refuses passage until peace agreement signed.
+- ~20% of world oil supply offline; geopolitical premium ~$15-20/bbl persists.
+- Trump claimed reopening imminent but shipping execs unwilling without definitive US-Iran agreement.
+
+**Earnings calendar this week (Gemini + yfinance)**:
+- Tue 6/2: nothing major scheduled
+- **Wed 6/3 post-close = Tonight**: **AVGO** (Core hold), **CRWD** (cyber bellwether)
+- Thu 6/4 post-close: LULU (consensus EPS $1.68 / rev $2.44B), DOCU
+- Fri 6/5 13:30Z: **NFP** (consensus ~150k jobs)
+
+**Crypto scan (yfinance Tue 12:08Z)**:
+- BTC -2.69% / $69,400 / 7d -5.41% / 50-DMA ~$77.2k / 200-DMA ~$79.4k / gap **-2.81% widening** (Mon -2.68% Tue -2.81% on Mon-Tue overnight BTC drop)
+- ETH -1.26%, SOL -2.68%, AVAX -2.65%, LINK -2.52% — uniform mild risk-off; no flush trigger
+- 0/5 50/200 cross-up; 0/5 -10%/24h flush; `crypto-weekend-momentum` next-arm Fri 6/5 21:00Z
+
+**Polygon options-chain status**: **8th consecutive 403 Forbidden** at 12:08Z (`get_options_chain('SPY')` → HTTP 403; `get_iv_rank('NVDA')` → None). All 4 active Options sub-strategies remain BLOCKED. L4 ESCALATION 2nd-consecutive routine WhatsApp to Robin.
+
+**Citations**: Gemini search-grounded answer cached at session; sources include market commentary (10Y, DXY, oil futures), Strait of Hormuz reporting (Iranian Revolutionary Guards Navy, shipping execs), Google AI capex bond announcements ($80B + $10B Berkshire), Broadcom-Google partnership coverage, NVDA new PC chip launch, Q2 FY26 AVGO consensus estimates, CRWD Q1 FY27 estimates, Hammack Cleveland Fed speaker schedule, JOLTS April + NFP May release calendar.
+
+---
+
 ## 2026-05-28 — Pre-market (LM Day 8 of 30, Thu, PCE+GDP day)
 
 **Macro (Gemini, 12:05Z; cached):**
