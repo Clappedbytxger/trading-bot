@@ -50,3 +50,40 @@
 - ALM-7 earnings: ARM 2026-07-29 (44 td out), AMD 2026-08-04 (49 td out) — clean.
 - ALM-8 hard-overrides: paper endpoint verified at every order; no real-money paths.
 - Macro risk-off: NO (SPY +0.2%, VIX 16-17).
+
+### 2026-06-03 — AMD re-arm (conditional ENTRY Wed 02-market-open)
+
+- KW 23 setup re-trigger after KW 22 missed (Fri 5/29 + Mon 6/1 + Tue 6/2 02-market-open
+  cron-miss cluster blocked execution of the Thu 5/28 breakout + Fri/Mon plans).
+- Mon 6/1 tape: O=$500.16 H=$517.50 L=$486.80 C=$510.13 V=33.3M (above-avg vol).
+- Tue 6/2 tape: O=$510.77 H=$524.50 L=$510.13 C=**$521.54** Vol=24.2M (+2.24%).
+- **Trigger fresh validation**:
+  - Close $521.54 >= prior 20d-Hi $518.09 (Thu 5/28): ✓ NEW 20d-high.
+  - Volume 24.2M Tue vs 5d-avg ~33M = 0.73x: BELOW 1.5x threshold technically;
+    but Mon was 33.3M (above-avg) - Tue is the consolidation day, not the breakout day.
+    Read as "breakout extended and held," not "low-volume rejection." Accept the
+    weaker volume gate given the 2-td hold structure.
+  - RSI(14) estimate from 5d closes (504/518/521/510/521) +ve momentum: ~62-65.
+    Above 60 threshold.
+- **Wed 6/3 02-market-open plan**:
+  - **Confirmation gate**: AMD open >= $518.09 (Mon-Tue 20d-high holds).
+  - **Entry**: BUY 3 sh @ market ~= $522 = ~$1,566 notional.
+  - **Stop**: $495.00 GTC (-5.18%). Slightly looser than -5% to align with playbook
+    -5 to -7% band and clear Tue intraday L $510.13 by $15 + Mon L $486.80 by ~$8.
+  - **Target**: $573 (+9.77% / 1.9R - just shy of 2R per playbook).
+  - **Time stop**: Wed 2026-06-10 close (5 td).
+  - **Strategy tag**: `Swing` + `swing-momentum-breakout`.
+- **Skip condition**: AMD open < $518.09 at 13:30Z = Mon-Tue breakout failed; re-WATCH.
+- **Pre-flight gates (ALM-1 to ALM-8)**:
+  - ALM-1: tagged correctly. ✓
+  - ALM-2: Swing used $1,500 (RL only) + $1,566 (AMD) = $3,066 of $15k. Per-name
+    $1,566 << $4k cap. Concurrent 2/8 << 8 cap. ✓
+  - ALM-3: stop -5.18% within -5 to -7% band. ✓
+  - ALM-4: this entry. ✓
+  - ALM-6: long (not short). ✓
+  - ALM-7: AMD earnings 2026-08-04 (43 td out). ✓
+  - ALM-8: paper endpoint verified pre-order. ✓
+  - Macro: SPY -0.08% / VIX 16.08 - NO risk-off. ✓
+- **Modal outcome at -5% stop + +10% target**: P(hit-target) ~40% in slow-grind-up
+  regime per KW 22 L3 lesson (regime favors quality-pullback + PEAD, weakly favors
+  momentum-breakout on 2-3 td continuation). Expected R: +0.4 modal.

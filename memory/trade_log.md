@@ -1092,3 +1092,93 @@ with Fri 02-05 cluster miss).
    above; surface to Robin).
 3. **Polygon options-chain 6-consecutive-block** (L4 5/30 lesson; ESCALATION
    trigger fires in today's WhatsApp; Robin to decide path).
+
+---
+
+## 2026-06-02T13:33:50Z — ORGANIC BROKER FILL: GOOGL trail-stop triggered (first LM Core close)
+
+Routine: organic broker event (no Bull routine call; Tue 6/2 02-market-open MISSED
+per cron-miss pattern, so this fill was not captured at the time). Logged in
+arrears at Wed 6/3 01-pre-market. Broker: Alpaca paper (`paper-api.alpaca.markets`
+verified). Phase: **LEARNING MONTH Day 13 of 30**.
+
+### Trade closed (organic stop fill)
+
+| # | Side | Symbol | Trigger | Filled Qty | Avg Fill | Order ID | sleeve | strategy |
+|--:|------|--------|--------:|-----------:|---------:|----------|--------|----------|
+| 1 | SELL TRAILING_STOP | GOOGL | $367.749 | 12 sh | **$361.01** | (per broker get_orders CLOSED) | Core | core-buy-and-hold |
+
+- **Original entry**: GOOGL 12.047273 sh @ $387.32 avg ($4,667.85 notional) across
+  Live-Phase DCA tranches T1+T2 on 2026-05-13 + 2026-05-14.
+- **Stop placement**: Trailing-stop -10% on 12 sh (`floor(qty)`) GTC. Stop walked
+  organically from initial $349.623 to HWM-derived $367.749 over Live-Phase + LM.
+- **Fill mechanics**: Filled at **$361.01 avg = $6.74 BELOW $367.749 trigger**.
+  GOOGL gapped down at the open on continued Mon $80B-AI-share-issuance dilution
+  concern (-3.86% close Tue), opening sub-trigger and filling at the consolidated
+  tape's first print rather than the trail-stop level. The trail-stop mechanic
+  worked as designed - the stop converts to a market order at trigger; the
+  fill price is wherever the market is when that conversion happens, which can
+  be well below trigger on a gap.
+- **Realized P&L $**: 12 sh x ($361.01 - $387.32) = **-$315.72**.
+- **Realized P&L %**: -6.79% on cost basis $4,647.84 (12 sh x $387.32). Below the
+  -5% mechanical-trail expectation by 174 bp due to gap-down execution.
+- **R-multiple**: -1.36R (planned -10% trail = $464.78 risk per the original
+  trail spec; realized -$315.72 / $464.78 risk per trail = -0.68R using
+  trail-spec risk; or vs the prior-day cushion $20 = -15.8R on tight-cushion
+  basis. The "R" framing depends on whether you anchor risk to trail-pct or
+  to last-day cushion; both views logged).
+- **Days held**: 21 calendar (5/13 fill -> 6/2 stop); 14 td elapsed.
+- **Fractional stub remaining**: 0.047273 sh @ $358.65 Wed pre-mkt mark = $16.95 mv
+  (UPL -$1.36). Stub close queued Wed 6/3 02-market-open per fractional-handling pattern.
+
+### Why this was an organic event, not a Bull routine action
+
+- Trail-stop order placed by Bull on 2026-05-13 immediately after DCA T1 fill per
+  guardrail #3 hard-stop-at-entry discipline.
+- Stop sat live GTC for ~15 trading days, organically walking from $349.623 to
+  $367.749 across LM Day 1-12 as GOOGL's HWM advanced and trail held the lag.
+- Tue 6/2 13:30Z cash-market opening tape gapped GOOGL below $367.749; broker
+  converted trail-stop to market-order at trigger; fill at $361.01 = the
+  consolidated first print 4 min into the session.
+- No Bull routine fired at that timestamp (Tue 6/2 02-market-open MISSED per the
+  Mon-Tue 02 cron-miss cluster). This fill is logged in arrears at Wed 6/3
+  01-pre-market.
+
+### Strategy attribution
+
+- **`core-buy-and-hold`** first LM Core close. Validates -10% trail mechanic +
+  the gap-fill risk that comes with mechanical stops.
+- Thesis was WEAKENED at stop time but NOT broken: Mon's $80B share-issuance
+  was a real dilution event (~3.4% on $2.34T market cap = $80B premium), reducing
+  TPU-cost-advantage premium that anchored the entry thesis. However GOOGL's
+  underlying Search + Cloud + Gemini still intact; this is a re-rating from
+  AI-capex-funded growth optimism back toward fundamentals-anchored valuation
+  (~$361 fwd P/E ~25). The trail-stop is the discipline; the post-hoc question
+  is whether to re-enter on a confirmed lower-band setup post-Learning-Month.
+- Sample: now 2 LM closed trades (NVDA Wed 5/27 -1.0R; GOOGL Tue 6/2 -0.68R-ish
+  on gap-fill). Both Core/Swing trail mechanics worked at the broker layer; both
+  reinforced the principle that stops are discipline, not P&L optimization.
+
+### Account post-fill snapshot (broker reconciliation Wed 6/3 12:05Z)
+
+- Equity Wed 6/3 12:05Z snap: **$101,997.45** (vs Mon last_equity $102,177.45 -> -$180).
+- Cash Wed 6/3 12:05Z: **$40,712.65** (up $4,332.11 from $36,380.54 = 12 sh x $361.01
+  fill proceeds = $4,332.12; cent-perfect match).
+- Long MV Wed 6/3 12:05Z: $61,284.80 (Core $60,851 7 active + $17 GOOGL stub +
+  Swing $1,466 RL + NVDA stub $21).
+- Daytrade count (5d): **0** UNCHANGED - this was NOT a same-day round-trip
+  (entry 5/13, exit 6/2, 14-td hold). PDT budget full 5/5 for KW 23.
+
+### Guardrails verified
+
+- **ALM-1 sleeve discipline**: stop fill tagged `Core` + `core-buy-and-hold`. ✓
+- **ALM-2 sleeve cash budget**: Core sleeve was frozen; this was an organic stop
+  fill on an inherited Live-Phase position, not a discretionary order. ✓
+- **ALM-3 sleeve stops**: trail-stop fired at the planned -10% level (mechanically;
+  fill below trigger due to gap, which is a real-market outcome not a guardrail
+  violation). ✓
+- **ALM-4 strategy logging**: `core-buy-and-hold` row in `_ledger.md` to be
+  updated at next 05-close-summary with closed-trade attribution. Trade log here
+  serves as the immediate record. ✓
+- **ALM-8 hard-overrides**: paper-endpoint verified at Wed 6/3 broker pull. ✓
+
