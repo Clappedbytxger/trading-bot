@@ -819,3 +819,81 @@ consensus, FOMC Warsh June debut). yfinance EOD aggregates (8 Core + 4 Swing wat
 OK; MSFT/META/GOOGL/AVGO/SPY/QQQ rate-limited 429). Polygon options-chain probe
 (403 7th time). Polygon market-movers probe (403; documented gating). See
 `memory/daily/2026-06-01.md` for full per-sleeve detail.
+
+---
+
+## 2026-06-03 12:05Z — 01-pre-market (LM Day 14 — Wed pre-AVGO/CRWD earnings)
+
+**Macro tape (Gemini Search Grounding)**:
+- US futures mixed (ES=F -0.08% / NQ=F +0.23% / YM=F -0.27%); record highs Tue;
+  oil-spike sector rotation continues into Wed.
+- 10Y Treasury 4.49% (+4 bp Tue close) - rising on oil/inflation re-rate.
+- DXY 99.34 (+0.12%) - dollar safe-haven; Iran-US diplomacy stalled.
+- WTI $95.72 (+2.09% Tue) / Brent $97.95 (+2.03% Tue) - 3rd consecutive up day;
+  Strait of Hormuz still effectively choked (~20% of global oil offline).
+  Geopolitical premium ~$15-20/bbl.
+- Gold $4,491 (+0.04%) - safe-haven still bid; UBS YE $5,500.
+- VIX 16.08 - sub-17 firm risk-on despite oil shock.
+
+**Geopolitics - Strait of Hormuz (3rd day continuing)**:
+- Iran ceasefire talks with US still suspended (Mon update); fueling Mon +5% pop.
+- Some commerce flowing but volumes capped by shipping-insurance + crew refusal.
+- Status: choked-but-not-fully-closed; full-closure tail risk elevated.
+
+**Earnings calendar this week**:
+- **Wed 6/3 post-close = TONIGHT**: AVGO (cons EPS $2.40 / rev $22.11B; implied
+  +/-7.5%; strangle BLOCKED), CRWD (cyber bellwether, cons EPS $1.07 / rev $1.363B).
+- Thu 6/4 post-close: LULU (cons EPS $1.68 / rev $2.44B), DOCU.
+- Fri 6/5 13:30Z: NFP May (cons +150k jobs).
+
+**Economic releases today**:
+- 14:15Z: ADP May private payrolls (cons +116k vs Apr +109k).
+- 16:00Z: ISM Services May (cons 53.8 vs Apr 53.6).
+
+**Fed speakers**:
+- Tue 6/2: Hammack already spoke (no surprise flag).
+- FOMC June 16-17 = Warsh debut.
+
+**Single-stock catalysts (last 24h, Gemini)**:
+- AVGO: +4.70% Tue continuation Mon Google $80B AI-capex bond raise tailwind;
+  earnings TONIGHT ~21:00Z.
+- CRWD: Earnings TONIGHT (cyber-bellwether; not in Bull book).
+- MSFT: -4.17% Tue giveback (rotation out of Mon's leaders).
+- LLY: -1.67% Tue continued giveback from Thu $1149.10 ATH; healthcare-rotation.
+- GOOGL: stop FIRED Tue 6/2 13:33:50Z @ $361.01 (gap-down below $367.749 trigger);
+  realized -$315.72 / -6.79% on 12 sh. First LM Core close.
+- NVDA: -0.69% Tue (mild giveback Mon +6.26%).
+- AMD: +2.24% Tue = NEW 20d-high $521.54 (above Thu 5/28 $518.09); momentum-breakout
+  re-armed; conditional entry queued for Wed 02-market-open.
+- TSLA: +1.89% Tue; not in book.
+
+**Strategic read**:
+- Tape: **oil shock + risk-on tech + healthcare rotation OUT of LLY + dilution
+  weakness in GOOGL/MSFT**. Energy benefits; mega-cap tech mixed with NVDA/AVGO
+  leading and MSFT/META giving back; healthcare-defensive bid Mon faded.
+- AMD trigger now CLEAN: Tue close $521.54 = new 20d-high. Entry conditional on
+  open >= $518.09 (Mon-Tue 20d-high holds).
+- NVDA stub 5th liquidate attempt; GOOGL stub NEW liquidate; both fractional-handling
+  pattern at 02-market-open.
+- RL bleed continues td7 of 10; cushion 3.67% (above 3% emergency). Time-stop Fri 6/5.
+- LLY Core cushion 3.12% = tightest in book; -3% intraday today triggers stop.
+  Mechanical -10% trail still intact at $1034.19; surface in WhatsApp Dringend.
+- AVGO earnings tonight; Core position +18.87% UPL ($880); stop $440 vs current $492
+  = 11.9% cushion absorbs even -10% gap-down.
+- Options sleeve L4 escalation 9th consecutive 403. Robin's reply still pending; default
+  if no inbox reply by Mon 6/8 = path (b) reallocate $5k to Cash.
+- Crypto convergence REVERSED (-2.81% Tue -> -3.4% Wed); ETA cross now likely past
+  6/20 LM endpoint at current divergence pace.
+
+**No thesis-break events on 7 active Core holdings (GOOGL exited Tue); RL Swing leg
+HOLD/cushion-watch; NVDA stub 5th liquidate + GOOGL stub liquidate at 02-market-open;
+1 new Swing-momentum AMD candidate at confirmation gate; short-rejection vetoed;
+crypto + options sleeves dormant; Polygon chain still blocked (9th).**
+
+**Cited sources**: Gemini Search-Grounding (oil + Strait of Hormuz 3rd-day; ADP +
+ISM Services + AVGO/CRWD pre-earnings; 10Y + DXY). yfinance EOD aggregates Tue 6/2
+(7 Core + 4 Swing watch + 5 crypto + 7 macro/futures + VIX). Alpaca paper-api broker
+(account + 10 positions incl. 2 fractional stubs + 8 open stop orders verified
+`OrderStatus.NEW` + GOOGL stop FILLED Tue 6/2 13:33:50Z @ $361.01). Polygon
+options-chain probe (403 9th time). See `memory/daily/2026-06-03.md` for full
+per-sleeve detail.
