@@ -1182,3 +1182,112 @@ verified). Phase: **LEARNING MONTH Day 13 of 30**.
   serves as the immediate record. ✓
 - **ALM-8 hard-overrides**: paper-endpoint verified at Wed 6/3 broker pull. ✓
 
+
+---
+
+## 2026-06-04T13:36:31Z — ORGANIC BROKER FILL: AVGO trail-stop triggered (2nd LM Core close)
+
+Routine: organic broker event (no Bull routine call; Thu 6/4 01-pre-market fired
+late at ~13:50Z, AFTER the AVGO stop had already fired at 13:36:31Z). Logged in
+arrears in this routine. Broker: Alpaca paper (`paper-api.alpaca.markets`
+verified). Phase: **LEARNING MONTH Day 15 of 30**.
+
+### Trade closed (organic stop fill)
+
+| # | Side | Symbol | Trigger | Filled Qty | Avg Fill | Order ID | sleeve | strategy |
+|--:|------|--------|--------:|-----------:|---------:|----------|--------|----------|
+| 1 | SELL TRAILING_STOP | AVGO | $439.938 | 11 sh | **$410.882727** | (per broker `get_orders CLOSED`) | Core | core-buy-and-hold |
+
+- **Original entry**: AVGO 11.264102 sh @ $414.236 avg ($4,665.94 notional on whole
+  11 sh; $109.39 stub) across Live-Phase DCA tranches T1+T2 on 2026-05-13 + 2026-05-14.
+- **Stop placement**: Trailing-stop -10% on 11 sh (`floor(qty)`) GTC. Stop walked
+  organically from initial $372.81 to HWM-derived $439.938 over Live-Phase + LM
+  (multiple HWMs: $448.88 Fri 5/29 -> $466.05 Mon 6/1 -> **$488.82 Tue 6/2**
+  pre-earnings froth -> stop $439.938 fixed at that HWM).
+- **Fill mechanics**: Filled at **$410.88 avg = $29.058 BELOW $439.938 trigger**.
+  AVGO gapped down ~-7.85% at the Thu cash open after Wed post-close earnings
+  beat-and-raise that nevertheless disappointed (long-term $100B 2027 AI target NOT
+  raised; software segment shortfall). The trail-stop converts to a market order
+  at the trigger touch on the gap-down open, fills at the consolidated tape's first
+  available bid 6 min into the session.
+- **Realized P&L $**: 11 sh × ($410.882727 - $414.236) = **-$36.92** (-0.79% on
+  $4,665.94 cost basis).
+- **Give-back vs HWM**: Position was +$880.44 UPL at Wed close ($492.40 mark);
+  Thu realized = -$36.92; **net Wed-close -> Thu-realized give-back = $917.36** on
+  the 11 sh leg. The "loss" frame is give-back of paper gains, not cost-basis erosion.
+- **R-multiple frames** (multiple anchors per the GOOGL precedent):
+  - Anchored to original trail risk (-10% from $414.236 entry = $41.42/sh × 11 = $455.66
+    initial risk): realized -$36.92 / $455.66 = **-0.08R** vs initial trail-spec.
+  - Anchored to last-day cushion (Wed close $492.40 vs stop $439.938 = $52.46 cushion,
+    × 11 = $577.06): give-back $917.36 / $577.06 = **-1.59R** on cushion-anchor.
+  - Anchored to Wed UPL ($880.44 unrealized peak vs realized -$36.92): -$917 vs Wed
+    pre-print state.
+  - All three lenses logged; the trail-spec -0.08R is the "what we planned for"
+    answer (mechanical trail did its job at the broker layer; the gap fill was
+    market noise).
+- **Days held**: 22 calendar (5/13 fill -> 6/4 stop); 15 td elapsed.
+- **Fractional stub remaining**: 0.264102 sh @ $414.4775 Thu intraday mark = $109.46
+  mv (UPL +$0.06; flat-lucky). Stub close queued next routine per fractional-handling
+  pattern (joined the GOOGL+NVDA stub-queue).
+
+### Why this was an organic event, not a Bull routine action
+
+- Trail-stop placed by Bull on 2026-05-13 immediately after DCA T1 fill per
+  guardrail #3 hard-stop-at-entry discipline.
+- Stop sat live GTC for ~16 trading days, organically walking from $372.81 to
+  $439.938 across LM Day 1-14 as AVGO's HWM advanced to $488.82 pre-Wed-earnings
+  ($448.88 Fri 5/29 walk -> $466.05 Mon 6/1 -> $488.82 Tue 6/2 pre-print).
+- Thu 6/4 13:30Z cash-market open: AVGO gapped down on post-earnings disappointment
+  (-13.58% Thu net; opening sub-trigger). Broker converted trail-stop to market
+  order at trigger touch; fill at $410.88 = the consolidated first prints 6 min
+  into the session.
+- No Bull routine fired at that timestamp - Thu 6/4 01-pre-market fired late at
+  ~13:50Z (post-fill). This entry is logged at that late fire as arrears.
+
+### Earnings post-mortem (Wed 6/3 post-close, ~21:00Z)
+
+- **Revenue**: $22.2B (cons $22.27B; **slight miss -$0.07B**).
+- **Non-GAAP EPS**: $2.44 (cons $2.32-$2.40; **beat midpoint by $0.08**).
+- **AI semi revenue**: $10.8B (**exceeded forecasts**); raised Q3 AI guide to $16B.
+- **Q3 guide**: $29.4B revenue (raised from prior).
+- **Software segment**: slight shortfall vs internal targets (specific number not
+  reported by Gemini grounding).
+- **Wall Street disappointment vector**: did NOT raise long-term $100B AI revenue
+  target for 2027 (consensus pre-print was hoping for $125-150B re-rate). The
+  re-rate didn't come; existing target stands.
+- **Result**: -13.58% Thu = textbook "beat-and-raise rejected because expectations
+  were higher than the raise."
+
+### Strategy attribution
+
+- **`core-buy-and-hold`** 2nd LM Core close (after GOOGL Tue 6/2). Validates
+  -10% trail mechanic + gap-fill risk again.
+- Thesis was WEAKENED at stop time but NOT broken: AI capex hyper-growth story
+  intact (Q3 $16B AI revenue projection is +48% YoY); just didn't deliver the
+  long-term re-rate Wall Street was pricing. AVGO fwd P/E ~24 at $414 = back to
+  pre-rally fair value; no fundamental break.
+- Sample: now 3 LM closed trades (NVDA Wed 5/27 -1.0R Swing; GOOGL Tue 6/2
+  -0.68R-ish Core gap-fill; AVGO Thu 6/4 -0.08R Core gap-fill). All 3 mechanical
+  stops fired as designed at the broker layer.
+
+### Account post-fill snapshot (broker reconciliation Thu 6/4 ~13:50Z)
+
+- Equity Thu 6/4 13:50Z snap: **$101,381.67** (vs Wed pre-mkt $101,997.45 = -$615.78;
+  vs Wed last_equity $101,661.38 = -$279.71 intraday Thu).
+- Cash Thu 6/4 13:50Z: **$45,232.36** (up $4,519.71 from Wed pre-mkt $40,712.65 =
+  11 sh × $410.882727 = $4,519.71; cent-perfect match).
+- Long MV Thu 6/4 13:50Z: $56,149.31 (Core 5 active = $52,485 + 3 stubs = $146.84 +
+  Swing $1,431.13 RL = ~$54,063 reconcile noise).
+- Daytrade count (5d): **0** UNCHANGED — this was NOT a same-day round-trip
+  (entry 5/13, exit 6/4, 16-td hold). PDT budget full 5/5.
+
+### Guardrails verified
+
+- **ALM-1 sleeve discipline**: stop fill tagged `Core` + `core-buy-and-hold`. ✓
+- **ALM-2 sleeve cash budget**: Core sleeve was frozen; organic stop fill on
+  inherited Live-Phase position. ✓
+- **ALM-3 sleeve stops**: trail-stop fired at planned -10% level (mechanically;
+  fill below trigger due to gap, real-market outcome). ✓
+- **ALM-4 strategy logging**: `core-buy-and-hold` row in `_ledger.md` updated this
+  routine; trade log serves as immediate record. ✓
+- **ALM-8 hard-overrides**: paper-endpoint verified at Thu 6/4 broker pull. ✓

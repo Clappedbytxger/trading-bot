@@ -897,3 +897,88 @@ ISM Services + AVGO/CRWD pre-earnings; 10Y + DXY). yfinance EOD aggregates Tue 6
 `OrderStatus.NEW` + GOOGL stop FILLED Tue 6/2 13:33:50Z @ $361.01). Polygon
 options-chain probe (403 9th time). See `memory/daily/2026-06-03.md` for full
 per-sleeve detail.
+
+---
+
+## 2026-06-04 13:50Z — 01-pre-market (LM Day 15 — Thu post-AVGO/CRWD earnings; AVGO Core stop fired)
+
+**Macro tape (Gemini Search Grounding)**:
+- US futures split (ES=F +0.13% / NQ=F -0.67% / YM=F flat) - Nasdaq dragged by
+  AVGO -13.58%; broad ES bid.
+- **VIX 15.71 (-2.18% Thu)** - market REJECTING AVGO sell as idiosyncratic; vol
+  pricing in down across the move; firm sub-16 risk-on regime intact.
+- 10Y Treasury 4.465% (-0.58% Thu); small bid for duration as oil softens.
+- DXY 99.33 (-0.20%); flat.
+- **WTI $93.01 (-3.13%) / Brent $95.28 (-2.59%)** - FIRST DOWN DAY in 4 sessions
+  on Israel-Lebanon conditional ceasefire (raises Hormuz-reopen hope).
+- Gold $4,496 (+1.35%); safe-haven STILL bid despite oil softening (positioning).
+- XLV +2.81% (healthcare lift; LLY +4.99% part of this); XLP +0.10%; XLE +0.16%.
+
+**Geopolitics - Strait of Hormuz day 94**:
+- Closed since 2026-02-28; commercial transit -~90%; insurers withdrawing en masse.
+- **NEW: Israel-Lebanon CONDITIONAL CEASEFIRE Thu 6/4** = first material thaw.
+  Raises hope Iran-US can follow; oil tape pricing aggressive ceasefire optimism.
+
+**Earnings outcomes Wed 6/3 post-close**:
+- **AVGO Q2 FY26**: Rev $22.2B (cons $22.27B; slight miss) / EPS $2.44 (cons
+  $2.32-$2.40; beat) / AI semi $10.8B (exceeded). Raised Q3 guide $29.4B rev /
+  $16B AI semi. **Stock -13.58% Thu because**: did NOT raise long-term $100B 2027
+  AI target (Wall St wanted higher); software shortfall. "Raised but not enough."
+- **CRWD Q1 FY27**: Rev $1.39B (cons $1.36B; beat) / Adj EPS $1.10 (cons $1.07;
+  beat) / ARR $5.51B (+24%) / Net new ARR $255.8M (beat). Raised FY27 guide.
+  Announced 4-for-1 split. **Stock -6.82% Thu because**: pre-earnings rally set
+  high bar; billings growth 18% below; Q2 guide in-line not material beat.
+
+**Economic releases Thu 6/4**:
+- 14:15Z: ADP May +122k (cons +120k; slight beat; highest since Jan 2025).
+- 16:00Z: ISM Services 54.5 (cons 53.7; solid beat; 23rd month expansion).
+  Employment sub-index 47.9 (3rd month contraction).
+
+**Tomorrow's catalyst**:
+- **Fri 6/5 13:30Z: NFP May** at cash-market open. Cons ~150k per prior research.
+- Strong ADP + ISM data could reinforce hawkish narrative ahead of FOMC June 16-17.
+
+**Single-stock catalysts (Thu intraday)**:
+- AVGO: STOP FIRED 13:36:31Z @ $410.88 (gap-down -7.85% from $447.83 trigger;
+  full Thu -13.58%). First LM Core close 2 (after GOOGL Tue 6/2). Realized -$36.92
+  on 11 sh (-0.79% of cost basis); gave back $880 unrealized gain.
+- CRWD: -6.82% (cyber sector sympathy; not in book).
+- ARM: -5.96% (momentum-stock purge sympathy with AVGO).
+- AMD: -3.22% (semi sympathy; Wed +4.02% was missed entry on cron-miss).
+- LLY: +4.99% (healthcare rebound; Tue/Wed -3.7% recovered).
+- MSFT: +0.88% Thu; cushion 2.65% TIGHTEST in book now.
+- META: +2.48% strong; V: +3.07% strong.
+
+**Strategic read**:
+- Tape: **AI-capex names rolling over (AVGO/CRWD/ARM/AMD purge) while broader
+  market shrugs and healthcare bids**. Energy positions stable despite oil -3%.
+- AVGO Core stop fired; mechanical trail worked as designed despite gap-fill.
+- 2 consecutive Core stops on gap-downs in 3 sessions (GOOGL Tue + AVGO Thu)
+  reinforces lesson 2026-06-02: trail-stops fill below trigger on post-event
+  opens (single-stock catalysts > broader market drifts).
+- MSFT cushion 2.65% = book-record tightest; next stop-candidate mechanically.
+- RL Swing cushion 2.59% sub-3% emergency threshold for first time; emergency
+  decision queued for 03-midday.
+- 3 fractional stubs queued together (NVDA 6th attempt, GOOGL 2nd, AVGO NEW).
+- Options sleeve still BLOCKED (10th 403); AVGO `options-earnings-strangle` was
+  textbook missed +long-vol setup (chain gated).
+- Macro risk-off NOT active (VIX FALLING not rising; SPY +0.18%); AVGO/CRWD
+  sell is sector-rotation not regime-change.
+- Israel-Lebanon ceasefire is first material thaw in Hormuz crisis (94 days);
+  oil pricing it but ground-level reopening will take weeks.
+
+**No thesis-break events on 5 remaining active Core holdings (VOO/MSFT/META/V/
+BRK.B/LLY post-AVGO stop); RL Swing leg HOLD/emergency-cushion decision queued
+for 03-midday; 3 fractional stubs queued for 02-market-open; AMD swing-momentum
+DROPPED-as-MISSED; short-rejection vetoed; crypto + options sleeves dormant;
+Polygon chain still blocked (10th).**
+
+**Cited sources**: Gemini Search-Grounding (AVGO Q2 FY26 print + AI long-term
+guide miss; CRWD Q1 FY27 beat-and-raise + billings shortfall + 4:1 split; ADP
+May +122k; ISM Services 54.5; Israel-Lebanon conditional ceasefire + Hormuz
+day 94 status; FOMC June 16-17 expectations). yfinance Wed 6/3 + Thu intraday
+aggregates (8 Core + 4 Swing watch + 3 sector ETFs + 8 macro/futures + VIX).
+Alpaca paper-api broker (account + 10 positions incl. 3 fractional stubs + 7
+open stop orders verified `OrderStatus.NEW` + AVGO stop FILLED Thu 6/4
+13:36:31Z @ $410.882727). Polygon options-chain probe (403 10th time). See
+`memory/daily/2026-06-04.md` for full per-sleeve detail.
