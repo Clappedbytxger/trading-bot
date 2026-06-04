@@ -19,11 +19,11 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Strategy slug | Sleeve | Status | Trades | Win-rate | Avg R | Net P&L | Max DD | RAR | Alpha vs SPY | Last update |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---|
-| core-buy-and-hold          | Core      | active | 16 fills (T1+T2, no closes) | — | — | +$2,330.92 (UPL Fri 5/29 EOD; LLY +$357.98 leads after Thu +5.13% walk; MSFT +$521.56 / AVGO +$366.46 / META +$247.01 / VOO +$976.15) | $0 (no closes) | — | LM cum **-44.6 bp** (Bull +1.41% vs SPY +1.85% over LM Day 1-9) | 2026-05-30 06-weekly-review |
-| swing-momentum-breakout    | Swing     | active | 0 (AMD trigger fired Thu close $518.09 + held Fri $516.10; **Mon 6/1 02-market-open RE-QUEUE** after Fri 02-market-open missed; ARM EXTENDED → SKIP; AAPL no rejection) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
+| core-buy-and-hold          | Core      | active | **2 closed (GOOGL Tue 6/2 stop -$315.72 / -1.36R-cushion-anchor; AVGO Thu 6/4 stop -$36.92 / -0.08R-trail-anchor)** + 6 active + 3 stubs pending liquidate | — | — | +UPL Thu intraday for 6 active ~$1,905; realized -$352.64 cum (GOOGL -$315.72 + AVGO -$36.92) | -$315.72 (GOOGL gap-fill peak); -$917 from Wed UPL on AVGO give-back if anchored to last-day cushion | — | LM cum tracking deferred to 05-close-summary | 2026-06-04 01-pre-market |
+| swing-momentum-breakout    | Swing     | active | 0 (AMD trigger DROPPED-AS-MISSED Thu 6/4 after 4 consecutive cron-miss entry days Fri 5/29 + Mon 6/1 + Tue 6/2 + Wed 6/3; Thu trigger weakened with intraday breach $499.87 of $510 spec; ARM SKIP -5.96% Thu purge; AAPL no rejection WWDC ahead) | — | — | $0.00 (opportunity-cost ~$60 missed Wed open) | $0 | — | — | 2026-06-04 01-pre-market |
 | swing-mean-reversion       | Swing     | active | 0 (1 SKIP = INTU thesis-risk; no fresh triggers KW 22 — slow-grind-up tape disfavors mean-reversion) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
 | swing-quality-pullback     | Swing     | active | **1 CLOSED (NVDA stop-out Wed 5/27 @ $208.95; -$99.10 / -1.0R exactly) + stub 0.0925 sh pending Mon 6/1 liquidate** | 0 / 1 | -1.0R | -$99.10 realized + -$0.82 stub UPL = ~-$99.92 final | -$99.10 | -1.0 | — | 2026-05-30 06-weekly-review |
-| swing-earnings-drift       | Swing     | active | **1 open (RL)** | — | — | -$52.24 UPL (Fri 5/29 EOD; cushion 3.66%, day 8 cal / 5 td; deteriorated -$52.28 KW 22) | $0 (no closes) | — | — | 2026-05-30 06-weekly-review |
+| swing-earnings-drift       | Swing     | active | **1 open (RL); EMERGENCY CUSHION 2.59% sub-3% Thu 6/4 td9; time-stop Fri 6/5 td10** | — | — | -$68.87 UPL (Thu 6/4 intraday; UPL -4.59%); td9 of 10; 03-midday cushion-watch active | $0 (no closes) | — | — | 2026-06-04 01-pre-market |
 | swing-insider-buys         | Swing     | paused | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | swing-short-rejection      | Swing     | active | 0 (AAPL WATCH 5/26/27/28/29; no rejection candle in any session — closed >open each day) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
 | swing-short-fundamental    | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
@@ -618,3 +618,28 @@ whether trigger is reachable":
   `swing-short-rejection` re-watch, ARM `swing-momentum-breakout`
   re-arm watch, NVDA Day-2-of-7-td cushion watch, RL Day-2-of-10-td
   watch, SPY protective-put pre-flight for Thu 5/28 PCE+GDP).
+
+- **2026-06-04 13:50Z (01-pre-market LATE FIRE, LM Day 15 — Thu post-AVGO/CRWD earnings)** —
+  **AVGO Core trail-stop FIRED Thu 6/4 13:36:31Z @ $410.882727** on post-earnings
+  gap-down (-13.58% Thu net; -7.85% gap-fill from $439.938 trigger). 2nd LM Core
+  close (after GOOGL Tue 6/2). Realized -$36.92 on 11 sh / -0.79% of $4,665.94
+  cost basis; gave back $880 of Wed UPL. AVGO earnings post-mortem: rev $22.2B
+  slight miss / EPS $2.44 beat / AI semi $10.8B beat / Q3 guide $29.4B raised
+  → BUT long-term $100B 2027 AI target NOT raised (Wall St wanted higher);
+  software shortfall. "Beat-and-raise rejected because raise wasn't enough."
+  `core-buy-and-hold` row updated. **RL `swing-earnings-drift` cushion COMPRESSED
+  to 2.59% Thu (mark $359.72 / stop $350.64; UPL -4.59%) = sub-3% emergency
+  threshold for first time in hold**; td9 of 10, time-stop Fri 6/5 close.
+  Bull's recommendation queued for 03-midday: HOLD-into-td10 if cushion > 1.5%;
+  CLOSE-EARLY if cushion < 1.5%; emergency stop-tighten as middle option.
+  **AMD `swing-momentum-breakout` DROPPED-AS-MISSED** after 4 consecutive cron-miss
+  entry-day pattern (Fri 5/29 + Mon-Tue-Wed 02-market-open all missed); Thu Wed
+  trigger weakened (Thu C=$525.07 < Wed C=$542.52 new 20d-Hi; intraday L $499.87
+  breached $510 spec threshold). Opportunity-cost ~$60 missed Wed open paper UPL.
+  3 fractional stubs queued together for next live routine (NVDA 6th attempt +
+  GOOGL 2nd attempt + AVGO NEW). MSFT cushion **2.65% = book-record tightest**;
+  next mechanical stop-candidate. Equity $101,381.67 (-$615.78 vs Wed pre-mkt;
+  +$619.95 vs 5/21 LM baseline). SPY +0.18% Thu intraday; VIX 15.71 (-2.18%);
+  Macro risk-off NOT active. Polygon options-chain 10th block (AVGO strangle was
+  textbook missed long-vol setup). Inbox.md Pending: empty. WhatsApp Dringend
+  multi-part sent: AVGO stop + MSFT cushion + RL emergency + L4 escalation.

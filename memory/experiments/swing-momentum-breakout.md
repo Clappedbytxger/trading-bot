@@ -87,3 +87,31 @@
 - **Modal outcome at -5% stop + +10% target**: P(hit-target) ~40% in slow-grind-up
   regime per KW 22 L3 lesson (regime favors quality-pullback + PEAD, weakly favors
   momentum-breakout on 2-3 td continuation). Expected R: +0.4 modal.
+
+### 2026-06-04 — AMD DROP-AS-MISSED (Wed cron-miss; Thu trigger weakened)
+
+- **Wed 6/3 02-market-open plan**: BUY 3 sh @ market IF open >= $518.09. Plan
+  documented in this file Wed 6/3 entry above.
+- **Wed 6/3 actual**: 02-market-open cron-missed (no commit in git log after Wed
+  6/3 12:13Z 01-pre-market). AMD Wed tape: O=$521ish, C=**$542.52 (+4.02% Wed)**.
+  Had Bull entered at Wed open ~$522, mark Wed close +3.9% = +$60 UPL on 3 sh.
+- **Thu 6/4 tape**: C=**$525.07 (-3.22% Thu)**; intraday H $526.47 L **$499.87**
+  (intraday breached $500 then recovered).
+- **Trigger weakening assessment**:
+  - Spec: Close >= 20-day high + volume + RSI > 60.
+  - 20-day high now $542.52 (Wed); Thu $525.07 = **$17.45 BELOW Wed peak** (-3.22% Thu).
+  - Thu intraday L $499.87 < the $510 spec threshold that held all Mon-Tue. The
+    "clean break + hold" condition has been violated intraday.
+  - Sentiment: Thu AVGO -13.58% + ARM -5.96% = momentum-stock cohort purge; AMD
+    -3.22% sympathy. Sector momentum has rolled over Thu.
+- **Decision**: **DROP / CLOSED-AS-MISSED**. No re-arm.
+- **Re-arm condition for future**: AMD must (1) close above $542.52 Wed-peak, (2)
+  hold above $542 for at least 1 td of consolidation, (3) volume confirmation
+  >= 1.5x avg, (4) sector momentum (semis breadth) recovering. None of those
+  conditions met as of Thu 6/4 close.
+- **Strategy-attribution**: 0 fills. Opportunity-cost only (missed +$60 paper
+  UPL on Wed open). NOT counted as a strategy P&L hit.
+- **Operational takeaway**: 4th consecutive entry-day missed by 02-market-open
+  cron (Fri 5/29 AMD entry missed; Mon 6/1 AMD re-queue missed; Tue 6/2 02
+  cron-miss; Wed 6/3 02 cron-miss). The cron-failure pattern is now systematically
+  blocking Swing-sleeve activation. This is the L1 operational issue from KW 22.

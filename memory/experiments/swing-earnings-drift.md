@@ -140,3 +140,74 @@ Sleeve: Swing. Status: active. Playbook reference: `memory/playbook.md`.
 - Days held:
 - Delta vs expectation:
 - Lesson:
+
+### LM Day 15 emergency cushion compression (01-pre-market 2026-06-04 13:50Z LATE FIRE)
+
+- **Day 9 td elapsed** (5/22 td1 + 5/26 td2 + 5/27 td3 + 5/28 td4 + 5/29 td5 +
+  6/1 td6 + 6/2 td7 + 6/3 td8 + **6/4 = td9**). Time-stop Fri 6/5 close = **td10
+  tomorrow**.
+- **Thu 6/4 intraday mark** ~$359.72; **UPL -$68.87 / -4.59%** (deteriorated from
+  Wed pre-mkt $363.51 / -3.59%; -1.0 pp / -$15 over 1 td).
+- **Cushion 2.59%** (mark $359.72 / stop $350.64 - 1) — **BELOW the playbook 3%
+  emergency threshold for the first time in the hold** (peak was 7.19% Sat 5/23
+  weekend snap).
+- **Stop $350.64 GTC** verified live (`OrderStatus.NEW` id `9e45b1e8-...`); fixed
+  stop, no trail.
+- **Trajectory KW 23**: Mon 6/1 (td6) UPL essentially unchanged from KW 22 EOW
+  -3.48% → Tue 6/2 (td7) UPL -3.5% → Wed 6/3 (td8) UPL -3.59% → **Thu 6/4 (td9)
+  UPL -4.59%**. Slow grind lower, no catalyst, cushion-bleed +33 bp on Thu (3.66%
+  → 2.59%).
+- **No fresh thesis-break catalyst** per Gemini Thu scan: no analyst PT changes,
+  no margin guide change. Just continued consumer-discretionary weakness with
+  Thu AVGO-led Nasdaq pressure pulling NQ-correlated names down marginally.
+- **AVGO post-earnings sympathy**: AVGO -13.58% Thu but RL +0.07% Thu (essentially
+  flat); RL avoided AVGO drag thanks to consumer-discretionary segment being
+  decoupled. The AVGO-Thu effect on RL: ZERO. The RL bleed is its own slow drift.
+- **LULU earnings tonight 6/4 post-close** (cons EPS $1.68 / rev $2.44B) — closest
+  consumer-discretionary read for RL. A LULU miss + guide-down would create RL
+  sympathy gap risk into NFP Fri morning.
+
+### Decision matrix for 03-midday + 04-pre-close
+
+Bull's recommendation is **HOLD into Fri 6/5 td10 time-stop**, but with explicit
+contingency gates:
+
+- **Option A — Emergency-tighten to -2% stop** ($352.53):
+  - Locks worst-case -4.4% (vs current -7% stop -4.59% UPL = essentially same exit
+    price as Option C if no Fri rebound).
+  - Reduces overnight LULU-sympathy gap risk.
+  - Costs the ~$4-9 of optionality on a Fri NFP-driven rebound (modal +1-3% rebound
+    = +$15-40 UPL recovery).
+  - Strategy-attribution stays clean (-0.6R to -0.9R band).
+- **Option B — Close-early at market now** (Thu intraday):
+  - Locks -4.59% / -0.66R right now.
+  - Eliminates overnight LULU gap AND Fri NFP gap risk.
+  - Cedes the 26-hour time-stop optionality entirely.
+  - Strategy-attribution -0.66R = neutral-bad (similar to NVDA -1.0R Swing close).
+- **Option C — HOLD into Fri 6/5 close** (td10 time-stop):
+  - Preserves NFP-rebound optionality (modal +1-3% Fri move).
+  - Risk: LULU miss + RL gap-down overnight + NFP-cold Fri morning could compress
+    cushion < 0% (mark < $350.64) and trigger -7% stop = -1.0R clean.
+  - Modal outcomes Fri 6/5 close: -4.59% (flat continuation) OR -7% (-1.0R stop)
+    OR 0R (NFP-rebound to entry $377.03 = +4.81% rebound needed).
+
+**Bull's queued recommendation for 03-midday (17:30Z)**:
+- IF Thu 6/4 cushion stays > 1.5% intraday (mark > $355.95) at 17:30Z → **HOLD**
+  (Option C).
+- IF Thu 6/4 cushion < 1.5% intraday at 17:30Z → **CLOSE EARLY** (Option B).
+- IF cushion < 0.5% intraday → MARKET SELL immediately don't wait for routine.
+- **Reasoning**: Option C preserves the asymmetric Fri rebound optionality at
+  small marginal risk (~$8-20 worse-case incremental). The PEAD thesis was
+  weakening but never broke, the consumer-discretionary segment is decoupled from
+  the AVGO-led Thu purge, and the cost-of-discipline (tight-stop now vs let-time-
+  stop play out) is small in dollars.
+
+### Uncovered slice (Thu 6/4 carry-forward)
+
+- 0.978463 sh × $359.72 = ~$352 still unprotected by the 3-share fixed stop. Today's
+  intraday range bracketed $355-$362; slice took a small mark-to-market hit but no
+  stop event was triggered on it (the 3-share leg is the protected position).
+- Long-weekend risk: NFP Fri + weekend = sleeve-correlated risk window. The slice
+  prints additional ~$3-5 loss per 1% RL gap-down if Fri turns sharp red.
+- Acceptable given Swing budget context ($15k cap; RL at $1.5k cost basis using
+  10% of sleeve).
