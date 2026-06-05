@@ -982,3 +982,54 @@ Alpaca paper-api broker (account + 10 positions incl. 3 fractional stubs + 7
 open stop orders verified `OrderStatus.NEW` + AVGO stop FILLED Thu 6/4
 13:36:31Z @ $410.882727). Polygon options-chain probe (403 10th time). See
 `memory/daily/2026-06-04.md` for full per-sleeve detail.
+
+## 2026-06-05 (Fri, 01-pre-market LATE FIRE 15:39Z) — NFP-hawk + crypto-flush
+
+**Sources**: Gemini Search Grounding (NFP May print + market reaction + Fed-path
+implications) + yfinance Fri intraday (SPY/VIX/NQ/10Y/DXY/oil/gold/crypto) + Alpaca
+broker pull (positions/stops/account).
+
+### Macro
+
+- **NFP May 2026**: +172k actual vs +85k cons (+102% beat). Unemployment 4.3%.
+  AHE 3.4% YoY (in-line; wage growth cooling). March + April revised UP +93k combined.
+- **Market reaction**: SPY -1.37%, NQ -2.53%, VIX 16.63 (+7.99%), 10Y +6 bp to 4.54%,
+  2Y +10 bp to 4.15%, DXY +0.49% to 99.895. Risk-off NOT at -3%/40 thresholds.
+- **Fed path**: Futures 65% Fed-hike-by-Dec (up from 48% pre-NFP). FOMC June 16-17
+  = no cut expected; "higher for longer" reinforced.
+- **Oil**: WTI -2.20% to $90.99 (Israel-Lebanon-ceasefire-optimism unwind continues).
+- **Gold**: -2.17% to $4,378 (rate-up + dollar-bid pulled gold lower — cross-asset
+  risk-off correlation).
+- **Geopolitics**: Strait of Hormuz day 95 closed; no change.
+
+### Crypto flush (correlated with NFP-hawk)
+
+- **BTC -5.70%/24h**, -18.00%/7d → no trigger yet (approaching but >-10%).
+- **ETH -10.87%/24h ✓ TRIGGER**, -21.61%/7d.
+- **SOL -6.87%/24h**, -21.89%/7d → no trigger.
+- **AVAX -10.38%/24h ✓ TRIGGER**, -21.85%/7d.
+- **LINK -9.11%/24h**, -19.34%/7d → close to trigger.
+- **2 `crypto-mean-reversion` entries QUEUED** (ETH + AVAX, $1.5k each) for 03-midday
+  execution. NOT an exchange collapse → passes the "no fundamental break" filter.
+
+### Single-stock catalysts (Fri intraday)
+
+- **MSFT** -2.13% / **cushion 0.46% NEXT MECHANICAL STOP-CANDIDATE** (book-record
+  tightest); no fresh thesis-break catalyst.
+- **META** -4.19% (mega-cap-tech-NFP-hawk drawdown leadership).
+- **LLY** +2.42% / **NEW ATH HWM $1166.225 +1.49% walk** (healthcare-defensive rotation).
+- **BRK.B** +2.94% (defensive bid; HWM walk +0.14%).
+- **V** -0.01% (rate-up financials hold flat).
+- **RL** $367.54 +2.18% from Thu (NFP-consumer-discretionary positive on cool wages).
+- **NVDA** $207.80 -1.27%, **AVGO** $395.12 -3.83% (continued rate-pressure on AI cohort).
+
+### Earnings calendar next 5 td
+
+- Fri 6/5 post-close: nothing major in book.
+- Mon 6/8 - Fri 6/12: AAPL WWDC week.
+- Tue 6/16 - Wed 6/17: FOMC + Warsh debut as Chair.
+
+### Citations
+
+- Gemini grounding redirect URLs (vertexaisearch.cloud.google.com) — 4 sources cited
+  in the macro-NFP response chunk.

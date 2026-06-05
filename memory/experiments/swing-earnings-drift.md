@@ -211,3 +211,33 @@ contingency gates:
   prints additional ~$3-5 loss per 1% RL gap-down if Fri turns sharp red.
 - Acceptable given Swing budget context ($15k cap; RL at $1.5k cost basis using
   10% of sleeve).
+
+### LM Day 16 td10 TIME-STOP day (01-pre-market 2026-06-05 15:39Z LATE FIRE)
+
+- **Day 10 td elapsed = TIME-STOP at close TODAY** (5/22 td1 + 5/26 td2 + 5/27 td3 +
+  5/28 td4 + 5/29 td5 + 6/1 td6 + 6/2 td7 + 6/3 td8 + 6/4 td9 + **6/5 = td10**).
+- **Fri 6/5 intraday mark** $367.54 (vs Thu intraday $359.72 = **+2.18% recovery**);
+  **UPL -$37.76 / -2.52%** (vs Thu -$68.87 / -4.59% = +$31.11 improvement).
+- **Cushion RECOVERED to 4.82%** (mark $367.54 / stop $350.64 - 1) — above 3% emergency
+  threshold AND above 1.5% HOLD gate. Was 2.59% Thu = +2.23 pp recovery.
+- **Catalyst**: NFP May +172k vs +85k cons. AHE 3.4% in-line (wage growth cooling
+  signal). Retail/consumer-discretionary segment BENEFITED from "strong jobs but cool
+  wages" combination — RL +2.18% intraday outperformed SPY -1.37% by 355 bp on Fri.
+- **PEAD thesis post-mortem (in progress)**: The Tue+Wed PEAD-Day-3-4 drift (+3.36%
+  peak) followed by Thu-bleed (-4.59%) then Fri-recovery (+2.18%) reflects exactly the
+  PEAD literature's "mean-reverting drift on weak names". The net realized outcome will
+  be modestly negative (~-2.5% to -3%) — not the planned +10% target, not the -7% stop.
+  Time-stop is doing its job (capping the bleed).
+- **Decision per Bull's Thu queued recommendation (Option C)**:
+  - Cushion 4.82% > 1.5% gate → **HOLD into td10 close**.
+  - **Action queued for 04-pre-close 20:30Z**: MARKET SELL 3.978 sh at close-window OR
+    allow time-stop to fire naturally at 20:00Z cash close.
+- **Expected realized R outcome at current mark**: -$37.76 = **-0.36R**
+  (planned 1R = $105 = 7% stop; -$37.76 / -$105 = -0.36R).
+- **Modal close attribution range**: -0.3R to -0.5R clean attribution at 04-pre-close
+  market-sell or time-stop trigger.
+- **No fresh PT raises in 24h** per Gemini Fri scan (no analyst PT cuts either).
+- **Sleeve attribution at td10 close (modal)**: Swing sleeve -$99.10 NVDA realized +
+  (~-$37 RL realized today) ≈ **-$136 / -0.91% of $15k Swing budget** at LM Day 16.
+- **Stop $350.64 GTC** verified live (`OrderStatus.NEW` id `9e45b1e8-...`).
+

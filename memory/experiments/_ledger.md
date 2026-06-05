@@ -23,7 +23,7 @@ Window: 2026-05-21 → 2026-06-20.
 | swing-momentum-breakout    | Swing     | active | 0 (AMD trigger DROPPED-AS-MISSED Thu 6/4 after 4 consecutive cron-miss entry days Fri 5/29 + Mon 6/1 + Tue 6/2 + Wed 6/3; Thu trigger weakened with intraday breach $499.87 of $510 spec; ARM SKIP -5.96% Thu purge; AAPL no rejection WWDC ahead) | — | — | $0.00 (opportunity-cost ~$60 missed Wed open) | $0 | — | — | 2026-06-04 01-pre-market |
 | swing-mean-reversion       | Swing     | active | 0 (1 SKIP = INTU thesis-risk; no fresh triggers KW 22 — slow-grind-up tape disfavors mean-reversion) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
 | swing-quality-pullback     | Swing     | active | **1 CLOSED (NVDA stop-out Wed 5/27 @ $208.95; -$99.10 / -1.0R exactly) + stub 0.0925 sh pending Mon 6/1 liquidate** | 0 / 1 | -1.0R | -$99.10 realized + -$0.82 stub UPL = ~-$99.92 final | -$99.10 | -1.0 | — | 2026-05-30 06-weekly-review |
-| swing-earnings-drift       | Swing     | active | **1 open (RL); EMERGENCY CUSHION 2.59% sub-3% Thu 6/4 td9; time-stop Fri 6/5 td10** | — | — | -$68.87 UPL (Thu 6/4 intraday; UPL -4.59%); td9 of 10; 03-midday cushion-watch active | $0 (no closes) | — | — | 2026-06-04 01-pre-market |
+| swing-earnings-drift       | Swing     | active | **1 open (RL); td10 TIME-STOP at Fri 6/5 close; cushion RECOVERED to 4.82% Fri intraday (HOLD into close per Option C)** | — | — | -$37.76 UPL (Fri 6/5 ~15:39Z intraday; UPL -2.52%); +$31.11 recovery from Thu on NFP-consumer-discretionary positive | $0 (no closes; close pending 04-pre-close 20:30Z) | — | — | 2026-06-05 01-pre-market |
 | swing-insider-buys         | Swing     | paused | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | swing-short-rejection      | Swing     | active | 0 (AAPL WATCH 5/26/27/28/29; no rejection candle in any session — closed >open each day) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
 | swing-short-fundamental    | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
@@ -35,11 +35,11 @@ Window: 2026-05-21 → 2026-06-20.
 | daytrade-news-catalyst     | Daytrade  | active | 0 (PCE+GDP Thu 5/28 was the KW 22 candidate event but Thu 02-market-open / news-react window not utilized; PCE came in-line / SPY +0.55% to ATH so the catalyst pattern fired benignly) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
 | crypto-trend-follow        | Crypto    | active | 0 (BTC 50/200 gap converging -4.31% Mon → -3.26% Fri at +0.23 pp/day; ETA cross 6/15-6/17 at current pace; no entries triggered KW 22) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
 | crypto-weekend-momentum    | Crypto    | active | 0 (Fri 5/29 trigger NOT met: BTC 7d -2.88% << +2%; closed; re-arm next Fri 6/5 21:00Z) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
-| crypto-mean-reversion      | Crypto    | active | 0 (largest 24h move KW 22 was AVAX +2.53% Mon-intraday — opposite direction; flush trigger -10% never approached) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
-| options-long-call-momentum | Options   | active | 0 (Polygon chain BLOCKED 6 consecutive routines; NVDA conviction routed via Swing equity which stopped Wed -1R) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
-| options-protective-put     | Options   | active | 0 (Polygon chain BLOCKED; PCE+GDP Thu 5/28 hedge would have been benign-loss in retrospect — print came in-line, SPY +0.55%) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
-| options-vertical-bull-call-spread | Options | active | 0 (Polygon chain BLOCKED) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
-| options-earnings-strangle  | Options   | active | 0 (AVGO 6/3 = next candidate, 2 td out from Mon 6/1; Polygon chain BLOCKED; IV-rank stub returns None) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
+| crypto-mean-reversion      | Crypto    | active | **0 fills; 2 TRIGGERS FIRED Fri 6/5 (ETH -10.87% AND AVAX -10.38% / 24h); queued for 03-midday 17:30Z execution at $1.5k each = $3k total / 60% of $5k sleeve** | — | — | $0.00 (pending fills) | $0 | — | — | 2026-06-05 01-pre-market |
+| options-long-call-momentum | Options   | active | 0 (Polygon chain BLOCKED 11 consecutive routines incl Fri 6/5; NVDA conviction routed via Swing equity stopped Wed 5/27 -1R) | — | — | $0.00 | $0 | — | — | 2026-06-05 01-pre-market |
+| options-protective-put     | Options   | active | 0 (Polygon chain BLOCKED 11x; **Fri 6/5 NFP-hawk SPY -1.37% would have been textbook protective-put profit ~30-50 bp; chain inaccessibility = direct cost**) | — | — | $0.00 | $0 | — | — | 2026-06-05 01-pre-market |
+| options-vertical-bull-call-spread | Options | active | 0 (Polygon chain BLOCKED 11x) | — | — | $0.00 | $0 | — | — | 2026-06-05 01-pre-market |
+| options-earnings-strangle  | Options   | active | 0 (AVGO 6/3 missed long-vol opportunity Thu 6/4 -13.58% gap; Polygon chain BLOCKED 11x; IV-rank stub returns None) | — | — | $0.00 | $0 | — | — | 2026-06-05 01-pre-market |
 | options-cash-secured-put   | Options   | paused | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 
 ## Sleeve roll-ups
@@ -643,3 +643,27 @@ whether trigger is reachable":
   Macro risk-off NOT active. Polygon options-chain 10th block (AVGO strangle was
   textbook missed long-vol setup). Inbox.md Pending: empty. WhatsApp Dringend
   multi-part sent: AVGO stop + MSFT cushion + RL emergency + L4 escalation.
+
+- **2026-06-05 15:39Z (01-pre-market LATE FIRE, LM Day 16 — Fri NFP-hawk + crypto-flush)** —
+  **LATE FIRE research+draft only**, no orders authorized (per lesson 2026-05-15). Routine
+  fired ~2h09m after cash open. **NFP May +172k vs +85k cons (102% beat) drove hawkish
+  re-pricing**: SPY -1.37% / NQ -2.53% / VIX 16.63 (+8%) / 10Y +6 bp to 4.54% / DXY +0.49% /
+  futures repricing 65% Fed-hike-by-Dec (was 48%). **MSFT cushion compressed to book-record
+  tightest 0.46%** (stop $419.688 vs mark $421.625) on NQ-tech selloff — next mechanical
+  stop-candidate, NO thesis-break catalyst (just rate-pressure). LLY HWM walked to NEW ATH
+  $1166.225 (+1.49% organic) on healthcare-defensive rotation. BRK.B HWM walked $490.035
+  (+0.14%). RL `swing-earnings-drift` cushion RECOVERED to 4.82% Fri intraday (was 2.59%
+  Thu); mark $367.54 +2.18% from Thu on NFP-consumer-discretionary positive (cool wages
+  3.4% AHE benefits retail tape). **HOLD into td10 close** per Thu Option C recommendation.
+  **2 crypto-mean-reversion triggers FIRED**: ETH -10.87%/24h AND AVAX -10.38%/24h crossed
+  -10% flush threshold. Catalyst = NFP-hawk-driven systemic risk-off (not exchange
+  collapse → passes "no fundamental break" filter). **Queued for 03-midday 17:30Z**:
+  ETH $1.5k + AVAX $1.5k = $3k total / 60% of $5k Crypto sleeve. First non-Core LM sleeve
+  activation since 5/22 Swing. **Polygon options-chain 11th consecutive 403** — L4
+  ESCALATION re-fires; NFP `options-protective-put` was textbook missed opportunity
+  Fri. Default-if-no-Robin-reply Mon 6/8 = reallocate $5k → Cash reserve. **Thu 6/4
+  WhatsApp send FAILED (503)** — Robin did NOT see yesterday's brief; Fri brief
+  re-includes Thu key items. **3 fractional stubs** (NVDA 7th, GOOGL 3rd, AVGO 2nd)
+  queued together for 03-midday. Equity $100,880.55 (-$501.12 vs Thu pre-mkt; +$118.83
+  vs 5/21 LM baseline). Inbox.md Pending: empty. WhatsApp Top-5 News DE + Dringend
+  overlay multi-part scheduled.
