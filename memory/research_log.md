@@ -982,3 +982,123 @@ Alpaca paper-api broker (account + 10 positions incl. 3 fractional stubs + 7
 open stop orders verified `OrderStatus.NEW` + AVGO stop FILLED Thu 6/4
 13:36:31Z @ $410.882727). Polygon options-chain probe (403 10th time). See
 `memory/daily/2026-06-04.md` for full per-sleeve detail.
+
+---
+
+## 2026-06-05 12:03Z — 01-pre-market (LM Day 16 — Fri NFP-day, EARLY FIRE +57m before slot)
+
+**Macro tape (Gemini Search Grounding @ 12:03Z)**:
+- US futures red: ES=F 7,564.5 (-0.48%) / NQ=F 30,153 (-1.10%) / YM=F flat (+0.11%).
+  Nasdaq continues AI-capex purge (AVGO -12.59% Thu net + MU -7.74% AI-memory + AVGO
+  downgrade tag overnight on Google-insourcing concern).
+- VIX Thu close 15.40 (-4.11% Thu); pre-mkt drift 15.65-15.87. Regime risk-on
+  intact below 16.
+- 10Y Treasury 4.477% (4.48% per Gemini); flat-ish into NFP.
+- DXY 99.20 (-0.22%); flat.
+- WTI $92.85 (-0.20%) / Brent $94.77 (-0.27%); flat after Thu's -3% ceasefire move.
+- Gold $4,497.50 (+0.48%); safe-haven bid into NFP.
+
+**NFP MAY 2026 — RELEASE 13:30Z TODAY**:
+- Consensus jobs: +85k (April +115k; TD/GS forecast +60k lower-end).
+- Unemployment rate: 4.3% steady.
+- Avg Hourly Earnings (AHE): +3.4% YoY (softening from 3.6%).
+- Hawkish surprise (>100k): SPY ↓ / Tech ↓ / 10Y ↑ — reinforces FOMC June 16-17
+  Warsh Chair-debut hawkish narrative.
+- Dovish surprise (<60k): SPY ↑ / Tech ↑ / 10Y ↓ — Fed-pivot trade.
+
+**Geopolitics — Strait of Hormuz day 95**:
+- Closed since 2026-02-28; Israel-Lebanon conditional ceasefire from Thu still
+  holding. Oil pricing continuing ceasefire optimism (WTI flat $93 from $97-98 highs).
+- No fresh Iran-US thaw signals overnight.
+
+**Pre-market movers Gemini headline (relevant to Bull)**:
+- **LULU -11.82%** after disappointing earnings/guidance — **DIRECT SYMPATHY RISK
+  for RL `swing-earnings-drift` open position** (consumer-discretionary segment purge).
+- AVGO -12.59% Thu close net per yfinance daily; overnight downgrade thesis cited
+  "Google insourcing custom chips" as fresh negative (offsetting 8+ PT raises from
+  Jefferies $550, Mizuho $530, DB $515, JPM $580, BNP $640, KeyBanc $575, Bernstein
+  $550, GS $525 all on 6/4). Stub close pending regardless.
+- CIEN -13.66% (earnings reset; not in book).
+- MU -7.74% (AI memory pullback; AVGO sympathy).
+- DOCU -4.73% (in-line guide; not in book).
+- RDDT +8.51% (Loop Capital highlight; not in book).
+- BX +7.50% ($36B Anthropic debt financing; not in book).
+
+**Analyst PT changes overnight (6/4 -> 6/5)**:
+- **AVGO**: 8 PT raises (Jefferies/Mizuho/DB/JPM/BNP/KeyBanc/Bernstein/GS) BUT 1
+  downgrade thesis (Google-insourcing). Net = bullish on numbers, bearish on
+  long-term capture share.
+- **AMD**: Zacks downgrade (strong-buy -> hold) overnight; Barclays raised PT $665
+  from $500 on 6/1. Confirms AMD `swing-momentum-breakout` DROP call was correct.
+- **RL, CRWD, LLY, MSFT**: no fresh PT changes overnight.
+
+**Account snapshot (Alpaca paper-api verified 12:03Z)**:
+- equity: $101,219.57 (-$162.10 vs Thu pre-mkt; +$457.85 / +0.4545% vs LM 5/21
+  baseline $100,761.72).
+- last_equity (Thu close): $101,335.76.
+- cash: $45,232.34 (UNCHANGED from Thu pre-mkt; 3 stub liquidations did NOT execute Thu
+  due to cron-miss cluster).
+- options_bp $73,225.95 / L3 ✓.
+- daytrade_count: 0 (full PDT budget).
+- 10 positions: 6 active Core + 3 stubs Core + 1 Swing RL.
+
+**Stop status (7 GTC orders verified `OrderStatus.NEW`)**:
+- VOO $629.235 / HWM $699.15 (cushion 10.15%).
+- **MSFT $419.688 / HWM $466.32 (cushion 2.46% — TIGHTEST BOOK-RECORD)**.
+  Even tighter than Thu's 2.65%. NFP-hawkish gap-down risk especially acute;
+  mechanical -10% trail will fill below trigger per lesson 2026-06-04 if MSFT
+  gaps > -2.40% on hawkish print.
+- META $578.7 / HWM $643 (cushion 7.84%).
+- V $301.653 / HWM $335.17 (cushion 6.38%).
+- BRK.B $440.424 / HWM $489.36 (cushion 8.79%).
+- LLY $1034.19 / HWM $1149.10 (cushion 9.94%; mark $1137 short of HWM by 1.07%
+  — first HWM-walk in 5 sessions if today's intraday breaks $1149.10).
+- **RL $350.64 fixed -7% (cushion 4.59% — RECOVERED overnight from Thu's emergency 2.59%)**.
+
+**Single-stock catalysts (Fri pre-mkt intraday)**:
+- AVGO: -0.18% on stub mark drift (main 11 sh leg already stopped Thu $410.88).
+- MSFT: cushion 2.46% TIGHTEST book-record; next mechanical stop candidate.
+- LLY: +1.04% Fri pre-mkt; +13.94% UPL; HWM walk likely if intraday > $1149.10.
+- RL: cushion recovered 4.59%; td10 TIME-STOP at close today.
+- AMD: -0.35% Fri pre-mkt; Zacks downgrade overnight (drop confirmed).
+
+**Strategic read**:
+- Tape: **risk-off-into-NFP** (red futures -0.5%; VIX firm sub-16). AI-capex
+  purge continuing (MU -7.74% / AVGO downgrade); broader Dow flat (rotational
+  not regime-change).
+- **RL TIME-STOP today** + **LULU sympathy risk** + **NFP at open** = compound
+  risk window on Bull's single open Swing position.
+- **MSFT cushion 2.46% TIGHTEST book-record** = next mechanical Core stop
+  candidate; NFP-hawkish gap-down would likely fire.
+- 3 fractional stubs still queued (NVDA 7th attempt, GOOGL 3rd, AVGO 2nd) — cron
+  miss-cluster Thu blocked all 3.
+- Options sleeve BLOCKED 11th routine; NFP `options-protective-put` SPY would be
+  textbook today's missed setup.
+- Macro risk-off NOT active pre-fire; recheck mandatory at 03-midday post-NFP.
+- Israel-Lebanon ceasefire still holding day-2; oil pricing ceasefire optimism;
+  no fresh Iran-US thaw signals.
+
+**Tomorrow's catalysts**:
+- Mon 6/8: WWDC opens (AAPL `swing-short-rejection` veto for next 5 td continues).
+- Mon 6/8: bandit-cull decision implementation if tonight's 06-weekly-review
+  produces actionable rebalance.
+- Tue-Fri 6/9-6/12: WWDC week; CPI release likely mid-week (check tonight's
+  research for confirmation).
+- FOMC June 16-17 in 11 td = Warsh Chair debut; NFP today + ADP/ISM Thu repricing
+  FOMC hike/hold expectations.
+
+**No thesis-break events on 6 active Core (MSFT cushion 2.46% mechanical-not-thesis
+risk); RL Swing leg HOLD into td10 time-stop with NFP-day risk-managed plan;
+3 fractional stubs queued for 02-market-open; AMD swing-momentum DROPPED-confirmed;
+ARM/AAPL/NVDA-fresh SKIPPED; AVAX close to -10% crypto-mean-reversion threshold;
+options sleeve BLOCKED 11th routine.**
+
+**Cited sources**: Gemini Search-Grounding (NFP May cons + 10Y + DXY + Brent/WTI +
+SPY futures + VIX prior close + analyst PT changes overnight on RL/AVGO/CRWD/AMD/
+LLY/MSFT + pre-market movers including LULU -11.82% + AVGO Google-insourcing
+downgrade + Strait of Hormuz day 95 + Israel-Lebanon ceasefire day-2 + FOMC
+June 16-17 expectations). yfinance 5d aggregates Fri 6/5 12:03Z (8 Core + 4 Swing
+watch + 5 crypto + 8 macro/futures + VIX). Alpaca paper-api broker (account +
+10 positions incl. 3 fractional stubs + 7 open stop orders verified `OrderStatus.NEW`).
+Polygon options-chain probe (403 11th time). See `memory/daily/2026-06-05.md` for
+full per-sleeve detail.

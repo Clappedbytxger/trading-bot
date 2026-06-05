@@ -20,10 +20,10 @@ Window: 2026-05-21 → 2026-06-20.
 | Strategy slug | Sleeve | Status | Trades | Win-rate | Avg R | Net P&L | Max DD | RAR | Alpha vs SPY | Last update |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---|
 | core-buy-and-hold          | Core      | active | **2 closed (GOOGL Tue 6/2 stop -$315.72 / -1.36R-cushion-anchor; AVGO Thu 6/4 stop -$36.92 / -0.08R-trail-anchor)** + 6 active + 3 stubs pending liquidate | — | — | +UPL Thu intraday for 6 active ~$1,905; realized -$352.64 cum (GOOGL -$315.72 + AVGO -$36.92) | -$315.72 (GOOGL gap-fill peak); -$917 from Wed UPL on AVGO give-back if anchored to last-day cushion | — | LM cum tracking deferred to 05-close-summary | 2026-06-04 01-pre-market |
-| swing-momentum-breakout    | Swing     | active | 0 (AMD trigger DROPPED-AS-MISSED Thu 6/4 after 4 consecutive cron-miss entry days Fri 5/29 + Mon 6/1 + Tue 6/2 + Wed 6/3; Thu trigger weakened with intraday breach $499.87 of $510 spec; ARM SKIP -5.96% Thu purge; AAPL no rejection WWDC ahead) | — | — | $0.00 (opportunity-cost ~$60 missed Wed open) | $0 | — | — | 2026-06-04 01-pre-market |
+| swing-momentum-breakout    | Swing     | active | 0 (AMD DROP CONFIRMED Fri 6/5 — Zacks downgrade strong-buy→hold overnight; Thu drop already logged; ARM SKIP volatility post-AVGO purge; AAPL WWDC 6/8-12 veto 3 td out) | — | — | $0.00 (opportunity-cost ~$60 missed Wed open) | $0 | — | — | 2026-06-05 01-pre-market |
 | swing-mean-reversion       | Swing     | active | 0 (1 SKIP = INTU thesis-risk; no fresh triggers KW 22 — slow-grind-up tape disfavors mean-reversion) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
 | swing-quality-pullback     | Swing     | active | **1 CLOSED (NVDA stop-out Wed 5/27 @ $208.95; -$99.10 / -1.0R exactly) + stub 0.0925 sh pending Mon 6/1 liquidate** | 0 / 1 | -1.0R | -$99.10 realized + -$0.82 stub UPL = ~-$99.92 final | -$99.10 | -1.0 | — | 2026-05-30 06-weekly-review |
-| swing-earnings-drift       | Swing     | active | **1 open (RL); EMERGENCY CUSHION 2.59% sub-3% Thu 6/4 td9; time-stop Fri 6/5 td10** | — | — | -$68.87 UPL (Thu 6/4 intraday; UPL -4.59%); td9 of 10; 03-midday cushion-watch active | $0 (no closes) | — | — | 2026-06-04 01-pre-market |
+| swing-earnings-drift       | Swing     | active | **1 open (RL); CUSHION RECOVERED 4.59% Fri 6/5 pre-mkt (from Thu emergency 2.59%); td10 TIME-STOP at close TODAY 20:00Z** | — | — | -$41.02 UPL Fri pre-mkt (-2.73%); recovered $27.85 from Thu's -$68.87; td10 of 10; LULU -11.82% pre-mkt = sympathy risk + NFP 13:30Z = compound NFP-day risk | $0 (no closes) | — | — | 2026-06-05 01-pre-market |
 | swing-insider-buys         | Swing     | paused | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | swing-short-rejection      | Swing     | active | 0 (AAPL WATCH 5/26/27/28/29; no rejection candle in any session — closed >open each day) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
 | swing-short-fundamental    | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
@@ -36,10 +36,10 @@ Window: 2026-05-21 → 2026-06-20.
 | crypto-trend-follow        | Crypto    | active | 0 (BTC 50/200 gap converging -4.31% Mon → -3.26% Fri at +0.23 pp/day; ETA cross 6/15-6/17 at current pace; no entries triggered KW 22) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
 | crypto-weekend-momentum    | Crypto    | active | 0 (Fri 5/29 trigger NOT met: BTC 7d -2.88% << +2%; closed; re-arm next Fri 6/5 21:00Z) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
 | crypto-mean-reversion      | Crypto    | active | 0 (largest 24h move KW 22 was AVAX +2.53% Mon-intraday — opposite direction; flush trigger -10% never approached) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
-| options-long-call-momentum | Options   | active | 0 (Polygon chain BLOCKED 6 consecutive routines; NVDA conviction routed via Swing equity which stopped Wed -1R) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
-| options-protective-put     | Options   | active | 0 (Polygon chain BLOCKED; PCE+GDP Thu 5/28 hedge would have been benign-loss in retrospect — print came in-line, SPY +0.55%) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
-| options-vertical-bull-call-spread | Options | active | 0 (Polygon chain BLOCKED) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
-| options-earnings-strangle  | Options   | active | 0 (AVGO 6/3 = next candidate, 2 td out from Mon 6/1; Polygon chain BLOCKED; IV-rank stub returns None) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
+| options-long-call-momentum | Options   | active | 0 (Polygon chain BLOCKED 11 consecutive routines; NFP 13:30Z option-protective-put SPY would be today's textbook setup; chain gated) | — | — | $0.00 | $0 | — | — | 2026-06-05 01-pre-market |
+| options-protective-put     | Options   | active | 0 (Polygon chain BLOCKED 11th; NFP at cash-open today = textbook missed setup; AVGO earnings-strangle missed Wed 6/3 was clear long-vol +13.58% payoff lost) | — | — | $0.00 | $0 | — | — | 2026-06-05 01-pre-market |
+| options-vertical-bull-call-spread | Options | active | 0 (Polygon chain BLOCKED 11th) | — | — | $0.00 | $0 | — | — | 2026-06-05 01-pre-market |
+| options-earnings-strangle  | Options   | active | 0 (AVGO 6/3 textbook missed long-vol +13.58% Thu gap-down; chain BLOCKED 11th; next earnings candidate likely LLY post-FOMC) | — | — | $0.00 | $0 | — | — | 2026-06-05 01-pre-market |
 | options-cash-secured-put   | Options   | paused | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 
 ## Sleeve roll-ups

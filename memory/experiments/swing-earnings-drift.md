@@ -211,3 +211,64 @@ contingency gates:
   prints additional ~$3-5 loss per 1% RL gap-down if Fri turns sharp red.
 - Acceptable given Swing budget context ($15k cap; RL at $1.5k cost basis using
   10% of sleeve).
+
+## 2026-06-05 — RL td10 TIME-STOP day (01-pre-market early fire 12:03Z)
+
+### Cushion update overnight Thu close -> Fri pre-mkt
+
+- Thu 6/4 intraday low cushion: 2.59% (mark $359.72 / stop $350.64) — emergency threshold breached.
+- Thu 6/4 close mark: **$366.72** (+1.95% Thu late-session bounce; per yfinance EOD).
+- Fri 6/5 pre-mkt mark: **$366.72** (broker current_price; flat overnight on no fresh tape).
+- Fri 6/5 pre-mkt cushion: **4.59%** ($366.72 / $350.64 - 1) — **RECOVERED above 3% emergency threshold by +2.00 pp**.
+- UPL: -$41.02 / -2.73% (improved from Thu's -$68.87 / -4.59%).
+- 03-midday emergency-tighten decision queued for Thu 6/4 never fired (cron-miss); cushion recovery overnight makes it moot.
+
+### NEW risk factors for td10 (Fri 6/5)
+
+1. **LULU -11.82% pre-mkt** after disappointing earnings/guidance. Consumer-discretionary
+   sympathy = direct risk to RL (same segment, similar customer profile premium-apparel).
+   If RL gaps down >2% at 13:30Z open on sympathy, cushion compresses back below
+   emergency threshold OR -7% stop fires.
+2. **NFP MAY release at 13:30Z = same minute as cash-market open**. Cons +85k
+   (vs April +115k; TD/GS at +60k lower-end). Hawkish surprise >100k = SPY ↓ / Tech ↓
+   / Consumer-disc ↓ likely. Dovish <60k = SPY ↑ / Consumer-disc ↑.
+3. **No fresh PT changes on RL overnight** (UBS $511 + Wells $415 from 5/22 still most
+   recent per Gemini); no thesis-break catalyst BUT no fresh positive support either.
+
+### Fri 6/5 NFP-day decision matrix (updated from Thu's matrix)
+
+- **Option A (emergency-tighten now to -2% above mark)**: move stop $350.64 -> $359.39
+  (mark $366.72 * 0.98). Locks ~-4.65% / -0.66R if hit; protects NFP-gap-down.
+  CON: cuts off NFP-positive rebound optionality.
+- **Option B (close-early at 02-market-open)**: locks -$41.02 / -2.73% / -0.39R.
+  Eliminates NFP gap risk entirely. CON: cedes 7-hour time-stop window.
+- **Option C (HOLD into 20:00Z time-stop)**: accept Fri close exit; -7% stop
+  $350.64 active. CON: LULU sympathy + NFP-hawkish gap could fire stop.
+- **Option D (emergency-tighten to -1% above mark)**: move stop $350.64 -> $363.05
+  (mark $366.72 * 0.99). Locks ~-3.71% / -0.53R if hit. Mid-path A-C.
+
+### Bull's queued recommendation for Fri 02-market-open (14:30Z)
+
+- **Default: HOLD UNTOUCHED (Option C)**; rely on -7% stop $350.64 + 20:00Z time-stop.
+- **If RL opens 0 to -2% post-NFP**: emergency-tighten to **Option D ($363.05)**.
+- **If RL opens green/flat**: HOLD UNTOUCHED; let time-stop fire at close.
+- **If RL opens worse than -2% gap**: accept -7% stop fill if it triggers.
+- **At 03-midday 17:30Z**: if cushion < 1.5% intraday (mark < ~$355.95), MARKET
+  CLOSE EARLY (Option B-late) to avoid afternoon downside drift.
+- **At 04-pre-close 20:30Z**: if still open, force MARKET SELL at 20:00Z time-stop
+  per playbook spec (10 td hold).
+
+**Final outcome will be logged at 04-pre-close or 05-close-summary** with
+exit price, R-multiple, P&L vs entry, and PEAD-thesis post-mortem.
+
+### Strategy-level implication for bandit cull tonight 21:30Z
+
+- `swing-earnings-drift` will have 1 closed trade by tonight EOD (RL).
+- Modal outcomes:
+  - -7% stop fire (-$104.50 / -1.0R): clean stop, similar to NVDA Wed 5/27.
+  - Time-stop at flat-to-mildly-negative (-2 to -5%): -$30 to -$75 / -0.3 to -0.7R.
+  - NFP-rebound to entry $377 (+2.81% intraday rebound needed from current): 0R.
+  - NFP-strong rebound to >$385: +0.5R.
+- Sample size still 1 trade (NOT ≥3 threshold for bandit cull); strategy stays ACTIVE
+  per spec. Decision point: KW 24 EOW with 2 trades for full sample.
+
