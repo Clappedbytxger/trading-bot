@@ -19,11 +19,11 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Strategy slug | Sleeve | Status | Trades | Win-rate | Avg R | Net P&L | Max DD | RAR | Alpha vs SPY | Last update |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---|
-| core-buy-and-hold          | Core      | active | **2 closed (GOOGL Tue 6/2 stop -$315.72 / -1.36R-cushion-anchor; AVGO Thu 6/4 stop -$36.92 / -0.08R-trail-anchor)** + 6 active + 3 stubs pending liquidate | — | — | +UPL Thu intraday for 6 active ~$1,905; realized -$352.64 cum (GOOGL -$315.72 + AVGO -$36.92) | -$315.72 (GOOGL gap-fill peak); -$917 from Wed UPL on AVGO give-back if anchored to last-day cushion | — | LM cum tracking deferred to 05-close-summary | 2026-06-04 01-pre-market |
+| core-buy-and-hold          | Core      | active | **3 closed KW 23 (GOOGL Tue 6/2 -$315.72 / -0.68R-trail; AVGO Thu 6/4 -$36.92 / -0.08R-trail; MSFT Fri 6/5 +$158.70 / +0.35R clean lock)** + 5 active + 4 stubs pending liquidate | 1/3 (MSFT win) | -0.14R avg | **-$193.94 realized + +$510.75 UPL on 5 active + ~-$1.04 stub UPL = +$315.77 net Core book Fri 6/5 EOD** | -$315.72 (GOOGL gap-fill peak); -$917 from Wed UPL on AVGO give-back if anchored to last-day cushion | -0.61 | LM Core cum: 5 closes (3 KW23 + GOOGL Tue + NVDA stub deferred); realized -$229.86 + open UPL +$510.75 = net +$280.89 vs cost basis | 2026-06-06 06-weekly-review |
 | swing-momentum-breakout    | Swing     | active | 0 (AMD trigger DROPPED-AS-MISSED Thu 6/4 after 4 consecutive cron-miss entry days Fri 5/29 + Mon 6/1 + Tue 6/2 + Wed 6/3; Thu trigger weakened with intraday breach $499.87 of $510 spec; ARM SKIP -5.96% Thu purge; AAPL no rejection WWDC ahead) | — | — | $0.00 (opportunity-cost ~$60 missed Wed open) | $0 | — | — | 2026-06-04 01-pre-market |
 | swing-mean-reversion       | Swing     | active | 0 (1 SKIP = INTU thesis-risk; no fresh triggers KW 22 — slow-grind-up tape disfavors mean-reversion) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
 | swing-quality-pullback     | Swing     | active | **1 CLOSED (NVDA stop-out Wed 5/27 @ $208.95; -$99.10 / -1.0R exactly) + stub 0.0925 sh pending Mon 6/1 liquidate** | 0 / 1 | -1.0R | -$99.10 realized + -$0.82 stub UPL = ~-$99.92 final | -$99.10 | -1.0 | — | 2026-05-30 06-weekly-review |
-| swing-earnings-drift       | Swing     | active | **1 open (RL); td10 TIME-STOP at Fri 6/5 close; cushion RECOVERED to 4.82% Fri intraday (HOLD into close per Option C)** | — | — | -$37.76 UPL (Fri 6/5 ~15:39Z intraday; UPL -2.52%); +$31.11 recovery from Thu on NFP-consumer-discretionary positive | $0 (no closes; close pending 04-pre-close 20:30Z) | — | — | 2026-06-05 01-pre-market |
+| swing-earnings-drift       | Swing     | active | **1 OPEN PAST TIME-STOP (RL); 04-pre-close + 05-close-summary MISSED Fri so time-stop didn't execute; queued for Mon 6/8 liquidate**; Fri 6/5 EOD UPL -$41.69 / -2.78% | — | — | -$41.69 UPL Sat 6/6 ~20:42Z; modal final exit Mon 6/8 ~$-30 to $-50 | $0 (close pending) | — | — | 2026-06-06 06-weekly-review |
 | swing-insider-buys         | Swing     | paused | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
 | swing-short-rejection      | Swing     | active | 0 (AAPL WATCH 5/26/27/28/29; no rejection candle in any session — closed >open each day) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
 | swing-short-fundamental    | Swing     | active | 0 | — | — | $0.00 | $0 | — | — | 2026-05-20 |
@@ -35,7 +35,7 @@ Window: 2026-05-21 → 2026-06-20.
 | daytrade-news-catalyst     | Daytrade  | active | 0 (PCE+GDP Thu 5/28 was the KW 22 candidate event but Thu 02-market-open / news-react window not utilized; PCE came in-line / SPY +0.55% to ATH so the catalyst pattern fired benignly) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
 | crypto-trend-follow        | Crypto    | active | 0 (BTC 50/200 gap converging -4.31% Mon → -3.26% Fri at +0.23 pp/day; ETA cross 6/15-6/17 at current pace; no entries triggered KW 22) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
 | crypto-weekend-momentum    | Crypto    | active | 0 (Fri 5/29 trigger NOT met: BTC 7d -2.88% << +2%; closed; re-arm next Fri 6/5 21:00Z) | — | — | $0.00 | $0 | — | — | 2026-05-30 06-weekly-review |
-| crypto-mean-reversion      | Crypto    | active | **0 fills; 2 TRIGGERS FIRED Fri 6/5 (ETH -10.87% AND AVAX -10.38% / 24h); queued for 03-midday 17:30Z execution at $1.5k each = $3k total / 60% of $5k sleeve** | — | — | $0.00 (pending fills) | $0 | — | — | 2026-06-05 01-pre-market |
+| crypto-mean-reversion      | Crypto    | active | **0 fills; 2 TRIGGERS FIRED Fri 6/5 (ETH + AVAX) but 03-midday MISSED → entries NEVER EXECUTED. 24h flush window has likely now expired by Sat snap. Re-evaluate Mon 6/8 01-pre-market.** | — | — | $0.00 (pending Mon eval; opp-cost est ~$50-150 if +5% bounce already played out) | $0 | — | — | 2026-06-06 06-weekly-review |
 | options-long-call-momentum | Options   | active | 0 (Polygon chain BLOCKED 11 consecutive routines incl Fri 6/5; NVDA conviction routed via Swing equity stopped Wed 5/27 -1R) | — | — | $0.00 | $0 | — | — | 2026-06-05 01-pre-market |
 | options-protective-put     | Options   | active | 0 (Polygon chain BLOCKED 11x; **Fri 6/5 NFP-hawk SPY -1.37% would have been textbook protective-put profit ~30-50 bp; chain inaccessibility = direct cost**) | — | — | $0.00 | $0 | — | — | 2026-06-05 01-pre-market |
 | options-vertical-bull-call-spread | Options | active | 0 (Polygon chain BLOCKED 11x) | — | — | $0.00 | $0 | — | — | 2026-06-05 01-pre-market |
@@ -46,14 +46,109 @@ Window: 2026-05-21 → 2026-06-20.
 
 | Sleeve | Cash Budget | Used | Open positions | Cumulative P&L | Cumulative Alpha vs SPY |
 |---|---:|---:|---:|---:|---:|
-| Core     | $62,000 | $64,331.93 (Fri 5/29 EOD; +$2,330.92 UPL) | 8 | +$2,330.92 / +3.76% (10-day Live-Phase + LM Day 1-9 Fri EOD; LLY +10.74% / MSFT +11.18% / AVGO +7.85% / META +5.29% / VOO +2.93% lead) | LM-window: Bull +1.41% vs SPY +1.85% → **-44.6 bp** |
-| Swing    | $15,000 | $1,500 (RL cost basis; NVDA closed Wed) | 2 (RL active + NVDA stub pending liquidate) | -$99.10 realized + -$0.82 stub + -$52.24 RL = **-$152.16 net** (UPL incl. realized) | — |
-| Daytrade | $10,000 | $0      | 0 | $0 | — (PDT 0/5d full budget; 0 entries across 9 LM days) |
-| Crypto   | $5,000  | $0      | 0 | $0 | — (BTC convergence -3.26% Fri; ~14 td to neutral at +0.23 pp/day pace) |
-| Options  | $5,000  | $0      | 0 | $0 | — (Polygon chain BLOCKED 6 consecutive routines; **ESCALATION needed**) |
-| Cash reserve | $3,000 | — (of $36,381 cash total, ≥$3k reserved per ALM-2) | — | — | — |
+| Core     | $62,000 (cost basis frozen) | $48,512.75 active (5 names) + $355.66 in 4 stubs | 5 + 4 stubs | **Realized LM cum -$229.86** (3 KW23 closes -$193.94 + GOOGL stub deferred + NVDA stub deferred); **Open UPL +$510.75 active + ~-$1.04 stubs**; net Core LM attribution **+$279.85**; KW 23 alone -$1,987.90 net | LM-window: Bull -0.658% vs SPY -0.696% → **+3.8 bp** (swing +48.4 bp from KW 22 EOW -44.6 bp) |
+| Swing    | $15,000 | $1,500 (RL cost basis; NVDA closed 5/27) | 1 (RL past time-stop) + NVDA stub | -$99.10 realized + ~-$1.37 stub + -$41.69 RL UPL = **-$142.16 net** (modal final at Mon liquidate ~-$140 to -$160) | — (RL 6/8 close pending) |
+| Daytrade | $10,000 | $0      | 0 | $0 | — (PDT 0/5d full budget; 0 entries across 12 LM days) |
+| Crypto   | $5,000  | $0      | 0 | $0 (2 triggers FIRED Fri 6/5 but cron miss prevented execution) | — (opp-cost ~$50-150 est on missed bounce; Mon re-eval) |
+| Options  | $5,000  | $0      | 0 | $0 | — (Polygon chain BLOCKED 11+ consecutive routines; **L4 ESCALATION 3rd weekly ping; default Mon 6/8 path b = reallocate $5k → Cash**) |
+| Cash reserve | $3,000 | — (of $49,846 cash total, ≥$3k reserved per ALM-2) | — | — | — |
 
 ## Weekly bandit log (06-weekly-review writes here)
+
+### 2026-06-06 (Sat-slot 06-weekly-review for KW 23) — **NO CULL** (Core has 3 trades but not bandit-eligible; rest below threshold)
+
+- **Window**: Mon 6/1 → Fri 6/5 (5 trading days; no holiday).
+- **Pre-condition check**: Routine spec requires ≥ 3 trades per strategy in trailing
+  7d AND strategy must be bandit-eligible. **PARTIALLY MET**:
+  - `core-buy-and-hold`: **3 closes** (GOOGL Tue + AVGO Thu + MSFT Fri) — meets
+    3-trade threshold BUT Core is the LM benchmark sleeve per strategy.md v3
+    ("Sleeve 1 — Core (frozen during Learning Month)"). **NOT bandit-eligible**
+    by design (Core is the comparator the other 4 sleeves are measured against;
+    you can't cull/scale the benchmark).
+  - `swing-quality-pullback`: 0 fresh closes (NVDA closed 5/27; only stub pending
+    liquidate). Below threshold.
+  - `swing-earnings-drift`: 0 closes (RL still open; time-stop missed firing
+    due to 04-pre-close + 05-close-summary missing Fri). Below threshold.
+  - All 19 other sub-strategies: 0 trades each. Below threshold.
+- **Decision**: Skip kill / scale / budget re-allocation. Sleeve budgets remain at
+  initialized values. Status of all 22 sub-strategies UNCHANGED.
+- **What we'd cull if pre-conditions were relaxed** (advisory, not actioned):
+  - `swing-quality-pullback`: 1-trade sample (NVDA -1.0R clean stop); insufficient
+    for cull. Stop fired as designed; thesis was intact at fill time.
+  - `swing-earnings-drift`: 1 open trade (RL); cushion compression 7.19% → 4.82%
+    Fri intraday → ~-2.5% UPL EOD. **Would refine spec per lesson 2026-06-04
+    (mid-hold cushion-compression rule), not cull strategy.** Defer playbook.md
+    edit to KW 24 EOW after RL realizes a final exit Mon 6/8.
+  - 4 Options sub-strategies (Polygon chain blocked 11+ routines): operational
+    debt, not strategy concept failure. Can't cull on attribution Bull can't measure.
+  - 6 Daytrade sub-strategies (0 fills across 12 LM days): triggers reachable
+    but tape rarely offering setups. Keep ACTIVE; the LM whole purpose is to
+    see what fires.
+- **What we'd scale if pre-conditions were relaxed**: nothing — `core-buy-and-hold`
+  is the only strategy that produced 3 closes, and those are mechanical broker
+  trail-stops not discretionary attribution; Core is sleeve-frozen so scaling has
+  no operational meaning.
+- **Next eligible bandit cull**: Sat 2026-06-13 (KW 24 EOW). LM Final Report due
+  Sat 2026-06-20 (which IS a cull-day at the end of the LM window — the final
+  bandit decision becomes the proposal for Live-Phase strategy.md v4).
+
+### Weekly KPI roll-up — KW 23 (week ending Fri 2026-06-05, broker-basis)
+
+- Bull week: $102,178.75 (Fri 5/29 EOD) → $100,099.09 (Fri 6/5 last_equity broker
+  close) = **-$2,079.66 / -2.0353%**
+- SPY week: $756.48 (5/29 EOD) → $737.55 (6/5 EOD) = **-2.5024%**
+- **Weekly alpha: +46.71 bp (POSITIVE — first since KW 20's +60 bp; +97 bp swing
+  from KW 22's -50 bp)**
+- LM cumulative (since 5/21 EOD baseline $100,761.72): **-$662.63 / -0.6577% equity**
+- LM cumulative SPY (since 5/21 EOD $742.72): **-0.696%**
+- **LM cumulative alpha: +3.8 bp** (swing +48.4 bp from KW 22 EOW -44.6 bp)
+- YTD: Bull +0.099% vs SPY +8.26% → **YTD alpha -816 bp** (improvement from -885;
+  +69 bp YTD-gap tightening)
+- Max equity intra-week: $102,177.45 (Mon 6/1 pre-open carryover; Tue pre-GOOGL-stop
+  marked $101,997.45 broker-snap shortly after)
+- Min equity intra-week: ~$100,099.09 (Fri 6/5 close on NFP-hawk Fri whoosh)
+- Peak-to-trough drawdown intra-week: ~-2.04% (Mon open → Fri close)
+- VIX range: 15.40 → **21.51 (+33.94%)** EOD Fri (NFP-hawk shock); week-low 15.40 Thu
+- Total trades book-wide: **3 closes** (all Core mechanical trail-stops, all 11-12 sh)
+- PDT day-trade count Fri EOD: **0/5** (full budget; no same-day round-trips)
+
+### Per-sleeve P&L attribution (KW 23)
+
+| Sleeve | Days active | Trades | Realized $ | Open UPL Δ (Fri 5/29 → Fri 6/5) | Net P&L attribution |
+|---|---:|---:|---:|---:|---:|
+| Core | 5 | 3 (GOOGL Tue + AVGO Thu + MSFT Fri) | **-$193.94** | -$1,793.96 (UPL $2,330.92 → ~$536.96 incl. MSFT stub) | **-$1,987.90** (-1.943%) |
+| Swing | 5 | 0 | $0 | -$11.20 (RL -$52.24 → -$41.69 +$10.55; minor stub Δ) | **-$11.20** |
+| Daytrade | 5 | 0 | $0 | $0 | $0 |
+| Crypto | 5 | 0 (2 triggers FIRED Fri 6/5 03-midday but route MISSED) | $0 | $0 | $0 (opp-cost ~$50-150 estimated) |
+| Options | 5 | 0 | $0 | $0 | $0 (Polygon chain 11+ blocks; NFP-hawk Fri = textbook protective-put missed; opp-cost ~$30-50) |
+| **Total** | — | **3** | **-$193.94** | **-$1,885.16** | **-$2,079.10** (matches broker Δ -$2,079.66 within $0.56 reconcile noise) |
+
+**Best sub-strategy KW 23**: `core-buy-and-hold` MSFT leg only (+$158.70 realized
+clean trail-lock at $419.40, 0.07% slip vs $419.688 trigger = **cleanest trail-stop
+fill in book history**; mid-session NFP-hawk systemic-pressure trigger, NOT a
+gap-fill below trigger). All other Core-leg attributions were negative.
+
+**Worst sub-strategy KW 23**: `core-buy-and-hold` aggregate net **-$1,987.90**
+(via GOOGL Tue -$315.72 gap-fill + AVGO Thu -$36.92 gap-fill + META/V/RL Fri
+NFP-hawk UPL erosion; partial offsets from LLY +$88.28 UPL Δ, BRK.B +$93.96 UPL Δ,
+MSFT +$158.70 realized). Single largest single-strategy weekly loss in book history.
+
+**Strategies with 0 trades in 7d**: 21 of 22 sub-strategies (only `core-buy-and-hold`
+fired with 3 mechanical closes). Trigger reachability review:
+- POLYGON-dependent Swing/Daytrade (10 strategies, set since 5/22 AM): triggers
+  reachable. Cron-miss prevented all execution this week. Keep ACTIVE.
+- `swing-earnings-drift` (RL open; td10 missed time-stop firing due to 04-pre-close
+  + 05-close-summary miss): trigger system fired conceptually; execution missed.
+  Mon 6/8 liquidate.
+- `crypto-mean-reversion` (ETH + AVAX TRIGGERS FIRED Fri 6/5): trigger reachable;
+  03-midday MISSED. Re-evaluate Mon 6/8 — 24h flush window has likely expired.
+- POLYGON-options 4 strategies: triggers STILL not reachable — 11+ consecutive
+  403. **L4 ESCALATION re-fires Sat 6/6 WhatsApp; default = Mon 6/8 reallocate.**
+- `swing-mean-reversion`, `swing-short-rejection`, `swing-short-fundamental`,
+  `crypto-trend-follow`, `crypto-weekend-momentum`: triggers reachable; tape
+  did not offer signals. NFP-hawk Fri spike COULD trigger crypto-trend-follow
+  short / `swing-short-rejection` in KW 24 if tech selloff extends.
+- `swing-insider-buys`, `options-cash-secured-put`: still PAUSED.
 
 ### 2026-05-30 (Sat-slot 06-weekly-review for KW 22) — **NO CULL** (pre-condition not met)
 
@@ -204,6 +299,35 @@ whether trigger is reachable":
 - `options-cash-secured-put`: still paused.
 
 ## Daily refresh log
+
+- **2026-06-06 20:42Z (06-weekly-review, KW 23 Sat-slot)** — **NO BANDIT CULL**
+  (pre-condition partial: `core-buy-and-hold` had 3 closes but Core is the LM
+  benchmark sleeve, not bandit-eligible; all 21 other sub-strategies below
+  3-trade threshold). Weekly KPI roll-up appended above. **Weekly alpha +46.71
+  bp POSITIVE (first since KW 20's +60 bp); +97 bp swing from KW 22's -50 bp.**
+  Bull -2.0353% vs SPY -2.5024% on NFP-hawk Fri whoosh -2.58%; defensive
+  ballast (LLY +16.40% UPL / BRK.B +0.79% / V flat) absorbed NQ-tech beating.
+  3 Core mechanical trail-stops fired KW 23 (GOOGL Tue $361.01 gap-fill -$315.72
+  / -0.68R; AVGO Thu $410.88 gap-fill -$36.92 / -0.08R; **MSFT Fri $419.40
+  CLEAN 0.07% slip +$158.70 / +0.35R — cleanest trail-stop in book history**).
+  Net Core realized KW 23 -$193.94; Core UPL Δ -$1,793.96; total Core attribution
+  -$1,987.90. **LM cum alpha now +3.8 bp (swing +48.4 bp from KW 22 -44.6 bp).**
+  YTD alpha gap -816 bp (improvement from -885 bp; +69 bp tightening). 4 lessons
+  appended to `memory/lessons.md` as KW 23 entry (L1 cron-miss sustained 2 weeks
+  20 missed routines; L2 defensive ballast carried the week — strategy validation;
+  L3 CallMeBot 503 cluster Thu+Fri; L4 Polygon options-chain 11+ blocks 3rd
+  weekly ping). No strategy.md / playbook.md edits this routine (defer to LM
+  Final Report 6/20). Next eligible bandit cull = Sat 6/13 (KW 24 EOW). WhatsApp
+  German weekly brief attempted at end of routine; if 503 again, surface to
+  inbox.md. Inbox.md Pending: empty.
+
+  Operational items re-broadcast in WhatsApp:
+  - L1 (cron-miss reliability): 20 missed routines KW 23; mechanical trail-stops
+    carried the book.
+  - L3 (CallMeBot 503 cluster): need alternate notify channel; Telegram bot
+    recommended.
+  - L4 (Polygon options-chain): default Mon 6/8 = reallocate $5k → Cash.
+  - L2 (positive alpha despite -$2k week): strategy spec working as designed.
 
 - **2026-05-30 20:38Z (06-weekly-review, KW 22 Sat-slot)** — **NO BANDIT CULL**
   (pre-condition: ≥3 trades per strategy not met for any strategy in trailing 7d).

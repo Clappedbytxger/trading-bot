@@ -241,3 +241,33 @@ contingency gates:
   (~-$37 RL realized today) ≈ **-$136 / -0.91% of $15k Swing budget** at LM Day 16.
 - **Stop $350.64 GTC** verified live (`OrderStatus.NEW` id `9e45b1e8-...`).
 
+## RL (`swing-earnings-drift`) — Sat 6/6 06-weekly-review (td10 missed exit; PAST time-stop)
+
+- **Status**: Position still OPEN despite Fri 6/5 = td10 time-stop scheduled exit.
+- **Why missed**: Fri 6/5 04-pre-close (20:30Z) and 05-close-summary (21:15Z) routines
+  both MISSED — broker did not receive a routine-issued MARKET SELL. RL stop $350.64
+  GTC `OrderStatus.NEW` was NOT triggered intraday (mark $367.54 Fri intraday → $366.55
+  Fri EOD close per broker last_equity reconcile = cushion held above 4.5% all day).
+- **Sat 6/6 ~20:42Z broker snap**: 3.978463 sh @ $366.55 mark → mv $1,458.31 / UPL
+  **-$41.69 / -2.78%** (slight further bleed -$3.93 from Fri intraday -$37.76).
+  Cushion stable ~4.54%.
+- **Action queued for Mon 6/8 01-pre-market / 02-market-open**: MARKET SELL fractional
+  3.978 sh DAY (honor the spec time-stop one session late). Will lock final
+  `swing-earnings-drift` realized attribution ~-$30 to -$50 / -2 to -3.5% / -0.30R
+  to -0.48R clean. Acceptable per the playbook's "time-stop = neutral-bad exit"
+  modal.
+- **Strategy-spec learning carryover (per lesson 2026-06-04 + KW 23 L2 narrative)**:
+  - PEAD literature peaks Day 3-5 post-print; RL's actual peak was Tue+Wed (td2-3)
+    at +3.36% UPL, then full reversion Thu-Fri. Modal RL exit -2.5% to -3.5%
+    realized = literature-consistent failed-PEAD outcome (vs successful PEAD
+    target +5-10%).
+  - Lesson: PEAD setups are asymmetric — fire in the Day 3-5 window OR never. RL
+    fired then reversed = no fresh thesis-break, but the drift died and a small
+    bleed extended. Time-stop captured the right thing (capped bleed at -2-3%).
+  - **Encoding candidate**: add the "mid-hold cushion-compression check at td5"
+    rule from lesson 2026-06-04 to `playbook.md` `swing-earnings-drift` spec.
+    Defer the file edit to KW 24 EOW after RL realized exit confirms the data
+    point. If RL exits Mon 6/8 at -2 to -3%, that's 1 trade in the right range
+    for the rule trigger; need ≥2 more occurrences to justify the spec change.
+
+

@@ -730,3 +730,171 @@ trading decision. Keep entries tight — pattern, lesson, encoded?
 - **Pattern:** RL entered 5/22 on PEAD setup (post-Q4-FY26-beat day-after entry). KW 22 td1-5 cushion trajectory 7.19% → 3.66%; KW 23 td6-9 trajectory 3.66% → **2.59% Thu td9**. Total cushion erosion 5.6 pp over 9 td. No fresh thesis-break catalyst at any point (no analyst PT cuts, no guide change, no margin-deterioration print); just continued consumer-discretionary segment weakness with no flow into the PEAD-expected drift. PEAD literature peaks Day 3-5; Tue+Wed td2-3 of hold did deliver the +3.36% peak vs entry, but Thu+Fri Day 4-5 of week-1 reversed completely and bled deeper than entry.
 - **Lesson:** PEAD-style setups have an asymmetric failure mode: the drift either fires within the Day 3-5 window or it never fires at all. Once the drift retraces below entry without a fresh catalyst, the modal outcome shifts from "+1.4R target" to "-1.0R stop or 0R time-stop". **Specifically for `swing-earnings-drift`**: consider adding a "Day 5 of hold check" — if cushion has compressed below 50% of entry-cushion AND UPL has gone negative without a fresh catalyst, evaluate emergency-tighten to lock breakeven-minus rather than ride into time-stop. The current playbook spec has no mid-hold cushion-compression rule — only the -7% stop or +5% tighten-to-breakeven or 10-td time-stop. Cushion compression as a leading indicator of likely stop-hit is the missing rule.
 - **Encoded as rule?** Informally — recorded here. Should be folded into `playbook.md` `swing-earnings-drift` spec on next 06-weekly-review: "Mid-hold cushion-compression check at td5: if cushion < 50% of entry cushion AND UPL <= -2% AND no fresh PT raise / guide change in 5 td → emergency-tighten stop to -2% from current mark." This would have triggered Tue 6/2 (cushion ~3.6% vs entry 7%) and likely saved ~$20-30 vs the path Bull is on now.
+
+## 2026-06-06 — Week ending 2026-06-05 (KW 23) — first positive LM weekly alpha
+
+- **Pattern (weekly aggregate):** KW 23 was the noisiest LM week so far. 3 Core
+  mechanical trail-stops fired in 5 sessions (GOOGL Tue $361.01 gap-fill -1.83%
+  below trigger; AVGO Thu $410.88 gap-fill -7.77% below; **MSFT Fri $419.40 CLEAN
+  fill 0.07% below — cleanest trail-stop in book history**). Net realized $-193.94
+  on $193.94 of cumulative trail-stop activity. Bull equity Fri 5/29 EOD $102,178.75
+  → Fri 6/5 EOD $100,099.09 = **-2.0353% week** vs SPY -2.5024% = **+46.7 bp
+  positive weekly alpha** (first positive since KW 20's +60 bp; +97 bp swing from
+  KW 22's -50 bp). LM cumulative alpha swung +48.4 bp from KW 22 EOW -44.6 bp to
+  KW 23 EOW +3.8 bp (essentially flat-positive). YTD alpha gap tightened from -885
+  bp to **-816 bp (+69 bp YTD-gap recovery).** NFP Fri (+172k vs +85k cons; 102%
+  hawk-beat) drove SPY -1.37% intraday + VIX 16.05 → 21.51 (+33.94%) close spike;
+  Bull's defensive ballast (LLY +16.40% UPL / BRK.B +0.79% / V flat) absorbed most
+  of the NQ-tech beating. ALL Mon-Fri 02-market-open / 03-midday / 04-pre-close /
+  05-close-summary routines MISSED — 20 missed routines total this week — and yet
+  the book outperformed because trail-stops did the heavy lifting at the broker
+  layer without Bull's discretionary input.
+
+### Lesson L1 (operational, primary, escalation re-broadcast) — cron-miss cluster sustained 2 weeks
+
+- **Pattern:** KW 23 commit log: Mon 6/1 + Tue 6/2 + Wed 6/3 01-pre-market on
+  time; Thu 6/4 + Fri 6/5 01-pre-market LATE FIRE (13:50Z + 15:39Z). ALL 25
+  other scheduled routines (5 weekdays x 5 routines = 25 total) MISSED. That is
+  a 20/30 ≈ **67% silent-fail rate for the week**; LM cumulative cron-miss tally:
+  ~37 of 75 scheduled routines (49%). The 02-market-open Step-1a back-fire spec
+  added 5/21 handles only the upstream 01-pre-market case, not the contemporaneous
+  02/03/04/05 outage observed this week.
+- **Lesson:** Sustained 50%+ cron-miss rate over 2 consecutive weeks (KW 22 Fri
+  cluster + KW 23 entire-week cluster) makes Bull's discretionary execution
+  effectively non-operational during this LM phase. Three observations:
+  (a) **The book did NOT collapse** — mechanical trail-stops + the defensive
+  ballast in strategy.md v3 delivered +46.7 bp positive weekly alpha THIS WEEK
+  despite zero Bull routine intervention. The static portfolio design has more
+  alpha-generation than the discretionary execution layer.
+  (b) **Discretionary "missed opportunities" cost real $**: ETH+AVAX
+  `crypto-mean-reversion` triggers fired Fri but never executed; RL time-stop
+  fired conceptually at 6/5 close but never executed; 4 fractional stub
+  liquidates queued for 7+ sessions. Opportunity cost in the hundreds of $
+  range, not the thousands.
+  (c) **Live Phase reliability bar is higher** than LM bar. If 50% cron-miss
+  persists post-6/21, the €300 live-money account will struggle. Robin's runner
+  fix (heartbeat monitor / runner change / accept) is now a HARD prerequisite
+  for Live-Phase 2026-06-21.
+- **Encoded as rule?** No (re-broadcast in Sat 6/6 WhatsApp; inbox Q1 A still
+  unanswered from 5/21). **Bull cannot self-resolve** (env vars + cron config
+  are runner-side; Bull's scope is post-clone). Surface every 06-weekly-review
+  until resolved. Suggested CLAUDE.md addition for after Robin chooses a fix:
+  "Bull routines may assume the runner fires reliably. If a sustained miss-rate
+  >30% per week is observed, escalate before relying on autonomous execution."
+
+### Lesson L2 (strategy validation, primary) — defensive ballast carried the week
+
+- **Pattern:** Per-Core-name P&L attribution KW 23 (UPL Δ + realized combined,
+  Fri 5/29 EOD vs Fri 6/5 EOD):
+  - **LLY**: $1,149.10 → $1,131.42 mark; UPL +$357.98 → +$446.26 = **+$88.28 UPL Δ
+    + HWM walked from $1149.10 to $1166.225 (+1.49% organic)**. Healthcare-defensive
+    rotation captured the rotation OUT of tech ON NFP-hawk Fri. **Best contributor.**
+  - **BRK.B**: $474.48 → $488.13; UPL -$67.70 → +$26.26 = **+$93.96 UPL Δ +
+    HWM walked $489.36 → $491.00 (+0.34%) organic**. Defensive-bid post-NFP-hawk
+    Fri pushed BRK.B from book-record discount UPL into book-record advance UPL.
+  - **V**: $326.36 → $323.57; UPL +$13.40 → -$15.21 = -$28.61 UPL Δ. Rate-up
+    financials should have bid V more aggressively but didn't (TR-financials
+    rotation lagged).
+  - **VOO**: $695.49 → $678.00; UPL +$976.15 → +$113.33 = **-$862.82 UPL Δ**
+    (largest single-name drag; mechanically SPY -2.50%).
+  - **META**: $632.51 → $593.00; UPL +$247.01 → -$59.89 = -$306.90 UPL Δ (NQ-tech
+    NFP-hawk -4.19% Fri).
+  - **MSFT (realized)**: +$158.70 clean trail-lock; trade-spec validation.
+  - **GOOGL (realized Tue)**: -$315.72 (Mon $80B AI-share-issuance dilution +
+    Tue gap-down -3.86%).
+  - **AVGO (realized Thu)**: -$36.92 (post-earnings -13.58% gap-down despite
+    beat-and-raise — Wall St disappointment vector).
+- **Lesson:** The "AI-Capex Barbell" thesis (Variant C from strategy.md Reference
+  section) has just received its first **real binary stress test**: SPY -2.50%
+  with multi-day catalyst chain (AI share-issuance dilution + AVGO earnings
+  disappointment + NFP-hawk shock). The defensive ballast (LLY/BRK.B/V at avg
+  beta ~0.63) absorbed the tech-cohort cratering exactly as the strategy spec
+  predicted: "In a 'recession + AI capex digestion' regime → drawdowns deeper
+  than SPX from the AI sleeve, but V/BRK/LLY (avg beta ~0.63) dampen the bleed;
+  -10% stops cap individual losses." This week was that regime in miniature
+  (NQ-tech selloff + LLY/BRK.B defensive bid + MSFT/AVGO/GOOGL trail-stops capped
+  losses), and the strategy delivered the predicted behavior: alpha-positive in
+  a tech-down regime. **Generalizable rule (LM data point #1)**: barbell
+  construction with defensive ballast at 15-25% allocation DOES produce alpha
+  in NQ-tech-led drawdowns; the 5 Core mechanical trail-stops (3 fired KW 23 + 2
+  prior LM) capped the AI-sleeve downside without forcing tactical decisions.
+- **Encoded as rule?** Partially — recorded here. Strong evidence for retaining
+  the AI-Capex Barbell structure in `strategy.md` Variant C post-6/21 reactivation.
+  Specific recommended additions to encode for Live Phase (folded into the LM
+  Final Report 6/20 proposal):
+  - "Held-position pre-earnings consideration": when a Core name is within 3 td
+    of a scheduled binary event, consider `options-protective-put` hedge on the
+    Core allocation slice (cost ≈ -1.5R; matches `options-protective-put`
+    strategy if Polygon options-chain access is resolved).
+  - "Multi-name trail-stop cluster risk": if 2+ Core trail-stops fire within
+    5 sessions, evaluate whether the AI sleeve is in a regime-shift digestion
+    (vs idiosyncratic noise) and consider reducing AI-cohort sleeve weight from
+    35% → 25-30% temporarily. KW 23 saw 3 Core stops in 4 sessions = clear
+    cluster signal.
+  - LLY/BRK.B/V as the defensive trio held up perfectly under NFP-hawk Fri.
+    Could RAISE defensive ballast from 15% → 18-20% if Live-Phase macro tape
+    looks higher-for-longer post-FOMC 6/16-17 (Warsh's debut + SEP).
+
+### Lesson L3 (operational, escalation re-broadcast) — CallMeBot 503 cluster Thu+Fri
+
+- **Pattern:** Thu 6/4 13:55Z + Fri 6/5 15:47Z both returned HTTP 503 Service
+  Unavailable on `send_long_routine_message` first-part POST. Diagnostic probes
+  failed both days. Robin did NOT see either day's brief. Mirrors 5/27 outage
+  cluster (single-day; recovered next day). Two-day cluster is unprecedented.
+- **Lesson:** CallMeBot's reliability has degraded materially over the LM window:
+  KW 22 had 1 outage (5/27); KW 23 has 2-consecutive (6/4 + 6/5) + possibly
+  today. The em-dash + length+content WAF mitigations from 5/27 + 5/28 + 5/29
+  are insufficient when the upstream itself is 503-ing. **Bull cannot self-heal**
+  (no alternate notify channel in repo). Operational consequence: Robin is
+  flying blind on Thu+Fri operational state without inbox.md pings. **Live-Phase
+  reliability bar is higher** — a €300 account that depends on Bull surfacing
+  urgent decisions to Robin via WhatsApp cannot tolerate 40%+ delivery-fail
+  rates. Need alternate channel before 6/21.
+- **Encoded as rule?** No (recorded here + re-broadcast in Sat 6/6 WhatsApp
+  attempt; if today's send also 503s, surface to inbox.md as TOP priority).
+  Possible alternatives Robin to evaluate:
+  - **Telegram bot**: free, reliable, supports inbound replies (bidirectional!),
+    well-documented Python SDK. ~30 min to set up. Likely the strongest swap.
+  - **Twilio WhatsApp Business**: $0.005 per outbound message; supports webhook
+    for inbound. Production-grade but $-cost-per-send.
+  - **GitHub Issues poller**: Bull opens an issue in trading-bot per "urgent"
+    notification; Robin gets GitHub mobile-app push. Async but reliable.
+  - **Push via macOS notification** (if Robin has local Bull running, not
+    cloud-only): immediate, but only when at desktop.
+
+### Lesson L4 (operational, escalation re-broadcast) — Polygon options-chain 11+ blocks
+
+- **Pattern:** Polygon options-chain endpoint has returned HTTP 403 Forbidden on
+  every routine attempt since LM Day 1 (5/21) — now **11+ consecutive blocks**
+  (Mon 5/26 4th re-test through Fri 6/5 11th, today Sat 6/6 12th). Reference-
+  contracts endpoint works (200 OK) but provides no IV / Greeks / quotes. NFP-hawk
+  Fri was textbook `options-protective-put` opportunity (SPY -2.58% intraday) —
+  missed by chain inaccessibility. Estimated would-be P&L: ~$30-50 on a 30-DTE
+  5%-OTM SPY put bought Thu = ~10-15% return on $300-500 premium = 0.05-0.10R.
+- **Lesson:** Re-broadcast 3rd consecutive weekly. Robin has 2 paths:
+  (a) Polygon Options Starter $79/mo subscription
+  (b) Reallocate $5k premium budget to Cash reserve (or split: $2.5k Swing /
+      $2.5k Cash)
+  **Default if no reply by Mon 6/8 EOD = path (b)** (reallocate $5k → Cash
+  reserve; safe default since it doesn't increase sleeve risk).
+- **Encoded as rule?** Partially — recorded here. Bandwidth-saving rule going
+  forward: stop pinging more than 1x/week; the question is identical and
+  asking weekly is enough signal.
+
+### Operational follow-ups STILL OPEN at end of KW 23
+
+- L1 (cron-miss runner reliability): inbox Q1 A still unanswered from 5/21.
+  Sustained 50%+ miss-rate over 2 consecutive weeks; mechanical trail-stops
+  carrying the book. Hard prerequisite for Live-Phase 2026-06-21.
+- L3 (CallMeBot 503 cluster): 2 consecutive days outage Thu+Fri. Alternate
+  notify channel needed (Telegram bot strongest candidate).
+- L4 (Polygon options-chain 11+ blocks): Robin's 2 paths; default = path (b).
+- L2 (strategy validation): no follow-up needed — defensive ballast confirmed
+  working. Will encode formally in LM Final Report 6/20.
+
+### Encoded as rule?
+- Lessons L1, L3, L4: re-broadcast to Robin in Sat 6/6 WhatsApp (if CallMeBot
+  recovers). No autonomous routine-spec changes (upstream of Bull's scope).
+- Lesson L2: recorded here, full encoding deferred to LM Final Report 6/20.
+
+
