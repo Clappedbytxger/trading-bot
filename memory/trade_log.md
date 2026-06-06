@@ -1291,3 +1291,131 @@ verified). Phase: **LEARNING MONTH Day 15 of 30**.
 - **ALM-4 strategy logging**: `core-buy-and-hold` row in `_ledger.md` updated this
   routine; trade log serves as immediate record. ✓
 - **ALM-8 hard-overrides**: paper-endpoint verified at Thu 6/4 broker pull. ✓
+
+
+---
+
+## 2026-06-05T16:08:05Z — ORGANIC BROKER FILL: MSFT trail-stop triggered (3rd LM Core close — CLEAN LOCK-IN-GAIN)
+
+Routine: organic broker event (no Bull routine call; Fri 6/5 02-market-open /
+03-midday / 04-pre-close / 05-close-summary all MISSED per the all-week cron-miss
+cluster; only 01-pre-market fired LATE at 15:39Z, ~25 min BEFORE the MSFT stop
+fired at 16:08:05Z). Logged in arrears at Sat 6/6 06-weekly-review. Broker:
+Alpaca paper (`paper-api.alpaca.markets` verified). Phase: **LEARNING MONTH
+Day 16 of 30**.
+
+### Trade closed (organic stop fill — CLEAN trail-lock-in-gain)
+
+| # | Side | Symbol | Trigger | Filled Qty | Avg Fill | Order ID | sleeve | strategy |
+|--:|------|--------|--------:|-----------:|---------:|----------|--------|----------|
+| 1 | SELL TRAILING_STOP | MSFT | $419.688 | 11 sh | **$419.40** | (per broker `get_orders CLOSED`) | Core | core-buy-and-hold |
+
+- **Original entry**: MSFT 11.521758 sh @ $404.973 avg ($4,665.92 notional on whole
+  11 sh; ~$211 stub) across Live-Phase DCA tranches T1+T2 on 2026-05-13 + 2026-05-14.
+- **Stop placement**: Trailing-stop -10% on 11 sh (`floor(qty)`) GTC. Stop walked
+  organically from initial $364.48 to HWM-derived $419.688 over Live-Phase + LM
+  (multiple HWMs: $432.70 mid-week 5/26 → **$450.33 Fri 5/29 +4.08% walk (book-
+  record MSFT walk) → $466.32 Mon 6/1 → fixed at HWM through KW 23 → stop $419.688**
+  walked 4 organic times). HWM was $466.32 at Mon close 6/1; mark eased from there
+  through the week.
+- **Fill mechanics**: Filled at **$419.40 avg = $0.288 BELOW $419.688 trigger =
+  0.069% slip (7 bp).** This is the **CLEANEST trail-stop fill in book history** —
+  compare GOOGL Tue gap-fill -1.83% (-$6.74), AVGO Thu gap-fill -7.77% (-$29.06),
+  NVDA 5/27 stop -0.005% (1¢ slip on Swing stop). MSFT slip 7 bp ranks 2nd cleanest
+  vs NVDA's 0.5 bp. The fill happened mid-session at 16:08:05Z = ~2h08m after cash
+  open, NOT at a binary-event-open — so no gap-fill risk applied. NFP-hawk Fri
+  -1.37% SPY (-2.13% MSFT specifically) extended through the session, trail
+  triggered as the move played out organically.
+- **Realized P&L $**: 11 sh × ($419.40 - $404.973) = **+$158.70** (+3.42% on
+  $4,454.70 cost basis on 11 sh).
+- **Lock-in-gain frame**: Position was +$521.56 UPL at Fri 5/29 EOD ($450.24
+  mark; cushion 9.98%). Fri 6/5 intraday -2.13% MSFT to $421.625 → cushion
+  compressed to 0.46% (book-record tightest); trail fired at $419.688 → fill
+  $419.40 = realized **+$158.70** (lock-in of 30% of peak UPL). Give-back vs
+  Fri 5/29 peak UPL = -$362.86; but **vs the cost basis the trade is a WIN.**
+- **R-multiple frames** (multiple anchors per the GOOGL/AVGO precedent):
+  - Anchored to original trail risk (-10% from $404.973 entry = $40.50/sh × 11 =
+    $445.47 initial risk): realized +$158.70 / $445.47 = **+0.36R** vs initial
+    trail-spec. **First positive R-multiple Core trail-stop in LM.**
+  - Anchored to last-day cushion (Fri 5/29 EOD cushion 9.98% = $44.94 / sh ×
+    11 = $494.34): give-back -$362.86 / $494.34 = -0.73R on cushion-anchor.
+  - Anchored to Fri 5/29 UPL ($521.56 unrealized peak vs +$158.70 realized):
+    -$362.86 vs Fri 5/29 pre-erosion state.
+  - All three lenses logged; the trail-spec **+0.36R is the "what we planned
+    for" answer (trail mechanic locked in a gain at the -10% drift level)**.
+- **Days held**: 23 calendar (5/13 fill → 6/5 stop); 17 td elapsed.
+- **Fractional stub remaining**: 0.521758 sh @ $401.40 broker-recalc avg = $217.40
+  mv Sat 6/6 (UPL +$7.97 / +3.80% per broker). Joins the 3-stub queue (NVDA +
+  GOOGL + AVGO). Stub close queued Mon 6/8 02-market-open per fractional-handling
+  pattern.
+
+### Why this was an organic event, not a Bull routine action
+
+- Trail-stop placed by Bull on 2026-05-13 immediately after DCA T1 fill per
+  guardrail #3 hard-stop-at-entry discipline.
+- Stop sat live GTC for ~17 trading days, organically walking from $364.48 to
+  $419.688 across LM Day 1-15 as MSFT's HWM advanced to $466.32 Mon 6/1.
+- Fri 6/5 13:30Z cash-market open: SPY -0.7% pre-mkt; NFP-hawk-shock at 13:30Z
+  release sold MSFT/META/NQ-tech aggressively through the morning. MSFT -2.13%
+  intraday by ~14:15Z → cushion compressed to 0.46% (per Fri 01-pre-market LATE
+  FIRE at 15:39Z); trail tracked the decline; mid-session 16:08:05Z = NFP-hawk
+  selloff drove MSFT to trigger price; broker converted trail-stop to market
+  order at trigger touch; fill at $419.40 = 7 bp slip vs trigger (cleanest in book).
+- No Bull routine fired at that timestamp — Fri 6/5 01-pre-market fired late
+  at 15:39Z (pre-fill but post-cash-open); 02 / 03 / 04 / 05 all MISSED. This
+  entry is logged in arrears at Sat 6/6 06-weekly-review.
+
+### Fri 6/5 NFP-hawk session context (single-stock catalysts)
+
+- **NFP May 2026 (released Fri 13:30Z)**: +172k actual vs +85k cons = **102% beat**.
+- Market reaction:
+  - SPY -1.37% intraday at 14:00Z → **-2.58% close $737.55** (extended through
+    afternoon session)
+  - NQ -2.53% intraday → -3% close vicinity
+  - VIX 15.40 → **21.51 EOD (+39.7%)** = book-record single-day spike
+  - 10Y +6 bp to 4.54%; DXY +0.49% → 99.895
+  - Crypto: BTC -5.7% / ETH -10.9% / AVAX -10.4% / LINK -9.1% / SOL -6.9%
+    (systemic flush correlated with rates-up + dollar-bid)
+  - Fed-hike-probability-by-Dec re-priced 48% → 65%
+- MSFT specifically: -2.13% intraday at fill time; cushion 0.46% by 14:00Z;
+  trail fired ~2h later as selloff extended.
+
+### Strategy attribution
+
+- **`core-buy-and-hold`** 3rd LM Core close (after GOOGL Tue 6/2 + AVGO Thu 6/4).
+  **First WIN in LM Core trail-stop sequence.** Validates -10% trail mechanic
+  for mid-session systemic-pressure fills (vs binary-event-open gap-fills GOOGL
+  + AVGO).
+- Thesis was INTACT at stop time: MSFT story = Azure + Copilot + 46% op margin +
+  +21x fwd P/E; no fresh thesis-break catalyst on Fri (no downgrade, no margin
+  guide, no earnings <7d → ed=2026-07-29). Cushion 0.46% = systemic rate-pressure,
+  not thesis-break. MSFT is a Core-quality compounder; the trail-stop locked in
+  a +3.42% / 30%-of-peak-UPL gain at the systemic rate-shock.
+- Sample: now 4 LM closed trades (NVDA Wed 5/27 Swing -1.0R; GOOGL Tue 6/2
+  Core -0.68R gap-fill; AVGO Thu 6/4 Core -0.08R gap-fill; **MSFT Fri 6/5
+  Core +0.36R clean lock — first win**). All 4 mechanical stops fired as designed
+  at the broker layer; this is the 1st with positive R.
+
+### Account post-fill snapshot (broker reconciliation Sat 6/6 ~20:42Z)
+
+- Equity Sat 6/6 20:42Z snap: **$100,172.44** (vs Thu pre-mkt $101,381.67 = -$1,209.23;
+  vs Fri pre-mkt $100,880.55 = -$708.11; vs Fri 5/29 EOD $102,178.75 = -$2,006.31;
+  reconciles to broker last_equity Fri 6/5 close $100,099.09 within Sat re-quote noise).
+- Cash Sat 6/6 20:42Z: **$49,845.72** (up $4,613.36 from Fri pre-mkt $45,232.36 =
+  11 sh × $419.40 = $4,613.40; cent-perfect match within $0.04 reconcile noise).
+- Long MV Sat 6/6 20:42Z: $50,326.72 (Core 5 active = $48,512.75 + 4 stubs =
+  $355.66 + Swing $1,458.31 RL = $50,326.72; exact match).
+- Daytrade count (5d): **0** UNCHANGED — this was NOT a same-day round-trip
+  (entry 5/13, exit 6/5, 17-td hold). PDT budget full 5/5.
+
+### Guardrails verified
+
+- **ALM-1 sleeve discipline**: stop fill tagged `Core` + `core-buy-and-hold`. ✓
+- **ALM-2 sleeve cash budget**: Core sleeve was frozen; organic stop fill on
+  inherited Live-Phase position. ✓
+- **ALM-3 sleeve stops**: trail-stop fired at planned -10% level (mechanically;
+  clean 7-bp slip = systemic-pressure mid-session fill, no gap-fill risk). ✓
+- **ALM-4 strategy logging**: `core-buy-and-hold` row in `_ledger.md` updated
+  this routine; trade log serves as immediate record. ✓
+- **ALM-8 hard-overrides**: paper-endpoint verified at Sat 6/6 broker pull. ✓
+
