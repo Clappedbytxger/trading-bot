@@ -1033,3 +1033,53 @@ broker pull (positions/stops/account).
 
 - Gemini grounding redirect URLs (vertexaisearch.cloud.google.com) — 4 sources cited
   in the macro-NFP response chunk.
+
+---
+
+## 2026-06-08 (Mon, 12:18Z, 01-pre-market)
+
+### Macro snapshot (pre-market)
+- **10Y yield**: 4.56% (+4 bp vs Fri 4.54%); pre-mkt 4.544%.
+- **DXY**: 99.93 / 100.15 (mixed reports; flat).
+- **Brent crude**: **+3.55% to $96.39/bbl** (WTI past $93). Catalyst: **Israel-Iran
+  military escalation overnight** — Israeli strikes on Lebanon, Iranian retaliatory
+  missiles. Strait of Hormuz risk highlighted. OPEC+ 4th consecutive monthly supply
+  hike insufficient offset.
+- **S&P futures**: **+0.65% pre-mkt** (SPY ~$739.29 implied). Bounce attempt after
+  Fri NFP-hawk -2.58% whoosh.
+- **VIX futures**: +14.85% (cash VIX 21.51 Fri close).
+
+### This week catalyst calendar
+- **Mon 6/8 17:00Z**: AAPL WWDC 2026 keynote opens. Consensus: major Siri overhaul
+  (agentic + on-device Apple Intelligence) powered by the Apple-Google Gemini
+  partnership announced Jan 2026. AI-generated wallpapers, Image Playground updates,
+  new writing tools; many features gated to newer iPhones.
+- **Wed 6/10 8:30 ET**: May 2026 CPI release. Single biggest macro data point post
+  NFP-hawk shock.
+- **Wed 6/10 post-close**: ORCL Q4 earnings (only mega-cap this week).
+- **No FOMC** this week (next 6/16-17). Rate-hike-by-Dec probability now 65%.
+
+### Active-book single-stock news (last 24h)
+- **META**: AI bug exposed 20k IG accounts; addressed + invalidated reset links. Minor.
+  Plan: full automation of 97% ad-revenue by EOY 2026. Non-material to thesis.
+- **All other Core names** (VOO, LLY, V, BRK.B): no fresh material news.
+- **RL** (Swing): no fresh news; PEAD thesis already faded over 10-td hold.
+
+### Crypto 24h / 7d
+- BTC $62,955  (-0.45% / -11.73%)
+- ETH $1,673   (-0.76% / -16.45%)  - Fri flush expired, NO bounce
+- SOL $66.26   (-0.08% / -18.29%)
+- AVAX $6.74   (-0.83% / -24.40%)  - Fri flush expired, NO bounce
+- LINK $7.91   (+0.17% / -12.46%)
+
+No fresh `crypto-mean-reversion` trigger; `crypto-trend-follow` BTC 50/200 gap widened;
+`crypto-weekend-momentum` re-arm Fri 6/12.
+
+### Polygon options-chain re-test (12th consecutive block)
+HTTP 403 Forbidden on `get_options_chain('SPY')`; `get_iv_rank('SPY'|'NVDA')` = None.
+L4 ESCALATION default-trigger deadline = Mon 6/8 EOD; if no Robin reply, EXECUTE
+path (b) reallocate $5k premium → Cash.
+
+### Citations
+- Gemini grounding redirect URLs (vertexaisearch.cloud.google.com) — 6 sources cited
+  in the macro pre-market response and 3 in the triangulation (oil/WWDC/META) call.
