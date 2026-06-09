@@ -1083,3 +1083,46 @@ path (b) reallocate $5k premium → Cash.
 ### Citations
 - Gemini grounding redirect URLs (vertexaisearch.cloud.google.com) — 6 sources cited
   in the macro pre-market response and 3 in the triangulation (oil/WWDC/META) call.
+
+---
+
+## 2026-06-09 12:08Z — 01-pre-market (LM Day 20)
+
+### Macro pre-market (one Gemini grounded query)
+- 10Y yield: **4.55%** (-1 bp from Mon 4.56%); pre-mkt 4.544%
+- DXY: **99.73** (-0.31%; dollar easing on Israel-Iran de-escalation hopes)
+- Brent: **$92.78 (-1.56%)** — Mon's geopol pop largely unwinding
+- WTI: $89.58 (-1.88%); CL=F $89.58 / BZ=F $92.78
+- S&P futures: **+0.2% pre-mkt** (continuation of Mon's modest bounce attempt)
+- VIX: **18.03 (-4.70% vs Mon 18.92)** — risk easing, still elevated vs pre-NFP 15.40
+
+### This week's catalyst calendar
+- Tue 6/9: NO scheduled US macro release. AAPL post-WWDC drift (Mon -1.89%; sell-the-news intact).
+- **Wed 6/10 8:30 ET**: May CPI. Consensus headline +0.5% m/m / +4.2% y/y; core +0.3% m/m / +2.9% y/y.
+- **Wed 6/10 post-close**: ORCL Q4 earnings (consensus est. focus = cloud growth).
+- No FOMC this week. Next 6/16-17 = Warsh debut + SEP; Fed-hike-by-Dec probability 65%.
+
+### Active-book single-stock signals
+- **META mark $585.25 / stop $578.70 = cushion 1.12% CRITICAL** (Mon close $585.39, intraday low $579.22). No fresh thesis-break catalyst; broad NQ-tech NFP-hawk continuation + post-WWDC drag + CPI-eve risk-aversion. **Mechanical stop fires on any further weakness Tue.**
+- **LLY trail walked organically Mon to $1,064.457** (HWM implied $1,182.73 = new book-record ATH from prior $1,166.225 Fri 6/5).
+- RL recovered to $373.33 (+1.85% Mon) but past td12 time-stop → liquidate Tue.
+- All other Core marks: VOO $679.77 cushion 7.43%, V $319.72 cushion 5.65%, BRK.B $486.925 cushion 9.25%.
+
+### Israel-Iran geopolitical update
+- Trump-mediated tentative ceasefire reported; Iran cautions resumption if Israel
+  continues Hezbollah strikes (Tyre strike Tue AM).
+- Oil giving back Mon's spike → energy sector headwind Tue. XLE $58.33 +1.14%
+  Mon close; gap-fade short candidate if XOM/CVX open >2% red Tue.
+
+### Crypto 24h
+- BTC $62,824 (-0.42%), ETH $1,681 (-0.52%), SOL $66.42 (-0.56%), AVAX $6.72 (-0.56%), LINK $7.92 (-0.83%).
+- All 5 coins drifting flat post-Fri-flush. No fresh trigger.
+
+### Polygon options-chain re-test (13th consecutive block)
+HTTP 403 Forbidden on `get_options_chain('SPY')`; `get_iv_rank('SPY')` = None.
+L4 ESCALATION default-trigger SLIPPED past Mon 6/8 EOD (05-close-summary missed).
+Revised default deadline = Tue 6/9 EOD if 05-close-summary fires.
+
+### Citations
+- Gemini grounding redirect URLs (vertexaisearch.cloud.google.com) — 9 sources
+  cited in the macro pre-market response.
