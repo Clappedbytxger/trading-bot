@@ -6,6 +6,72 @@ entries (> 30 days) can be pruned by the weekly-review routine.
 
 ---
 
+## 2026-06-10 — Pre-market (LM Day 21 of 30, Wed, CPI day + ORCL post-close)
+
+**Macro (yfinance + broker; Gemini 503 UNAVAILABLE 2x this routine -- 503 cluster Tue+Wed)**:
+- **VIX 22.16** (+17.12% from Mon 18.92 on Tue close) -- pre-CPI hedging demand
+  bid options vol; back above 20 first time since Fri 6/5 NFP-hawk close 21.51.
+  Below 40 risk-off threshold; macro risk-off NOT active.
+- **10Y yield 4.55%** (~unchanged Tue); no fresh repricing pre-CPI.
+- **DXY 99.99** (-0.06%); flat.
+- **Brent $93.02** (+1.72%); WTI $89.95 (+1.98%) -- geopol re-pricing on
+  Israel-Iran ceasefire wobble (Tyre strike continuation).
+- **SPY pre-mkt $737.05** (vs Tue close $735.70 = +0.18% modest gap up).
+- **QQQ pre-mkt $707.83** (+0.16% vs Tue close).
+- **AAPL pre-mkt $290.55** (-0.19% vs Tue close $291.10; -3.6% vs Mon $301.54
+  on post-WWDC continuation).
+- **ORCL pre-mkt $205.81** (-0.21% vs Tue close $206.24; pre-earnings light vol).
+- **XLE pre-mkt $57.39 / XOM $148.91** (energy modestly down vs Tue close on
+  Brent firming -- not yet trickling to equities pre-open).
+- **Crypto**: BTC $61,069 -0.93% / ETH $1,622 -0.95% / SOL $63.49 -2.27% /
+  AVAX $6.46 -2.70% / LINK $7.64 -2.49%. All 5 continued post-NFP-flush
+  bleed; no fresh -10% flush trigger anywhere.
+
+**Catalyst calendar (refined this routine)**:
+- **Wed 6/10 12:30Z (8:30 ET) = TODAY**: **May CPI release** -- THE event.
+  Consensus headline +0.5% m/m / +4.2% y/y; core +0.3% m/m / +2.9% y/y. Hot
+  print = NFP-hawk continuation + direct META 0.76% cushion trigger risk;
+  in-line/cool = relief rally + VIX back toward 18.
+- **Wed 6/10 post-close (~20:00Z+)**: **ORCL Q4 earnings** -- Cloud/AI infra
+  focus; `swing-earnings-drift` Thu candidate IF beat + guide + PT raise.
+- **Thu 6/11 12:30Z**: Initial jobless claims (consensus 245k).
+- **Fri 6/12 14:00Z**: U Michigan consumer sentiment prelim.
+- **No FOMC** this week (next 6/16-17 -- Warsh debut + SEP; rate-hike-by-Dec
+  probability 65% per futures).
+
+**Single-stock and sleeve catalysts (broker live; no Gemini this routine)**:
+- **META**: cushion compressed 1.12% Tue pre-mkt -> 0.76% Wed pre-mkt
+  (book-record tightest); systemic NQ-tech NFP-hawk continuation, not
+  META-specific. No thesis-break catalyst. CPI 12:30Z = direct trigger risk.
+- **RL**: mark $373.33 Tue pre-mkt -> $388.98 Wed pre-mkt = +$15.65 / +4.19%
+  in 1 session. UPL flipped -$14.61 Tue -> **+$47.54 Wed**. PEAD-style DRIFT
+  fired LATE on td11-13 post-NFP-consumer-rotation tape. Still queued for
+  Wed 02-market-open liquidate per ALM-3 time-stop discipline (4th attempt).
+  **First Swing WIN candidate in LM book history**.
+- **LLY**: HWM $1,182.73 (book ATH) unchanged from Mon walk; mark $1,137.01
+  -1.11% Tue with no fresh HWM walk.
+- **AAPL**: -1.89% Mon post-WWDC sell-the-news + Tue continuation -3.6%
+  vs Mon close $301.54. Daytrade ORB-short candidate Wed.
+- **ORCL**: pre-earnings light volume Wed; `swing-earnings-drift` Thu candidate
+  IF post-print analyst PT raise + beat + guide.
+
+**Operational status (this routine)**:
+- **Cron-miss continuity**: Mon 6/8 + Tue 6/9 02/03/04/05 ALL MISSED again
+  despite on-time 01-pre-market days. 8 missed routines KW 24 to date.
+  7 consecutive trading days with mid-day/EOD routines failing.
+- **Polygon options-chain 14th block** (5/26 1st through 6/10 14th); chain
+  inaccessibility = direct cost on CPI 12:30Z protective-put + ORCL strangle
+  setups today.
+- **CallMeBot 5-day outage BROKEN Wed 12:09Z** via single-shot short-form
+  ≤500-char WhatsApp (Thu 6/4 + Fri 6/5 + Sat 6/6 + Mon 6/8 + Tue 6/9 all 503;
+  Wed PASS). Confirms Tue's hypothesis: length+content WAF rule, not total
+  outage. Lesson L1-KW24 candidate.
+
+**Earnings-window check**: Entire active book + 4 stubs CLEAR; ORCL Wed post-close
+is the only Swing watchlist candidate inside 7d window (0 td today).
+
+---
+
 ## 2026-06-02 — Pre-market (LM Day 13 of 30, Tue, post-Mon AI-capex rotation + Iran flare)
 
 **Macro (Gemini, 12:10Z):**
