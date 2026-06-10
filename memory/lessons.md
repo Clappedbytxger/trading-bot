@@ -897,4 +897,59 @@ trading decision. Keep entries tight — pattern, lesson, encoded?
   recovers). No autonomous routine-spec changes (upstream of Bull's scope).
 - Lesson L2: recorded here, full encoding deferred to LM Final Report 6/20.
 
+## 2026-06-10 — CallMeBot 5-day 503 outage broken via single-shot short-form (length+content WAF confirmed)
+
+- **Pattern**: CallMeBot returned HTTP 503 on every Bull multi-part WhatsApp
+  attempt across 5 consecutive routine days (Thu 6/4 + Fri 6/5 + Sat 6/6 +
+  Mon 6/8 + Tue 6/9). On Tue 6/9 a single-shot 78-char bull-personal
+  piggyback ping received HTTP 200 OK in the same session where Bull's
+  3-part 700-char brief 503'd. Wed 6/10 01-pre-market intentionally tested
+  the single-shot short-form path: 364-char body + ~30-char header
+  (`🐂 *01-pre-market* - 12:09`) sent via `send_routine_summary` (NOT the
+  multi-part `send_long_routine_message`). **HTTP 200 / "Message queued"
+  returned** -- first successful Bull WhatsApp delivery since 6/4. The
+  message included the URGENT META cushion overlay + CPI/ORCL/VIX/Brent/
+  RL/Polygon items compressed into 5 ASCII-bullet lines.
+- **Lesson**: The CallMeBot WAF rule that triggered the 5-day 503 streak
+  is confirmed (with high confidence on 2 data points) to be a
+  **length+content composite**, NOT a total CallMeBot outage. Multi-part
+  sends at SAFE_PART_LEN 700 trip it; single-shot sends at body length ≤500
+  pass it. The hypothesized mechanism (per lesson 2026-05-28 / 2026-05-29
+  L5) is that 400+-char URL-encoded payloads in close succession trip a
+  content-density heuristic. For the remainder of the LM window
+  (6/10 -> 6/20) and the immediate Live-Phase reactivation (6/21+), Bull
+  should default to **single-shot short-form for routine briefs**:
+  - Body ≤500 chars (target ≤400 to leave header overhead).
+  - Use `send_routine_summary` (NOT `send_long_routine_message`).
+  - Plain ASCII (no em-dash; emoji ONLY in the header that the helper
+    auto-prepends, never inline in the body).
+  - Compress the Top-5 News structure into 4-5 ASCII bullet lines; keep
+    URGENT overlay at the top.
+  - Sacrifice the per-item "Auswirkungen" explanation in favor of delivery
+    success. Robin's WhatsApp is the channel; an undelivered detailed
+    brief is worse than a delivered terse one.
+- **Encoded as rule?** Partial -- recorded here and applied today.
+  Follow-ups:
+  1. **Update `routines/01-pre-market.md` Step 7b/7d** when next touched
+     to default to single-shot short-form during the CallMeBot WAF era,
+     with the multi-part `send_long_routine_message` reserved for the
+     Top-5 News structure if/when the WAF lifts. (Bull may edit
+     routines/*.md autonomously during LM per the lifecycle rules; this
+     is a candidate edit on the next non-trading routine that fires.)
+  2. **Update `src/notify/whatsapp.py`** to add `send_short_routine_brief`
+     as a thin wrapper around `send_routine_summary` with explicit
+     `body ≤ 500` pre-flight assertion. Optional (not blocking) -- the
+     existing helper already works for this; the wrapper documents intent.
+  3. The **alternate notify channel** (Telegram bot recommended per
+     lesson 2026-06-06 L3) remains owed as the structural fix. Wed's
+     workaround buys ~1-2 weeks; the LM Final Report 6/20 should still
+     prioritize the channel swap before Live-Phase 6/21 reactivation.
+- **Why this matters operationally**: Robin's primary visibility into
+  Bull's state is the WhatsApp brief. The 5-day outage meant Robin had no
+  signal across one of the busiest LM weeks (NFP-hawk + CPI eve + META
+  cushion compression to book-record tightest). Restoring the channel
+  before the CPI 12:30Z release is meaningful -- if Wed's CPI hot prints
+  and META stops out, Robin will see the urgent overlay BEFORE the stop
+  fires (with 21 min of buffer in this case).
+
 
