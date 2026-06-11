@@ -1192,3 +1192,55 @@ Revised default deadline = Tue 6/9 EOD if 05-close-summary fires.
 ### Citations
 - Gemini grounding redirect URLs (vertexaisearch.cloud.google.com) — 9 sources
   cited in the macro pre-market response.
+
+## 2026-06-11 (Thu, LM Day 22) — 01-pre-market
+
+**Macro / CPI / ORCL focus** (Gemini-grounded synthesis + yfinance verified marks)
+
+- **May CPI release Wed 6/10 12:30Z**: Headline +0.5% m/m / +4.2% YoY (in-line);
+  **Core +0.2% m/m vs +0.3% consensus = COOL CORE BEAT** / +2.9% YoY (in-line).
+  Initial risk-on tone, but tape closed weak on geopol + chip selloff.
+  - SPY -1.58% to $725.43 (Wed close, yfinance verified)
+  - QQQ -2.00% to $693.69
+  - VIX 22.16 -> 20.75 (-6.62%) event-vol crush
+  - 10Y yield essentially flat 4.54%; DXY 100.05 (+0.10%)
+  - Fed-hike-by-Dec probability: 65% -> 56% (cooled by cool-core)
+
+- **ORCL Q4 earnings post-close Wed 6/10** (Gemini-cited, multiple sources):
+  - Revenue $19.2B (+21% YoY) — STRONG BEAT
+  - Non-GAAP EPS $2.11 (+24% YoY) — BEAT
+  - Total cloud +47% to $9.9B
+  - **OCI (cloud infra) +93% to $5.8B**
+  - SaaS +10% to $4.1B
+  - **RPO $638B (+363% YoY)** — book-record AI backlog
+  - $67B AI infra contracts signed in Q4
+  - Q1 FY27 guide: Revenue +27-29% USD (above consensus)
+  - **BUT stock -10 to -12% pre-mkt Thu** ($180-187 vs Wed close $201.26):
+    - Capex concern: AI buildout cost trajectory accelerating
+    - **$40B debt + equity raise** announced for AI infra
+    - "Beat-and-raise rejected on financing" pattern
+  - **Citation**: Multiple sources via Gemini grounded search 2026-06-11T12:14Z.
+  - Implication for Bull book:
+    - **NOT a `swing-earnings-drift` candidate** (PEAD direction is DOWN, spec requires UP).
+    - **IS a `daytrade-gap-go DOWN` candidate** for Thu open (clear catalyst, ~10% gap).
+    - **IS a `swing-short-rejection` candidate** for Thu 02-market-open
+      (beat-and-raise rejection variant — short with confirmation on first 5-min candle).
+
+- **Single-name Wed close moves (yfinance verified)**:
+  - META -2.33% Thu pre-mkt from Wed close $584.59 to $570.98 (post-trail-fill drift)
+  - NVDA -3.73% Wed close $208.19 -> Thu pre-mkt $200.42 (chip selloff continuation)
+  - AMD -4.86% to $452.40 (worst-in-tape chip name)
+  - AAPL +0.35% to $291.58 (relative-strength bright spot, post-WWDC settling)
+  - BTC +2.65% to $63,076 (rate-cut bid on cool-core-CPI)
+  - ETH +2.46% to $1,660 (same)
+
+- **Catalyst calendar refresh (look-forward 7 td)**:
+  - **Thu 6/11 12:30Z**: Initial jobless claims (consensus 245k)
+  - **Fri 6/12 14:00Z**: U Michigan consumer sentiment prelim (consensus 70.5)
+  - **Tue 6/16**: Empire State manufacturing + FOMC eve
+  - **Wed 6/17**: **FOMC + SEP + Warsh first press conference** (THE event)
+  - **Fri 6/19**: Triple-witching expiry
+  - **Sat 6/20**: LM end + final report due
+
+- **Risk-off triggers**: NONE active. SPY Wed -1.58% > -3%; VIX 20.75 < 40; 10Y
+  4.54% flat; no fresh tail-risk.
