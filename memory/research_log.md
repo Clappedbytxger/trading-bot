@@ -6,6 +6,55 @@ entries (> 30 days) can be pruned by the weekly-review routine.
 
 ---
 
+## 2026-06-12 — Pre-market (LM Day 23 of 30, Fri, post-CPI relief continuation + Iran de-escalation)
+
+**Macro (yfinance + Gemini-grounded)**:
+- **VIX 18.83** (-3.14% Thu close from 20.75 Wed; -9 pts off Tue CPI-day peak
+  22.16). Vol-crush continues; risk-off NOT active (<<40).
+- **10Y yield 4.46%** Thu close (-10 bp on Thu; pre-mkt 4.43%); cool core CPI
+  fully absorbed. Futures price 96.4% Hold at Wed 6/17 FOMC.
+- **DXY 99.68** (-0.17%; Iran-ceasefire / Trump-cancel-airstrikes report).
+- **WTI oil $84.84** (-3.27% Thu, **-9.51% 7d**); Iran de-escalation removed
+  geopol premium. Biggest macro mover of the week.
+- **SPY $737.76** Thu close (+1.70% relief rally absorbing Wed -1.58% CPI
+  selloff). Pre-mkt Fri ~$740.39 (+0.36%).
+- **QQQ $717.12** Thu close (+3.38% — tech-led rebound); pre-mkt $718.52
+  (+0.20%).
+- **NVDA pre-mkt $206.13** (+0.62%); **AMD pre-mkt $496.16** (+1.58%) with
+  Citi upgrade to Buy / **$575 PT** (+15% upside).
+- Crypto: BTC $63,547 (24h flat / 7d -0.73%); ETH 7d -7.89%; AVAX 7d
+  -17.64% (biggest universe drawdown but spread over the week).
+
+**Macro calendar (forward)**:
+- **Fri 6/12 14:00Z TODAY**: U Michigan consumer sentiment prelim (consensus
+  46.0 vs May record-low 44.8).
+- **Mon 6/15 18:00Z**: Empire State manufacturing.
+- **Tue 6/16**: FOMC eve / Warsh debut prep.
+- **Wed 6/17**: **FOMC + SEP + Warsh first press conference**. 96.4% Hold;
+  statement expected to drop "easing bias" language.
+- **Thu 6/18 OR Fri 6/19**: **Triple-witching** (Juneteenth shifts settlement).
+- **Fri 6/19**: Juneteenth — US market CLOSED.
+
+**Citations**: Gemini grounded search 2026-06-12T12:30Z; yfinance 10d windows
+for VIX/SPY/QQQ/BTC/ETH/SOL/AVAX/LINK/^TNX/DX-Y.NYB/CL=F; broker live marks
+via Alpaca paper at 12:23Z.
+
+**Single-stock catalysts on watch**:
+- **AMD**: Citi upgrade Buy $575 PT (+15% upside). `daytrade-orb` LONG
+  highest-conviction Daytrade idea today.
+- **NVDA**: Pre-mkt +0.62% to $206.13; `daytrade-orb` LONG candidate on
+  Wed chip-selloff rebound continuation.
+- **ORCL**: Post-print drift turned positive Thu (relief rally absorbed
+  Wed's beat-rejected -10% gap); ORCL `swing-short-rejection` stale -> PASS.
+- **AAPL**: Relative-strength held Wed +0.35% / Thu +QQQ-tracking;
+  `daytrade-orb` LONG candidate if rs holds + ORB high break.
+
+**Risk-off triggers monitored (all CLEAR Fri pre-mkt)**:
+- SPY 1-day: Thu +1.70% (clear vs -3%).
+- VIX: 18.83 (clear vs 40).
+- 10Y yield: 4.46% (clear; not extreme).
+- Oil: -3.27% Thu, -9.51% 7d — consumer-bullish, NOT a risk-off signal.
+
 ## 2026-06-10 — Pre-market (LM Day 21 of 30, Wed, CPI day + ORCL post-close)
 
 **Macro (yfinance + broker; Gemini 503 UNAVAILABLE 2x this routine -- 503 cluster Tue+Wed)**:
